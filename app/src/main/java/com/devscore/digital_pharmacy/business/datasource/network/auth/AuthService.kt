@@ -27,4 +27,22 @@ interface AuthService {
         @Field("address") address: String = "BD"
     ): RegistrationResponse
 
+
+    @POST("sales/odermedicine")
+    suspend fun testpost(
+        @Header("Authorization") authorization : String,
+        @Body data : Oder
+    ): String
+
+
+    data class Oder(
+        val oderItem : OderItem,
+        val customer_id : Int = -1
+    )
+
+    data class OderItem(
+        val quantity : Int,
+        val medicine_id : Int
+    )
+
 }

@@ -45,7 +45,7 @@ class AuthActivity : BaseActivity()
     }
 
     private fun onFinishCheckPreviousAuthUser(){
-        progress_bar.visibility = View.INVISIBLE
+        fragment_container.visibility = View.VISIBLE
         splash_logo.visibility = View.INVISIBLE
     }
 

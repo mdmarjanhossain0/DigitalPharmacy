@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.main
+package com.devscore.digital_pharmacy.presentation.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,6 @@ import android.os.Handler
 import android.view.WindowManager
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
-import com.devscore.digital_pharmacy.register.WelcomeActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
