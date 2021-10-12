@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalPharmacy">
         <activity
+            android:name=".inventory.ContainerActivity"
+            android:exported="true" />
+        <activity
             android:name=".register.VerifyActivity"
             android:exported="true" />
         <activity
