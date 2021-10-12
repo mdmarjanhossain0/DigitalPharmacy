@@ -13,7 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="100dp"
-        android:src="@drawable/logo_black"
+        android:src="@drawable/ic_logo_black"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumberTvId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

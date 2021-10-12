@@ -1,8 +1,7 @@
-package com.devscore.digital_pharmacy.presentation.main
+package com.devscore.digital_pharmacy
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.devscore.digital_pharmacy.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,6 +19,9 @@
             android:name=".presentation.auth.AuthActivity"
             android:exported="true" />
         <activity
+            android:name=".inventory.ContainerActivity"
+            android:exported="true" />
+        <activity
             android:name=".register.VerifyActivity"
             android:exported="true" />
         <activity
