@@ -1,10 +1,12 @@
-package com.devscore.digital_pharmacy
+package com.devscore.digital_pharmacy.presentation.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
 import com.devscore.digital_pharmacy.register.WelcomeActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -23,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
         Handler().postDelayed({
-            val intent = Intent(this, WelcomeActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000) // 3000 is the delayed time in milliseconds.

@@ -1,5 +1,32 @@
 <resources>
     <string name="app_name">Digital Pharmacy</string>
     <string name="terms_and_condition">Agree to <font color="#2866B9">Terms &amp; Conditions</font></string>
+    <string name="password_reset_email_sent">Password reset email sent</string>
+    <string name="return_to_launcher_fragment">Return</string>
+    <string name="text_error">Error</string>
+    <string name="text_success">Success</string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="email_field">Email</string>
+    <string name="field_password">Password</string>
+    <string name="field_login">Login</string>
+    <string name="field_username">Username</string>
+    <string name="field_confirm_password">Confirm password</string>
+    <string name="field_register">Register</string>
+    <string name="network_error_response">Error</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
+    <string name="my_blogs">My Blogs</string>
+    <string name="home">Home</string>
+    <string name="create">Create</string>
+
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="text_yes">yes</string>
+    <string name="are_you_sure_publish">Are you sure you want to publish this?</string>
+    <string name="are_you_sure_delete">Are you sure you want to delete this? This can\'t be un-done.</string>
+    <string name="text_info">Info</string>
+    <string name="delete">Delete</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
