@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Digital Pharmacy</string>
     <string name="terms_and_condition">Agree to <font color="#2866B9">Terms &amp; Conditions</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
