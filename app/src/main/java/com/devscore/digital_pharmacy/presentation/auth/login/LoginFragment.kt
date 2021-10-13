@@ -29,7 +29,7 @@ class LoginFragment : BaseAuthFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
-        loginBtnId.setOnClickListener {
+        authLoginBtnId.setOnClickListener {
             cacheState()
             login()
         }

@@ -58,7 +58,7 @@ class LauncherFragment : Fragment(R.layout.fragment_launcher) {
 //                catch (e : Exception){
 //                    print(e.toString())
 //                }
-            }
+//            }
     }
 
     private fun navigateRegisterFragment() {

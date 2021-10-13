@@ -34,7 +34,7 @@ constructor(
                     username = event.username,
                     password = event.password,
                     confirmPassword = event.confirmPassword,
-                    business_name = event.business_name,
+//                    business_name = event.business_name,
                     mobile = event.mobile,
                     license_key = event.license_key,
                     address = event.address
@@ -87,7 +87,7 @@ constructor(
         username: String,
         password: String,
         confirmPassword: String,
-        business_name : String,
+//        business_name : String,
         mobile : String,
         license_key : String,
         address : String
@@ -99,7 +99,7 @@ constructor(
                 username = username,
                 password = password,
                 confirmPassword = confirmPassword,
-                businessName = business_name,
+//                businessName = business_name,
                 mobile = mobile,
                 license_key = license_key,
                 address = address

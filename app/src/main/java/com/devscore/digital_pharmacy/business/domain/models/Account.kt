@@ -5,7 +5,7 @@ data class Account(
     val email: String,
     val username: String,
     val profile_picture : String,
-    val business_name : String,
+//    val business_name : String,
     val mobile : String,
     val license_key : String,
     val address : String
