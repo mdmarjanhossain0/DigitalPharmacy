@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.devscore.digital_pharmacy.R
 
 
-class SalesFragment : Fragment() {
+class SalesCompletedFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class SalesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sales, container, false)
+        return inflater.inflate(R.layout.fragment_sales_completed, container, false)
     }
 
 
