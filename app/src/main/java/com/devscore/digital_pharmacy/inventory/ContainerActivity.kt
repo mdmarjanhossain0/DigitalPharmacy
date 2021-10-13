@@ -3,7 +3,6 @@ package com.devscore.digital_pharmacy.inventory
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment
 import com.devscore.digital_pharmacy.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
 

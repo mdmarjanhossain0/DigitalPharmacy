@@ -8,7 +8,7 @@ sealed class RegisterEvents{
         val username: String,
         val password: String,
         val confirmPassword: String,
-        val business_name : String,
+//        val business_name : String,
         val mobile : String,
         val license_key : String,
         val address : String
@@ -30,9 +30,9 @@ sealed class RegisterEvents{
         val confirmPassword: String
     ): RegisterEvents()
 
-    data class OnUpdateBusinessName(
-        val business_name: String
-    ): RegisterEvents()
+//    data class OnUpdateBusinessName(
+//        val business_name: String
+//    ): RegisterEvents()
 
     data class OnUpdateMobile(
         val mobile: String

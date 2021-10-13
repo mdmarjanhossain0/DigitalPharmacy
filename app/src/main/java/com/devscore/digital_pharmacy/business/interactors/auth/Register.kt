@@ -29,7 +29,7 @@ class Register(
         username: String,
         password: String,
         confirmPassword: String,
-        businessName : String,
+//        businessName : String,
         mobile : String,
         license_key : String,
         address : String
@@ -40,7 +40,7 @@ class Register(
             username = username,
             password = password,
             password2 = confirmPassword,
-            business_name = businessName,
+//            business_name = businessName,
             mobile = mobile,
             license_key = license_key,
             address = address
@@ -57,7 +57,7 @@ class Register(
                 registerResponse.email,
                 registerResponse.username,
                 registerResponse.profile_picture!!,
-                registerResponse.business_name,
+//                registerResponse.business_name,
                 registerResponse.mobile,
                 registerResponse.license_key,
                 registerResponse.address

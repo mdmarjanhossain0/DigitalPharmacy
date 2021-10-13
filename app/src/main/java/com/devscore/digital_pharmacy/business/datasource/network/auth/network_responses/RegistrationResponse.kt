@@ -25,8 +25,8 @@ class RegistrationResponse(
     @SerializedName("profile_picture")
     var profile_picture : String?,
 
-    @SerializedName("business_name")
-    var business_name : String,
+//    @SerializedName("business_name")
+//    var business_name : String,
 
     @SerializedName("mobile")
     var mobile : String,

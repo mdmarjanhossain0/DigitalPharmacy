@@ -11,5 +11,6 @@
     <color name="image_border">#DEE1F2</color>
     <color name="card_color">#F5F7FA</color>
     <color name="gray">#707070</color>
+    <color name="link_blue">#0000EE</color>
 
 </resources>

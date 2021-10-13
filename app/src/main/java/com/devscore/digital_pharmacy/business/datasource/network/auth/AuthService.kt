@@ -21,7 +21,7 @@ interface AuthService {
         @Field("username") username: String = "a",
         @Field("password") password: String = "adminpassword",
         @Field("password2") password2: String = "adminpassword",
-        @Field("business_name") business_name: String = "a",
+//        @Field("business_name") business_name: String = "a",
         @Field("mobile") mobile: String = "54354",
         @Field("license_key") license_key: String = "45345",
         @Field("address") address: String = "BD"
