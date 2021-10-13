@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.dashboard
+package com.devscore.digital_pharmacy.presentation.main.dashboard
 
 import android.content.Intent
 import android.os.Bundle

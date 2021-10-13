@@ -42,7 +42,7 @@ class Login(
                 email = loginResponse.email,
                 username = "",
                 profile_picture = "",
-                business_name = "",
+//                business_name = "",
                 mobile = "",
                 license_key = "",
                 address = ""

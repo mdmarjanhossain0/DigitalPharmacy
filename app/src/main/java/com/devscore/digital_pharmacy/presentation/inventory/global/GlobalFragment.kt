@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.inventory
+package com.devscore.digital_pharmacy.presentation.inventory.global
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,25 +8,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.inventory.adapter.LocalAdapter
+import com.devscore.digital_pharmacy.inventory.adapter.GlobalAdapter
 
-class LocalFragment : Fragment() {
+class GlobalFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-
-        val view: View = inflater.inflate(R.layout.fragment_local, container, false)
-        val localRv: RecyclerView? = view.findViewById(R.id.localRvId)
-
+        val view: View = inflater.inflate(R.layout.fragment_global, container, false)
+        val localRv: RecyclerView? = view.findViewById(R.id.globalRvId)
 
         if (localRv != null) {
             localRv.layoutManager = LinearLayoutManager(context)
-            localRv.adapter = context?.let { LocalAdapter(it) }
+            localRv.adapter = context?.let { GlobalAdapter(it) }
         }
 
         return view
     }
+
+
 }

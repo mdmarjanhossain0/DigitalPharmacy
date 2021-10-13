@@ -19,8 +19,8 @@ data class AccountEntity(
     @ColumnInfo(name = "username")
     val username: String,
 
-    @ColumnInfo(name = "business_name")
-    val business_name : String,
+//    @ColumnInfo(name = "business_name")
+//    val business_name : String,
 
     @ColumnInfo(name = "mobile")
     val mobile : String,
@@ -41,7 +41,7 @@ fun AccountEntity.toAccount(): Account {
         email = email,
         username = username,
         profile_picture = profile_picture!!,
-        business_name = business_name,
+//        business_name = business_name,
         mobile = mobile,
         license_key = license_key,
         address = address
@@ -54,7 +54,7 @@ fun Account.toEntity(): AccountEntity {
         email = email,
         username = username,
         profile_picture = profile_picture,
-        business_name = business_name,
+//        business_name = business_name,
         mobile = mobile,
         license_key = license_key,
         address = address

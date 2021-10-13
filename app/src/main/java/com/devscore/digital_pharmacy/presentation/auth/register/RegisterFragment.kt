@@ -62,7 +62,7 @@ class RegisterFragment : BaseAuthFragment() {
         userNameEtvId.setText(username)
         passwordEtv.setText(password)
         password2Etv.setText(confirmPassword)
-        businessNameEtv.setText(businessName)
+//        businessNameEtv.setText(businessName)
         phoneNumberEtvId.setText(mobile)
         pharmacyNumberEtvId.setText(license_key)
         addressLineEtvId1.setText(address)
@@ -73,7 +73,7 @@ class RegisterFragment : BaseAuthFragment() {
         viewModel.onTriggerEvent(RegisterEvents.OnUpdateUsername(userNameEtvId.text.toString()))
         viewModel.onTriggerEvent(RegisterEvents.OnUpdatePassword(passwordEtv.text.toString()))
         viewModel.onTriggerEvent(RegisterEvents.OnUpdateConfirmPassword(password2Etv.text.toString()))
-        viewModel.onTriggerEvent(RegisterEvents.OnUpdateBusinessName(businessNameEtv.text.toString()))
+//        viewModel.onTriggerEvent(RegisterEvents.OnUpdateBusinessName(""))
         viewModel.onTriggerEvent(RegisterEvents.OnUpdateMobile(phoneNumberEtvId.text.toString()))
         viewModel.onTriggerEvent(RegisterEvents.OnUpdateLicenseKey(pharmacyNumberEtvId.text.toString()))
         viewModel.onTriggerEvent(RegisterEvents.OnUpdateAddress(addressLineEtvId1.text.toString()))
@@ -87,7 +87,7 @@ class RegisterFragment : BaseAuthFragment() {
             username = userNameEtvId.text.toString(),
             password = passwordEtv.text.toString(),
             confirmPassword = password2Etv.text.toString(),
-            business_name = businessNameEtv.text.toString(),
+//            business_name = "",
             mobile = phoneNumberEtvId.text.toString(),
             license_key = pharmacyNumberEtvId.text.toString(),
             address = addressLineEtvId1.text.toString()
