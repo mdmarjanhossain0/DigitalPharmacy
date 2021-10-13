@@ -80,16 +80,17 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:background="@color/colorPrimaryVariant"
+        android:background="#00000000"
         app:itemTextColor="@color/white">
+<!--        android:background="@color/colorPrimaryVariant"-->
 
         <include
             android:id="@+id/layoutDrawerMenuId"
             layout="@layout/layout_drawer_menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.navigation.NavigationView>
 
