@@ -70,7 +70,6 @@ class ContainerActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.closeImgId -> {
                 drawerLayout!!.closeDrawer(navigationView, true)
-                Toast.makeText(this, "Close", Toast.LENGTH_SHORT).show()
             }
             R.id.navDashboardTvId -> {
                 drawerLayout!!.closeDrawer(navigationView, true)

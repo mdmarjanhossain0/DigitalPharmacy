@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".inventory.InventorySalesHistoryFragment">
 
+
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/salesTabLayoutId"
+        android:id="@+id/inventorySalesTabLayoutId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="3dp"
@@ -17,11 +18,11 @@
         app:tabSelectedTextColor="@color/colorPrimaryVariant" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/salesViewPagerId"
+        android:id="@+id/inventoryViewPagerId"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salesTabLayoutId" />
+        app:layout_constraintTop_toBottomOf="@+id/inventorySalesTabLayoutId" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
