@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.sales
+package com.devscore.digital_pharmacy.inventory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.devscore.digital_pharmacy.R
 
-
-class SalesFragment : Fragment() {
+class AddProductSubNonMedicineFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,8 +15,7 @@ class SalesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sales, container, false)
+        return inflater.inflate(R.layout.fragment_add_product_sub_non_medicine, container, false)
     }
-
 
 }

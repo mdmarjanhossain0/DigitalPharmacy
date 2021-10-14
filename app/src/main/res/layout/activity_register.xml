@@ -64,6 +64,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profileImgId"
                         android:layout_width="120dp"
+                        android:src="@drawable/ic_inventory"
                         android:layout_height="120dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

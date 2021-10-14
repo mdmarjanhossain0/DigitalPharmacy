@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.inventory.adapter.InventoryAddProductPageAdapter
 import com.devscore.digital_pharmacy.inventory.adapter.InventoryPageAdapter
-import com.devscore.digital_pharmacy.inventory.adapter.InventorySubSalesHistoryPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class InventorySalesHistoryFragment : Fragment() {
+class InventoryAddProductFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -21,25 +21,23 @@ class InventorySalesHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view :View = inflater.inflate(R.layout.fragment_inventory_sales_history, container, false)
+        val view: View= inflater.inflate(R.layout.fragment_inventory_add_product, container, false)
 
-        val viewPager: ViewPager2 = view.findViewById(R.id.inventoryViewPagerId)
-        val tabLayout: TabLayout = view.findViewById(R.id.salesTabLayoutId)
 
-        viewPager.adapter = fragmentManager?.let { InventorySubSalesHistoryPageAdapter(it, lifecycle) }
+        val viewPager: ViewPager2 = view.findViewById(R.id.addProductViewPagerId)
+        val tabLayout: TabLayout = view.findViewById(R.id.addProductTabLayoutId)
+
+        viewPager.adapter = fragmentManager?.let { InventoryAddProductPageAdapter(it, lifecycle) }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Sales History"
-                1 -> tab.text = "Returns History"
-                2 -> tab.text = "Purchase History"
-                3 -> tab.text = "Overview History"
+                0 -> tab.text = "Medicine"
+                1 -> tab.text = "Non Medicine"
             }
         }.attach()
 
 
         return view
     }
-
 
 }
