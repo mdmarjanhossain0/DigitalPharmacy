@@ -1,7 +1,5 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-import com.google.gson.annotations.SerializedName
-
 data class GlobalMedicine (
     var id : Int,
     var name : String,
