@@ -1,9 +1,9 @@
 package com.devscore.digital_pharmacy.business.datasource.network.inventory
 
-import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.google.gson.annotations.SerializedName
 
-data class GlobalMedicineDto (
+data class LocalMedicineDto (
 
     @SerializedName("id") var id : Int,
     @SerializedName("name") var name : String,
@@ -15,20 +15,26 @@ data class GlobalMedicineDto (
     @SerializedName("symptom") var symptom : String,
     @SerializedName("strength") var strength : String,
     @SerializedName("description") var description : String,
-    @SerializedName("base_mrp") var baseMrp : Int,
-    @SerializedName("base_purchase_price") var basePurchasePrice : Int,
+    @SerializedName("base_mrp") var baseMrp : String,
+    @SerializedName("discount") var discount : String,
+    @SerializedName("is_percent_discount") var isPercentDiscount : Boolean,
+    @SerializedName("sales_unit") var salesUnit : String,
+    @SerializedName("purchases_unit") var purchasesUnit : String,
     @SerializedName("brand") var brand : String,
     @SerializedName("manufacture") var manufacture : String,
     @SerializedName("kind") var kind : String,
     @SerializedName("form") var form : String,
-    @SerializedName("created_at") var createdAt : String,
-    @SerializedName("updated_at") var updatedAt : String
+    @SerializedName("remaining_quanity") var remainingQuantity : String,
+    @SerializedName("damage_quantity") var damageQuantity : String,
+    @SerializedName("sale_price") var salePrice : Int,
+    @SerializedName("purchase_price") var purchasePrice : Int,
+    @SerializedName("rack_number") var rackNumber : String
 
 )
 
 
-fun GlobalMedicineDto.toGlobalMedicine() : GlobalMedicine {
-    return GlobalMedicine(
+fun LocalMedicineDto.toLocalMedicine() : LocalMedicine {
+    return LocalMedicine(
         id = id,
         name = name,
         sku = sku,
@@ -40,12 +46,18 @@ fun GlobalMedicineDto.toGlobalMedicine() : GlobalMedicine {
         strength = strength,
         description = description,
         baseMrp = baseMrp,
-        basePurchasePrice = basePurchasePrice,
+        discount = discount,
+        isPercentDiscount = isPercentDiscount,
+        salesUnit = salesUnit,
+        purchasesUnit = purchasesUnit,
         brand = brand,
         manufacture = manufacture,
         kind = kind,
         form = form,
-        createdAt = createdAt,
-        updatedAt = updatedAt
+        remainingQuantity = remainingQuantity,
+        damageQuantity = damageQuantity,
+        salePrice = salePrice,
+        purchasePrice = purchasePrice,
+        rackNumber = rackNumber
     )
 }
