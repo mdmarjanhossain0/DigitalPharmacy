@@ -37,12 +37,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
+        <TextView
             android:id="@+id/historyImgId"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_dot"
+            android:text="Stock:1995"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/itemNameTvId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/itemNameTvId" />
@@ -53,10 +54,10 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_circle_right"
-            app:layout_constraintBottom_toBottomOf="@+id/stockTvId"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/stockTvId" />
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/recycle_bin"
+            app:layout_constraintBottom_toTopOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/groupTvId"
@@ -84,31 +85,6 @@
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/groupTvId"
             app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
-
-
-        <!-- <EditText
-             android:id="@+id/priceTvId"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="5dp"
-             android:text="৳ 14"
-             android:textSize="12sp"
-             app:layout_constraintStart_toStartOf="@+id/groupTvId"
-             app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
- -->
-
-        <TextView
-            android:id="@+id/stockTvId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="112dp"
-            android:text="Stock:1995"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/priceTvId"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/priceTvId"
-            app:layout_constraintVertical_bias="0.0" />
 
 
         <LinearLayout
@@ -194,6 +170,7 @@
 
 
         <TextView
+            android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

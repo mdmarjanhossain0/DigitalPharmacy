@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.devscore.digital_pharmacy.R
 
-
-class InventoryProductDetailsEditFragment : Fragment() {
-
+class ReturnOnOrderFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inventory_product_details_edit, container, false)
+        return inflater.inflate(R.layout.fragment_return_on_order, container, false)
     }
+
 
 }
