@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".cashVendor.VendorReceiveFragment">
 
-
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
