@@ -17,60 +17,57 @@ data class GlobalMedicineEntity (
     val name : String,
 
     @ColumnInfo(name="sku")
-    val sku : String,
+    val sku : String?,
 
     @ColumnInfo(name="dr_number")
-    val darNumber : String,
+    val darNumber : String?,
 
     @ColumnInfo(name="mr_number")
-    val mrNumber : String,
+    val mrNumber : String?,
 
     @ColumnInfo(name="generic")
-    val generic : String,
+    val generic : String?,
 
     @ColumnInfo(name="indication")
-    val indication : String,
+    val indication : String?,
 
     @ColumnInfo(name="symptom")
-    val symptom : String,
+    val symptom : String?,
 
     @ColumnInfo(name="strength")
-    val strength : String,
+    val strength : String?,
 
     @ColumnInfo(name="description")
-    val description : String,
+    val description : String?,
 
     @ColumnInfo(name="baseMrp")
-    val baseMrp : Int,
+    val mrp : Int?,
 
     @ColumnInfo(name="basePurchasePrice")
-    val basePurchasePrice : Int,
-
-    @ColumnInfo(name="brand")
-    val brand : String,
+    val purchases_price : Int?,
 
     @ColumnInfo(name="manufacture")
-    val manufacture : String,
+    val manufacture : String?,
 
     @ColumnInfo(name="kind")
-    val kind : String,
+    val kind : String?,
 
     @ColumnInfo(name="form")
-    val form : String,
+    val form : String?,
 
     val currentDateTime : Long = System.currentTimeMillis(),
 
     @ColumnInfo(name="createdAt")
-    val createdAt : String,
+    val createdAt : String?,
 
     @ColumnInfo(name="updatedAt")
-    val updatedAt : String
+    val updatedAt : String?
 )
 
 fun GlobalMedicineEntity.toGlobalMedicine() : GlobalMedicine {
     return GlobalMedicine(
         id = id,
-        name = name,
+        brand_name = name,
         sku = sku,
         darNumber = darNumber,
         mrNumber = mrNumber,
@@ -79,9 +76,8 @@ fun GlobalMedicineEntity.toGlobalMedicine() : GlobalMedicine {
         symptom = symptom,
         strength = strength,
         description = description,
-        baseMrp = baseMrp,
-        basePurchasePrice = basePurchasePrice,
-        brand = brand,
+        mrp = mrp,
+        purchases_price = purchases_price,
         manufacture = manufacture,
         kind = kind,
         form = form,
@@ -93,7 +89,7 @@ fun GlobalMedicineEntity.toGlobalMedicine() : GlobalMedicine {
 fun GlobalMedicine.toGlobalMedicineEntity() : GlobalMedicineEntity {
     return GlobalMedicineEntity(
         id = id,
-        name = name,
+        name = brand_name,
         sku = sku,
         darNumber = darNumber,
         mrNumber = mrNumber,
@@ -102,9 +98,8 @@ fun GlobalMedicine.toGlobalMedicineEntity() : GlobalMedicineEntity {
         symptom = symptom,
         strength = strength,
         description = description,
-        baseMrp = baseMrp,
-        basePurchasePrice = basePurchasePrice,
-        brand = brand,
+        mrp = mrp,
+        purchases_price = purchases_price,
         manufacture = manufacture,
         kind = kind,
         form = form,

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".inventory.AddProductSubMedicineFragment">
+    tools:context=".presentation.inventory.add.addmedicine.AddProductSubMedicineFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -447,7 +447,7 @@
 
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/addMedicineCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -461,16 +461,16 @@
             app:layout_constraintTop_toBottomOf="@+id/edt11" />
 
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/addMedicineAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/colorPrimaryVariant"
             android:text="Add"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="@+id/btn1"
+            app:layout_constraintBottom_toBottomOf="@+id/addMedicineCancel"
             app:layout_constraintEnd_toEndOf="@+id/edt12"
-            app:layout_constraintTop_toTopOf="@+id/btn1" />
+            app:layout_constraintTop_toTopOf="@+id/addMedicineCancel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

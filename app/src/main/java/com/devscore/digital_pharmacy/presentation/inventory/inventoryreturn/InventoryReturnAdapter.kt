@@ -1,17 +1,14 @@
-package com.devscore.digital_pharmacy.inventory.adapter
+package com.devscore.digital_pharmacy.presentation.inventory.inventoryreturn
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.inventory.Return1Fragment
 
-class Return1Adapter(val context: Context) :
-    RecyclerView.Adapter<Return1Adapter.Return1ViewHolder>() {
+class InventoryReturnAdapter(val context: Context) :
+    RecyclerView.Adapter<InventoryReturnAdapter.Return1ViewHolder>() {
 
     class Return1ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

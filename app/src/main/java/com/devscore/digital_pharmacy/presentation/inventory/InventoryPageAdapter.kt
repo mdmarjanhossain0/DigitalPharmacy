@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.inventory.adapter
+package com.devscore.digital_pharmacy.presentation.inventory
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -16,14 +16,13 @@ class InventoryPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycl
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment = Fragment()
 
-        when (position) {
-            0 -> fragment = LocalFragment()
-            1 -> fragment = GlobalFragment()
+
+        return when (position) {
+            0 -> LocalFragment()
+            1 -> GlobalFragment()
+            else -> LocalFragment()
         }
-
-        return fragment
     }
 
 }

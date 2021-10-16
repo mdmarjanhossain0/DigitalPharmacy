@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".inventory.AddProductSubNonMedicineFragment">
+    tools:context=".presentation.inventory.add.addnonmedicine.AddProductSubNonMedicineFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -464,7 +464,7 @@
 
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/addNonMedicineCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -473,12 +473,12 @@
             android:text="Cancel"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn2"
+            app:layout_constraintEnd_toStartOf="@+id/addNonMedicineAdd"
             app:layout_constraintStart_toStartOf="@+id/img4"
             app:layout_constraintTop_toBottomOf="@+id/tv12" />
 
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/addNonMedicineAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -486,10 +486,10 @@
             android:backgroundTint="@color/colorPrimaryVariant"
             android:text="Add"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="@+id/btn1"
+            app:layout_constraintBottom_toBottomOf="@+id/addNonMedicineCancel"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout1"
-            app:layout_constraintStart_toEndOf="@+id/btn1"
-            app:layout_constraintTop_toTopOf="@+id/btn1" />
+            app:layout_constraintStart_toEndOf="@+id/addNonMedicineCancel"
+            app:layout_constraintTop_toTopOf="@+id/addNonMedicineCancel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
