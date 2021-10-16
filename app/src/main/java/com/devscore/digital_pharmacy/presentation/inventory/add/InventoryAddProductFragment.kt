@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.inventory
+package com.devscore.digital_pharmacy.presentation.inventory.add
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.inventory.adapter.InventoryAddProductPageAdapter
-import com.devscore.digital_pharmacy.inventory.adapter.InventoryPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

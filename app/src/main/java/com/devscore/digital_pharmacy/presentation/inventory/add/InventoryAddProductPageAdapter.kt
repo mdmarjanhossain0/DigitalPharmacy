@@ -1,13 +1,11 @@
-package com.devscore.digital_pharmacy.inventory.adapter
+package com.devscore.digital_pharmacy.presentation.inventory.add
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.devscore.digital_pharmacy.inventory.AddProductSubMedicineFragment
-import com.devscore.digital_pharmacy.inventory.AddProductSubNonMedicineFragment
-import com.devscore.digital_pharmacy.presentation.inventory.global.GlobalFragment
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalFragment
+import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddProductSubMedicineFragment
+import com.devscore.digital_pharmacy.presentation.inventory.add.addnonmedicine.AddProductSubNonMedicineFragment
 
 class InventoryAddProductPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inventory.InventoryProductDetailsEditFragment">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -581,7 +581,7 @@
 
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/editMedicineCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -590,22 +590,22 @@
             android:text="Cancel"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn2"
+            app:layout_constraintEnd_toStartOf="@+id/ediMedicineUpdate"
             app:layout_constraintStart_toStartOf="@+id/layoutLeft"
             app:layout_constraintTop_toBottomOf="@+id/layoutLeft" />
 
         <Button
-            android:id="@+id/btn2"
+            android:id="@+id/ediMedicineUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:backgroundTint="@color/colorPrimaryVariant"
             android:text="Update"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="@+id/btn1"
+            app:layout_constraintBottom_toBottomOf="@+id/editMedicineCancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn1"
-            app:layout_constraintTop_toTopOf="@+id/btn1" />
+            app:layout_constraintStart_toEndOf="@+id/editMedicineCancel"
+            app:layout_constraintTop_toTopOf="@+id/editMedicineCancel" />
 
 
 

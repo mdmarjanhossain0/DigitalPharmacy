@@ -7,16 +7,16 @@ import com.google.gson.annotations.SerializedName
 
 data class LocalMedicineResponse (
 
-    @SerializedName("count") var count : Int,
-    @SerializedName("next") var next : String,
-    @SerializedName("previous") var previous : String,
-    @SerializedName("results") var results : List<LocalMedicineDto>
+    @SerializedName("count") var count : Int?,
+    @SerializedName("next") var next : Int?,
+    @SerializedName("previous") var previous : Int?,
+    @SerializedName("results") var results : List<LocalMedicineDto>?
 
 )
 
 fun LocalMedicineResponse.toList() : List<LocalMedicine> {
     val list : MutableList<LocalMedicine> = mutableListOf()
-    for (dto in results) {
+    for (dto in results!!) {
         list.add(
             dto.toLocalMedicine()
         )
