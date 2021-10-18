@@ -9,5 +9,64 @@
         android:id="@+id/inventoryFragment"
         android:name="com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment"
         android:label="fragment_inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory" >
+        <action
+            android:id="@+id/action_inventoryFragment_to_inventoryAddProductFragment"
+            app:destination="@id/inventoryAddProductFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_return1Fragment"
+            app:destination="@id/return1Fragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_inventoryProductDetailsEditFragment"
+            app:destination="@id/inventoryProductDetailsEditFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_dispensingFragment2"
+            app:destination="@id/dispensingFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/globalFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.global.GlobalFragment"
+        android:label="fragment_global"
+        tools:layout="@layout/fragment_global" />
+    <fragment
+        android:id="@+id/localFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.local.LocalFragment"
+        android:label="fragment_local"
+        tools:layout="@layout/fragment_local" />
+    <fragment
+        android:id="@+id/return1Fragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.inventoryreturn.InventoryReturnFragment"
+        android:label="fragment_return1"
+        tools:layout="@layout/fragment_return1" />
+    <fragment
+        android:id="@+id/addProductSubMedicineFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddProductSubMedicineFragment"
+        android:label="fragment_add_product_sub_medicine"
+        tools:layout="@layout/fragment_add_product_sub_medicine" />
+    <fragment
+        android:id="@+id/addProductSubNonMedicineFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.addnonmedicine.AddProductSubNonMedicineFragment"
+        android:label="fragment_add_product_sub_non_medicine"
+        tools:layout="@layout/fragment_add_product_sub_non_medicine" />
+    <fragment
+        android:id="@+id/inventoryProductDetailsEditFragment"
+        android:name="com.devscore.digital_pharmacy.inventory.InventoryProductDetailsEditFragment"
+        android:label="fragment_inventory_product_details_edit"
+        tools:layout="@layout/fragment_inventory_product_details_edit" />
+    <fragment
+        android:id="@+id/inventoryAddProductFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.InventoryAddProductFragment"
+        android:label="fragment_inventory_add_product"
+        tools:layout="@layout/fragment_inventory_add_product" >
+        <action
+            android:id="@+id/action_inventoryAddProductFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment"
+            app:popUpTo="@id/inventoryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/dispensingFragment2"
+        android:name="com.devscore.digital_pharmacy.inventory.DispensingFragment"
+        android:label="fragment_dispensing"
+        tools:layout="@layout/fragment_dispensing" />
 </navigation>

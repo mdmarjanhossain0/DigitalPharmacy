@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.inventory.ContainerActivity
+import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 
 
 class DashboardFragment : Fragment() {
@@ -23,7 +24,7 @@ class DashboardFragment : Fragment() {
         val salesImg: ImageView = view.findViewById(R.id.salesImgId)
 
         inventoryImg.setOnClickListener(){
-            val intent = Intent(context, ContainerActivity::class.java)
+            val intent = Intent(context, InventoryActivity::class.java)
 
             intent.putExtra("INVENTORY","inventory")
 

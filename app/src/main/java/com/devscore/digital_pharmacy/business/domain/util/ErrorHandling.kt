@@ -33,7 +33,7 @@ class ErrorHandling{
         const val ERROR_PK_INVALID = "Account PK is invalid. Log out and log back in."
         const val ERROR_UPDATE_ACCOUNT = "Unable to update account. Try logging out and logging back in."
         const val ERROR_UPDATE_PASSWORD = "Unable to update password. Try logging out and logging back in."
-        const val ERROR_BLOG_UNABLE_TO_RETRIEVE = "Unable to retrieve the blog post. Try reselecting it from the list."
+        const val ERROR_MEDICINE_UNABLE_TO_RETRIEVE = "Unable to retrieve the Medicine. Try reselecting it from the list."
         const val ERROR_NO_PREVIOUS_AUTH_USER = "No previously authenticated user. This error can be ignored."
         const val ERROR_BLANK_FIELD = "This field may not be blank."
         const val SOMETHING_WRONG_WITH_IMAGE = "Something went wrong with the image."

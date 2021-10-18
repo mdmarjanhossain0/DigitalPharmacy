@@ -12,12 +12,6 @@
         android:icon="@drawable/ic_list"
         android:title="@null" />
 
-<!--    <item-->
-<!--        android:id="@+id/sync"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_sync"-->
-<!--        android:title="@null" />-->
-
     <item
         android:id="@+id/nav_settings_graph"
         android:enabled="true"

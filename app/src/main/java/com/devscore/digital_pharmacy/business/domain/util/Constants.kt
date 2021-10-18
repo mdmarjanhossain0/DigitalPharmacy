@@ -6,8 +6,8 @@ class Constants {
 
 //        const val BASE_URL = "http://10.0.2.2:8000/api/"    // For emulator
 //        const val BASE_URL = "http://127.0.0.1/:8000/api/"
-//        const val BASE_URL = "http://192.168.43.140:8000/api/"
-        const val BASE_URL = "http://157.245.147.57:8000/api/"
+        const val BASE_URL = "http://192.168.43.254:8000/api/"
+//        const val BASE_URL = "http://157.245.147.57:8000/api/"
         const val PASSWORD_RESET_URL: String = "https://open-api.xyz/password_reset/"
 
 

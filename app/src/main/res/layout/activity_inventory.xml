@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
@@ -65,7 +66,7 @@
 
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerId"
+            android:id="@+id/inventory_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -74,6 +75,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_inventory_graph"
             />
 
 
