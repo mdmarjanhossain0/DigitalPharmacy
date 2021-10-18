@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.business.datasource.cache.inventory
+package com.devscore.digital_pharmacy.business.datasource.cache.inventory.global
 
 import androidx.room.*
 import com.devscore.digital_pharmacy.business.domain.util.Constants.Companion.PAGINATION_PAGE_SIZE

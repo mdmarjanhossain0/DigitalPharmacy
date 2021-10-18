@@ -10,13 +10,13 @@ data class GlobalMedicineResponse (
     @SerializedName("count") var count : Int?,
     @SerializedName("next") var next : Int?,
     @SerializedName("previous") var previous : Int?,
-    @SerializedName("results") var results : List<GlobalMedicineDto>?
+    @SerializedName("results") var results : List<GlobalMedicineDto>
 )
 
 
 fun GlobalMedicineResponse.toList() : List<GlobalMedicine> {
     val list : MutableList<GlobalMedicine> = mutableListOf()
-    for (dto in results!!){
+    for (dto in results){
         list.add(
             dto.toGlobalMedicine()
         )

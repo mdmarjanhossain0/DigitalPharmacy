@@ -15,12 +15,12 @@ abstract class BaseInventoryFragment : Fragment()
     lateinit var uiCommunicationListener: UICommunicationListener
 
     override fun onAttach(context: Context) {
-        super.onAttach(context)
         try{
             uiCommunicationListener = context as UICommunicationListener
         }catch(e: ClassCastException){
             Log.e(TAG, "$context must implement UICommunicationListener" )
         }
+        super.onAttach(context)
 
     }
 }

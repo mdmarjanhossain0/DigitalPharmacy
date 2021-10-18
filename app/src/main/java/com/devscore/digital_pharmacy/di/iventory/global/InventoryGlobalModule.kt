@@ -1,8 +1,7 @@
-package com.devscore.digital_pharmacy.di.iventory
+package com.devscore.digital_pharmacy.di.iventory.global
 
 import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.GlobalMedicineDao
-import com.devscore.digital_pharmacy.business.datasource.network.auth.AuthService
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.interactors.inventory.SearchGlobalMedicine
 import dagger.Module
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 @FlowPreview
 @Module
 @InstallIn(SingletonComponent::class)
-object InventoryModule {
+object InventoryGlobalModule {
 
 
     @Singleton

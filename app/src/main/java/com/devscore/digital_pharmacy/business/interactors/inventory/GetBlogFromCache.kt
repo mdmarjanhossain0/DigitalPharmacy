@@ -1,6 +1,6 @@
 package com.devscore.digital_pharmacy.business.interactors.inventory
 
-//import com.devscore.digital_pharmacy.business.datasource.cache.inventory.GlobalMedicineDao
+//import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 //import com.devscore.digital_pharmacy.business.datasource.cache.inventory.toGlobalMedicine
 //import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 //import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine

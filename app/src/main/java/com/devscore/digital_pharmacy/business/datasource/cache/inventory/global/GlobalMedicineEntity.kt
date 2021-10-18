@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.business.datasource.cache.inventory
+package com.devscore.digital_pharmacy.business.datasource.cache.inventory.global
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,8 +13,8 @@ data class GlobalMedicineEntity (
     @PrimaryKey
     val id : Int,
 
-    @ColumnInfo(name="name")
-    val name : String,
+    @ColumnInfo(name="brand_name")
+    val brand_name : String?,
 
     @ColumnInfo(name="sku")
     val sku : String?,
@@ -67,7 +67,7 @@ data class GlobalMedicineEntity (
 fun GlobalMedicineEntity.toGlobalMedicine() : GlobalMedicine {
     return GlobalMedicine(
         id = id,
-        brand_name = name,
+        brand_name = brand_name,
         sku = sku,
         darNumber = darNumber,
         mrNumber = mrNumber,
@@ -89,7 +89,7 @@ fun GlobalMedicineEntity.toGlobalMedicine() : GlobalMedicine {
 fun GlobalMedicine.toGlobalMedicineEntity() : GlobalMedicineEntity {
     return GlobalMedicineEntity(
         id = id,
-        name = brand_name,
+        brand_name = brand_name,
         sku = sku,
         darNumber = darNumber,
         mrNumber = mrNumber,

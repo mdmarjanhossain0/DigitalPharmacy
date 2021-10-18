@@ -10,7 +10,7 @@ data class LocalMedicineResponse (
     @SerializedName("count") var count : Int?,
     @SerializedName("next") var next : Int?,
     @SerializedName("previous") var previous : Int?,
-    @SerializedName("results") var results : List<LocalMedicineDto>?
+    @SerializedName("results") var results : List<LocalMedicineDto>
 
 )
 

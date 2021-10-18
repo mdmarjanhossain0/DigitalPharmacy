@@ -1,61 +1,152 @@
 package com.devscore.digital_pharmacy.presentation.inventory.local
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
-import com.devscore.digital_pharmacy.presentation.inventory.inventoryreturn.InventoryReturnFragment
-import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.*
+import com.codingwithmitch.openapi.presentation.util.GenericViewHolder
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.inventory.InventorySalesHistoryFragment
+import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import kotlinx.android.synthetic.main.item_global.view.*
+import kotlinx.android.synthetic.main.item_local.view.*
 
-class LocalAdapter(
-    val interaction : Interaction?,
-    val context: Context) :
-    RecyclerView.Adapter<LocalAdapter.LocalViewHolder>() {
+class LocalAdapter
+constructor(
+    private val interaction: Interaction? = null
+)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class LocalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val TAG = "LocalAdapter"
 
-        var returnImg :ImageView = itemView.findViewById(R.id.returnImgId)
-        var historyImg :ImageView = itemView.findViewById(R.id.historyImgId)
+    companion object {
 
+        const val IMAGE_ITEM = 1
+        const val LOADING_ITEM = 2
+
+        const val LOADING = 1
+        const val RETRY =2
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_local, parent, false)
-        return LocalViewHolder(view)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        when(viewType) {
+            IMAGE_ITEM -> {
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_local,parent,false)
+                return LocalDataViewHolder(itemView, interaction)
+            }
+
+            LOADING_ITEM -> {
+                Log.d(TAG, "onCreateViewHolder: No more results...")
+                return GenericViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.item_loading,
+                        parent,
+                        false
+                    )
+                )
+            }
+        }
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_local ,parent,false)
+        return LocalDataViewHolder(itemView, interaction)
     }
 
-    override fun onBindViewHolder(holder: LocalViewHolder, position: Int) {
+    override fun getItemViewType(position: Int): Int {
+        if(differ.currentList.size < (position + 1)){
+            interaction?.nextPage()
+            return LOADING_ITEM
+        }
+        return IMAGE_ITEM
+    }
 
-        holder.returnImg.setOnClickListener(){
-
-//            (context as FragmentActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainerId, InventoryReturnFragment()).commit()
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder) {
+            is LocalDataViewHolder -> {
+                holder.bind(differ.currentList.get(position))
+            }
         }
 
-        holder.historyImg.setOnClickListener(){
-
-//            (context as FragmentActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainerId, InventorySalesHistoryFragment()).commit()
-        }
-
-        holder.itemView.setOnClickListener {
-            //  context.startActivity(Intent(context, BuyCourseActivity::class.java))
-            interaction?.onItemSelected(position)
-        }
     }
 
     override fun getItemCount(): Int {
-        return 10
+        Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
+        return differ.currentList.size + 1
     }
 
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalMedicine>() {
+
+        override fun areItemsTheSame(oldItem: LocalMedicine, newItem: LocalMedicine): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: LocalMedicine, newItem: LocalMedicine): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    private val differ =
+        AsyncListDiffer(
+            LocalRecyclerChangeCallback(this),
+            AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
+        )
+
+    internal inner class LocalRecyclerChangeCallback(
+        private val adapter: LocalAdapter
+    ) : ListUpdateCallback {
+
+        override fun onChanged(position: Int, count: Int, payload: Any?) {
+            adapter.notifyItemRangeChanged(position, count, payload)
+        }
+
+        override fun onInserted(position: Int, count: Int) {
+            adapter.notifyItemRangeChanged(position, count)
+        }
+
+        override fun onMoved(fromPosition: Int, toPosition: Int) {
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun onRemoved(position: Int, count: Int) {
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    fun submitList(medicineList: List<LocalMedicine>?, ){
+        val newList = medicineList?.toMutableList()
+        differ.submitList(newList)
+    }
+
+    fun changeBottom(bottomState : Int) {
+    }
+
+    class LocalDataViewHolder
+    constructor(
+        itemView: View,
+        private val interaction: Interaction?
+    ) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(item: LocalMedicine) = with(itemView) {
+            itemView.setOnClickListener {
+                interaction?.onItemSelected(adapterPosition, item)
+            }
+            Log.d("LocalAdapter", item.toString())
+            itemView.localBrandNameTV.setText(item.brand_name)
+            itemView.localCompanyNameTV.setText(item.generic)
+            itemView.localMRPTV.setText(item.mrp.toString())
+
+        }
+    }
 
     interface Interaction {
 
-        fun onItemSelected(position: Int)
+        fun onItemSelected(position: Int, item: LocalMedicine)
 
+        fun onItemReturnSelected(position: Int, item: LocalMedicine)
+
+        fun onItemDeleteSelected(position: Int, item: LocalMedicine)
+
+        fun restoreListPosition()
+
+        fun nextPage()
     }
 }
