@@ -22,6 +22,7 @@
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_history.xml" value="0.23333333333333334" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_home.xml" value="0.26614583333333336" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_imo.xml" value="0.26614583333333336" />
+        <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_inventory.xml" value="0.26614583333333336" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_left_down.xml" value="0.26614583333333336" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_list.xml" value="0.26614583333333336" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/drawable/ic_medicine.xml" value="0.26614583333333336" />
@@ -49,6 +50,7 @@
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/activity_verify.xml" value="0.25" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/add_product_dialog.xml" value="0.25" />
+        <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/dialog.xml" value="0.264" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/dispensing_dialog.xml" value="0.264" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/fragment_add_customer.xml" value="0.24615384615384617" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/fragment_add_product_sub_medicine.xml" value="0.264" />
@@ -99,7 +101,7 @@
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_branch.xml" value="0.536" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_customer_list.xml" value="0.264" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_customer_sales_history.xml" value="0.25" />
-        <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_dispensing.xml" value="0.4" />
+        <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_dispensing.xml" value="0.24615384615384617" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_global.xml" value="0.264" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_inventory_purchase_history.xml" value="0.21851851851851853" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/layout/item_inventory_returns_history.xml" value="0.2222222222222222" />
@@ -126,5 +128,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.176" />
+      </ProjectState>
+    </option>
   </component>
 </project>
