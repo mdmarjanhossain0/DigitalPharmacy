@@ -136,5 +136,9 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
         onBackPressed()
     }
 
+    fun navigateLocalFragmentToDisposingFragment(){
+        navController.navigate(R.id.action_inventoryFragment_to_dispensingFragment)
+    }
+
 
 }

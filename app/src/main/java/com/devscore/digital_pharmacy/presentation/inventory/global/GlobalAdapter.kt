@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.codingwithmitch.openapi.presentation.util.GenericViewHolder
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
+import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.item_global.view.*
 
 class GlobalAdapter

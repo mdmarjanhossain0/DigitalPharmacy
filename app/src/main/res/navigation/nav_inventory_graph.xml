@@ -20,7 +20,7 @@
             android:id="@+id/action_inventoryFragment_to_inventoryProductDetailsEditFragment"
             app:destination="@id/inventoryProductDetailsEditFragment" />
         <action
-            android:id="@+id/action_inventoryFragment_to_dispensingFragment2"
+            android:id="@+id/action_inventoryFragment_to_dispensingFragment"
             app:destination="@id/dispensingFragment2" />
     </fragment>
     <fragment
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/dispensingFragment2"
-        android:name="com.devscore.digital_pharmacy.inventory.DispensingFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.inventory.dispensing.DispensingFragment"
         android:label="fragment_dispensing"
         tools:layout="@layout/fragment_dispensing" />
 </navigation>

@@ -42,23 +42,23 @@
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_history"
-            app:layout_constraintBottom_toBottomOf="@+id/returnImgId"
-            app:layout_constraintEnd_toStartOf="@+id/returnImgId"
-            app:layout_constraintTop_toTopOf="@+id/returnImgId" />
+            app:layout_constraintBottom_toBottomOf="@+id/localMedicineReturn"
+            app:layout_constraintEnd_toStartOf="@+id/localMedicineReturn"
+            app:layout_constraintTop_toTopOf="@+id/localMedicineReturn" />
 
 
         <ImageView
-            android:id="@+id/returnImgId"
+            android:id="@+id/localMedicineReturn"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_resource_return"
-            app:layout_constraintBottom_toBottomOf="@+id/removeImgId"
-            app:layout_constraintEnd_toStartOf="@+id/removeImgId"
-            app:layout_constraintTop_toTopOf="@+id/removeImgId" />
+            app:layout_constraintBottom_toBottomOf="@+id/localMedicineDelete"
+            app:layout_constraintEnd_toStartOf="@+id/localMedicineDelete"
+            app:layout_constraintTop_toTopOf="@+id/localMedicineDelete" />
 
         <ImageView
-            android:id="@+id/removeImgId"
+            android:id="@+id/localMedicineDelete"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="10dp"

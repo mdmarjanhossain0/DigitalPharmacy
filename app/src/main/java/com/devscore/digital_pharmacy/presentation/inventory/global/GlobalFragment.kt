@@ -16,17 +16,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
-import com.codingwithmitch.openapi.presentation.util.TopSpacingItemDecoration
-import com.codingwithmitch.openapi.presentation.util.processQueue
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
+import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
+import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.fragment_global.*
 
 class GlobalFragment : BaseInventoryFragment(),

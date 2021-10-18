@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.codingwithmitch.openapi.presentation.util.processQueue
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.auth.BaseAuthFragment
+import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.fragment_register.*
 
 

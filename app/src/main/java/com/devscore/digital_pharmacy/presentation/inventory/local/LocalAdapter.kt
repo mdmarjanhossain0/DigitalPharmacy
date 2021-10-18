@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.codingwithmitch.openapi.presentation.util.GenericViewHolder
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.item_global.view.*
 import kotlinx.android.synthetic.main.item_local.view.*
 
@@ -133,6 +133,14 @@ constructor(
             itemView.localBrandNameTV.setText(item.brand_name)
             itemView.localCompanyNameTV.setText(item.generic)
             itemView.localMRPTV.setText(item.mrp.toString())
+
+            itemView.localMedicineReturn.setOnClickListener {
+                interaction?.onItemReturnSelected(adapterPosition, item)
+            }
+
+            itemView.localMedicineDelete.setOnClickListener {
+                interaction?.onItemDeleteSelected(adapterPosition, item)
+            }
 
         }
     }
