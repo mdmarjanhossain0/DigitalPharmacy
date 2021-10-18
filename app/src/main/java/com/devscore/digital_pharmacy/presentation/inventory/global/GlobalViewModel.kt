@@ -103,17 +103,19 @@ constructor(
 
 
     private fun search() {
-        resetPage()
-        clearList()
+//        resetPage()
+//        clearList()
         state.value?.let { state ->
             searchGlobalMedicine.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
                 page = state.page,
             ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
                 this.state.value = state.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { list ->
+                    Log.d(TAG, "ViewModel List Size " + list.size)
                     this.state.value = state.copy(globalMedicineList = list)
                 }
 

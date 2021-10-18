@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class GlobalMedicineDto (
 
     @SerializedName("id") var id : Int,
-    @SerializedName("name") var brand_name : String,
+    @SerializedName("brand_name") var brand_name : String?,
     @SerializedName("sku") var sku : String?,
     @SerializedName("dar_number") var darNumber : String?,
     @SerializedName("mr_number") var mrNumber : String?,

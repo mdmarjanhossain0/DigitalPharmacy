@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class LocalMedicineDto (
 
     @SerializedName("id") var id : Int,
-    @SerializedName("name") var brand_name : String,
+    @SerializedName("brand_name") var brand_name : String?,
     @SerializedName("sku") var sku : String?,
     @SerializedName("dar_number") var dar_number : String?,
     @SerializedName("mr_number") var mr_number : String?,
@@ -26,7 +26,7 @@ data class LocalMedicineDto (
     @SerializedName("remaining_quanity") var remaining_quantity : Int?,
     @SerializedName("damage_quantity") var damage_quantity : Int?,
     @SerializedName("rack_number") var rack_number : String?,
-    @SerializedName("units") var units : List<MedicineUnitsDto>?
+    @SerializedName("units") var units : List<MedicineUnitsDto>
 )
 
 data class MedicineUnitsDto(
@@ -66,7 +66,7 @@ fun LocalMedicineDto.toLocalMedicine() : LocalMedicine {
         remaining_quantity = remaining_quantity,
         damage_quantity = damage_quantity,
         rack_number = rack_number,
-        units = units?.map {
+        units = units.map {
             it.toMedicineUnits()
         }
     )

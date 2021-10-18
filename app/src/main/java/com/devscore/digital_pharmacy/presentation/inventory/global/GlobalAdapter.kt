@@ -1,20 +1,14 @@
 package com.devscore.digital_pharmacy.presentation.inventory.global
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.codingwithmitch.openapi.presentation.util.GenericViewHolder
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
-import com.devscore.digital_pharmacy.presentation.inventory.add.InventoryAddProductFragment
+import kotlinx.android.synthetic.main.item_global.view.*
 
 class GlobalAdapter
 constructor(
@@ -38,7 +32,7 @@ constructor(
         when(viewType) {
             IMAGE_ITEM -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_global,parent,false)
-                return ImageViewHolder(itemView, interaction)
+                return GlobalDataViewHolder(itemView, interaction)
             }
 
             LOADING_ITEM -> {
@@ -53,11 +47,11 @@ constructor(
             }
         }
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_global,parent,false)
-        return ImageViewHolder(itemView, interaction)
+        return GlobalDataViewHolder(itemView, interaction)
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.size == (position + 1)){
+        if(differ.currentList.size < (position + 1)){
             interaction?.nextPage()
             return LOADING_ITEM
         }
@@ -66,7 +60,7 @@ constructor(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is ImageViewHolder -> {
+            is GlobalDataViewHolder -> {
                 holder.bind(differ.currentList.get(position))
             }
         }
@@ -74,7 +68,8 @@ constructor(
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
+        return differ.currentList.size + 1
     }
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GlobalMedicine>() {
@@ -90,11 +85,11 @@ constructor(
 
     private val differ =
         AsyncListDiffer(
-            ImageRecyclerChangeCallback(this),
+            GlobalRecyclerChangeCallback(this),
             AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
         )
 
-    internal inner class ImageRecyclerChangeCallback(
+    internal inner class GlobalRecyclerChangeCallback(
         private val adapter: GlobalAdapter
     ) : ListUpdateCallback {
 
@@ -123,7 +118,7 @@ constructor(
     fun changeBottom(bottomState : Int) {
     }
 
-    class ImageViewHolder
+    class GlobalDataViewHolder
     constructor(
         itemView: View,
         private val interaction: Interaction?
@@ -134,6 +129,9 @@ constructor(
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
+            itemView.globalBrandNameTV.setText(item.brand_name)
+            itemView.globalCompanyNameTV.setText(item.generic)
+            itemView.globalMRPTV.setText(item.mrp.toString())
 
         }
     }

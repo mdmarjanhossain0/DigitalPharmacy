@@ -16,11 +16,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment
 import com.devscore.digital_pharmacy.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-class InventoryActivity : AppCompatActivity(), View.OnClickListener {
+@AndroidEntryPoint
+class InventoryActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var navigationView: NavigationView
     var drawerLayout: DrawerLayout? = null
@@ -28,6 +31,8 @@ class InventoryActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    override fun displayProgressBar(isLoading: Boolean) {
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +109,9 @@ class InventoryActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun expandAppBar() {
     }
 
 

@@ -4,7 +4,7 @@ package com.devscore.digital_pharmacy.business.domain.models
 data class LocalMedicine(
     var id: Int,
 
-    var brand_name: String,
+    var brand_name: String?,
 
     var sku: String?,
 
@@ -42,7 +42,7 @@ data class LocalMedicine(
 
     var rack_number: String?,
 
-    var units: List<MedicineUnits>?
+    var units: List<MedicineUnits>
 )
 
 

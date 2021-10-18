@@ -39,10 +39,79 @@
         <entry key="..\:/Users/Marjan/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Marjan/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/menu/nev_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Marjan/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/xml/network_security_config.xml" value="0.16802536231884058" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_auth.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_container.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_inventory.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_register.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_splash.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_verify.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/activity_welcome.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/add_product_dialog.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/dispensing_dialog.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_add_customer.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_add_product_sub_medicine.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_add_product_sub_non_medicine.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_cash_vendor.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_create_supplier.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_customer_previous_orders.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_customers_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_dashboard.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_dispensing.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_forgot_password.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_global.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_add_product.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_product_details_edit.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sales_history.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sub_overview_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sub_purchase_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sub_returns_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sub_sales_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_launcher.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_local.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_notifications.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_otp_verification.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_register.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_return1.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_return_on_order.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales_cart.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales_completed.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales_orders.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales_pay_now.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_sales_report.xml" value="0.2056159420289855" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_supplier_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_supplier_previous_orders.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_vendor_payment.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/fragment_vendor_receive.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/inventory_details_dialog.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/inventory_list_filter_dialog.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_customer_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_customer_sales_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_dispensing.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_global.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_inventory_purchase_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_inventory_returns_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_inventory_sales_history.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_loading.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_local.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_retrun.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_sales_cart.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_sales_completed.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_sales_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_sales_orders.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_sub_sales_list.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_supplier_list.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/item_supplier_previous_orders.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DigitalPharmacy/app/src/main/res/layout/layout_drawer_menu.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

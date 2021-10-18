@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7030093e612c019fd40b510029835036",
+    "identityHash": "42a0e697e905f4cb48ecac7f35decef4",
     "entities": [
       {
         "tableName": "auth_token",
@@ -100,7 +100,7 @@
       },
       {
         "tableName": "GlobalMedicine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `sku` TEXT, `dr_number` TEXT, `mr_number` TEXT, `generic` TEXT, `indication` TEXT, `symptom` TEXT, `strength` TEXT, `description` TEXT, `baseMrp` INTEGER, `basePurchasePrice` INTEGER, `manufacture` TEXT, `kind` TEXT, `form` TEXT, `currentDateTime` INTEGER NOT NULL, `createdAt` TEXT, `updatedAt` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `sku` TEXT, `dr_number` TEXT, `mr_number` TEXT, `generic` TEXT, `indication` TEXT, `symptom` TEXT, `strength` TEXT, `description` TEXT, `baseMrp` INTEGER, `basePurchasePrice` INTEGER, `manufacture` TEXT, `kind` TEXT, `form` TEXT, `currentDateTime` INTEGER NOT NULL, `createdAt` TEXT, `updatedAt` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -112,7 +112,7 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "sku",
@@ -224,7 +224,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7030093e612c019fd40b510029835036')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '42a0e697e905f4cb48ecac7f35decef4')"
     ]
   }
 }

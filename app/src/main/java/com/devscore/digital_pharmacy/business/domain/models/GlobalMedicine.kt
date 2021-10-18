@@ -2,7 +2,7 @@ package com.devscore.digital_pharmacy.business.domain.models
 
 data class GlobalMedicine (
     var id : Int,
-    var brand_name : String,
+    var brand_name : String?,
     var sku : String?,
     var darNumber : String?,
     var mrNumber : String?,

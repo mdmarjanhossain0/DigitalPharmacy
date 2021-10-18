@@ -104,7 +104,7 @@ class GlobalFragment : BaseInventoryFragment(),
                         && viewModel.state.value?.isQueryExhausted == false
                     ) {
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
-                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
+                        viewModel.onTriggerEvent(GlobalEvents.NewMedicineSearch)
                     }
                 }
             })
