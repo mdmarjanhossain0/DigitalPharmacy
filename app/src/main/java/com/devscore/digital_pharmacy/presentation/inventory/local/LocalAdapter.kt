@@ -56,6 +56,7 @@ constructor(
             interaction?.nextPage()
             return LOADING_ITEM
         }
+        Log.d(TAG, "Data Item")
         return IMAGE_ITEM
     }
 

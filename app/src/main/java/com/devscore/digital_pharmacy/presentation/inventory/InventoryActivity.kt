@@ -1,23 +1,18 @@
 package com.devscore.digital_pharmacy.presentation.inventory
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.presentation.BaseActivity
-import com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment
 import com.devscore.digital_pharmacy.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,7 +52,7 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
         navigationView = findViewById(R.id.navigationView)
 
         val menuImg: ImageView = findViewById(R.id.menuImgId)
-        val closeImg: ImageView = findViewById(R.id.closeImgId)
+        val closeImg: ImageView = findViewById(R.id.productDetailsCloseIcon)
         val navDashboardTv: TextView = findViewById(R.id.navDashboardTvId)
         val navInventoryTv: TextView = findViewById(R.id.navInventoryTvId)
         val navSalesTv: TextView = findViewById(R.id.navSalesTvId)
@@ -77,7 +72,7 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
             R.id.menuImgId -> {
                 drawerLayout!!.openDrawer(navigationView, true)
             }
-            R.id.closeImgId -> {
+            R.id.productDetailsCloseIcon -> {
                 drawerLayout!!.closeDrawer(navigationView, true)
             }
             R.id.navDashboardTvId -> {

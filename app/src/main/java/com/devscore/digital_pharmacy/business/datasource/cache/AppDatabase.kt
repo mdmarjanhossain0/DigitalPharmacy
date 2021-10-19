@@ -18,7 +18,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.L
     GlobalMedicineEntity::class,
     LocalMedicineEntity::class,
     LocalMedicineUnitsEntity::class
-], version = 3)
+], version = 4)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao

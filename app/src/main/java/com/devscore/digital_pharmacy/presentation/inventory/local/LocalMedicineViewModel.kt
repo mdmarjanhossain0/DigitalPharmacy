@@ -94,7 +94,8 @@ constructor(
 
     private fun incrementPageNumber() {
         state.value?.let { state ->
-            this.state.value = state.copy(page = state.page + 1)
+            val pageNumber : Int = (state.localMedicineList.size / 10) as Int
+            this.state.value = state.copy(page = pageNumber)
         }
     }
 

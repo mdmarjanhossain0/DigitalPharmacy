@@ -31,6 +31,6 @@ interface LocalMedicineDao {
     ): List<LocalMedicineEntity>
 
 
-    @Query("SELECT * FROM LocalMedicine WHERE id = :id ")
-    suspend fun getGlobalMedicineWithUnits(id: Int): LocalMedicineWithUnits?
+    @Query("SELECT * FROM LocalMedicine WHERE room_medicine_id = :room_medicine_id ")
+    suspend fun getLocalMedicineWithUnits(room_medicine_id : Long): LocalMedicineWithUnits?
 }

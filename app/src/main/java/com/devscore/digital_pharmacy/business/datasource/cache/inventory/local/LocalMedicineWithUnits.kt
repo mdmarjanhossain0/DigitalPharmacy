@@ -20,6 +20,7 @@ data class LocalMedicineWithUnits (
 
 fun LocalMedicineWithUnits.toLocalMedicine() : LocalMedicine {
     return LocalMedicine(
+        room_medicine_id = localMedicine.room_medicine_id,
         id = localMedicine.id,
         brand_name = localMedicine.brand_name,
         sku = localMedicine.sku,
@@ -49,7 +50,7 @@ fun LocalMedicineWithUnits.toLocalMedicine() : LocalMedicine {
 
 fun LocalMedicine.toLocalMedicineEntity() : LocalMedicineEntity {
     return LocalMedicineEntity(
-        id = id,
+        id = id!!,
         brand_name = brand_name,
         sku = sku,
         dar_number = dar_number,
@@ -74,10 +75,10 @@ fun LocalMedicine.toLocalMedicineEntity() : LocalMedicineEntity {
 
 fun LocalMedicine.toLocalMedicineUnitEntity() : List<LocalMedicineUnitsEntity> {
     var unitList = mutableListOf<LocalMedicineUnitsEntity>()
-    for (unit in units) {
+    for (unit in units!!) {
         unitList.add(
             LocalMedicineUnitsEntity(
-                medicine_id = id,
+                medicine_id = id!!,
                 id = unit.id,
                 name = unit.name,
                 quantity = unit.quantity,

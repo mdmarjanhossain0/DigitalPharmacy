@@ -110,8 +110,8 @@ constructor(
         }
     }
 
-    fun submitList(blogList: List<GlobalMedicine>?, ){
-        val newList = blogList?.toMutableList()
+    fun submitList(medicineList: List<GlobalMedicine>?, ){
+        val newList = medicineList?.toMutableList()
         differ.submitList(newList)
     }
 

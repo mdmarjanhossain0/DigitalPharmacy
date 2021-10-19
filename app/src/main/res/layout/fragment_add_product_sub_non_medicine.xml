@@ -51,7 +51,7 @@
 
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/productDetailsMenufactureName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -69,13 +69,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="5134-0000-0876"
-            app:layout_constraintEnd_toEndOf="@+id/tv1"
-            app:layout_constraintStart_toStartOf="@+id/tv1"
-            app:layout_constraintTop_toBottomOf="@+id/tv1" />
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsMenufactureName" />
 
 
         <TextView
-            android:id="@+id/tv2"
+            android:id="@+id/productDetailsCompanyName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -92,9 +92,9 @@
             android:id="@+id/edt2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/tv2"
-            app:layout_constraintStart_toStartOf="@+id/tv2"
-            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsCompanyName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsCompanyName" />
 
 
         <TextView
@@ -134,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edt3" />
 
         <EditText
-            android:id="@+id/edt4"
+            android:id="@+id/genericET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/tv4"
@@ -166,13 +166,13 @@
 
 
         <EditText
-            android:id="@+id/edt5"
+            android:id="@+id/kindET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/edt4"
+            app:layout_constraintBottom_toBottomOf="@+id/genericET"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/edt4"
+            app:layout_constraintStart_toEndOf="@+id/genericET"
             app:layout_constraintTop_toBottomOf="@+id/tv4" />
 
 
@@ -186,8 +186,8 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/tv7"
-            app:layout_constraintStart_toStartOf="@+id/edt4"
-            app:layout_constraintTop_toBottomOf="@+id/edt4" />
+            app:layout_constraintStart_toStartOf="@+id/genericET"
+            app:layout_constraintTop_toBottomOf="@+id/genericET" />
 
 
         <TextView
@@ -198,26 +198,26 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv6"
-            app:layout_constraintEnd_toEndOf="@+id/edt5"
+            app:layout_constraintEnd_toEndOf="@+id/kindET"
             app:layout_constraintStart_toEndOf="@+id/tv6"
             app:layout_constraintTop_toTopOf="@+id/tv6" />
 
         <EditText
-            android:id="@+id/edt6"
+            android:id="@+id/formET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/edt7"
+            app:layout_constraintEnd_toStartOf="@+id/strengthET"
             app:layout_constraintStart_toStartOf="@+id/tv6"
             app:layout_constraintTop_toBottomOf="@+id/tv6" />
 
         <EditText
-            android:id="@+id/edt7"
+            android:id="@+id/strengthET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edt6"
+            app:layout_constraintStart_toEndOf="@+id/formET"
             app:layout_constraintTop_toBottomOf="@+id/tv7" />
 
 
@@ -230,7 +230,7 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/img2"
-            app:layout_constraintEnd_toEndOf="@+id/edt7"
+            app:layout_constraintEnd_toEndOf="@+id/strengthET"
             app:layout_constraintStart_toEndOf="@+id/img2"
             app:layout_constraintTop_toTopOf="@+id/img2" />
 
@@ -242,14 +242,14 @@
             android:layout_marginStart="32dp"
             android:gravity="start"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/edt8"
+            app:layout_constraintBottom_toBottomOf="@+id/salesUnit"
             app:layout_constraintEnd_toEndOf="@+id/tv8"
-            app:layout_constraintStart_toEndOf="@+id/edt8"
-            app:layout_constraintTop_toTopOf="@+id/edt8">
+            app:layout_constraintStart_toEndOf="@+id/salesUnit"
+            app:layout_constraintTop_toTopOf="@+id/salesUnit">
 
 
             <TextView
-                android:id="@+id/tv13"
+                android:id="@+id/minimumStockDecrementTV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/blue_shape_round_outline"
@@ -261,7 +261,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt10"
+                android:id="@+id/minimumStockCount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -280,7 +280,7 @@
 
 
             <TextView
-                android:id="@+id/tv15"
+                android:id="@+id/minimumStockIncrementTV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -324,11 +324,11 @@
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/img2"
-            app:layout_constraintStart_toStartOf="@+id/edt6"
-            app:layout_constraintTop_toBottomOf="@+id/edt6" />
+            app:layout_constraintStart_toStartOf="@+id/formET"
+            app:layout_constraintTop_toBottomOf="@+id/formET" />
 
         <EditText
-            android:id="@+id/edt8"
+            android:id="@+id/salesUnit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -342,8 +342,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_delete"
-            app:layout_constraintStart_toStartOf="@+id/edt8"
-            app:layout_constraintTop_toBottomOf="@+id/edt8" />
+            app:layout_constraintStart_toStartOf="@+id/salesUnit"
+            app:layout_constraintTop_toBottomOf="@+id/salesUnit" />
 
 
         <TextView
@@ -375,7 +375,7 @@
 
 
         <ImageView
-            android:id="@+id/img4"
+            android:id="@+id/addNewMeasureUnit"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginTop="16dp"
@@ -394,9 +394,9 @@
             android:text="Add new unit of measure"
             android:textColor="@color/colorPrimaryVariant"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img4"
+            app:layout_constraintBottom_toBottomOf="@+id/addNewMeasureUnit"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout1"
-            app:layout_constraintStart_toEndOf="@+id/img4" />
+            app:layout_constraintStart_toEndOf="@+id/addNewMeasureUnit" />
 
 
         <LinearLayout
@@ -474,7 +474,7 @@
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/addNonMedicineAdd"
-            app:layout_constraintStart_toStartOf="@+id/img4"
+            app:layout_constraintStart_toStartOf="@+id/addNewMeasureUnit"
             app:layout_constraintTop_toBottomOf="@+id/tv12" />
 
         <Button

@@ -1,14 +1,9 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toMedicineUnits
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.AddMedicineResponse
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.toMedicineUnits
 
-
-data class LocalMedicine(
-
-
-    var room_medicine_id : Long? = null,
-
-    var id: Int,
+data class AddMedicine (
 
     var brand_name: String?,
 
@@ -16,7 +11,7 @@ data class LocalMedicine(
 
     var dar_number: String?,
 
-    var mr_number: String? = null,
+    var mr_number: String?,
 
     var generic: String?,
 
@@ -32,9 +27,9 @@ data class LocalMedicine(
 
     var purchases_price : Int?,
 
-    var discount: Int? = 0,
+    var discount: Int?,
 
-    var is_percent_discount: Boolean = false,
+    var is_percent_discount: Boolean,
 
     var manufacture: String?,
 
@@ -42,26 +37,18 @@ data class LocalMedicine(
 
     var form: String?,
 
-    var remaining_quantity: Int? = 0,
+    var remaining_quantity: Int?,
 
-    var damage_quantity: Int? = 0,
+    var damage_quantity: Int?,
 
-    var rack_number: String? = null,
+    var rack_number: String?,
 
     var units: List<MedicineUnits>
 )
 
-
-data class MedicineUnits(
-    var id: Int,
-    var quantity : Int,
-    var name : String,
-    var type : String
-)
-
-
-fun LocalMedicine.toAddMedicine() : AddMedicine {
-    return AddMedicine(
+fun AddMedicine.toLocalMedicine() : LocalMedicine {
+    return LocalMedicine(
+        id = -1,
         brand_name = brand_name,
         sku = sku,
         dar_number = dar_number,

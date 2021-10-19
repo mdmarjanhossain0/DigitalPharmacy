@@ -1,21 +1,16 @@
 package com.devscore.digital_pharmacy.presentation.inventory.global
 
-import android.app.SearchManager
-import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.inputmethod.EditorInfo
-import androidx.fragment.app.Fragment
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
@@ -24,6 +19,8 @@ import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.fragment_global.*
+import kotlinx.android.synthetic.main.inventory_details_dialog.*
+import kotlinx.android.synthetic.main.inventory_list_filter_dialog.*
 
 class GlobalFragment : BaseInventoryFragment(),
     GlobalAdapter.Interaction {
@@ -65,7 +62,7 @@ class GlobalFragment : BaseInventoryFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(blogList = state.globalMedicineList)
+                submitList(medicineList = state.globalMedicineList)
             }
         })
     }
@@ -82,7 +79,7 @@ class GlobalFragment : BaseInventoryFragment(),
     private fun initRecyclerView(){
         globalRvId.apply {
             layoutManager = LinearLayoutManager(this@GlobalFragment.context)
-            val topSpacingDecorator = TopSpacingItemDecoration(30)
+            val topSpacingDecorator = TopSpacingItemDecoration(15)
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
@@ -100,7 +97,7 @@ class GlobalFragment : BaseInventoryFragment(),
                         && viewModel.state.value?.isQueryExhausted == false
                     ) {
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
-                        viewModel.onTriggerEvent(GlobalEvents.NewMedicineSearch)
+                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
                     }
                 }
             })
@@ -109,6 +106,7 @@ class GlobalFragment : BaseInventoryFragment(),
     }
 
     override fun onItemSelected(position: Int, item: GlobalMedicine) {
+        (activity as InventoryActivity).navigateGlobalFragmentToAddMedicineContainerFragment()
     }
 
     override fun restoreListPosition() {
@@ -120,5 +118,41 @@ class GlobalFragment : BaseInventoryFragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null
+    }
+
+
+    fun showFilterDialog() {
+        val dialog = MaterialDialog(requireContext())
+        dialog.cancelable(false)
+        dialog.setContentView(R.layout.inventory_list_filter_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.globalMedicineFilterClear.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.globalMedicineApplyFilter.setOnClickListener {
+            val generic = dialog.globalFilterGeneric.text.toString()
+            val manufacturer = dialog.globalFilterManufacturer.text.toString()
+            applyFilter(generic, manufacturer)
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    private fun applyFilter(generic: String, manufacturer: String) {
+        if (generic == "" && manufacturer == ""){
+            return
+        }
+
+        if (manufacturer == "") {
+            viewModel.onTriggerEvent(GlobalEvents.GenericFilter(generic))
+            return
+        }
+
+        if (generic == "") {
+            viewModel.onTriggerEvent(GlobalEvents.ManufacturerFilter(generic))
+            return
+        }
+
+        viewModel.onTriggerEvent(GlobalEvents.GenericWithManufacturerFilter(generic, manufacturer))
     }
 }
