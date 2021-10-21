@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -24,63 +26,32 @@
             android:orientation="vertical">
 
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Reason:"
-                android:textAppearance="@android:style/TextAppearance.Medium"
-                android:textColor="@color/colorPrimaryVariant"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/colorPrimaryVariant" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <RadioButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Damage"
-                    android:textColor="@color/colorPrimaryVariant"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="16dp"
+                    android:text="Vendor"
+                    android:textColor="@color/colorPrimaryVariant" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Expired"
-                    android:textColor="@color/colorPrimaryVariant"
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lost"
-                    android:textColor="@color/colorPrimaryVariant"
-                    android:textSize="12sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
-            </RadioGroup>
-
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/card_color"
                 android:gravity="center">
 
@@ -88,33 +59,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+
                     <Button
-                        android:id="@+id/addMedicineClear"
+                        android:id="@+id/btn1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="40dp"
                         android:backgroundTint="@color/colorPrimaryVariant"
                         android:text="Clear"
                         android:textAllCaps="false" />
 
 
                     <Button
-                        android:id="@+id/addMedicineUnitAdd"
+                        android:id="@+id/btn2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="40dp"
                         android:backgroundTint="@color/colorPrimaryVariant"
-                        android:text="Confirm"
+                        android:text="Apply"
                         android:textAllCaps="false" />
 
                 </RelativeLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
 
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
