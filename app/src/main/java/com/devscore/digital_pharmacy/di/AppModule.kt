@@ -2,8 +2,8 @@ package com.devscore.digital_pharmacy.di
 
 import android.app.Application
 import androidx.room.Room
-import com.devscore.digital_pharmacy.business.datasource.AppDatabase
-import com.devscore.digital_pharmacy.business.datasource.AppDatabase.Companion.DATABASE_NAME
+import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
+import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase.Companion.DATABASE_NAME
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore

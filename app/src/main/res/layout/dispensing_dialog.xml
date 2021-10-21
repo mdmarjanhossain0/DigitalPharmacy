@@ -53,22 +53,24 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Damage"
-                    android:textColor="@color/colorPrimaryVariant" />
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="12sp" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text="Expired"
-                    android:textColor="@color/colorPrimaryVariant" />
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="12sp" />
 
                 <RadioButton
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lost"
-                    android:textColor="@color/colorPrimaryVariant" />
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="12sp" />
 
 
             </RadioGroup>
@@ -90,7 +92,8 @@
                         android:id="@+id/btn1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
                         android:backgroundTint="@color/colorPrimaryVariant"
                         android:text="Clear"
                         android:textAllCaps="false" />
@@ -101,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="40dp"
+                        android:layout_marginEnd="20dp"
                         android:backgroundTint="@color/colorPrimaryVariant"
                         android:text="Confirm"
                         android:textAllCaps="false" />
@@ -113,6 +116,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

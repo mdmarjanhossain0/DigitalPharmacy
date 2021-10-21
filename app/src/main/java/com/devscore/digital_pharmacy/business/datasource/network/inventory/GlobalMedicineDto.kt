@@ -6,23 +6,22 @@ import com.google.gson.annotations.SerializedName
 data class GlobalMedicineDto (
 
     @SerializedName("id") var id : Int,
-    @SerializedName("name") var name : String,
-    @SerializedName("sku") var sku : String,
-    @SerializedName("dar_number") var darNumber : String,
-    @SerializedName("mr_number") var mrNumber : String,
-    @SerializedName("generic") var generic : String,
-    @SerializedName("indication") var indication : String,
-    @SerializedName("symptom") var symptom : String,
-    @SerializedName("strength") var strength : String,
-    @SerializedName("description") var description : String,
-    @SerializedName("base_mrp") var baseMrp : Int,
-    @SerializedName("base_purchase_price") var basePurchasePrice : Int,
-    @SerializedName("brand") var brand : String,
-    @SerializedName("manufacture") var manufacture : String,
-    @SerializedName("kind") var kind : String,
-    @SerializedName("form") var form : String,
-    @SerializedName("created_at") var createdAt : String,
-    @SerializedName("updated_at") var updatedAt : String
+    @SerializedName("brand_name") var brand_name : String?,
+    @SerializedName("sku") var sku : String?,
+    @SerializedName("dar_number") var darNumber : String?,
+    @SerializedName("mr_number") var mrNumber : String?,
+    @SerializedName("generic") var generic : String?,
+    @SerializedName("indication") var indication : String?,
+    @SerializedName("symptom") var symptom : String?,
+    @SerializedName("strength") var strength : String?,
+    @SerializedName("description") var description : String?,
+    @SerializedName("base_mrp") var mrp : Int?,
+    @SerializedName("base_purchase_price") var purchase_price : Int?,
+    @SerializedName("manufacture") var manufacture : String?,
+    @SerializedName("kind") var kind : String?,
+    @SerializedName("form") var form : String?,
+    @SerializedName("created_at") var createdAt : String?,
+    @SerializedName("updated_at") var updatedAt : String?
 
 )
 
@@ -30,7 +29,7 @@ data class GlobalMedicineDto (
 fun GlobalMedicineDto.toGlobalMedicine() : GlobalMedicine {
     return GlobalMedicine(
         id = id,
-        name = name,
+        brand_name = brand_name,
         sku = sku,
         darNumber = darNumber,
         mrNumber = mrNumber,
@@ -39,9 +38,8 @@ fun GlobalMedicineDto.toGlobalMedicine() : GlobalMedicine {
         symptom = symptom,
         strength = strength,
         description = description,
-        baseMrp = baseMrp,
-        basePurchasePrice = basePurchasePrice,
-        brand = brand,
+        mrp = mrp,
+        purchases_price = purchase_price,
         manufacture = manufacture,
         kind = kind,
         form = form,

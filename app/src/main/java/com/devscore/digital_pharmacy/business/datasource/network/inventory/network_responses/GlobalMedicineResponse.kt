@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName
 
 data class GlobalMedicineResponse (
 
-    @SerializedName("count") var count : Int,
-    @SerializedName("next") var next : String,
-    @SerializedName("previous") var previous : String,
+    @SerializedName("count") var count : Int?,
+    @SerializedName("next") var next : Int?,
+    @SerializedName("previous") var previous : Int?,
     @SerializedName("results") var results : List<GlobalMedicineDto>
 )
 
