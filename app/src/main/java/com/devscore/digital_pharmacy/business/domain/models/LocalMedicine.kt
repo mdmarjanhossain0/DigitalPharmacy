@@ -8,7 +8,7 @@ data class LocalMedicine(
 
     var room_medicine_id : Long? = null,
 
-    var id: Int,
+    var id: Int? = null,
 
     var brand_name: String?,
 

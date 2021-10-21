@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
@@ -28,6 +29,8 @@ class DispensingFragment : BaseInventoryFragment(), DispensingAdapter.Interactio
     private var recyclerAdapter: DispensingAdapter? = null // can leak memory so need to null
     private val viewModel: DispensingViewModel by viewModels()
 
+
+    val args : DispensingFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,

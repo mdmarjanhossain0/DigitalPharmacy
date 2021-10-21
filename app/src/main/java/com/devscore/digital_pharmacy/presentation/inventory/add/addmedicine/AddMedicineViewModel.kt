@@ -30,7 +30,6 @@ constructor(
     val state: MutableLiveData<AddMedicineState> = MutableLiveData(AddMedicineState())
 
     init {
-        onTriggerEvent(AddMedicineEvents.NewAddMedicine)
     }
 
     fun onTriggerEvent(event: AddMedicineEvents) {

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -17,10 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
-import com.devscore.digital_pharmacy.business.domain.models.AddMedicine
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
-import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
-import com.devscore.digital_pharmacy.business.domain.util.MedicineProperties
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
@@ -31,9 +27,6 @@ import kotlinx.android.synthetic.main.add_product_dialog.*
 import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.fragment_local.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,40 +62,60 @@ class LocalFragment : BaseInventoryFragment(),
     }
 
     private fun initUIClick() {
-//        CoroutineScope(IO).launch {
-//            val result = inventoryApiService.addMedicine(
-//                "Token 0c58549b616cba8e1f39a4ed1c86b019b52ea764",
-//                AddMedicine(
-//                    brand_name = "Paracitamol7",
-//                    sku = null,
-//                    dar_number = null,
-//                    mr_number = null,
-//                    generic = null,
-//                    indication = null,
-//                    symptom = null,
-//                    strength = null,
-//                    description = null,
-//                    mrp = null,
-//                    purchases_price = null,
-//                    discount = null,
-//                    is_percent_discount = false,
-//                    manufacture = null,
-//                    kind = null,
-//                    form = null,
-//                    remaining_quantity = null,
-//                    damage_quantity = null,
-//                    rack_number = null,
-//                    units = listOf<MedicineUnits>()
-//                )
-//            )
-//            Log.d(TAG, result.toString())
-//        }
+/*        CoroutineScope(IO).launch {
+            val result = inventoryApiService.addMedicine(
+                "Token 0c58549b616cba8e1f39a4ed1c86b019b52ea764",
+                AddMedicine(
+                    brand_name = "Paracitamol7",
+                    sku = null,
+                    dar_number = null,
+                    mr_number = null,
+                    generic = null,
+                    indication = null,
+                    symptom = null,
+                    strength = null,
+                    description = null,
+                    mrp = null,
+                    purchases_price = null,
+                    discount = null,
+                    is_percent_discount = false,
+                    manufacture = null,
+                    kind = null,
+                    form = null,
+                    remaining_quantity = null,
+                    damage_quantity = null,
+                    rack_number = null,
+                    units = listOf<MedicineUnits>()
+                )
+            )
+            Log.d(TAG, result.toString())
+        }*/
+
+        localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                // your text view here
+//                textView.text = newText
+                executeNewQuery(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+//                textView.text = query
+                executeNewQuery(query)
+                return true
+            }
+        })
+
+
+        localFragmentFloatingActionButton.setOnClickListener {
+            (activity as InventoryActivity).navigateGlobalFragmentToAddMedicineContainerFragment()
+        }
     }
 
     private fun subscribeObservers(){
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
-            uiCommunicationListener.displayProgressBar(state.isLoading)
+//            uiCommunicationListener.displayProgressBar(state.isLoading)
 
             processQueue(
                 context = context,
@@ -121,10 +134,12 @@ class LocalFragment : BaseInventoryFragment(),
 
     private fun executeNewQuery(query: String){
         resetUI()
+        viewModel.onTriggerEvent(LocalMedicineEvents.UpdateQuery(query))
+        viewModel.onTriggerEvent(LocalMedicineEvents.NewLocalMedicineSearch)
     }
 
     private  fun resetUI(){
-        uiCommunicationListener.hideSoftKeyboard()
+//        uiCommunicationListener.hideSoftKeyboard()
 //        focusableView.requestFocus()
     }
 
@@ -149,7 +164,7 @@ class LocalFragment : BaseInventoryFragment(),
                         && viewModel.state.value?.isQueryExhausted == false
                     ) {
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
-                        viewModel.onTriggerEvent(LocalMedicineEvents.NewLocalMedicineSearch)
+                        viewModel.onTriggerEvent(LocalMedicineEvents.NextPage)
                     }
                 }
             })
@@ -172,7 +187,7 @@ class LocalFragment : BaseInventoryFragment(),
     }
 
     override fun onItemDeleteSelected(position: Int, item: LocalMedicine) {
-        (activity as InventoryActivity).navigateLocalFragmentToDisposingFragment()
+        (activity as InventoryActivity).navigateLocalFragmentToDispensingFragment(item.id!!)
     }
 
     override fun restoreListPosition() {

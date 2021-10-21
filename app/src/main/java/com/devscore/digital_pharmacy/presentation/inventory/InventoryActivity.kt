@@ -16,6 +16,11 @@ import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_auth.*
+import kotlinx.android.synthetic.main.activity_auth.progress_bar
+import kotlinx.android.synthetic.main.activity_container.*
+import kotlinx.android.synthetic.main.activity_container.backImage
+import kotlinx.android.synthetic.main.activity_inventory.*
 
 @AndroidEntryPoint
 class InventoryActivity : BaseActivity(), View.OnClickListener {
@@ -27,6 +32,12 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     override fun displayProgressBar(isLoading: Boolean) {
+        if(isLoading){
+            inventory_progress_bar.visibility = View.VISIBLE
+        }
+        else{
+            inventory_progress_bar.visibility = View.GONE
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +45,17 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_inventory)
 
         setUpUI()
+        initUIClick()
 
         navigationView = NavigationView(this)
         onSetNavigationDrawerEvents()
 
+    }
+
+    private fun initUIClick() {
+        backImage.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setUpUI() {
@@ -131,7 +149,7 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
         onBackPressed()
     }
 
-    fun navigateLocalFragmentToDisposingFragment(){
+    fun navigateLocalFragmentToDispensingFragment(id : Int){
         navController.navigate(R.id.action_inventoryFragment_to_dispensingFragment)
     }
 

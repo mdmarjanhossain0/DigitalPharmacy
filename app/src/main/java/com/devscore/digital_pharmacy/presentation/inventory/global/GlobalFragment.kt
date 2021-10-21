@@ -44,13 +44,35 @@ class GlobalFragment : BaseInventoryFragment(),
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         initRecyclerView()
+        initUIClick()
         subscribeObservers()
+    }
+
+    private fun initUIClick() {
+        globalFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                // your text view here
+//                textView.text = newText
+                executeNewQuery(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+//                textView.text = query
+                executeNewQuery(query)
+                return true
+            }
+        })
+
+        globalFragmentFloatingActionButton.setOnClickListener {
+            showFilterDialog()
+        }
     }
 
     private fun subscribeObservers(){
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
-            uiCommunicationListener.displayProgressBar(state.isLoading)
+//            uiCommunicationListener.displayProgressBar(state.isLoading)
 
             processQueue(
                 context = context,
@@ -69,10 +91,12 @@ class GlobalFragment : BaseInventoryFragment(),
 
     private fun executeNewQuery(query: String){
         resetUI()
+        viewModel.onTriggerEvent(GlobalEvents.SearchWithQuery(query))
+        viewModel.onTriggerEvent(GlobalEvents.NewMedicineSearch)
     }
 
     private  fun resetUI(){
-        uiCommunicationListener.hideSoftKeyboard()
+//        uiCommunicationListener.hideSoftKeyboard()
 //        focusableView.requestFocus()
     }
 

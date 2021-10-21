@@ -133,7 +133,12 @@ constructor(
             Log.d("LocalAdapter", item.toString())
             itemView.localBrandNameTV.setText(item.brand_name)
             itemView.localCompanyNameTV.setText(item.generic)
-            itemView.localMRPTV.setText(item.mrp.toString())
+            if (item.mrp != null) {
+                itemView.localMRPTV.setText("MRP ৳ "+ item.mrp.toString())
+            }
+            else {
+                itemView.localMRPTV.setText("MRP ৳ ...")
+            }
 
             itemView.localMedicineReturn.setOnClickListener {
                 interaction?.onItemReturnSelected(adapterPosition, item)

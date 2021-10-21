@@ -13,4 +13,7 @@
     <color name="gray">#707070</color>
     <color name="link_blue">#0000EE</color>
 
+    <color name="register_button_default">#EAEAEA</color>
+    <color name="globalFilterCheck">#5082C5</color>
+
 </resources>

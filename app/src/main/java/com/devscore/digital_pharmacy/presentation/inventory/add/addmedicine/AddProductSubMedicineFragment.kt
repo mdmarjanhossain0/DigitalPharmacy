@@ -4,33 +4,26 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.util.MedicineProperties.Companion.OTHER
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
-import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalAdapter
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineEvents
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineViewModel
-import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.add_product_dialog.*
 import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import kotlinx.android.synthetic.main.fragment_local.*
+import kotlinx.android.synthetic.main.item_dispensing.view.*
 
 
 class AddProductSubMedicineFragment : BaseInventoryFragment() {
@@ -57,7 +50,44 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         initUIClick()
+        initUI()
         subscribeObservers()
+    }
+
+    private fun initUI() {
+//        val kindList = ArrayList<String>()
+//        kindList.add("Human")
+//        kindList.add("Veterinary")
+//        val kindAdapter = ArrayAdapter(
+//            requireContext(),
+//            android.R.layout.simple_spinner_item,
+//            kindList
+//        )
+//
+//        kindAdapter.setDropDownViewResource(
+//            android.R.layout
+//                .simple_spinner_dropdown_item
+//        )
+//
+//        kindET.setAdapter(kindAdapter)
+//
+//        val formList = ArrayList<String>()
+//        formList.add("TABLET")
+//        formList.add("LIQUITE")
+//        formList.add("OTHER")
+//        val formAdapter = ArrayAdapter(
+//            requireContext(),
+//            android.R.layout.simple_spinner_item,
+//            formList
+//        )
+//
+//        formAdapter.setDropDownViewResource(
+//            android.R.layout
+//                .simple_spinner_dropdown_item
+//        )
+//
+//        formET.setAdapter(formAdapter)
+
     }
 
     private fun initUIClick() {
@@ -67,12 +97,12 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
 
         minimumStockIncrementTV.setOnClickListener {
             val value = minimumStockCount.text.toString().toInt() + 1
-            minimumStockCount.setText(value)
+            minimumStockCount.setText(value.toString())
         }
 
         minimumStockDecrementTV.setOnClickListener {
             val value = minimumStockCount.text.toString().toInt() - 1
-            minimumStockCount.setText(value)
+            minimumStockCount.setText(value.toString())
         }
 
 
@@ -101,37 +131,52 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
 
 
     fun cacheState() {
-        val brand_name = brand_nameET.text.toString()
-        val dar_number = dar_mr_NumberET.text.toString()
-        val manufacture = manufactureET.text.toString()
-        val generic = genericET.text.toString()
-        val kind = kindET.text.toString()
-        val form = formET.text.toString()
-        val strength = strengthET.text.toString()
-        val salesUnit = salesUnit.text.toString()
-        val purchasesUnit = symtomORPurchasesUnit.text.toString()
-        val mrp = mrpET.text.toString().toInt()
-        val purchases_price = purchases_price.text.toString().toInt()
-        val minimum_stock = minimumStockCount.text.toString().toInt()
+        try {
+            val brand_name = brand_nameET.text.toString()
+            val dar_number = dar_mr_NumberET.text.toString()
+            val manufacture = manufactureET.text.toString()
+            val generic = genericET.text.toString()
+//        val kind = kindET.text.toString()
+            val kind = "Human"
+//        val form = formET.text.toString()
+            val form = "TABLET"
+            val strength = strengthET.text.toString()
+//        val salesUnit = salesUnit.text.toString()
+//        val purchasesUnit = symtomORPurchasesUnit.text.toString()
+            val mrp = mrpET.text.toString().toInt()
+            val purchases_price = purchases_price.text.toString().toInt()
+            val minimum_stock = minimumStockCount.text.toString().toInt()
 
-        val local_medicine = LocalMedicine(
-            id = -1,
-            brand_name = brand_name,
-            sku = null,
-            dar_number = dar_number,
-            manufacture = manufacture,
-            generic = generic,
-            indication = null,
-            symptom = null,
-            description = null,
-            kind = kind,
-            form = form,
-            strength = strength,
-            mrp = mrp,
-            purchases_price = purchases_price,
-            units = unitList
-        )
-        viewModel.onTriggerEvent(AddMedicineEvents.CacheState(local_medicine))
+            val local_medicine = LocalMedicine(
+                id = -1,
+                brand_name = brand_name,
+                sku = null,
+                dar_number = dar_number,
+                manufacture = manufacture,
+                generic = generic,
+                indication = null,
+                symptom = null,
+                description = null,
+                kind = kind,
+                form = form,
+                strength = strength,
+                mrp = mrp,
+                purchases_price = purchases_price,
+                units = unitList
+            )
+            viewModel.onTriggerEvent(AddMedicineEvents.CacheState(local_medicine))
+        }
+        catch (e : Exception) {
+            MaterialDialog(requireContext())
+                .show{
+                    title(R.string.text_info)
+                    message(text = "Some thing is wrong")
+                    onDismiss {
+                    }
+                    cancelable(true)
+                }
+        }
+
     }
 
 
@@ -177,9 +222,30 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
                     type = OTHER
                 )
             )
+            updateSpinner()
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    private fun updateSpinner() {
+        val newList = ArrayList<String>()
+        for (a in unitList) {
+            newList.add(a.name)
+        }
+        val kindAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            newList
+        )
+
+        kindAdapter.setDropDownViewResource(
+            android.R.layout
+                .simple_spinner_dropdown_item
+        )
+
+        salesUnit.setAdapter(kindAdapter)
+        symtomORPurchasesUnit.setAdapter(kindAdapter)
     }
 
 }

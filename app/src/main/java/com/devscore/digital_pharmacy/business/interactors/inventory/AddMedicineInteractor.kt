@@ -1,10 +1,9 @@
 package com.devscore.digital_pharmacy.business.interactors.inventory
 
+import android.content.Context
 import android.util.Log
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicine
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicineUnitEntity
+import androidx.work.*
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.toLocalMedicine
@@ -13,6 +12,8 @@ import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.toLocalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.*
+import com.devscore.digital_pharmacy.presentation.util.SyncWorker
+import com.devscore.digital_pharmacy.presentation.util.UploadWorker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.flow
 class AddMedicineInteractor(
     private val service: InventoryApiService,
     private val cache: LocalMedicineDao,
+    private val context: Context
 ) {
 
     private val TAG: String = "AppDebug"
@@ -28,12 +30,13 @@ class AddMedicineInteractor(
         authToken: AuthToken?,
         medicine: AddMedicine
     ): Flow<DataState<LocalMedicine>> = flow {
+
         emit(DataState.loading<LocalMedicine>())
         if(authToken == null){
             throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
         }
 
-        var room_medicine_id : Long = -1
+        var message  = " "
 
         try{ // catch network exception
             Log.d(TAG, "Call Api Section")
@@ -43,10 +46,8 @@ class AddMedicineInteractor(
             ).toLocalMedicine()
 
 
-
-
             try{
-                room_medicine_id = cache.insertLocalMedicine(medicineResponse.toLocalMedicineEntity())
+                cache.insertLocalMedicine(medicineResponse.toLocalMedicineEntity())
                 for (unit in medicineResponse.toLocalMedicineUnitEntity()) {
                     cache.insertLocalMedicineUnit(unit)
                 }
@@ -58,32 +59,50 @@ class AddMedicineInteractor(
             Log.d(TAG, "Exception " + e.toString())
 
             try{
-                room_medicine_id = cache.insertLocalMedicine(medicine.toLocalMedicine().toLocalMedicineEntity())
-                for (unit in medicine.toLocalMedicine().toLocalMedicineUnitEntity()) {
-                    cache.insertLocalMedicineUnit(unit)
+                cache.insertFailureMedicine(medicine.toLocalMedicine().toFailureMedicine())
+                for (unit in medicine.toLocalMedicine().toFailureMedicineUnitEntity()) {
+                    cache.insertFailureMedicineUnit(unit)
                 }
             }catch (e: Exception){
                 Log.d(TAG, "Room Exception Enter Exception is Exception " + e.toString())
                 e.printStackTrace()
+
+                val constraints = Constraints.Builder()
+                    .setRequiresCharging(false)
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+
+                val syncWorkRequest : WorkRequest =
+                    OneTimeWorkRequestBuilder<UploadWorker>()
+                        .setConstraints(constraints)
+                        .build()
+
+                WorkManager
+                    .getInstance(context)
+                    .enqueue(syncWorkRequest)
             }
+
 
             emit(
                 DataState.error<LocalMedicine>(
                     response = Response(
-                        message = "Unable to update the cache.",
-                        uiComponentType = UIComponentType.None(),
+                        message = "Unable to upload medicine. Please careful and don't uninstall or log out",
+                        uiComponentType = UIComponentType.Dialog(),
                         messageType = MessageType.Error()
                     )
                 )
             )
+            return@flow
         }
 
 
-        val cacheLocalMedicines = cache.getLocalMedicineWithUnits(
-            room_medicine_id = room_medicine_id
-        )?.toLocalMedicine()
+        val stateMedicine = medicine.toLocalMedicine()
 
-        emit(DataState.data(response = null, data = cacheLocalMedicines))
+        emit(DataState.data(response = Response(
+            message = "Successfully Uploaded.",
+            uiComponentType = UIComponentType.Dialog(),
+            messageType = MessageType.Success()
+        ), data = stateMedicine))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

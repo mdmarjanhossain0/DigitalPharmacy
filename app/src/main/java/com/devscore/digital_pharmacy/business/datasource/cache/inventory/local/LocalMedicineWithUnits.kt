@@ -20,7 +20,6 @@ data class LocalMedicineWithUnits (
 
 fun LocalMedicineWithUnits.toLocalMedicine() : LocalMedicine {
     return LocalMedicine(
-        room_medicine_id = localMedicine.room_medicine_id,
         id = localMedicine.id,
         brand_name = localMedicine.brand_name,
         sku = localMedicine.sku,

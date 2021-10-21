@@ -4,15 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 
-@Entity(tableName = "LocalMedicine")
-data class LocalMedicineEntity (
+@Entity(tableName = "FailureMedicine")
+data class FailureMedicineEntity (
 
 
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = false)
-    var id : Int,
+    @ColumnInfo(name = "room_medicine_id")
+    @PrimaryKey(autoGenerate = true)
+    var room_medicine_id : Long? = null,
 
     @ColumnInfo(name = "brand_name")
     var brand_name : String?,

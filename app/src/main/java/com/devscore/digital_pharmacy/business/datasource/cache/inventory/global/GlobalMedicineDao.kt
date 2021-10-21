@@ -26,4 +26,18 @@ interface GlobalMedicineDao {
 
     @Query("SELECT * FROM GlobalMedicine WHERE id = :id ")
     suspend fun getGlobalMedicine(id: Int): GlobalMedicineEntity?
+
+
+    @Query("""
+        SELECT * FROM GlobalMedicine 
+        WHERE brand_name LIKE '%' || :query || '%' 
+        OR generic LIKE '%' || :query || '%' 
+        OR manufacture LIKE '%' || :query || '%' 
+        ORDER BY updatedAt DESC LIMIT (:page * :pageSize)
+        """)
+    suspend fun searchGlobalMedicinwWithQuery(
+        query: String,
+        page: Int,
+        pageSize: Int = PAGINATION_PAGE_SIZE
+    ): List<GlobalMedicineEntity>
 }

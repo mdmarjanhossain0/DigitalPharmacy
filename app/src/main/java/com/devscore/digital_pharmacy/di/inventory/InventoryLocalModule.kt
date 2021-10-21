@@ -3,7 +3,7 @@ package com.devscore.digital_pharmacy.di.inventory
 import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchLocalMedicine
+import com.devscore.digital_pharmacy.business.interactors.inventory.local.SearchLocalMedicine
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

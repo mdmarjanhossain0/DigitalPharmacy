@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.RadioGroup
 import androidx.fragment.app.viewModels
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
@@ -28,10 +30,27 @@ class RegisterFragment : BaseAuthFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUIClick()
         registerBtnId.setOnClickListener {
-            register()
+            if (regCheckBokId.isChecked) {
+                register()
+            }
         }
         subscribeObservers()
+    }
+
+    private fun initUIClick() {
+        regCheckBokId.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
+            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                if (isChecked) {
+                    registerBtnId.background.setTint(resources.getColor(R.color.colorPrimaryVariant))
+                }
+                else {
+                    registerBtnId.background.setTint(resources.getColor(R.color.register_button_default))
+                }
+            }
+
+        })
     }
 
     private fun subscribeObservers() {
