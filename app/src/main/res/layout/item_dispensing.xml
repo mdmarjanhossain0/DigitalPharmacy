@@ -164,6 +164,9 @@
             android:drawableEnd="@drawable/ic_polygon"
             android:drawablePadding="5dp"
             android:text="Packs"
+            android:textSize="12sp"
+            android:background="@drawable/gray_shape_outline1"
+            android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/linearLayout" />
