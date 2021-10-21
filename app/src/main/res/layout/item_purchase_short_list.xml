@@ -19,6 +19,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/paracetamol" />
@@ -37,27 +38,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
+        <ImageView
             android:id="@+id/historyImgId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="16dp"
-            android:text="Stock:1995"
-            android:textSize="10sp"
+            android:src="@drawable/ic_remove"
             app:layout_constraintBottom_toBottomOf="@+id/itemNameTvId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/itemNameTvId" />
 
-
-        <ImageView
-            android:id="@+id/cartImgId"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/recycle_bin"
-            app:layout_constraintBottom_toTopOf="@+id/textView24"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/groupTvId"
@@ -70,35 +60,29 @@
             app:layout_constraintTop_toBottomOf="@+id/itemNameTvId" />
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/priceTvId"
+        <TextView
+            android:id="@+id/stockTvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="number"
-            android:paddingStart="5dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="5dp"
-            android:text="৳ 14"
-            android:textColor="@color/black"
+            android:layout_marginEnd="16dp"
+            android:text="Stock:1995"
             android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/groupTvId"
-            app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
+            app:layout_constraintBottom_toBottomOf="@+id/groupTvId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/groupTvId" />
 
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="22dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:gravity="start"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/itemImgId"
-            app:layout_constraintTop_toBottomOf="@+id/priceTvId">
+            app:layout_constraintStart_toStartOf="@+id/groupTvId"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId">
 
 
             <TextView
@@ -156,31 +140,28 @@
         </LinearLayout>
 
 
-        <Spinner
+        <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:background="@drawable/gray_shape_outline1"
             android:drawableEnd="@drawable/ic_polygon"
             android:drawablePadding="5dp"
+            android:padding="3dp"
             android:text="Packs"
             android:textSize="12sp"
-            android:background="@drawable/gray_shape_outline1"
-            android:padding="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
 
         <TextView
-            android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="Sub Total: ৳ 20.00"
+            android:text="৳ 20.00"
             android:textColor="@color/colorPrimaryVariant"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView10" />
 
