@@ -297,7 +297,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/colorPrimaryVariant"
+                android:backgroundTint="@color/register_button_default"
                 android:text="Register"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"

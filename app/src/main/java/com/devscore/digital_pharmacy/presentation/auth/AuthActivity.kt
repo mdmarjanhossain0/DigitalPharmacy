@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.codingwithmitch.openapi.presentation.util.processQueue
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
+import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_auth.*
 

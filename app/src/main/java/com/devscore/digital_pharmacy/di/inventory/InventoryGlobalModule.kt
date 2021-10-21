@@ -1,11 +1,9 @@
-package com.devscore.digital_pharmacy.di.iventory.local
+package com.devscore.digital_pharmacy.di.inventory
 
 import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchGlobalMedicine
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchLocalMedicine
+import com.devscore.digital_pharmacy.business.interactors.inventory.global.SearchGlobalMedicine
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,29 +12,40 @@ import kotlinx.coroutines.FlowPreview
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
+
 @FlowPreview
 @Module
 @InstallIn(SingletonComponent::class)
-object InventoryLocalModule {
+object InventoryGlobalModule {
+
 
     @Singleton
     @Provides
-    fun provideLocalMedicineDao(
-        database: AppDatabase
-    ) : LocalMedicineDao {
-        return database.getLocalMedicineDao()
+    fun provideInventoryService(retrofitBuilder: Retrofit.Builder): InventoryApiService {
+        return retrofitBuilder
+            .build()
+            .create(InventoryApiService::class.java)
     }
 
 
     @Singleton
     @Provides
-    fun provideSearchLocalMedicine(
+    fun provideGlobalMedicineDao(
+        database: AppDatabase
+    ) : GlobalMedicineDao {
+        return database.getGlobalMedicineDao()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideSearchGlobalMedicine(
         service: InventoryApiService,
-        localMedicineDao : LocalMedicineDao
-    ) : SearchLocalMedicine {
-        return SearchLocalMedicine(
+        globalMedicineDao: GlobalMedicineDao
+    ) : SearchGlobalMedicine {
+        return SearchGlobalMedicine(
             service = service,
-            cache = localMedicineDao
+            cache = globalMedicineDao
         )
     }
 }

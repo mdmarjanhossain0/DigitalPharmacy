@@ -35,7 +35,7 @@ class HorizontalDottedProgress : View {
 
         //set the color for the dot that you want to draw
 //        paint.color = Color.parseColor("#fd583f")
-        paint.color = Color.parseColor("#000000")
+        paint.color = Color.parseColor("#2866B9")
 
         //function to create dot
         createDot(canvas, paint)

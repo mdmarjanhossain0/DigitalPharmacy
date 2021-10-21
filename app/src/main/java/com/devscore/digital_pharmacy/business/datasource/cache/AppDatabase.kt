@@ -8,17 +8,17 @@ import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineUnitsEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
 
 @Database(entities = [
     AuthTokenEntity::class,
     AccountEntity::class,
     GlobalMedicineEntity::class,
     LocalMedicineEntity::class,
-    LocalMedicineUnitsEntity::class
-], version = 3)
+    LocalMedicineUnitsEntity::class,
+    FailureMedicineEntity::class,
+    FailureMedicineUnitEntity::class
+], version = 5)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao

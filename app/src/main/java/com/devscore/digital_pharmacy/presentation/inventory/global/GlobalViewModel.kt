@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchGlobalMedicine
+import com.devscore.digital_pharmacy.business.interactors.inventory.global.SearchGlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
@@ -36,7 +36,17 @@ constructor(
             is GlobalEvents.NewMedicineSearch -> {
                 search()
             }
+
+            is GlobalEvents.SearchWithQuery -> {
+                searchWithQuery(event.query)
+            }
             is GlobalEvents.NextPage -> {
+                incrementPageNumber()
+                search()
+            }
+
+            is GlobalEvents.UpdateQuery -> {
+                onUpdateQuery(event.query)
             }
 
             is GlobalEvents.Error -> {
@@ -48,6 +58,32 @@ constructor(
         }
     }
 
+    private fun searchWithQuery(query: String) {
+        state.value?.let { state ->
+            searchGlobalMedicine.execute(
+                authToken = sessionManager.state.value?.authToken,
+                query = query,
+                page = state.page,
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { list ->
+                    Log.d(TAG, "ViewModel List Size " + list.size)
+                    this.state.value = state.copy(globalMedicineList = list)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if (stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true) {
+                        onUpdateQueryExhausted(true)
+                    } else {
+                        appendToMessageQueue(stateMessage)
+                    }
+                }
+
+            }.launchIn(viewModelScope)
+        }
+    }
 
 
     private fun removeHeadFromQueue() {
@@ -93,7 +129,8 @@ constructor(
 
     private fun incrementPageNumber() {
         state.value?.let { state ->
-            this.state.value = state.copy(page = state.page + 1)
+            val pageNumber : Int = (state.globalMedicineList.size / 5) as Int + 1
+            this.state.value = state.copy(page = pageNumber)
         }
     }
 

@@ -9,6 +9,9 @@ import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStoreManager
 import com.devscore.digital_pharmacy.business.domain.util.Constants
+import com.devscore.digital_pharmacy.business.interactors.session.CheckPreviousAuthUser
+import com.devscore.digital_pharmacy.business.interactors.session.Logout
+import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -53,6 +56,21 @@ object AppModule{
             .databaseBuilder(app, AppDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration() // get correct db version if schema changed
             .build()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideSessionManager(
+        checkPreviousAuthUser: CheckPreviousAuthUser,
+        logout: Logout,
+        appDataStore : AppDataStore
+    ) : SessionManager {
+        return SessionManager(
+            checkPreviousAuthUser = checkPreviousAuthUser,
+            logout = logout,
+            appDataStoreManager = appDataStore
+        )
     }
 
     @Singleton

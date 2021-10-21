@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/productDetailsMenufactureName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,16 +20,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/productDetailsCompanyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Cash Balance"
         android:textColor="@color/colorPrimaryVariant"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv1"
+        app:layout_constraintBottom_toBottomOf="@+id/productDetailsMenufactureName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv1" />
+        app:layout_constraintTop_toTopOf="@+id/productDetailsMenufactureName" />
 
 
     <EditText
@@ -52,7 +52,7 @@
         android:drawableEnd="@drawable/ic_dofb"
         app:layout_constraintEnd_toStartOf="@+id/etv1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv1" />
+        app:layout_constraintTop_toBottomOf="@+id/productDetailsMenufactureName" />
 
     <TextView
         android:id="@+id/textView15"
@@ -164,7 +164,7 @@
 
 
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/addMedicineClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -173,11 +173,11 @@
         android:text="Clear"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn2"
+        app:layout_constraintEnd_toStartOf="@+id/addMedicineUnitAdd"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/addMedicineUnitAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -185,10 +185,10 @@
         android:backgroundTint="@color/colorPrimaryVariant"
         android:text="Save"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btn1"
+        app:layout_constraintBottom_toBottomOf="@+id/addMedicineClear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn1"
-        app:layout_constraintTop_toTopOf="@+id/btn1" />
+        app:layout_constraintStart_toEndOf="@+id/addMedicineClear"
+        app:layout_constraintTop_toTopOf="@+id/addMedicineClear" />
 
 
 
