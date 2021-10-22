@@ -1,11 +1,10 @@
-package com.devscore.digital_pharmacy.business.datasource.network.supplier.network_response
+package com.devscore.digital_pharmacy.business.datasource.network.supplier
 
-import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierEntity
+import com.devscore.digital_pharmacy.business.datasource.network.supplier.network_response.SupplierCreateResponse
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.google.gson.annotations.SerializedName
 
-data class SupplierCreateResponse (
-
+data class SupplierDto (
     @SerializedName("pk")
     var pk : Int,
 
@@ -37,19 +36,10 @@ data class SupplierCreateResponse (
     var created_at : String?,
 
     @SerializedName("updated_at")
-    var updated_at : String?,
+    var updated_at : String?
+)
 
-
-
-    @SerializedName("response")
-    var response : String?,
-
-    @SerializedName("error_message")
-    var errorMessage : String?
-    )
-
-
-fun SupplierCreateResponse.toSupplier() : Supplier {
+fun SupplierDto.toSupplier() : Supplier {
     return Supplier(
         pk = pk,
         company_name = company_name,

@@ -6,9 +6,14 @@ import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDa
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.customer.FailureCustomerEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.cache.supplier.FailureSupplierEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierDao
+import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierEntity
 
 @Database(entities = [
     AuthTokenEntity::class,
@@ -17,8 +22,12 @@ import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
     LocalMedicineEntity::class,
     LocalMedicineUnitsEntity::class,
     FailureMedicineEntity::class,
-    FailureMedicineUnitEntity::class
-], version = 5)
+    FailureMedicineUnitEntity::class,
+    SupplierEntity::class,
+    FailureSupplierEntity::class,
+    CustomerEntity::class,
+    FailureCustomerEntity::class
+], version = 6)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao
@@ -28,6 +37,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getGlobalMedicineDao() : GlobalMedicineDao
 
     abstract fun getLocalMedicineDao() : LocalMedicineDao
+
+    abstract fun getSupplierDao() : SupplierDao
 
 
     companion object{

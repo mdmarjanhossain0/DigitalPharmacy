@@ -8,7 +8,7 @@ import com.devscore.digital_pharmacy.business.domain.models.Supplier
 data class FailureSupplierEntity (
 
     @PrimaryKey(autoGenerate = true)
-    var room_id : Long,
+    var room_id : Long? = -1,
     var company_name : String?,
     var agent_name : String?,
     var email : String?,

@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.supplier
+package com.devscore.digital_pharmacy.presentation.supplier.createsupplier
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -63,5 +63,5 @@ interface SupplierDao {
         """)
     suspend fun searchAllFailureSupplier (
         query: String
-    ): List<SupplierEntity>
+    ): List<FailureSupplierEntity>
 }

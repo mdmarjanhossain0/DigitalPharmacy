@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/supplierListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.supplier.SupplierListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierListFragment"
         android:label="fragment_supplier_list"
         tools:layout="@layout/fragment_supplier_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/createSupplierFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.supplier.CreateSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.createsupplier.CreateSupplierFragment"
         android:label="fragment_create_supplier"
         tools:layout="@layout/fragment_create_supplier" />
     <fragment
