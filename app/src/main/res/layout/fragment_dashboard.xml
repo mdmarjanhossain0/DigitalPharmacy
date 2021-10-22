@@ -294,6 +294,7 @@
                     app:layout_constraintTop_toTopOf="@+id/customerCardId">
 
                     <LinearLayout
+                        android:id="@+id/supplier_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

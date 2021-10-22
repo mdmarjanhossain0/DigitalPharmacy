@@ -1,11 +1,8 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-import androidx.room.PrimaryKey
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierEntity
 
-data class Supplier (
-    var pk : Int? = -1,
-    var room_id : Long? = 1,
+data class CreateSupplier (
     var company_name : String?,
     var agent_name : String?,
     var email : String?,
@@ -13,15 +10,12 @@ data class Supplier (
     var whatsapp : String?,
     var facebook : String?,
     var imo : String?,
-    var address : String?,
-    var created_at : String? = null,
-    var updated_at : String? = null,
+    var address : String?
 )
 
 
-fun Supplier.toSupplier() : SupplierEntity {
-    return SupplierEntity(
-        pk = pk!!,
+fun CreateSupplier.toSupplier() : Supplier {
+    return Supplier(
         company_name = company_name,
         agent_name = agent_name,
         email = email,
@@ -29,8 +23,6 @@ fun Supplier.toSupplier() : SupplierEntity {
         whatsapp = whatsapp,
         facebook = facebook,
         imo = imo,
-        address = address,
-        created_at = created_at,
-        updated_at = updated_at
+        address = address
     )
 }

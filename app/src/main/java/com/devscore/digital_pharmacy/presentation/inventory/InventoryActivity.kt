@@ -12,7 +12,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.BaseActivity
+import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
+import com.devscore.digital_pharmacy.presentation.session.SessionEvents
+import com.devscore.digital_pharmacy.presentation.util.processQueue
 import com.devscore.digital_pharmacy.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +53,34 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
 
         navigationView = NavigationView(this)
         onSetNavigationDrawerEvents()
+        subscribeObservers()
 
+    }
+
+
+    fun subscribeObservers() {
+        sessionManager.state.observe(this) { state ->
+            displayProgressBar(state.isLoading)
+            processQueue(
+                context = this,
+                queue = state.queue,
+                stateMessageCallback = object : StateMessageCallback {
+                    override fun removeMessageFromStack() {
+                        sessionManager.onTriggerEvent(SessionEvents.OnRemoveHeadFromQueue)
+                    }
+                })
+            if (state.authToken == null || state.authToken.accountPk == -1) {
+                navAuthActivity()
+            }
+        }
+    }
+
+    private fun navAuthActivity() {
+        val intent = Intent(this, AuthActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 
     private fun initUIClick() {

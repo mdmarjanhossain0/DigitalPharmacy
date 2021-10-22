@@ -1,38 +1,38 @@
-package com.devscore.digital_pharmacy.business.datasource.cache.supplier
+package com.devscore.digital_pharmacy.business.datasource.cache.customer
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.devscore.digital_pharmacy.business.domain.models.Supplier
+import com.devscore.digital_pharmacy.business.domain.models.Customer
 
-@Entity(tableName = "AppClientVendor")
-data class SupplierEntity (
+@Entity(tableName = "AppClientCustomer")
+data class CustomerEntity (
 
     @PrimaryKey(autoGenerate = false)
-    var pk : Int,
-    var company_name : String?,
-    var agent_name : String?,
+    var pk : Int?,
+    var name : String?,
     var email : String?,
     var mobile : String?,
     var whatsapp : String?,
     var facebook : String?,
     var imo : String?,
     var address : String?,
+    var date_of_birth : String?,
     var created_at : String?,
     var updated_at : String?,
 )
 
 
-fun SupplierEntity.toSupplier() : Supplier {
-    return Supplier(
+fun CustomerEntity.toCustomer() : Customer {
+    return Customer(
         pk = pk,
-        company_name = company_name,
-        agent_name = agent_name,
+        name = name,
         email = email,
         mobile = mobile,
         whatsapp = whatsapp,
         facebook = facebook,
         imo = imo,
         address = address,
+        date_of_birth = date_of_birth,
         created_at = created_at,
         updated_at = updated_at
     )

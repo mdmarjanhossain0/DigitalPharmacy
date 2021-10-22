@@ -1,41 +1,41 @@
-package com.devscore.digital_pharmacy.business.datasource.cache.supplier
+package com.devscore.digital_pharmacy.business.datasource.cache.customer
 
 import androidx.room.*
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.supplier.FailureSupplierEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierEntity
 import com.devscore.digital_pharmacy.business.domain.util.Constants
 
 @Dao
-interface SupplierDao {
+interface CustomerDao {
 
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSupplier(supplier : SupplierEntity): Long
+    suspend fun insertCustomer(customerEntity: CustomerEntity): Long
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFailureSupplier(failureSupplierEntity: FailureSupplierEntity): Long
+    suspend fun insertFailureCustomer(failureCustomerEntity: FailureCustomerEntity): Long
 
 
     @Delete
-    suspend fun deleteSupplier(supplier: SupplierEntity)
+    suspend fun deleteCustomer(customerEntity: CustomerEntity)
 
     @Query("DELETE FROM AppClientVendor WHERE pk = :pk")
-    suspend fun deleteSupplier(pk : Int)
+    suspend fun deleteCustomer(pk : Int)
 
 
     @Delete
-    suspend fun deleteFailureSupplier(failureSupplierEntity: FailureSupplierEntity)
+    suspend fun deleteFailureCustomer(failureCustomerEntity: FailureCustomerEntity)
 
-    @Query("DELETE FROM FailureAppClientVendor WHERE room_id = :room_id")
-    suspend fun deleteSupplier(room_id : Long)
+    @Query("DELETE FROM FailureAppClientCustomer WHERE room_id = :room_id")
+    suspend fun deleteFailureCustomer(room_id : Long)
 
 
 
     @Query("""
-        SELECT * FROM AppClientVendor 
-        WHERE company_name LIKE '%' || :query || '%' 
-        OR agent_name LIKE '%' || :query || '%' 
+        SELECT * FROM AppClientCustomer 
+        WHERE name LIKE '%' || :query || '%' 
         OR email LIKE '%' || :query || '%' 
         OR mobile LIKE '%' || :query || '%' 
         OR whatsapp LIKE '%' || :query || '%' 
@@ -44,16 +44,15 @@ interface SupplierDao {
         OR address LIKE '%' || :query || '%' 
         ORDER BY updated_at DESC LIMIT (:page * :pageSize)
         """)
-    suspend fun searchAllSupplier (
+    suspend fun searchAllCustomer (
         query: String,
         page: Int,
         pageSize: Int = Constants.PAGINATION_PAGE_SIZE
     ): List<SupplierEntity>
 
     @Query("""
-        SELECT * FROM FailureAppClientVendor 
-        WHERE company_name LIKE '%' || :query || '%' 
-        OR agent_name LIKE '%' || :query || '%' 
+        SELECT * FROM AppClientCustomer 
+        WHERE name LIKE '%' || :query || '%' 
         OR email LIKE '%' || :query || '%' 
         OR mobile LIKE '%' || :query || '%' 
         OR whatsapp LIKE '%' || :query || '%' 
