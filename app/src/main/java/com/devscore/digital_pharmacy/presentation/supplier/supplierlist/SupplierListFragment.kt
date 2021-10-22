@@ -1,7 +1,5 @@
 package com.devscore.digital_pharmacy.presentation.supplier.supplierlist
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,15 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
-import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalAdapter
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineEvents
 import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
@@ -29,16 +22,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_local.*
 import kotlinx.android.synthetic.main.fragment_supplier_list.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SupplierListFragment : BaseSupplierFragment(),
-    SupplierAdapter.Interaction {
+    SupplierListAdapter.Interaction {
 
 
-    private var recyclerAdapter: SupplierAdapter? = null // can leak memory so need to null
-    private val viewModel: SupplierViewModel by viewModels()
+    private var recyclerAdapter: SupplierListAdapter? = null // can leak memory so need to null
+    private val viewModel: SupplierListViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -119,7 +111,7 @@ class SupplierListFragment : BaseSupplierFragment(),
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = SupplierAdapter(this@SupplierListFragment)
+            recyclerAdapter = SupplierListAdapter(this@SupplierListFragment)
             addOnScrollListener(object: RecyclerView.OnScrollListener(){
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

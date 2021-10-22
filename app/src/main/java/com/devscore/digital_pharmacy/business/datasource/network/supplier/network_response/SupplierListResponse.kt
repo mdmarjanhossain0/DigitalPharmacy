@@ -11,6 +11,7 @@ data class SupplierListResponse (
     @SerializedName("next") var next : String?,
     @SerializedName("previous") var previous : String?,
     @SerializedName("results") var results : List<SupplierDto>,
+
     @SerializedName("detail")
     var detail: String?
 )

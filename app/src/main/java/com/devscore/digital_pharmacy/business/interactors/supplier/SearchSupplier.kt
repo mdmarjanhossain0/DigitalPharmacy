@@ -34,11 +34,14 @@ class SearchSupplier (
 
         try{
             Log.d(TAG, "Call Api Section")
-            val suppliers = service.searchSupplier(
+            val suppliersResponse = service.searchSupplier(
                 "Token ${authToken.token}",
                 query = query,
                 page = page
-            ).results.map {
+            )
+            Log.d(TAG, suppliersResponse.toString())
+
+            val suppliers = suppliersResponse.results.map {
                 Log.d(TAG, "looping Supplier")
                 it.toSupplier()
             }

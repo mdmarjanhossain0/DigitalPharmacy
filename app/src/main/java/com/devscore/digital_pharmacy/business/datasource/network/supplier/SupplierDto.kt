@@ -5,7 +5,7 @@ import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.google.gson.annotations.SerializedName
 
 data class SupplierDto (
-    @SerializedName("pk")
+    @SerializedName("id")
     var pk : Int,
 
     @SerializedName("company_name")

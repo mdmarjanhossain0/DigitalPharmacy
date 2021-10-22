@@ -4,7 +4,7 @@ import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.business.domain.util.Queue
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 
-data class SupplierState (
+data class SupplierListState (
     val isLoading : Boolean = false,
     val supplierList : List<Supplier> = listOf(),
     val query: String = "",

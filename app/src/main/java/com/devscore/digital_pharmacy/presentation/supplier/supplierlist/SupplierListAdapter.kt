@@ -9,7 +9,7 @@ import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 
-class SupplierAdapter
+class SupplierListAdapter
 constructor(
     private val interaction: Interaction? = null
 )
@@ -90,7 +90,7 @@ constructor(
         )
 
     internal inner class LocalRecyclerChangeCallback(
-        private val adapter: SupplierAdapter
+        private val adapter: SupplierListAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {

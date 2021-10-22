@@ -8,10 +8,7 @@ import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
-import com.devscore.digital_pharmacy.business.interactors.inventory.local.SearchLocalMedicine
 import com.devscore.digital_pharmacy.business.interactors.supplier.SearchSupplier
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineEvents
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineState
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -19,7 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class SupplierViewModel
+class SupplierListViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
@@ -28,7 +25,7 @@ constructor(
 
     private val TAG: String = "AppDebug"
 
-    val state: MutableLiveData<SupplierState> = MutableLiveData(SupplierState())
+    val state: MutableLiveData<SupplierListState> = MutableLiveData(SupplierListState())
 
     init {
         onTriggerEvent(SupplierEvents.NewSearchSupplier)
