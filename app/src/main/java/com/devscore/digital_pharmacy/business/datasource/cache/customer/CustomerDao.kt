@@ -48,10 +48,10 @@ interface CustomerDao {
         query: String,
         page: Int,
         pageSize: Int = Constants.PAGINATION_PAGE_SIZE
-    ): List<SupplierEntity>
+    ): List<CustomerEntity>
 
     @Query("""
-        SELECT * FROM AppClientCustomer 
+        SELECT * FROM FailureAppClientCustomer 
         WHERE name LIKE '%' || :query || '%' 
         OR email LIKE '%' || :query || '%' 
         OR mobile LIKE '%' || :query || '%' 
@@ -62,5 +62,5 @@ interface CustomerDao {
         """)
     suspend fun searchAllFailureSupplier (
         query: String
-    ): List<SupplierEntity>
+    ): List<FailureCustomerEntity>
 }

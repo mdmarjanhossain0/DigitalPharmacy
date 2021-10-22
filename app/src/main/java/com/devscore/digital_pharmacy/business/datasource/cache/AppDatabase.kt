@@ -6,6 +6,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDa
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.FailureCustomerEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
@@ -39,6 +40,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getLocalMedicineDao() : LocalMedicineDao
 
     abstract fun getSupplierDao() : SupplierDao
+
+    abstract fun getCustomerDao() : CustomerDao
 
 
     companion object{

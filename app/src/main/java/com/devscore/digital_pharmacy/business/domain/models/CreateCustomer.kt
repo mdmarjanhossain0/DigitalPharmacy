@@ -13,8 +13,8 @@ data class CreateCustomer (
 )
 
 
-fun Customer.toCreateCustomer() : CreateCustomer {
-    return CreateCustomer(
+fun CreateCustomer.toCustomer() : Customer {
+    return Customer(
         name = name,
         email = email,
         mobile = mobile,

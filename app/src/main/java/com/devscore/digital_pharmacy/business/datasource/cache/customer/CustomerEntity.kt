@@ -19,6 +19,8 @@ data class CustomerEntity (
     var date_of_birth : String?,
     var created_at : String?,
     var updated_at : String?,
+    var total_balance : Int?,
+    var due_balance : Int?
 )
 
 
@@ -34,6 +36,8 @@ fun CustomerEntity.toCustomer() : Customer {
         address = address,
         date_of_birth = date_of_birth,
         created_at = created_at,
-        updated_at = updated_at
+        updated_at = updated_at,
+        total_balance = total_balance,
+        due_balance = due_balance
     )
 }

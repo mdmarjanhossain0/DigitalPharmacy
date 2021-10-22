@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "65cb1c65e34cb1a89406ccde6363a3cb",
+    "identityHash": "706bfa80f33b08411c1b3fe0415eb14d",
     "entities": [
       {
         "tableName": "auth_token",
@@ -774,7 +774,7 @@
       },
       {
         "tableName": "AppClientCustomer",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT, `created_at` TEXT, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT, `created_at` TEXT, `updated_at` TEXT, `total_balance` INTEGER, `due_balance` INTEGER, PRIMARY KEY(`pk`))",
         "fields": [
           {
             "fieldPath": "pk",
@@ -841,6 +841,18 @@
             "columnName": "updated_at",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "total_balance",
+            "columnName": "total_balance",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "due_balance",
+            "columnName": "due_balance",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -854,7 +866,7 @@
       },
       {
         "tableName": "FailureAppClientCustomer",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT, `total_balance` INTEGER, `due_balance` INTEGER)",
         "fields": [
           {
             "fieldPath": "room_id",
@@ -909,6 +921,18 @@
             "columnName": "date_of_birth",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "total_balance",
+            "columnName": "total_balance",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "due_balance",
+            "columnName": "due_balance",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -924,7 +948,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '65cb1c65e34cb1a89406ccde6363a3cb')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '706bfa80f33b08411c1b3fe0415eb14d')"
     ]
   }
 }

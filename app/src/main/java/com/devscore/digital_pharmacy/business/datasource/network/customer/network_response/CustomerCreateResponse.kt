@@ -2,7 +2,7 @@ package com.devscore.digital_pharmacy.business.datasource.network.customer.netwo
 
 import com.devscore.digital_pharmacy.business.domain.models.Customer
 
-data class CustomerNetworkResponse (
+data class CustomerCreateResponse (
     var pk : Int,
     var name : String?,
     var email : String?,
@@ -14,6 +14,8 @@ data class CustomerNetworkResponse (
     var date_of_birth : String?,
     var created_at : String?,
     var updated_at : String?,
+    var total_balance : Int?,
+    var due_balance : Int?,
 
 
     var response : String?,
@@ -21,7 +23,7 @@ data class CustomerNetworkResponse (
 )
 
 
-fun CustomerNetworkResponse.toCustomer() : Customer {
+fun CustomerCreateResponse.toCustomer() : Customer {
     return Customer(
         pk = pk,
         name = name,
@@ -33,6 +35,8 @@ fun CustomerNetworkResponse.toCustomer() : Customer {
         address = address,
         date_of_birth = date_of_birth,
         created_at = created_at,
-        updated_at = updated_at
+        updated_at = updated_at,
+        total_balance = total_balance,
+        due_balance = due_balance
     )
 }

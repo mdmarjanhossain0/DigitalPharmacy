@@ -18,7 +18,9 @@ data class FailureCustomerEntity (
     var facebook : String?,
     var imo : String?,
     var address : String?,
-    var date_of_birth : String?
+    var date_of_birth : String?,
+    var total_balance : Int?,
+    var due_balance : Int?
 )
 
 
@@ -32,6 +34,8 @@ fun FailureCustomerEntity.toCustomer() : Customer {
         facebook = facebook,
         imo = imo,
         address = address,
-        date_of_birth = date_of_birth
+        date_of_birth = date_of_birth,
+        total_balance = total_balance,
+        due_balance = due_balance
     )
 }
