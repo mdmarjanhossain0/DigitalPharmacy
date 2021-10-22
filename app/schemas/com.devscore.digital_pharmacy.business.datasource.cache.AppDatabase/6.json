@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "cd3590bf941605468541831ad2eba70a",
+    "identityHash": "65cb1c65e34cb1a89406ccde6363a3cb",
     "entities": [
       {
         "tableName": "auth_token",
@@ -602,7 +602,7 @@
       },
       {
         "tableName": "AppClientVendor",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER NOT NULL, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `created_at` TEXT, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER NOT NULL, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `total_balance` INTEGER, `due_balance` INTEGER, `created_at` TEXT, `updated_at` TEXT, PRIMARY KEY(`pk`))",
         "fields": [
           {
             "fieldPath": "pk",
@@ -659,6 +659,18 @@
             "notNull": false
           },
           {
+            "fieldPath": "total_balance",
+            "columnName": "total_balance",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "due_balance",
+            "columnName": "due_balance",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
             "fieldPath": "created_at",
             "columnName": "created_at",
             "affinity": "TEXT",
@@ -682,7 +694,7 @@
       },
       {
         "tableName": "FailureAppClientVendor",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `total_balance` INTEGER, `due_balance` INTEGER)",
         "fields": [
           {
             "fieldPath": "room_id",
@@ -736,6 +748,18 @@
             "fieldPath": "address",
             "columnName": "address",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total_balance",
+            "columnName": "total_balance",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "due_balance",
+            "columnName": "due_balance",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -900,7 +924,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cd3590bf941605468541831ad2eba70a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '65cb1c65e34cb1a89406ccde6363a3cb')"
     ]
   }
 }

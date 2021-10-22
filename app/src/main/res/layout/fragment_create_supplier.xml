@@ -96,6 +96,7 @@
                 android:textSize="12sp" />
 
             <EditText
+                android:id="@+id/supplierCompanyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp" />
@@ -114,11 +115,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/edt3" />
 
             <EditText
+                android:id="@+id/supplierAddressFirst"
                 android:hint="Address 1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp" />
             <EditText
+                android:id="@+id/supplierAddressSecond"
                 android:hint="Address 2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,6 +181,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/suppliertName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp" />
@@ -196,6 +200,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/edt3" />
 
                 <EditText
+                    android:id="@+id/supplierContactNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp" />
@@ -214,13 +219,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/edt3" />
 
                 <EditText
+                    android:id="@+id/supplierEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp" />
 
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -231,6 +236,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/supplierWhatsapp"
                     android:paddingEnd="10dp"
                     android:drawableEnd="@drawable/ic_whatsapp"
                     android:layout_width="match_parent"
@@ -248,6 +254,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/supplierFacebook"
                     android:paddingEnd="10dp"
                     android:drawableEnd="@drawable/ic_facebook"
                     android:layout_width="match_parent"
@@ -255,7 +262,6 @@
                     android:layout_marginStart="16dp" />
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -266,6 +272,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:id="@+id/supplierImo"
                     android:paddingEnd="10dp"
                     android:drawableEnd="@drawable/ic_imo"
                     android:layout_width="match_parent"
@@ -281,7 +288,7 @@
 
 
         <Button
-            android:id="@+id/addMedicineClear"
+            android:id="@+id/createSupplierClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -295,16 +302,16 @@
             app:layout_constraintTop_toBottomOf="@id/card2" />
 
         <Button
-            android:id="@+id/addMedicineUnitAdd"
+            android:id="@+id/createSupplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:backgroundTint="@color/colorPrimaryVariant"
             android:text="Create"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="@+id/addMedicineClear"
+            app:layout_constraintBottom_toBottomOf="@+id/createSupplierClear"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/addMedicineClear" />
+            app:layout_constraintTop_toTopOf="@+id/createSupplierClear" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

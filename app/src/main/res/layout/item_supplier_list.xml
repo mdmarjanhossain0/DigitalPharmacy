@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/supplierCompanyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -60,20 +60,20 @@
             android:id="@+id/imageView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+            app:layout_constraintBottom_toBottomOf="@+id/supplierContactNumber"
             app:layout_constraintEnd_toEndOf="@+id/view4"
-            app:layout_constraintTop_toTopOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/supplierContactNumber"
             app:srcCompat="@drawable/ic_imo" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/supplierName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Ashish Kumar Biswas"
             android:textColor="@color/colorPrimaryVariant"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintStart_toStartOf="@+id/supplierCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyName" />
 
         <TextView
             android:id="@+id/textView13"
@@ -81,9 +81,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="Balance: 0000"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintBottom_toBottomOf="@+id/supplierName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView12" />
+            app:layout_constraintTop_toTopOf="@+id/supplierName" />
 
 
         <View
@@ -93,11 +93,11 @@
             android:layout_marginTop="5dp"
             android:background="@color/gray"
             app:layout_constraintEnd_toEndOf="@+id/textView13"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toStartOf="@+id/supplierName"
+            app:layout_constraintTop_toBottomOf="@+id/supplierName" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/supplierContactNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

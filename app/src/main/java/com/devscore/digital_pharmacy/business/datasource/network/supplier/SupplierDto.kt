@@ -32,11 +32,17 @@ data class SupplierDto (
     @SerializedName("address")
     var address : String?,
 
+    @SerializedName("total_balance")
+    var total_balance : Int?,
+
+    @SerializedName("due_balance")
+    var due_balance : Int?,
+
     @SerializedName("created_at")
     var created_at : String?,
 
     @SerializedName("updated_at")
-    var updated_at : String?
+    var updated_at : String?,
 )
 
 fun SupplierDto.toSupplier() : Supplier {
@@ -50,6 +56,8 @@ fun SupplierDto.toSupplier() : Supplier {
         facebook = facebook,
         imo = imo,
         address = address,
+        total_balance = total_balance,
+        due_balance = due_balance,
         created_at = created_at,
         updated_at = updated_at
     )

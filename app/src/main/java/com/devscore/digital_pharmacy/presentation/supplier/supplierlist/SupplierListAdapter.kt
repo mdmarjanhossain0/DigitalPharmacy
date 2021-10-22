@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
+import kotlinx.android.synthetic.main.item_supplier_list.view.*
 
 class SupplierListAdapter
 constructor(
@@ -30,7 +31,7 @@ constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             IMAGE_ITEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_local,parent,false)
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_supplier_list,parent,false)
                 return SupplierDataViewHolder(itemView, interaction)
             }
 
@@ -75,6 +76,9 @@ constructor(
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Supplier>() {
 
         override fun areItemsTheSame(oldItem: Supplier, newItem: Supplier): Boolean {
+            if (oldItem.pk == null || newItem.pk == null) {
+                return oldItem.room_id == oldItem.room_id
+            }
             return oldItem.pk == newItem.pk
         }
 
@@ -128,23 +132,10 @@ constructor(
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
-//            Log.d("LocalAdapter", item.toString())
-//            itemView.localBrandNameTV.setText(item.brand_name)
-//            itemView.localCompanyNameTV.setText(item.generic)
-//            if (item.mrp != null) {
-//                itemView.localMRPTV.setText("MRP ৳ "+ item.mrp.toString())
-//            }
-//            else {
-//                itemView.localMRPTV.setText("MRP ৳ ...")
-//            }
-//
-//            itemView.localMedicineReturn.setOnClickListener {
-//                interaction?.onItemReturnSelected(adapterPosition, item)
-//            }
-//
-//            itemView.localMedicineDelete.setOnClickListener {
-//                interaction?.onItemDeleteSelected(adapterPosition, item)
-//            }
+
+            itemView.supplierCompanyName.setText(item.company_name)
+            itemView.supplierName.setText(item.agent_name)
+            itemView.supplierContactNumber.setText(item.mobile)
 
         }
     }

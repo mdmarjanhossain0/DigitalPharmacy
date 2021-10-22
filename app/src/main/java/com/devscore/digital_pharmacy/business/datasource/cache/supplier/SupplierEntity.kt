@@ -17,6 +17,8 @@ data class SupplierEntity (
     var facebook : String?,
     var imo : String?,
     var address : String?,
+    var total_balance : Int?,
+    var due_balance : Int?,
     var created_at : String?,
     var updated_at : String?,
 )
@@ -33,6 +35,8 @@ fun SupplierEntity.toSupplier() : Supplier {
         facebook = facebook,
         imo = imo,
         address = address,
+        total_balance = total_balance,
+        due_balance = due_balance,
         created_at = created_at,
         updated_at = updated_at
     )

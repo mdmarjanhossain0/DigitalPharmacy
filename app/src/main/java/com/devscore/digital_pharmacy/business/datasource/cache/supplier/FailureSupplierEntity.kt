@@ -17,6 +17,8 @@ data class FailureSupplierEntity (
     var facebook : String?,
     var imo : String?,
     var address : String?,
+    var total_balance : Int? = 0,
+    var due_balance : Int? = 0,
 )
 
 
@@ -30,6 +32,8 @@ fun FailureSupplierEntity.toSupplier() : Supplier {
         whatsapp = whatsapp,
         facebook = facebook,
         imo = imo,
-        address = address
+        address = address,
+        total_balance = total_balance,
+        due_balance = due_balance
     )
 }
