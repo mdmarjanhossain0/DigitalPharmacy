@@ -54,10 +54,9 @@
 
                 <TextView
                     android:id="@+id/globalFragmentBrandNameAction"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/blue_shape_outline_background_left"
                     android:gravity="center"
                     android:text="Brand Name"
                     android:textSize="12sp"
@@ -80,8 +79,6 @@
                     android:id="@+id/globalFragmentGenericAction"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
                     android:gravity="center"
                     android:text="Generic Name"
                     android:textSize="12sp"
@@ -105,8 +102,7 @@
                     android:id="@+id/globalFragmentIndicationAction"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:background="@color/colorPrimaryVariant"
                     android:gravity="center"
                     android:text="Indication"
                     android:textSize="12sp"
@@ -129,8 +125,6 @@
                     android:id="@+id/globalFragmentCompanyNameAction"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
                     android:gravity="center"
                     android:text="Company"
                     android:textSize="12sp"
@@ -160,16 +154,16 @@
         tools:listitem="@layout/item_global" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/globalFragmentFloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:clickable="true"
-            android:src="@drawable/ic_filter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/white" />
+        android:id="@+id/globalFragmentFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
