@@ -19,6 +19,7 @@ data class FailureCustomerEntity (
     var imo : String?,
     var address : String?,
     var date_of_birth : String?,
+    var loyalty_point : Int?,
     var total_balance : Int?,
     var due_balance : Int?
 )
@@ -35,6 +36,7 @@ fun FailureCustomerEntity.toCustomer() : Customer {
         imo = imo,
         address = address,
         date_of_birth = date_of_birth,
+        loyalty_point = loyalty_point,
         total_balance = total_balance,
         due_balance = due_balance
     )

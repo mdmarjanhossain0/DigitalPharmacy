@@ -73,7 +73,7 @@ class CustomersListFragment : BaseCustomerFragment(),
         })
 
 
-        supplierFloatingActionButton.setOnClickListener {
+        customerFloatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_customersListFragment_to_addCustomerFragment)
         }
     }

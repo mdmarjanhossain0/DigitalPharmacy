@@ -28,7 +28,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     FailureSupplierEntity::class,
     CustomerEntity::class,
     FailureCustomerEntity::class
-], version = 6)
+], version = 7)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao

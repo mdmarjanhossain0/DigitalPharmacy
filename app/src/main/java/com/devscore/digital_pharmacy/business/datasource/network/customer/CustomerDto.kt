@@ -39,6 +39,9 @@ data class CustomerDto (
     @SerializedName("date_of_birth")
     var date_of_birth : String?,
 
+    @SerializedName("loyalty_point")
+    var loyalty_point : Int?,
+
     @SerializedName("created_at")
     var created_at : String?,
 
@@ -59,6 +62,7 @@ fun CustomerDto.toCustomer() : Customer {
         total_balance = total_balance,
         due_balance = due_balance,
         date_of_birth = date_of_birth,
+        loyalty_point = loyalty_point,
         created_at = created_at,
         updated_at = updated_at
     )

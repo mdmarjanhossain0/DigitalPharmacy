@@ -14,6 +14,7 @@ data class Customer (
     var imo : String?,
     var address : String?,
     var date_of_birth : String?,
+    var loyalty_point : Int? = 0,
     var created_at : String? = null,
     var updated_at : String? = null,
     var total_balance : Int? = 0,
@@ -32,6 +33,7 @@ fun Customer.toCustomerEntity() : CustomerEntity {
         imo = imo,
         address = address,
         date_of_birth = date_of_birth,
+        loyalty_point = loyalty_point,
         created_at = created_at,
         updated_at = updated_at,
         total_balance = total_balance,
@@ -49,6 +51,7 @@ fun Customer.toCustomerFailureEntity() : FailureCustomerEntity {
         imo = imo,
         address = address,
         date_of_birth = date_of_birth,
+        loyalty_point = loyalty_point,
         total_balance = total_balance,
         due_balance = due_balance
     )

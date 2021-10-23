@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.inventory.ContainerActivity
+import com.devscore.digital_pharmacy.presentation.customer.CustomerActivity
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.supplier.SupplierActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -58,6 +59,11 @@ class DashboardFragment : Fragment() {
 
         supplier_id.setOnClickListener {
             val intent = Intent(context, SupplierActivity::class.java)
+            startActivity(intent)
+        }
+
+        customer_id.setOnClickListener {
+            val intent = Intent(context, CustomerActivity::class.java)
             startActivity(intent)
         }
     }
