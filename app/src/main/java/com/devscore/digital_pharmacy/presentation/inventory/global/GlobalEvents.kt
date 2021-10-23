@@ -6,7 +6,15 @@ sealed class GlobalEvents {
 
     object NewMedicineSearch : GlobalEvents()
 
+    data class SearchWithQuery(val query: String) : GlobalEvents()
+
     object NextPage: GlobalEvents()
+
+    data class GenericFilter(val generic : String): GlobalEvents()
+
+    data class ManufacturerFilter(val manufacturer : String): GlobalEvents()
+
+    data class GenericWithManufacturerFilter(val generic : String, val manufacturer: String): GlobalEvents()
 
     data class UpdateQuery(val query: String): GlobalEvents()
 

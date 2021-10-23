@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.devscore.digital_pharmacy.MainActivity
@@ -48,7 +47,7 @@ class ContainerActivity : AppCompatActivity(), View.OnClickListener {
         navigationView = findViewById(R.id.navigationView)
 
         val menuImg: ImageView = findViewById(R.id.menuImgId)
-        val closeImg: ImageView = findViewById(R.id.closeImgId)
+        val closeImg: ImageView = findViewById(R.id.productDetailsCloseIcon)
         val navDashboardTv: TextView = findViewById(R.id.navDashboardTvId)
         val navInventoryTv: TextView = findViewById(R.id.navInventoryTvId)
         val navSalesTv: TextView = findViewById(R.id.navSalesTvId)
@@ -68,7 +67,7 @@ class ContainerActivity : AppCompatActivity(), View.OnClickListener {
             R.id.menuImgId -> {
                 drawerLayout!!.openDrawer(navigationView, true)
             }
-            R.id.closeImgId -> {
+            R.id.productDetailsCloseIcon -> {
                 drawerLayout!!.closeDrawer(navigationView, true)
             }
             R.id.navDashboardTvId -> {

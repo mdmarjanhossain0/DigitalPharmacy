@@ -142,7 +142,7 @@
 
 
             <TextView
-                android:id="@+id/tv1"
+                android:id="@+id/productDetailsMenufactureName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -161,10 +161,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+                app:layout_constraintTop_toBottomOf="@+id/productDetailsMenufactureName" />
 
             <TextView
-                android:id="@+id/tv2"
+                android:id="@+id/productDetailsCompanyName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -183,7 +183,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv2" />
+                app:layout_constraintTop_toBottomOf="@+id/productDetailsCompanyName" />
 
             <TextView
                 android:id="@+id/tv3"

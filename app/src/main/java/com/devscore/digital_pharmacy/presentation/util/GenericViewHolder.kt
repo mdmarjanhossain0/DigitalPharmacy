@@ -1,4 +1,4 @@
-package com.codingwithmitch.openapi.presentation.util
+package com.devscore.digital_pharmacy.presentation.util
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

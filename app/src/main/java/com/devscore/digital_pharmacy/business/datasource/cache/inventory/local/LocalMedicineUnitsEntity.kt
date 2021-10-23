@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.cache.inventory.local
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -20,6 +21,7 @@ data class LocalMedicineUnitsEntity (
 
     @PrimaryKey(autoGenerate = false)
     var id : Int,
+
     var quantity : Int,
     var name : String,
     var type : String

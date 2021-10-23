@@ -8,8 +8,7 @@ import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchGlobalMedicine
-import com.devscore.digital_pharmacy.business.interactors.inventory.SearchLocalMedicine
+import com.devscore.digital_pharmacy.business.interactors.inventory.local.SearchLocalMedicine
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -37,7 +36,17 @@ constructor(
             is LocalMedicineEvents.NewLocalMedicineSearch -> {
                 search()
             }
+
+            is LocalMedicineEvents.SearchWithQuery -> {
+                searchWithQuery(event.query)
+            }
             is LocalMedicineEvents.NextPage -> {
+                incrementPageNumber()
+                search()
+            }
+
+            is LocalMedicineEvents.UpdateQuery -> {
+                onUpdateQuery(event.query)
             }
 
             is LocalMedicineEvents.Error -> {
@@ -49,6 +58,32 @@ constructor(
         }
     }
 
+    private fun searchWithQuery(query: String) {
+        state.value?.let { state ->
+            searchLocalMedicine.execute(
+                authToken = sessionManager.state.value?.authToken,
+                query = query,
+                page = state.page,
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { list ->
+                    Log.d(TAG, "ViewModel List Size " + list.size)
+                    this.state.value = state.copy(localMedicineList = list)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if(stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true){
+                        onUpdateQueryExhausted(true)
+                    }else{
+                        appendToMessageQueue(stateMessage)
+                    }
+                }
+
+            }.launchIn(viewModelScope)
+        }
+    }
 
 
     private fun removeHeadFromQueue() {
@@ -94,8 +129,13 @@ constructor(
 
     private fun incrementPageNumber() {
         state.value?.let { state ->
-            this.state.value = state.copy(page = state.page + 1)
+            val pageNumber : Int = (state.localMedicineList.size / 5) as Int + 1
+            Log.d(TAG, "Pre increment page number " + pageNumber)
+            this.state.value = state.copy(page = pageNumber)
         }
+//        state.value?.let { state ->
+//            this.state.value = state.copy(page = state.page + 1)
+//        }
     }
 
     private fun onUpdateQuery(query: String) {
@@ -106,6 +146,9 @@ constructor(
     private fun search() {
 //        resetPage()
 //        clearList()
+
+
+        Log.d(TAG, "ViewModel page number " + state.value?.page)
         state.value?.let { state ->
             searchLocalMedicine.execute(
                 authToken = sessionManager.state.value?.authToken,

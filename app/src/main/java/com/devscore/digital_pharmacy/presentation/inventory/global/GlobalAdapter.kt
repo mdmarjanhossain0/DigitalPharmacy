@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.codingwithmitch.openapi.presentation.util.GenericViewHolder
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
+import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.item_global.view.*
 
 class GlobalAdapter
@@ -110,8 +110,8 @@ constructor(
         }
     }
 
-    fun submitList(blogList: List<GlobalMedicine>?, ){
-        val newList = blogList?.toMutableList()
+    fun submitList(medicineList: List<GlobalMedicine>?, ){
+        val newList = medicineList?.toMutableList()
         differ.submitList(newList)
     }
 
@@ -131,7 +131,13 @@ constructor(
 
             itemView.globalBrandNameTV.setText(item.brand_name)
             itemView.globalCompanyNameTV.setText(item.generic)
-            itemView.globalMRPTV.setText(item.mrp.toString())
+            if (item.mrp != null) {
+                itemView.globalMRPTV.setText("MRP ৳ "+ item.mrp.toString())
+            }
+            else {
+                itemView.globalMRPTV.setText("MRP ৳ ...")
+            }
+
 
         }
     }

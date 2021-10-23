@@ -2,11 +2,13 @@ package com.devscore.digital_pharmacy.business.datasource.cache.inventory.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 
 @Entity(tableName = "LocalMedicine")
 data class LocalMedicineEntity (
+
 
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = false)

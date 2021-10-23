@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/productDetailsMenufactureName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -86,13 +86,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="5134-0000-0876"
-            app:layout_constraintEnd_toEndOf="@+id/tv1"
-            app:layout_constraintStart_toStartOf="@+id/tv1"
-            app:layout_constraintTop_toBottomOf="@+id/tv1" />
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsMenufactureName" />
 
 
         <TextView
-            android:id="@+id/tv2"
+            android:id="@+id/productDetailsCompanyName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -109,9 +109,9 @@
             android:id="@+id/edt2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/tv2"
-            app:layout_constraintStart_toStartOf="@+id/tv2"
-            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsCompanyName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsCompanyName" />
 
 
         <TextView

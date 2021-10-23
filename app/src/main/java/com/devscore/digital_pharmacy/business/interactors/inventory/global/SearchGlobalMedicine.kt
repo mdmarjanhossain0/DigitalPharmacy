@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.business.interactors.inventory
+package com.devscore.digital_pharmacy.business.interactors.inventory.global
 
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao

@@ -9,11 +9,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.codingwithmitch.openapi.presentation.util.processQueue
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
+import com.devscore.digital_pharmacy.presentation.util.processQueue
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint

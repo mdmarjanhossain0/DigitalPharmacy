@@ -1,8 +1,10 @@
 package com.devscore.digital_pharmacy.business.datasource.network.inventory
 
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.AddMedicineResponse
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.DeleteResponse
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.GlobalMedicineResponse
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.LocalMedicineResponse
+import com.devscore.digital_pharmacy.business.domain.models.AddMedicine
 import retrofit2.http.*
 
 interface InventoryApiService {
@@ -71,6 +73,7 @@ interface InventoryApiService {
 
     @POST("inventory/addmedicine")
     suspend fun addMedicine(
-        @Header("Authorization") authorization: String
-    )
+        @Header("Authorization") authorization: String,
+        @Body medicine : AddMedicine
+    ) : AddMedicineResponse
 }

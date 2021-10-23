@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/btn1"
+                        android:id="@+id/addMedicineClear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -100,7 +100,7 @@
 
 
                     <Button
-                        android:id="@+id/btn2"
+                        android:id="@+id/addMedicineUnitAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"

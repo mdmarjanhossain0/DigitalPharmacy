@@ -20,13 +20,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+
 class SessionManager
-@Inject
 constructor(
     private val checkPreviousAuthUser: CheckPreviousAuthUser,
     private val logout: Logout,
-    private val appDataStoreManager: AppDataStore,
+    private val appDataStoreManager : AppDataStore,
 ) {
 
     private val TAG: String = "AppDebug"
