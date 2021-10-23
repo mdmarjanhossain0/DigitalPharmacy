@@ -26,7 +26,7 @@ data class LocalMedicineDto (
     @SerializedName("remaining_quanity") var remaining_quantity : Int?,
     @SerializedName("damage_quantity") var damage_quantity : Int?,
     @SerializedName("rack_number") var rack_number : String?,
-    @SerializedName("units") var units : List<MedicineUnitsDto>
+    @SerializedName("units") var units : List<MedicineUnitsDto>?
 )
 
 data class MedicineUnitsDto(
@@ -66,7 +66,7 @@ fun LocalMedicineDto.toLocalMedicine() : LocalMedicine {
         remaining_quantity = remaining_quantity,
         damage_quantity = damage_quantity,
         rack_number = rack_number,
-        units = units.map {
+        units = units!!.map {
             it.toMedicineUnits()
         }
     )
