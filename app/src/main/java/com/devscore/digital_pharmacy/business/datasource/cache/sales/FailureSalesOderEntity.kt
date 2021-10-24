@@ -9,7 +9,7 @@ data class FailureSalesOderEntity (
 
     @ColumnInfo(name = "room_id")
     @PrimaryKey(autoGenerate = true)
-    var room_id : Long?,
+    var room_id : Long? = -1,
 
     @ColumnInfo(name = "customer")
     var customer : Int?,

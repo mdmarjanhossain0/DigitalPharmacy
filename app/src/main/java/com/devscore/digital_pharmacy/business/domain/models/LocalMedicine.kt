@@ -53,7 +53,8 @@ data class LocalMedicine(
 
 
 data class MedicineUnits(
-    var id: Int,
+    var id: Int? = -1,
+    var room_id : Long? = -1,
     var quantity : Int,
     var name : String,
     var type : String

@@ -78,7 +78,7 @@ fun LocalMedicine.toLocalMedicineUnitEntity() : List<LocalMedicineUnitsEntity> {
         unitList.add(
             LocalMedicineUnitsEntity(
                 medicine_id = id!!,
-                id = unit.id,
+                id = unit.id!!,
                 name = unit.name,
                 quantity = unit.quantity,
                 type = unit.type

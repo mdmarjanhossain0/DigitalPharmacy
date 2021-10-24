@@ -10,7 +10,7 @@ data class FailureSalesOderWithMedicine (
     var sales_oder : FailureSalesOderEntity,
 
     @Relation(
-        parentColumn = "pk",
+        parentColumn = "room_id",
         entityColumn = "sales_oder"
     )
     var sales_oder_medicines : List<FailureSalesOderMedicineEntity>
