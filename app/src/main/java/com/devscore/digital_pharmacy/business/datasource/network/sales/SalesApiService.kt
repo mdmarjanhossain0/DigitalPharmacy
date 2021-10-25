@@ -15,7 +15,7 @@ interface SalesApiService {
     ) : CreateSalesOderResponse
 
 
-    @GET("account/supplierlist")
+    @GET("sales/saleslist")
     suspend fun searchSalesOder (
         @Header("Authorization") authorization: String,
         @Query("search") query: String,

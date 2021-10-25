@@ -38,7 +38,7 @@ class CreateSalesOderInteractor (
 
             try{
                 cache.insertSalesOder(salesOder.toSalesOderEntity())
-                for (medicine in salesOder.toSalesOderMedicinesEnity()) {
+                for (medicine in salesOder.toSalesOderMedicinesEntity()) {
                     cache.insertSaleOderMedicine(medicine)
                 }
             }catch (e: Exception){

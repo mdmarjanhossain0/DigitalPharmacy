@@ -12,7 +12,7 @@ data class CreateSalesOderResponse (
     @SerializedName("paid_amount") var paid_amount : Long?,
     @SerializedName("discount") var discount : Long?,
     @SerializedName("is_discount_percent") var is_discount_percent : Boolean,
-    @SerializedName("oder_items") var sales_oder_medicines : List<SalesOderItemResponse>,
+    @SerializedName("sales_oder_medicines") var sales_oder_medicines : List<SalesOderItemDto>,
     @SerializedName("created_at")var created_at : String,
     @SerializedName("updated_at")var updated_at : String?,
     @SerializedName("brand_name") var brand_name : String?

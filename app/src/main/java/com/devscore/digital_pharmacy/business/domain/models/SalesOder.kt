@@ -35,7 +35,7 @@ fun SalesOder.toSalesOderEntity() : SalesOderEntity {
     )
 }
 
-fun SalesOder.toSalesOderMedicinesEnity() : List<SalesOderMedicineEntity> {
+fun SalesOder.toSalesOderMedicinesEntity() : List<SalesOderMedicineEntity> {
     var list = mutableListOf<SalesOderMedicineEntity>()
     for (medicine in sales_oder_medicines!!) {
         list.add(

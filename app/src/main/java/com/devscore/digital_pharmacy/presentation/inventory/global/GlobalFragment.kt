@@ -73,6 +73,7 @@ class GlobalFragment : BaseInventoryFragment(),
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
 //            uiCommunicationListener.displayProgressBar(state.isLoading)
+            Log.d(TAG, "GlobalFragment Loading State" + state.isLoading)
 
             processQueue(
                 context = context,
@@ -84,7 +85,7 @@ class GlobalFragment : BaseInventoryFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(medicineList = state.globalMedicineList)
+                submitList(medicineList = state.globalMedicineList, state.isLoading, state.isQueryExhausted)
             }
         })
     }
@@ -115,6 +116,8 @@ class GlobalFragment : BaseInventoryFragment(),
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val lastPosition = layoutManager.findLastVisibleItemPosition()
                     Log.d(TAG, "onScrollStateChanged: exhausted? ${viewModel.state.value?.isQueryExhausted}")
+                    Log.d(TAG, "onScrollStateChanged: exhausted? ${viewModel.state.value?.isLoading}")
+                    Log.d(TAG, "onScrollStateChanged: exhausted? ${layoutManager.findLastVisibleItemPosition()}")
                     if (
                         lastPosition == recyclerAdapter?.itemCount?.minus(1)
                         && viewModel.state.value?.isLoading == false

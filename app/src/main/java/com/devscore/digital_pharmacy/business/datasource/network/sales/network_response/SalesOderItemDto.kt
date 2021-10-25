@@ -3,7 +3,7 @@ package com.devscore.digital_pharmacy.business.datasource.network.sales.network_
 import com.devscore.digital_pharmacy.business.domain.models.SalesOderMedicine
 import com.google.gson.annotations.SerializedName
 
-data class SalesOderItemResponse (
+data class SalesOderItemDto (
 
     @SerializedName("unit") var unit : Int,
     @SerializedName("quantity") var quantity : Long,
@@ -14,7 +14,7 @@ data class SalesOderItemResponse (
     )
 
 
-fun SalesOderItemResponse.toSalesOderMedicine() : SalesOderMedicine {
+fun SalesOderItemDto.toSalesOderMedicine() : SalesOderMedicine {
     return SalesOderMedicine(
         pk = pk,
         unit = unit,
