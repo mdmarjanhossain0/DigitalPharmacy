@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DigitalPharmacy"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.sales.SalesActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.customer.CustomerActivity"
             android:exported="false" />
         <activity

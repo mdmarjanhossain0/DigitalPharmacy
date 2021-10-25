@@ -1,6 +1,7 @@
-package com.devscore.digital_pharmacy.presentation.inventory
+package com.devscore.digital_pharmacy.presentation.sales
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -15,15 +16,17 @@ import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
+import com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_container.backImage
+import kotlinx.android.synthetic.main.activity_container.*
 import kotlinx.android.synthetic.main.activity_inventory.*
+import kotlinx.android.synthetic.main.activity_sales.*
 
 @AndroidEntryPoint
-class InventoryActivity : BaseActivity(), View.OnClickListener {
+class SalesActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var navigationView: NavigationView
     var drawerLayout: DrawerLayout? = null
@@ -33,16 +36,16 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
     private lateinit var navController: NavController
     override fun displayProgressBar(isLoading: Boolean) {
         if(isLoading){
-            inventory_progress_bar.visibility = View.VISIBLE
+            sales_progress_bar.visibility = View.VISIBLE
         }
         else{
-            inventory_progress_bar.visibility = View.GONE
+            sales_progress_bar.visibility = View.GONE
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inventory)
+        setContentView(R.layout.activity_sales)
 
         setUpUI()
         initUIClick()
@@ -80,14 +83,14 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initUIClick() {
-        backImage.setOnClickListener {
-            onBackPressed()
-        }
+//        backImage.setOnClickListener {
+//            onBackPressed()
+//        }
     }
 
     private fun setUpUI() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.inventory_fragment_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.sales_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
     }
 
@@ -153,30 +156,11 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    fun navigateGlobalFragmentToAddMedicineContainerFragment(){
-        navController.navigate(R.id.action_inventoryFragment_to_inventoryAddProductFragment)
+    fun navigateSalesOrderFragmentToSalesCardFragment() {
+        navController.navigate(R.id.action_salesFragment_to_salesCartFragment)
     }
 
-    fun navigateLocalFragmentToReturnFragment(){
-        navController.navigate(R.id.action_inventoryFragment_to_return1Fragment)
+    fun navigateSalesCardFragmentToSalesPaymentFragment() {
+        navController.navigate(R.id.action_salesCartFragment_to_salesPayNowFragment)
     }
-
-    fun navigateLocalFragmentToMedicineDetailEditFragment(){
-        navController.navigate(R.id.action_inventoryFragment_to_inventoryProductDetailsEditFragment)
-    }
-
-
-    fun navigateAddMedicineFragmentToInventoryFragment(){
-        onBackPressed()
-    }
-
-    fun navigateMedicineDetailsEditToInventoryFragment(){
-        onBackPressed()
-    }
-
-    fun navigateLocalFragmentToDispensingFragment(id : Int){
-        navController.navigate(R.id.action_inventoryFragment_to_dispensingFragment)
-    }
-
-
 }

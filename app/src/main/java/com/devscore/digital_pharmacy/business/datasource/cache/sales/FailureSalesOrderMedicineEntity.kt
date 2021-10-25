@@ -3,28 +3,27 @@ package com.devscore.digital_pharmacy.business.datasource.cache.sales
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.devscore.digital_pharmacy.business.domain.models.SalesOderMedicine
-import com.google.gson.annotations.SerializedName
-
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 
 @Entity(
-    tableName = "SalesOderMedicine",
+    tableName = "FailureSalesOrderMedicine",
     foreignKeys = [
         ForeignKey(
-            entity = SalesOderEntity::class,
-            parentColumns = ["pk"],
+            entity = FailureSalesOrderEntity::class,
+            parentColumns = ["room_id"],
             childColumns = ["sales_oder"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class SalesOderMedicineEntity (
+data class FailureSalesOrderMedicineEntity (
 
 
     var sales_oder : Int,
 
-    @PrimaryKey(autoGenerate = false)
-    var pk : Int?,
+
+    @PrimaryKey(autoGenerate = true)
+    var room_id : Long? = -1,
 
     var unit : Int,
 
@@ -36,9 +35,9 @@ data class SalesOderMedicineEntity (
 
 )
 
-fun SalesOderMedicineEntity.toSaleOderMedicine() : SalesOderMedicine {
-    return SalesOderMedicine(
-        pk = pk,
+fun FailureSalesOrderMedicineEntity.toSaleOrderMedicine() : SalesOrderMedicine {
+    return SalesOrderMedicine(
+        room_id = room_id,
         unit = unit,
         quantity = quantity,
         local_medicine = local_medicine,

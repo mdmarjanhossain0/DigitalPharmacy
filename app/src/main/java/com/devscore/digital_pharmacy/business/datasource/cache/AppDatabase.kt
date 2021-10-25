@@ -29,10 +29,10 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     FailureSupplierEntity::class,
     CustomerEntity::class,
     FailureCustomerEntity::class,
-    SalesOderEntity::class,
-    SalesOderMedicineEntity::class,
-    FailureSalesOderEntity::class,
-    FailureSalesOderMedicineEntity::class
+    SalesOrderEntity::class,
+    SalesOrderMedicineEntity::class,
+    FailureSalesOrderEntity::class,
+    FailureSalesOrderMedicineEntity::class
 ], version = 8)
 abstract class AppDatabase : RoomDatabase() {
 

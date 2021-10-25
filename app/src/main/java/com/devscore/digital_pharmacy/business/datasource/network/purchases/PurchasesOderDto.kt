@@ -2,10 +2,7 @@ package com.devscore.digital_pharmacy.business.datasource.network.purchases
 
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response.PurchasesOderItemDto
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response.toPurchasesOderMedicine
-import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.SalesOderItemDto
-import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOderMedicine
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOder
-import com.devscore.digital_pharmacy.business.domain.models.SalesOder
 import com.google.gson.annotations.SerializedName
 
 data class PurchasesOderDto (

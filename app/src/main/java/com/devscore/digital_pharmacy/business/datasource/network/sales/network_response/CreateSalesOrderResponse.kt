@@ -1,9 +1,9 @@
 package com.devscore.digital_pharmacy.business.datasource.network.sales.network_response
 
-import com.devscore.digital_pharmacy.business.domain.models.SalesOder
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.google.gson.annotations.SerializedName
 
-data class CreateSalesOderResponse (
+data class CreateSalesOrderResponse (
 
     @SerializedName("pk") var pk : Int?,
     @SerializedName("customer") var customer : Int,
@@ -12,7 +12,7 @@ data class CreateSalesOderResponse (
     @SerializedName("paid_amount") var paid_amount : Long?,
     @SerializedName("discount") var discount : Long?,
     @SerializedName("is_discount_percent") var is_discount_percent : Boolean,
-    @SerializedName("sales_oder_medicines") var sales_oder_medicines : List<SalesOderItemDto>,
+    @SerializedName("sales_oder_medicines") var sales_oder_medicines : List<SalesOrderItemDto>,
     @SerializedName("created_at")var created_at : String,
     @SerializedName("updated_at")var updated_at : String?,
     @SerializedName("brand_name") var brand_name : String?
@@ -21,8 +21,8 @@ data class CreateSalesOderResponse (
 
 
 
-fun CreateSalesOderResponse.toSalesOder() : SalesOder {
-    return SalesOder(
+fun CreateSalesOrderResponse.toSalesOrder() : SalesOrder {
+    return SalesOrder(
         pk = pk,
         customer = customer,
         total_amount = total_amount,
@@ -33,7 +33,7 @@ fun CreateSalesOderResponse.toSalesOder() : SalesOder {
         created_at = created_at,
         updated_at = updated_at,
         sales_oder_medicines = sales_oder_medicines.map {
-            it.toSalesOderMedicine()
+            it.toSalesOrderMedicine()
         }
     )
 }

@@ -1,10 +1,8 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineUnitsEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.sales.*
 
-class SalesOder (
+class SalesOrder (
 
     var pk : Int? = -1,
     var room_id : Long? = -1,
@@ -14,15 +12,15 @@ class SalesOder (
     var paid_amount : Long?,
     var discount : Long?,
     var is_discount_percent : Boolean,
-    var sales_oder_medicines : List<SalesOderMedicine>,
+    var sales_oder_medicines : List<SalesOrderMedicine>?,
     var created_at : String? = null,
     var updated_at : String? = null
 )
 
 
 
-fun SalesOder.toSalesOderEntity() : SalesOderEntity {
-    return SalesOderEntity(
+fun SalesOrder.toSalesOrderEntity() : SalesOrderEntity {
+    return SalesOrderEntity(
         pk = pk,
         customer = customer,
         total_amount = total_amount,
@@ -35,11 +33,11 @@ fun SalesOder.toSalesOderEntity() : SalesOderEntity {
     )
 }
 
-fun SalesOder.toSalesOderMedicinesEntity() : List<SalesOderMedicineEntity> {
-    var list = mutableListOf<SalesOderMedicineEntity>()
+fun SalesOrder.toSalesOrderMedicinesEntity() : List<SalesOrderMedicineEntity> {
+    var list = mutableListOf<SalesOrderMedicineEntity>()
     for (medicine in sales_oder_medicines!!) {
         list.add(
-            SalesOderMedicineEntity(
+            SalesOrderMedicineEntity(
                 sales_oder = pk!!,
                 pk = pk,
                 unit = medicine.unit,
@@ -53,8 +51,8 @@ fun SalesOder.toSalesOderMedicinesEntity() : List<SalesOderMedicineEntity> {
 }
 
 
-fun SalesOder.toFailureSalesOderEntity() : FailureSalesOderEntity {
-    return FailureSalesOderEntity(
+fun SalesOrder.toFailureSalesOrderEntity() : FailureSalesOrderEntity {
+    return FailureSalesOrderEntity(
         customer = customer,
         total_amount = total_amount,
         total_after_discount = total_after_discount,
@@ -68,11 +66,11 @@ fun SalesOder.toFailureSalesOderEntity() : FailureSalesOderEntity {
 
 
 
-fun SalesOder.toFailureSalesOderMedicineEntity() : List<FailureSalesOderMedicineEntity> {
-    var list = mutableListOf<FailureSalesOderMedicineEntity>()
+fun SalesOrder.toFailureSalesOderMedicineEntity() : List<FailureSalesOrderMedicineEntity> {
+    var list = mutableListOf<FailureSalesOrderMedicineEntity>()
     for (medicine in sales_oder_medicines!!) {
         list.add(
-            FailureSalesOderMedicineEntity(
+            FailureSalesOrderMedicineEntity(
                 sales_oder = pk!!,
                 unit = medicine.unit,
                 quantity = medicine.quantity,

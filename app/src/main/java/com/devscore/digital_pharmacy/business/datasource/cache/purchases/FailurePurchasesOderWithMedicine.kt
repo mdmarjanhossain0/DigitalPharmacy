@@ -2,11 +2,7 @@ package com.devscore.digital_pharmacy.business.datasource.cache.purchases
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.FailureSalesOderEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.FailureSalesOderMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.toSaleOderMedicine
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOder
-import com.devscore.digital_pharmacy.business.domain.models.SalesOder
 
 
 data class FailurePurchasesOderWithMedicine (

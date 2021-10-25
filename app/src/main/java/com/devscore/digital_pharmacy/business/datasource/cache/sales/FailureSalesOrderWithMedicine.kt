@@ -2,23 +2,23 @@ package com.devscore.digital_pharmacy.business.datasource.cache.sales
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.devscore.digital_pharmacy.business.domain.models.SalesOder
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 
-data class FailureSalesOderWithMedicine (
+data class FailureSalesOrderWithMedicine (
 
     @Embedded
-    var sales_oder : FailureSalesOderEntity,
+    var sales_oder : FailureSalesOrderEntity,
 
     @Relation(
         parentColumn = "room_id",
         entityColumn = "sales_oder"
     )
-    var sales_oder_medicines : List<FailureSalesOderMedicineEntity>
+    var sales_oder_medicines : List<FailureSalesOrderMedicineEntity>
 )
 
 
-fun FailureSalesOderWithMedicine.toSalesOder() : SalesOder {
-    return SalesOder(
+fun FailureSalesOrderWithMedicine.toSalesOder() : SalesOrder {
+    return SalesOrder(
         room_id = sales_oder.room_id,
         customer = sales_oder.customer,
         total_amount = sales_oder.total_amount,
@@ -29,7 +29,7 @@ fun FailureSalesOderWithMedicine.toSalesOder() : SalesOder {
         created_at = sales_oder.created_at,
         updated_at = sales_oder.updated_at,
         sales_oder_medicines = sales_oder_medicines.map {
-            it.toSaleOderMedicine()
+            it.toSaleOrderMedicine()
         }
     )
 }

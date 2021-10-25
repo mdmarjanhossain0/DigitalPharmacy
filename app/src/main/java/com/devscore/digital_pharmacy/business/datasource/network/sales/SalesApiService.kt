@@ -1,8 +1,8 @@
 package com.devscore.digital_pharmacy.business.datasource.network.sales
 
-import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.CreateSalesOderResponse
+import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.CreateSalesOrderResponse
 import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.SalesOderListResponse
-import com.devscore.digital_pharmacy.business.domain.models.CreateSalesOder
+import com.devscore.digital_pharmacy.business.domain.models.CreateSalesOrder
 import retrofit2.http.*
 
 interface SalesApiService {
@@ -11,8 +11,8 @@ interface SalesApiService {
     @POST("sales/salesoder")
     suspend fun createSalesOder (
         @Header("Authorization") authorization: String,
-        @Body createSalesOder: CreateSalesOder
-    ) : CreateSalesOderResponse
+        @Body createSalesOder: CreateSalesOrder
+    ) : CreateSalesOrderResponse
 
 
     @GET("sales/saleslist")

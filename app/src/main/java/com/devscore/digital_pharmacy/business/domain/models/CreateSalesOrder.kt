@@ -1,6 +1,6 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-class CreateSalesOder (
+class CreateSalesOrder (
 
     var customer : Int?,
     var total_amount : Long?,
@@ -8,19 +8,19 @@ class CreateSalesOder (
     var paid_amount : Long,
     var discount : Long?,
     var is_discount_percent : Boolean,
-    var sales_oder_medicines : List<CreateSalesOderMedicine>
+    var sales_oder_medicines : List<CreateSalesOrderMedicine>
 )
 
 
-data class CreateSalesOderMedicine (
+data class CreateSalesOrderMedicine (
     var unit : Int,
     var quantity : Long,
     var local_medicine : Int
 
 )
 
-fun CreateSalesOderMedicine.toSalesOderMedicine() : SalesOderMedicine {
-    return SalesOderMedicine(
+fun CreateSalesOrderMedicine.toSalesOrderMedicine() : SalesOrderMedicine {
+    return SalesOrderMedicine(
         unit = unit,
         quantity = quantity,
         local_medicine = local_medicine
@@ -28,8 +28,8 @@ fun CreateSalesOderMedicine.toSalesOderMedicine() : SalesOderMedicine {
 }
 
 
-fun CreateSalesOder.toSalesOder() : SalesOder {
-    return SalesOder(
+fun CreateSalesOrder.toSalesOder() : SalesOrder {
+    return SalesOrder(
         customer = customer,
         total_amount = total_amount,
         total_after_discount = total_after_discount,
@@ -37,7 +37,7 @@ fun CreateSalesOder.toSalesOder() : SalesOder {
         discount = discount,
         is_discount_percent =is_discount_percent,
         sales_oder_medicines = sales_oder_medicines.map {
-            it.toSalesOderMedicine()
+            it.toSalesOrderMedicine()
         }
     )
 }

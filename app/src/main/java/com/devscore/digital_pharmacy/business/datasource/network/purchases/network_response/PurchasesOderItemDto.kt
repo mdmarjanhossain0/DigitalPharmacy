@@ -1,7 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response
 
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOderMedicine
-import com.devscore.digital_pharmacy.business.domain.models.SalesOderMedicine
 import com.google.gson.annotations.SerializedName
 
 data class PurchasesOderItemDto (

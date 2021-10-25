@@ -11,7 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment
-import com.devscore.digital_pharmacy.sales.SalesFragment
+import com.devscore.digital_pharmacy.presentation.sales.SalesFragment
 import com.google.android.material.navigation.NavigationView
 
 class ContainerActivity : AppCompatActivity(), View.OnClickListener {

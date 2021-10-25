@@ -1,9 +1,6 @@
 package com.devscore.digital_pharmacy.business.domain.models
 
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesOderMedicineEntity
-import com.google.gson.annotations.SerializedName
-
-data class SalesOderMedicine (
+data class SalesOrderMedicine (
 
     var pk : Int? = -1,
     var room_id : Long? = -1,

@@ -1,8 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.cache.sales
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
 import com.devscore.digital_pharmacy.business.domain.util.Constants
 
 @Dao
@@ -11,16 +9,16 @@ interface SalesDao {
     // Insert
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSalesOder(salesOder : SalesOderEntity): Long
+    suspend fun insertSalesOder(salesOder : SalesOrderEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSaleOderMedicine(salesOderMedicine : SalesOderMedicineEntity): Long
+    suspend fun insertSaleOderMedicine(salesOderMedicine : SalesOrderMedicineEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFailureSalesOder(failureSalesOder : FailureSalesOderEntity): Long
+    suspend fun insertFailureSalesOder(failureSalesOder : FailureSalesOrderEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFailureSalesOderMedicine(failureSalesOderMedicine : FailureSalesOderMedicineEntity): Long
+    suspend fun insertFailureSalesOderMedicine(failureSalesOderMedicine : FailureSalesOrderMedicineEntity): Long
 
 
 
@@ -30,10 +28,10 @@ interface SalesDao {
 
 
     @Delete
-    suspend fun deleteSalesOder(salesOder : SalesOderEntity)
+    suspend fun deleteSalesOder(salesOder : SalesOrderEntity)
 
     @Delete
-    suspend fun deleteFailureSalesOder(failureSalesOder : FailureSalesOderEntity)
+    suspend fun deleteFailureSalesOder(failureSalesOder : FailureSalesOrderEntity)
 
 
 
@@ -77,5 +75,5 @@ interface SalesDao {
         """)
     suspend fun searchFailureSalesOderWithMedicine(
         query: String
-    ): List<FailureSalesOderWithMedicine>
+    ): List<FailureSalesOrderWithMedicine>
 }

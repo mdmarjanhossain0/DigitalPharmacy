@@ -4,13 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity(tableName = "FailureSalesOrder")
+data class FailureSalesOrderEntity (
 
-@Entity(tableName = "SalesOder")
-data class SalesOderEntity (
-
-    @ColumnInfo(name = "pk")
-    @PrimaryKey(autoGenerate = false)
-    var pk : Int?,
+    @ColumnInfo(name = "room_id")
+    @PrimaryKey(autoGenerate = true)
+    var room_id : Long? = -1,
 
     @ColumnInfo(name = "customer")
     var customer : Int?,

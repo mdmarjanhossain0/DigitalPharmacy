@@ -1,9 +1,9 @@
 package com.devscore.digital_pharmacy.business.datasource.network.sales.network_response
 
-import com.devscore.digital_pharmacy.business.domain.models.SalesOderMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.google.gson.annotations.SerializedName
 
-data class SalesOderItemDto (
+data class SalesOrderItemDto (
 
     @SerializedName("unit") var unit : Int,
     @SerializedName("quantity") var quantity : Long,
@@ -14,8 +14,8 @@ data class SalesOderItemDto (
     )
 
 
-fun SalesOderItemDto.toSalesOderMedicine() : SalesOderMedicine {
-    return SalesOderMedicine(
+fun SalesOrderItemDto.toSalesOrderMedicine() : SalesOrderMedicine {
+    return SalesOrderMedicine(
         pk = pk,
         unit = unit,
         quantity = quantity,

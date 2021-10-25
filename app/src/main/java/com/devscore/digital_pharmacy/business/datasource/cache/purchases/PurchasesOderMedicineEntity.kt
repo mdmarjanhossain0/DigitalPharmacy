@@ -3,9 +3,7 @@ package com.devscore.digital_pharmacy.business.datasource.cache.purchases
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesOderEntity
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOderMedicine
-import com.devscore.digital_pharmacy.business.domain.models.SalesOderMedicine
 
 @Entity(
     tableName = "PurchasesOderMedicine",

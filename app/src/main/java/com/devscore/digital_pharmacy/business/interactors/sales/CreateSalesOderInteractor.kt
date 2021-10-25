@@ -4,7 +4,7 @@ import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
-import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOder
+import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOrder
 import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
@@ -20,10 +20,10 @@ class CreateSalesOderInteractor (
 
     fun execute(
         authToken: AuthToken?,
-        createSalesOder: CreateSalesOder
-    ): Flow<DataState<SalesOder>> = flow {
+        createSalesOder: CreateSalesOrder
+    ): Flow<DataState<SalesOrder>> = flow {
 
-        emit(DataState.loading<SalesOder>())
+        emit(DataState.loading<SalesOrder>())
         if(authToken == null){
             throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
         }
@@ -33,12 +33,12 @@ class CreateSalesOderInteractor (
             val salesOder = service.createSalesOder(
                 "Token ${authToken.token}",
                 createSalesOder
-            ).toSalesOder()
+            ).toSalesOrder()
 
 
             try{
-                cache.insertSalesOder(salesOder.toSalesOderEntity())
-                for (medicine in salesOder.toSalesOderMedicinesEntity()) {
+                cache.insertSalesOder(salesOder.toSalesOrderEntity())
+                for (medicine in salesOder.toSalesOrderMedicinesEntity()) {
                     cache.insertSaleOderMedicine(medicine)
                 }
             }catch (e: Exception){
@@ -57,7 +57,7 @@ class CreateSalesOderInteractor (
             e.printStackTrace()
 
             try{
-                cache.insertFailureSalesOder(createSalesOder.toSalesOder().toFailureSalesOderEntity())
+                cache.insertFailureSalesOder(createSalesOder.toSalesOder().toFailureSalesOrderEntity())
                 for (failureMedicine in createSalesOder.toSalesOder().toFailureSalesOderMedicineEntity()) {
                     cache.insertFailureSalesOderMedicine(failureMedicine)
                 }
@@ -67,7 +67,7 @@ class CreateSalesOderInteractor (
 
 
             emit(
-                DataState.error<SalesOder>(
+                DataState.error<SalesOrder>(
                     response = Response(
                         message = "Unable to create Sales Oder. Please be careful and don't uninstall or log out",
                         uiComponentType = UIComponentType.Dialog(),
