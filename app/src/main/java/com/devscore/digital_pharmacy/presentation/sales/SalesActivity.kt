@@ -163,4 +163,8 @@ class SalesActivity : BaseActivity(), View.OnClickListener {
     fun navigateSalesCardFragmentToSalesPaymentFragment() {
         navController.navigate(R.id.action_salesCartFragment_to_salesPayNowFragment)
     }
+
+    fun navigateSalesCardToSalesInventoryFragment() {
+        navController.navigate(R.id.action_salesCartFragment_to_salesInventoryFragment)
+    }
 }

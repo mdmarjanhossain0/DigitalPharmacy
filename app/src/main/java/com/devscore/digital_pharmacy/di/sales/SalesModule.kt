@@ -6,6 +6,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
 import com.devscore.digital_pharmacy.business.interactors.inventory.local.SearchLocalMedicine
+import com.devscore.digital_pharmacy.business.interactors.sales.CreateSalesOderInteractor
 import com.devscore.digital_pharmacy.business.interactors.sales.SearchSalesOder
 import dagger.Module
 import dagger.Provides
@@ -45,6 +46,18 @@ object SalesModule {
         cache : SalesDao
     ) : SearchSalesOder {
         return SearchSalesOder(
+            service = service,
+            cache = cache
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideCreateSalesOrderInteractor (
+        service : SalesApiService,
+        cache : SalesDao
+    ) : CreateSalesOderInteractor {
+        return CreateSalesOderInteractor(
             service = service,
             cache = cache
         )

@@ -10,3 +10,12 @@ data class SalesOrderMedicine (
     var brand_name : String? = null
 
 )
+
+
+fun SalesOrderMedicine.toCreateSalesOrderMedicine() : CreateSalesOrderMedicine {
+    return CreateSalesOrderMedicine(
+        unit = unit,
+        quantity = quantity,
+        local_medicine = local_medicine
+    )
+}

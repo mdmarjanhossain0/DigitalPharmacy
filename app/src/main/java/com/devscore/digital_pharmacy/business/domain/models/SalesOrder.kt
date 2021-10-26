@@ -81,3 +81,17 @@ fun SalesOrder.toFailureSalesOderMedicineEntity() : List<FailureSalesOrderMedici
     }
     return list
 }
+
+fun SalesOrder.toCreateSalesOrder() : CreateSalesOrder {
+    return CreateSalesOrder(
+        customer = customer,
+        total_amount = total_amount,
+        total_after_discount = total_after_discount,
+        paid_amount = paid_amount!!,
+        discount = discount,
+        is_discount_percent =is_discount_percent,
+        sales_oder_medicines = sales_oder_medicines!!.map {
+            it.toCreateSalesOrderMedicine()
+        }
+    )
+}

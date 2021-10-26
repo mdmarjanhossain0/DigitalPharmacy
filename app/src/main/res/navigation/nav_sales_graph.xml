@@ -32,10 +32,17 @@
         <action
             android:id="@+id/action_salesCartFragment_to_salesPayNowFragment"
             app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesCartFragment_to_salesInventoryFragment"
+            app:destination="@id/salesInventoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/salesPayNowFragment"
         android:name="com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayNowFragment"
         android:label="fragment_sales_pay_now"
         tools:layout="@layout/fragment_sales_pay_now" />
+    <fragment
+        android:id="@+id/salesInventoryFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.salesinventory.SalesInventoryFragment"
+        android:label="SalesInventoryFragment" />
 </navigation>
