@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 8,
-    "identityHash": "9df88a2ba4b4dd8977e47e71be421311",
+    "identityHash": "6bc3a0d30bbdd9733816260a4dcfe679",
     "entities": [
       {
         "tableName": "auth_token",
@@ -957,8 +957,8 @@
         "foreignKeys": []
       },
       {
-        "tableName": "SalesOder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `customer` INTEGER, `total_amount` INTEGER, `total_after_discount` INTEGER, `paid_amount` INTEGER, `discount` INTEGER, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "tableName": "SalesOrder",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT, PRIMARY KEY(`pk`))",
         "fields": [
           {
             "fieldPath": "pk",
@@ -975,25 +975,25 @@
           {
             "fieldPath": "total_amount",
             "columnName": "total_amount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "total_after_discount",
             "columnName": "total_after_discount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "paid_amount",
             "columnName": "paid_amount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "discount",
             "columnName": "discount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
@@ -1025,8 +1025,8 @@
         "foreignKeys": []
       },
       {
-        "tableName": "SalesOderMedicine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sales_oder` INTEGER NOT NULL, `pk` INTEGER, `unit` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `local_medicine` INTEGER NOT NULL, `brand_name` TEXT, PRIMARY KEY(`pk`), FOREIGN KEY(`sales_oder`) REFERENCES `SalesOder`(`pk`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "SalesOrderMedicine",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sales_oder` INTEGER NOT NULL, `pk` INTEGER, `unit` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `local_medicine` INTEGER NOT NULL, `brand_name` TEXT, PRIMARY KEY(`pk`), FOREIGN KEY(`sales_oder`) REFERENCES `SalesOrder`(`pk`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "sales_oder",
@@ -1074,7 +1074,7 @@
         "indices": [],
         "foreignKeys": [
           {
-            "table": "SalesOder",
+            "table": "SalesOrder",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -1087,8 +1087,8 @@
         ]
       },
       {
-        "tableName": "FailureSalesOder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `customer` INTEGER, `total_amount` INTEGER, `total_after_discount` INTEGER, `paid_amount` INTEGER, `discount` INTEGER, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT)",
+        "tableName": "FailureSalesOrder",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT)",
         "fields": [
           {
             "fieldPath": "room_id",
@@ -1105,25 +1105,25 @@
           {
             "fieldPath": "total_amount",
             "columnName": "total_amount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "total_after_discount",
             "columnName": "total_after_discount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "paid_amount",
             "columnName": "paid_amount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
             "fieldPath": "discount",
             "columnName": "discount",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": false
           },
           {
@@ -1155,8 +1155,8 @@
         "foreignKeys": []
       },
       {
-        "tableName": "FailureSalesOderMedicine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sales_oder` INTEGER NOT NULL, `room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `unit` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `local_medicine` INTEGER NOT NULL, `brand_name` TEXT, FOREIGN KEY(`sales_oder`) REFERENCES `FailureSalesOder`(`room_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "FailureSalesOrderMedicine",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sales_oder` INTEGER NOT NULL, `room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `unit` INTEGER NOT NULL, `quantity` INTEGER NOT NULL, `local_medicine` INTEGER NOT NULL, `brand_name` TEXT, FOREIGN KEY(`sales_oder`) REFERENCES `FailureSalesOrder`(`room_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "sales_oder",
@@ -1204,7 +1204,7 @@
         "indices": [],
         "foreignKeys": [
           {
-            "table": "FailureSalesOder",
+            "table": "FailureSalesOrder",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -1220,7 +1220,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9df88a2ba4b4dd8977e47e71be421311')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6bc3a0d30bbdd9733816260a4dcfe679')"
     ]
   }
 }

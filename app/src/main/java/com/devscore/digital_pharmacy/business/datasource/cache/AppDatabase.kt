@@ -33,7 +33,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     SalesOrderMedicineEntity::class,
     FailureSalesOrderEntity::class,
     FailureSalesOrderMedicineEntity::class
-], version = 8)
+], version = 9)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao

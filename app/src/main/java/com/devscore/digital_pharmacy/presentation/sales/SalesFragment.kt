@@ -35,7 +35,7 @@ class SalesFragment : Fragment(R.layout.fragment_sales) {
         val tabLayout: TabLayout = view.findViewById(R.id.salesTabLayoutId)
 
         viewPager.adapter =
-            InventoryPageAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
+            SalesPageAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {

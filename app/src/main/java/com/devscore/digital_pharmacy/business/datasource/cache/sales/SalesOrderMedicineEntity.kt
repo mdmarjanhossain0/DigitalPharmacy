@@ -27,7 +27,7 @@ data class SalesOrderMedicineEntity (
 
     var unit : Int,
 
-    var quantity : Long,
+    var quantity : Float,
 
     var local_medicine : Int,
 

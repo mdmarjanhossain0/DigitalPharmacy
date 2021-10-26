@@ -38,11 +38,11 @@ interface SalesDao {
 
 
 
-    @Query("DELETE FROM SalesOder WHERE pk = :pk")
+    @Query("DELETE FROM SalesOrder WHERE pk = :pk")
     suspend fun deleteSalesOder(pk : Int)
 
 
-    @Query("DELETE FROM FailureSalesOder WHERE room_id = :room_id")
+    @Query("DELETE FROM FailureSalesOrder WHERE room_id = :room_id")
     suspend fun deleteFailureSalesOder(room_id : Long)
 
 
@@ -57,7 +57,7 @@ interface SalesDao {
 
 
     @Query("""
-        SELECT * FROM SalesOder 
+        SELECT * FROM SalesOrder 
         WHERE customer LIKE '%' || :query || '%' 
         OR pk LIKE '%' || :query || '%'
         LIMIT (:page * :pageSize)
@@ -70,7 +70,7 @@ interface SalesDao {
 
 
     @Query("""
-        SELECT * FROM FailureSalesOder 
+        SELECT * FROM FailureSalesOrder 
         WHERE customer LIKE '%' || :query || '%'
         """)
     suspend fun searchFailureSalesOderWithMedicine(

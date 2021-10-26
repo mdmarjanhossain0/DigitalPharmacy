@@ -25,6 +25,7 @@ fun PurchasesOderDto.toPurchasesOder() : PurchasesOder {
     return PurchasesOder(
         pk = pk,
         vendor = vendor,
+        company = company,
         total_amount = total_amount,
         total_after_discount = total_after_discount,
         paid_amount = paid_amount,

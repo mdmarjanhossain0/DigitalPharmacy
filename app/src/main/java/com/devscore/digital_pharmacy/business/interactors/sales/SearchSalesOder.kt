@@ -31,11 +31,15 @@ class SearchSalesOder(
 
         try{
             Log.d(TAG, "Call Api Section")
-            val oderList = service.searchSalesOder(
+            val result = service.searchSalesOder(
                 "Token ${authToken.token}",
                 query = query,
                 page = page
-            ).results.map {
+            )
+
+            Log.d(TAG, result.toString())
+
+            val oderList = result.results.map {
                 Log.d(TAG, "looping toLocalMedicine")
                 it.toSalesOrder()
             }
@@ -64,12 +68,12 @@ class SearchSalesOder(
             )
         }
 
-        val localMedicine = cache.searchSaleOderWithMedicine(
+        val successList = cache.searchSaleOderWithMedicine(
             query = query,
             page = page
         ).map { it.toSalesOder() }
 
-        val failureMedicine = cache.searchFailureSalesOderWithMedicine(
+        val failureList = cache.searchFailureSalesOderWithMedicine(
             query = query,
         ).map {
             it.toSalesOder()
@@ -79,7 +83,7 @@ class SearchSalesOder(
 
 
 
-        emit(DataState.data(response = null, data = marge(localMedicine, failureMedicine)))
+        emit(DataState.data(response = null, data = marge(successList, failureList)))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

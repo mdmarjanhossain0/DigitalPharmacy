@@ -15,16 +15,16 @@ data class FailureSalesOrderEntity (
     var customer : Int?,
 
     @ColumnInfo(name = "total_amount")
-    var total_amount : Long?,
+    var total_amount : Float?,
 
     @ColumnInfo(name = "total_after_discount")
-    var total_after_discount : Long?,
+    var total_after_discount : Float?,
 
     @ColumnInfo(name = "paid_amount")
-    var paid_amount : Long?,
+    var paid_amount : Float?,
 
     @ColumnInfo(name = "discount")
-    var discount : Long?,
+    var discount : Float?,
 
     @ColumnInfo(name = "is_discount_percent")
     var is_discount_percent : Boolean,

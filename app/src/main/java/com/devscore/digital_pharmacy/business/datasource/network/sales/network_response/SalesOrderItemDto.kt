@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class SalesOrderItemDto (
 
     @SerializedName("unit") var unit : Int,
-    @SerializedName("quantity") var quantity : Long,
+    @SerializedName("quantity") var quantity : Float,
     @SerializedName("local_medicine") var local_medicine : Int,
     @SerializedName("brand_name") var brand_name : String?,
     @SerializedName("pk") var pk : Int?,

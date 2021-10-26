@@ -23,11 +23,20 @@ import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.core.*
 import kotlinx.android.synthetic.main.add_product_dialog.*
 import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.fragment_local.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
 import javax.inject.Inject
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers.io
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
+
 
 @AndroidEntryPoint
 class LocalFragment : BaseInventoryFragment(),
@@ -41,7 +50,8 @@ class LocalFragment : BaseInventoryFragment(),
     private lateinit var searchView: SearchView
     private var recyclerAdapter: LocalAdapter? = null // can leak memory so need to null
     private val viewModel: LocalMedicineViewModel by viewModels()
-    private lateinit var menu: Menu
+    private val disposables = CompositeDisposable()
+    private val timeSinceLastRequest: Long = 0
 
 
     override fun onCreateView(
@@ -58,6 +68,7 @@ class LocalFragment : BaseInventoryFragment(),
         setHasOptionsMenu(true)
         initRecyclerView()
         initUIClick()
+        bouncingSearch()
         subscribeObservers()
     }
 
@@ -91,20 +102,17 @@ class LocalFragment : BaseInventoryFragment(),
             Log.d(TAG, result.toString())
         }*/
 
-        localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String): Boolean {
-                // your text view here
-//                textView.text = newText
-                executeNewQuery(newText)
-                return true
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-//                textView.text = query
-                executeNewQuery(query)
-                return true
-            }
-        })
+//        localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                executeNewQuery(newText)
+//                return true
+//            }
+//
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                executeNewQuery(query)
+//                return true
+//            }
+//        })
 
 
         localFragmentFloatingActionButton.setOnClickListener {
@@ -176,6 +184,7 @@ class LocalFragment : BaseInventoryFragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null
+        disposables.dispose()
     }
 
     override fun onItemSelected(position: Int, item: LocalMedicine) {
@@ -215,6 +224,52 @@ class LocalFragment : BaseInventoryFragment(),
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+
+    fun bouncingSearch() {
+        val searchQueryObservable = Observable.create(object : ObservableOnSubscribe<String>{
+            override fun subscribe(emitter: ObservableEmitter<String>) {
+                localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(newText: String): Boolean {
+                        if (!emitter.isDisposed) {
+                            emitter.onNext(newText)
+                        }
+                        return true
+                    }
+
+                    override fun onQueryTextSubmit(query: String): Boolean {
+                        executeNewQuery(query)
+                        return true
+                    }
+                })
+            }
+        })
+            .debounce(1000, TimeUnit.MILLISECONDS)
+            .subscribeOn(io())
+
+
+        searchQueryObservable.subscribe(
+            object : Observer<String>{
+                override fun onSubscribe(d: Disposable) {
+                    disposables.add(d)
+                }
+
+                override fun onNext(t: String) {
+                    Log.d(TAG, t.toString())
+                    CoroutineScope(Dispatchers.Main).launch {
+                        executeNewQuery(t)
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                }
+
+                override fun onComplete() {
+                }
+
+            }
+        )
     }
 
 }

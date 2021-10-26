@@ -1,7 +1,5 @@
 package com.devscore.digital_pharmacy.presentation.sales.orderlist
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,18 +11,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
-import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
-import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineEvents
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
+import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_local.*
-import kotlinx.android.synthetic.main.fragment_local.localFragmentFloatingActionButton
 import kotlinx.android.synthetic.main.fragment_sales_orders.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
 
@@ -75,6 +70,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
 
 
         newSalesOrder.setOnClickListener {
+            (activity as SalesActivity).navigateSalesOrderFragmentToSalesCardFragment()
         }
     }
 
@@ -93,7 +89,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(medicineList = state.orderList)
+                submitList(list = state.orderList, state.isLoading, state.isQueryExhausted)
             }
         })
     }
@@ -110,7 +106,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
     }
 
     private fun initRecyclerView(){
-        localRvId.apply {
+        salesOrdersRvId.apply {
             layoutManager = LinearLayoutManager(this@SalesOrdersFragment.context)
             val topSpacingDecorator = TopSpacingItemDecoration(0)
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already

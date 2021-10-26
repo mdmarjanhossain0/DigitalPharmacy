@@ -51,13 +51,6 @@ class DashboardFragment : Fragment() {
             startActivity(intent)
         }
 
-        salesImgId.setOnClickListener(){
-            val intent = Intent(context, ContainerActivity::class.java)
-            intent.putExtra("SALES","sales")
-
-            startActivity(intent)
-        }
-
         supplier_id.setOnClickListener {
             val intent = Intent(context, SupplierActivity::class.java)
             startActivity(intent)

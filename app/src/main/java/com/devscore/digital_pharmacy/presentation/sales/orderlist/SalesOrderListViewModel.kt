@@ -11,6 +11,7 @@ import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExis
 import com.devscore.digital_pharmacy.business.interactors.sales.SearchSalesOder
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -26,6 +27,9 @@ constructor(
     private val TAG: String = "AppDebug"
 
     val state: MutableLiveData<SalesOrderListState> = MutableLiveData(SalesOrderListState())
+
+
+    lateinit var searchJob : Job
 
     init {
         onTriggerEvent(SalesOrderListEvents.NewSalesOrderListSearch)
@@ -116,13 +120,18 @@ constructor(
 
 
     private fun search() {
-//        resetPage()
-//        clearList()
+        resetPage()
+        clearList()
 
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)
+        if (searchJob != null) {
+            if (searchJob.isActive) {
+                searchJob.cancel()
+            }
+        }
         state.value?.let { state ->
-            searchSalesOder.execute(
+            searchJob = searchSalesOder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
                 page = state.page,

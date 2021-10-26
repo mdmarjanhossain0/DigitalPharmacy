@@ -3,10 +3,10 @@ package com.devscore.digital_pharmacy.business.domain.models
 class CreateSalesOrder (
 
     var customer : Int?,
-    var total_amount : Long?,
-    var total_after_discount : Long?,
-    var paid_amount : Long,
-    var discount : Long?,
+    var total_amount : Float?,
+    var total_after_discount : Float?,
+    var paid_amount : Float,
+    var discount : Float?,
     var is_discount_percent : Boolean,
     var sales_oder_medicines : List<CreateSalesOrderMedicine>
 )
@@ -14,7 +14,7 @@ class CreateSalesOrder (
 
 data class CreateSalesOrderMedicine (
     var unit : Int,
-    var quantity : Long,
+    var quantity : Float,
     var local_medicine : Int
 
 )

@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.network.sales
 
+import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.SalesOrderItemDto
 import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
@@ -8,10 +9,10 @@ import com.google.gson.annotations.SerializedName
 data class SalesOrderDto (
     @SerializedName("pk") var pk : Int?,
     @SerializedName("customer") var customer : Int,
-    @SerializedName("total_amount") var total_amount : Long?,
-    @SerializedName("total_after_discount") var total_after_discount : Long?,
-    @SerializedName("paid_amount") var paid_amount : Long?,
-    @SerializedName("discount") var discount : Long?,
+    @SerializedName("total_amount") var total_amount : Float?,
+    @SerializedName("total_after_discount") var total_after_discount : Float?,
+    @SerializedName("paid_amount") var paid_amount : Float?,
+    @SerializedName("discount") var discount : Float?,
     @SerializedName("is_discount_percent") var is_discount_percent : Boolean,
     @SerializedName("sales_oder_medicines") var sales_oder_medicines : List<SalesOrderItemDto>,
     @SerializedName("created_at")var created_at : String,
@@ -21,6 +22,7 @@ data class SalesOrderDto (
 
 
 fun SalesOrderDto.toSalesOrder() : SalesOrder {
+    Log.d("sfsdf", total_after_discount?.javaClass?.name.toString())
     return SalesOrder(
         pk = pk,
         customer = customer,

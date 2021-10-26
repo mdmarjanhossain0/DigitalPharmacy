@@ -75,7 +75,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_inventory_graph"
+            app:navGraph="@navigation/nav_sales_graph"
             />
 
 

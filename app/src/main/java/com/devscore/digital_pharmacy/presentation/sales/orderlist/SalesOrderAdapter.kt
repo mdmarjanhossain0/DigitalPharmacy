@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.toSaleOrderMedicine
-import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
-import kotlinx.android.synthetic.main.item_global.view.*
 
 class SalesOrderAdapter
 constructor(
@@ -26,10 +23,10 @@ constructor(
     val loadingItem = SalesOrder (
         pk = -2,
         customer = -1,
-        total_amount = 0,
-        total_after_discount = 0,
-        paid_amount = 0,
-        discount = 0,
+        total_amount = 0f,
+        total_after_discount = .05f,
+        paid_amount = 0f,
+        discount = 0f,
         is_discount_percent = false,
         created_at = "",
         updated_at = "",
@@ -41,10 +38,10 @@ constructor(
     val notFound = SalesOrder (
         pk = -3,
         customer = -1,
-        total_amount = 0,
-        total_after_discount = 0,
-        paid_amount = 0,
-        discount = 0,
+        total_amount = 0f,
+        total_after_discount = 0f,
+        paid_amount = 0f,
+        discount = 0f,
         is_discount_percent = false,
         created_at = "",
         updated_at = "",
@@ -160,8 +157,8 @@ constructor(
         }
     }
 
-    fun submitList(medicineList: List<SalesOrder>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
-        val newList = medicineList?.toMutableList()
+    fun submitList(list: List<SalesOrder>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
+        val newList = list?.toMutableList()
         if (isLoading) {
             newList?.add(loadingItem)
         }
