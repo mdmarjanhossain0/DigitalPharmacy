@@ -24,7 +24,7 @@
             app:srcCompat="@drawable/paracetamol" />
 
         <TextView
-            android:id="@+id/itemNameTvId"
+            android:id="@+id/salesCardItemBrandName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -43,13 +43,13 @@
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_dot"
-            app:layout_constraintBottom_toBottomOf="@+id/itemNameTvId"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemBrandName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/itemNameTvId" />
+            app:layout_constraintTop_toTopOf="@+id/salesCardItemBrandName" />
 
 
         <ImageView
-            android:id="@+id/cartImgId"
+            android:id="@+id/salesCartSuggetionIcon"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
@@ -65,8 +65,8 @@
             android:layout_marginTop="5dp"
             android:text="Square pharma"
             android:textColor="@color/colorPrimaryVariant"
-            app:layout_constraintStart_toStartOf="@+id/itemNameTvId"
-            app:layout_constraintTop_toBottomOf="@+id/itemNameTvId" />
+            app:layout_constraintStart_toStartOf="@+id/salesCardItemBrandName"
+            app:layout_constraintTop_toBottomOf="@+id/salesCardItemBrandName" />
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -172,7 +172,7 @@
 
         <TextView
             android:background="@drawable/gray_shape_outline1"
-            android:id="@+id/textView10"
+            android:id="@+id/salesCardItemUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -183,7 +183,24 @@
             android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            android:visibility="gone"
+            />
+        <Spinner
+            android:background="@drawable/gray_shape_outline1"
+            android:id="@+id/salesCardItemUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:drawablePadding="5dp"
+            android:text="Packs"
+            android:textSize="12sp"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            />
 
 
         <TextView
@@ -193,9 +210,9 @@
             android:text="Sub Total: ৳ 20.00"
             android:textColor="@color/colorPrimaryVariant"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView10" />
+            app:layout_constraintTop_toTopOf="@+id/salesCardItemUnit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

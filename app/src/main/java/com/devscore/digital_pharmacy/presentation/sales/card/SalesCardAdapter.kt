@@ -1,15 +1,18 @@
 package com.devscore.digital_pharmacy.presentation.sales.card
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
+import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
+import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
+import kotlinx.android.synthetic.main.item_sales_cart.view.*
 
 class SalesCardAdapter
 constructor(
@@ -21,22 +24,32 @@ constructor(
 
     var isLoading : Boolean = true
 
-    val loadingItem = SalesOrderMedicine (
-        pk = -2,
-        room_id = -2,
-        unit = -1,
-        quantity = 0f,
-        local_medicine = -1
-            )
+    val loadingItem = SalesCart(
+        medicine = null,
+        orderMedicine = SalesOrderMedicine (
+            pk = -2,
+            room_id = -2,
+            unit = -1,
+            quantity = 0f,
+            local_medicine = -1
+        ),
+        salesUnit = null,
+        amount = null
+    )
 
 
 
-    val notFound = SalesOrderMedicine (
-        pk = -3,
-        room_id = -3,
-        unit = -1,
-        quantity = 0f,
-        local_medicine = -1
+    val notFound = SalesCart(
+        medicine = null,
+        orderMedicine = SalesOrderMedicine (
+            pk = -3,
+            room_id = -3,
+            unit = -1,
+            quantity = 0f,
+            local_medicine = -1
+        ),
+        salesUnit = null,
+        amount = null
     )
 
 
@@ -82,10 +95,10 @@ constructor(
 
     override fun getItemViewType(position: Int): Int {
         if (differ.currentList.size != 0) {
-            if(differ.currentList.get(position).pk == -2){
+            if(differ.currentList.get(position).orderMedicine.pk == -2){
                 return LOADING_ITEM
             }
-            if(differ.currentList.get(position).pk == -3){
+            if(differ.currentList.get(position).orderMedicine.pk == -3){
                 return NOT_FOUND
             }
             return IMAGE_ITEM
@@ -109,13 +122,13 @@ constructor(
         return differ.currentList.size
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesOrderMedicine>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesCart>() {
 
-        override fun areItemsTheSame(oldItem: SalesOrderMedicine, newItem: SalesOrderMedicine): Boolean {
-            return oldItem.pk == newItem.pk
+        override fun areItemsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
+            return oldItem.orderMedicine.pk == newItem.orderMedicine.pk
         }
 
-        override fun areContentsTheSame(oldItem: SalesOrderMedicine, newItem: SalesOrderMedicine): Boolean {
+        override fun areContentsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
             return oldItem == newItem
         }
     }
@@ -147,7 +160,7 @@ constructor(
         }
     }
 
-    fun submitList(list: List<SalesOrderMedicine>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
+    fun submitList(list: List<SalesCart>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
         val newList = list?.toMutableList()
         if (isLoading) {
             newList?.add(loadingItem)
@@ -169,27 +182,64 @@ constructor(
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: SalesOrderMedicine) = with(itemView) {
+        fun bind(item: SalesCart) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-//            itemView.globalBrandNameTV.setText(item.brand_name)
-//            itemView.globalCompanyNameTV.setText(item.generic)
-//            if (item.mrp != null) {
-//                itemView.globalMRPTV.setText("MRP ৳ "+ item.mrp.toString())
-//            }
-//            else {
-//                itemView.globalMRPTV.setText("MRP ৳ ...")
+            if (item.salesUnit != null) {
+                itemView.salesCardItemUnit.setText(item.salesUnit?.name)
+            }
+
+            itemView.salesCardItemBrandName.setText(item.orderMedicine.brand_name)
+            val newList = mutableListOf<String>()
+            for (a in item.medicine?.units!!) {
+                newList.add(a.name)
+            }
+            val kindAdapter = ArrayAdapter(
+                context,
+                android.R.layout.simple_spinner_item,
+                newList
+            )
+
+            kindAdapter.setDropDownViewResource(
+                android.R.layout
+                    .simple_spinner_dropdown_item
+            )
+            itemView.salesCardItemUnitSpinner.setAdapter(kindAdapter)
+
+//            itemView.salesCardItemUnit.setOnClickListener {
+//                itemView.salesCardItemUnit.visibility = View.INVISIBLE
+//                itemView.salesCardItemUnitSpinner.visibility = View.VISIBLE
+//
+//                itemView.salesCardItemUnitSpinner.performClick()
 //            }
 
 
+            itemView.salesCardItemUnitSpinner.setOnItemSelectedListener(object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>, view: View?,
+                    position: Int, arg3: Long
+                ) {
+                    itemView.salesCardItemUnit.setText(item.medicine?.units?.get(position)?.name!!)
+                    Log.d("AppDebug", item.medicine?.units?.get(position)?.name!!)
+//                    itemView.salesCardItemUnitSpinner.visibility = View.GONE
+//                    itemView.salesCardItemUnit.visibility = View.VISIBLE
+                }
+
+                override fun onNothingSelected(arg0: AdapterView<*>?) {
+                    itemView.salesCardItemUnit.visibility = View.VISIBLE
+                    itemView.salesCardItemUnitSpinner.visibility = View.GONE
+                    Log.d("AppDebug", "dklfjsdlfjlfdjlfjf")
+                }
+            })
         }
     }
 
     interface Interaction {
 
-        fun onItemSelected(position: Int, item: SalesOrderMedicine)
+        fun onItemSelected(position: Int, item: SalesCart)
 
         fun restoreListPosition()
 

@@ -10,13 +10,13 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
@@ -100,8 +100,11 @@ class SalesCartFragment : BaseSalesFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(list = state.order.sales_oder_medicines, state.isLoading, state.isQueryExhausted)
+                submitList(list = state.salesCartList, state.isLoading, state.isQueryExhausted)
             }
+
+            salesCartItemCount.setText("Items : " + state.order.sales_oder_medicines!!.size.toString())
+            salesCartTotalAmount.setText("Total : ৳" + state.order.total_amount.toString())
         })
     }
 
@@ -151,7 +154,7 @@ class SalesCartFragment : BaseSalesFragment(),
         recyclerAdapter = null
     }
 
-    override fun onItemSelected(position: Int, item: SalesOrderMedicine) {
+    override fun onItemSelected(position: Int, item: SalesCart) {
         oderDetails(item)
     }
 
@@ -165,7 +168,7 @@ class SalesCartFragment : BaseSalesFragment(),
 
 
 
-    fun oderDetails(item: SalesOrderMedicine) {
+    fun oderDetails(item: SalesCart) {
 //        val dialog = MaterialDialog(requireContext())
 //        dialog.cancelable(false)
 //        dialog.setContentView(R.layout.inventory_details_dialog)

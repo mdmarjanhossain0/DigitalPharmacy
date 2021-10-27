@@ -1,6 +1,7 @@
 package com.devscore.digital_pharmacy.presentation.sales.card
 
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.Queue
@@ -20,6 +21,7 @@ data class SalesCardState (
         updated_at = "",
         sales_oder_medicines = ArrayList<SalesOrderMedicine>()
     ),
+    var salesCartList : ArrayList<SalesCart> = ArrayList<SalesCart>(),
     val medicineList : List<LocalMedicine> = listOf(),
     val query: String = "",
     val page: Int = 1,

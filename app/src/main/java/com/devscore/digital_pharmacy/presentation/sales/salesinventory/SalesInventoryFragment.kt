@@ -94,7 +94,7 @@ class SalesInventoryFragment : BaseInventoryFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(medicineList = state.medicineList)
+                submitList(medicineList = state.medicineList, state.isLoading, state.isQueryExhausted)
             }
             dynamicCart.setText(state.order.sales_oder_medicines?.size.toString())
         })

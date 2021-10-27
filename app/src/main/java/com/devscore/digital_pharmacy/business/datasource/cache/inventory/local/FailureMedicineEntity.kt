@@ -43,13 +43,13 @@ data class FailureMedicineEntity (
     var description : String?,
 
     @ColumnInfo(name = "base_mrp")
-    var mrp : Int?,
+    var mrp : Float?,
 
     @ColumnInfo(name = "purchases_price")
-    var purchases_price : Int?,
+    var purchases_price : Float?,
 
     @ColumnInfo(name = "discount")
-    var discount : Int?,
+    var discount : Float?,
 
     @ColumnInfo(name = "id_percent_discount")
     var is_percent_discount : Boolean,
@@ -64,10 +64,10 @@ data class FailureMedicineEntity (
     var form : String?,
 
     @ColumnInfo(name = "remaining_quantity")
-    var remaining_quantity : Int?,
+    var remaining_quantity : Float?,
 
     @ColumnInfo(name = "damage_quantity")
-    var damage_quantity : Int?,
+    var damage_quantity : Float?,
 
 
     @ColumnInfo(name = "rack_number")

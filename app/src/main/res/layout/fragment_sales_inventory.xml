@@ -18,6 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginRight="16dp"
             android:weightSum="10"
             >
 
@@ -25,7 +27,6 @@
                 android:id="@+id/salesInventorySearchView"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_shape"
@@ -35,7 +36,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:queryHint="Search..."
-                android:layout_weight="8"
+                android:layout_weight="7"
                 />
 
 

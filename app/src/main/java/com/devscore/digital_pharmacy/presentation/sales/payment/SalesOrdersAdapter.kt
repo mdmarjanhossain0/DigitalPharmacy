@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.SalesCart
+import java.util.ArrayList
 
 class SalesOrdersAdapter(val context: Context) :
     RecyclerView.Adapter<SalesOrdersAdapter.SalesOrdersViewHolder>() {
@@ -27,5 +29,8 @@ class SalesOrdersAdapter(val context: Context) :
 
     override fun getItemCount(): Int {
         return 1
+    }
+
+    fun submitList(list: ArrayList<SalesCart>) {
     }
 }

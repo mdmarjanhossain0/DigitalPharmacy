@@ -28,11 +28,11 @@ data class LocalMedicine(
 
     var description: String?,
 
-    var mrp: Int?,
+    var mrp: Float?,
 
-    var purchases_price : Int?,
+    var purchases_price : Float?,
 
-    var discount: Int? = 0,
+    var discount: Float? = 0f,
 
     var is_percent_discount: Boolean = false,
 
@@ -42,9 +42,9 @@ data class LocalMedicine(
 
     var form: String?,
 
-    var remaining_quantity: Int? = 0,
+    var remaining_quantity: Float? = 0f,
 
-    var damage_quantity: Int? = 0,
+    var damage_quantity: Float? = 0f,
 
     var rack_number: String? = null,
 

@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
-import com.devscore.digital_pharmacy.business.domain.models.toCreateSalesOrder
+import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
@@ -71,7 +68,7 @@ constructor(
         }
     }
 
-    private fun addToCard(medicine : LocalMedicine) {
+    private fun addToCard(medicine : LocalMedicine, quantity : Int = 1, unitId : Int = 1) {
         state.value?.let { state ->
             for (item in state.order.sales_oder_medicines!!) {
                 if (item.local_medicine == medicine.id) {
@@ -79,29 +76,51 @@ constructor(
                 }
             }
             Log.d(TAG, "Successfully Add To Cart")
-//            state.order.sales_oder_medicines?.toMutableList()?.add(
-//                SalesOrderMedicine(
-//                    unit = -1,
-//                    quantity = 1f,
-//                    local_medicine = medicine.id!!,
-//                    brand_name = medicine.brand_name
-//                )
-//            )
 
+
+
+            Log.d(TAG, "Show Medicine property " + medicine.toString())
+
+            val previousAmount = state.order.total_amount
+            Log.d(TAG, "Previous Amount " + previousAmount.toString())
+            var unitEquivalentQuantity : Int = 0
+            var salesUnit : MedicineUnits? = null
+            for (unit in medicine.units) {
+                if (unit.type == "SALES") {
+                    unitEquivalentQuantity = unit.quantity
+                    salesUnit = unit
+                    break
+                }
+            }
+            if (unitEquivalentQuantity == 0) {
+                unitEquivalentQuantity = medicine.units.first().quantity
+                salesUnit = medicine.units.first()
+            }
+            if (unitEquivalentQuantity == 0) {
+                unitEquivalentQuantity = 1
+            }
+
+            if (salesUnit == null) {
+                salesUnit = medicine.units.first()
+            }
+            val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
+            Log.d(TAG, "New Amount " + newAmount.toString())
+
+            val totalAmount = newAmount!! + previousAmount!!
 
             val list = state.order.sales_oder_medicines!!.toMutableList()
-            val medicine = SalesOrderMedicine(
+            val item = SalesOrderMedicine(
                 unit = -1,
                 quantity = 1f,
                 local_medicine = medicine.id!!,
                 brand_name = medicine.brand_name
             )
-            list.add(medicine)
+            list.add(item)
             this.state.value = state.copy(
                 order = SalesOrder(
                     pk = -2,
                     customer = -1,
-                    total_amount = 0f,
+                    total_amount = totalAmount,
                     total_after_discount = .05f,
                     paid_amount = 0f,
                     discount = 0f,
@@ -112,6 +131,15 @@ constructor(
                 )
             )
             Log.d(TAG, state.order.sales_oder_medicines!!.size.toString())
+
+            state.salesCartList.add(
+                SalesCart(
+                    medicine = medicine,
+                    orderMedicine = item,
+                    salesUnit = salesUnit!!,
+                    amount = newAmount
+                    )
+            )
         }
     }
 

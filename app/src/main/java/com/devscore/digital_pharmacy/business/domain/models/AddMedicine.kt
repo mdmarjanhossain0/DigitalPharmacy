@@ -23,11 +23,11 @@ data class AddMedicine (
 
     var description: String?,
 
-    var mrp: Int?,
+    var mrp: Float?,
 
-    var purchases_price : Int?,
+    var purchases_price : Float?,
 
-    var discount: Int?,
+    var discount: Float?,
 
     var is_percent_discount: Boolean,
 
@@ -37,9 +37,9 @@ data class AddMedicine (
 
     var form: String?,
 
-    var remaining_quantity: Int?,
+    var remaining_quantity: Float?,
 
-    var damage_quantity: Int?,
+    var damage_quantity: Float?,
 
     var rack_number: String?,
 

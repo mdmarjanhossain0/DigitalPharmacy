@@ -8,6 +8,7 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.presentation.inventory.global.GlobalAdapter
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.fragment_sales_inventory.view.*
@@ -33,15 +34,15 @@ constructor(
         symptom = "",
         strength = "",
         description = "",
-        mrp = 0,
-        purchases_price = 0,
-        discount = 0,
+        mrp = 0f,
+        purchases_price = 0f,
+        discount = 0f,
         is_percent_discount = false,
         manufacture = "",
         kind = "",
         form = "",
-        remaining_quantity = 0,
-        damage_quantity = 0,
+        remaining_quantity = 0f,
+        damage_quantity = 0f,
         rack_number = "",
         units = listOf()
             )
@@ -57,15 +58,15 @@ constructor(
         symptom = "",
         strength = "",
         description = "",
-        mrp = 0,
-        purchases_price = 0,
-        discount = 0,
+        mrp = 0f,
+        purchases_price = 0f,
+        discount = 0f,
         is_percent_discount = false,
         manufacture = "",
         kind = "",
         form = "",
-        remaining_quantity = 0,
-        damage_quantity = 0,
+        remaining_quantity = 0f,
+        damage_quantity = 0f,
         rack_number = "",
         units = listOf()
             )
@@ -178,8 +179,16 @@ constructor(
         }
     }
 
-    fun submitList(medicineList: List<LocalMedicine>?, ){
+    fun submitList(medicineList: List<LocalMedicine>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
         val newList = medicineList?.toMutableList()
+        if (isLoading) {
+            newList?.add(loadingItem)
+        }
+        else {
+            if (queryExhausted) {
+                newList?.add(notFound)
+            }
+        }
         differ.submitList(newList)
     }
 
