@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
@@ -22,6 +26,12 @@ import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sales_cart.*
 import kotlinx.android.synthetic.main.fragment_sales_orders.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -55,7 +65,17 @@ class SalesCartFragment : BaseSalesFragment(),
 
     private fun initUIClick() {
 
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+            backPressWarning()
+            Log.d(TAG, "Fragment On Back Press Callback call")
+        }
+
         salesCardGenerate.setOnClickListener {
+            if (viewModel.state.value?.order?.sales_oder_medicines?.size!! < 1) {
+                notItemAvailableInCart()
+                return@setOnClickListener
+            }
             (activity as SalesActivity).navigateSalesCardFragmentToSalesPaymentFragment()
         }
 
@@ -161,5 +181,52 @@ class SalesCartFragment : BaseSalesFragment(),
 //            dialog.dismiss()
 //        }
 //        dialog.show()
+    }
+
+
+
+    fun backPressWarning() {
+        MaterialDialog(requireContext())
+            .show{
+                title(R.string.are_you_sure)
+                message(text = "Cart item will be dismiss")
+                positiveButton(R.string.text_ok){
+                    viewModel.state.value = SalesCardState()
+                    findNavController().popBackStack()
+                    dismiss()
+                }
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
+    }
+
+
+    fun notItemAvailableInCart() {
+        val dialog = MaterialDialog(requireContext())
+            .show {
+                title(R.string.Warning)
+                message(text = "No item available in cart")
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
+
+
+        CoroutineScope(IO).launch {
+            delay(2000)
+            withContext(Main){
+                if (dialog == null) {
+                    return@withContext
+                }
+                dialog.dismiss()
+            }
+        }
     }
 }

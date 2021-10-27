@@ -17,7 +17,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10"
+            >
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/salesInventorySearchView"
@@ -32,16 +34,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="Search..." />
+                app:queryHint="Search..."
+                android:layout_weight="8"
+                />
 
 
             <include
                 android:id="@+id/salesInventoryCard"
-                android:layout_width="45dp"
+                android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_cart"
                 android:layout_marginTop="10dp"
                 layout="@layout/dynamic_cart"
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"
                 />
 
         </LinearLayout>
