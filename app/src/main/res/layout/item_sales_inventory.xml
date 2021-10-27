@@ -23,7 +23,7 @@
             app:srcCompat="@drawable/paracetamol" />
 
         <TextView
-            android:id="@+id/globalBrandNameTV"
+            android:id="@+id/salesInventoryBrandName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -42,9 +42,9 @@
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_history"
-            app:layout_constraintBottom_toBottomOf="@+id/globalBrandNameTV"
+            app:layout_constraintBottom_toBottomOf="@+id/salesInventoryBrandName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/globalBrandNameTV"
+            app:layout_constraintTop_toTopOf="@+id/salesInventoryBrandName"
             android:visibility="gone"
             />
 
@@ -54,32 +54,32 @@
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_cart"
-            app:layout_constraintBottom_toBottomOf="@+id/globalCompanyNameTV"
+            app:layout_constraintBottom_toBottomOf="@+id/salesInventoryCompanyName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/globalCompanyNameTV" />
+            app:layout_constraintTop_toTopOf="@+id/salesInventoryCompanyName" />
 
 
 
         <TextView
-            android:id="@+id/globalCompanyNameTV"
+            android:id="@+id/salesInventoryCompanyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Square pharma"
             android:textColor="@color/colorPrimaryVariant"
-            app:layout_constraintStart_toStartOf="@+id/globalBrandNameTV"
-            app:layout_constraintTop_toBottomOf="@+id/globalBrandNameTV" />
+            app:layout_constraintStart_toStartOf="@+id/salesInventoryBrandName"
+            app:layout_constraintTop_toBottomOf="@+id/salesInventoryBrandName" />
 
         <TextView
-            android:id="@+id/globalMRPTV"
+            android:id="@+id/salesInventoryMRP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="MRP ৳ 5"
             android:textColor="@color/speech_red"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/globalCompanyNameTV"
-            app:layout_constraintTop_toBottomOf="@+id/globalCompanyNameTV" />
+            app:layout_constraintStart_toStartOf="@+id/salesInventoryCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/salesInventoryCompanyName" />
 
 
         <TextView
@@ -90,9 +90,9 @@
             android:layout_marginEnd="8dp"
             android:text="Stock:1995"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/globalMRPTV"
+            app:layout_constraintBottom_toBottomOf="@+id/salesInventoryMRP"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/globalMRPTV" />
+            app:layout_constraintTop_toTopOf="@+id/salesInventoryMRP" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

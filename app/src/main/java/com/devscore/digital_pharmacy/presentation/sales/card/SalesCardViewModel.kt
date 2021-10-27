@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.models.toCreateSalesOrder
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
@@ -77,14 +78,40 @@ constructor(
                     return@addToCard
                 }
             }
-            state.order.sales_oder_medicines?.toMutableList()?.add(
-                SalesOrderMedicine(
-                    unit = -1,
-                    quantity = 1f,
-                    local_medicine = medicine.id!!,
-                    brand_name = medicine.brand_name
+            Log.d(TAG, "Successfully Add To Cart")
+//            state.order.sales_oder_medicines?.toMutableList()?.add(
+//                SalesOrderMedicine(
+//                    unit = -1,
+//                    quantity = 1f,
+//                    local_medicine = medicine.id!!,
+//                    brand_name = medicine.brand_name
+//                )
+//            )
+
+
+            val list = state.order.sales_oder_medicines!!.toMutableList()
+            val medicine = SalesOrderMedicine(
+                unit = -1,
+                quantity = 1f,
+                local_medicine = medicine.id!!,
+                brand_name = medicine.brand_name
+            )
+            list.add(medicine)
+            this.state.value = state.copy(
+                order = SalesOrder(
+                    pk = -2,
+                    customer = -1,
+                    total_amount = 0f,
+                    total_after_discount = .05f,
+                    paid_amount = 0f,
+                    discount = 0f,
+                    is_discount_percent = false,
+                    created_at = "",
+                    updated_at = "",
+                    sales_oder_medicines = list
                 )
             )
+            Log.d(TAG, state.order.sales_oder_medicines!!.size.toString())
         }
     }
 

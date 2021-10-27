@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,7 @@ import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.android.synthetic.main.dynamic_cart.*
 import kotlinx.android.synthetic.main.fragment_local.*
 import kotlinx.android.synthetic.main.fragment_sales_inventory.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
@@ -51,7 +53,7 @@ class SalesInventoryFragment : BaseInventoryFragment(),
 
     private lateinit var searchView: SearchView
     private var recyclerAdapter: SalesInventoryAdapter? = null // can leak memory so need to null
-    private val viewModel: SalesCardViewModel by viewModels()
+    private val viewModel: SalesCardViewModel by activityViewModels()
     private val disposables = CompositeDisposable()
 
 
@@ -71,6 +73,7 @@ class SalesInventoryFragment : BaseInventoryFragment(),
         initUIClick()
         bouncingSearch()
         subscribeObservers()
+        Log.d(TAG, "SalesInventoryFragment ViewModel " + viewModel.toString())
     }
 
     private fun initUIClick() {
@@ -93,6 +96,7 @@ class SalesInventoryFragment : BaseInventoryFragment(),
             recyclerAdapter?.apply {
                 submitList(medicineList = state.medicineList)
             }
+            dynamicCart.setText(state.order.sales_oder_medicines?.size.toString())
         })
     }
 
@@ -155,6 +159,11 @@ class SalesInventoryFragment : BaseInventoryFragment(),
     }
 
     override fun restoreListPosition() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onTriggerEvent(SalesCardEvents.NewLocalMedicineSearch)
     }
 
     override fun nextPage() {

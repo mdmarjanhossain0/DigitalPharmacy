@@ -35,12 +35,13 @@
                 app:queryHint="Search..." />
 
 
-            <ImageView
+            <include
                 android:id="@+id/salesInventoryCard"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/ic_cart"
                 android:layout_marginTop="10dp"
+                layout="@layout/dynamic_cart"
                 />
 
         </LinearLayout>

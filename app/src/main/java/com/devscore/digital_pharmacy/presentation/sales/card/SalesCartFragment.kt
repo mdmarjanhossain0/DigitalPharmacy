@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +31,7 @@ class SalesCartFragment : BaseSalesFragment(),
 
     private lateinit var searchView: SearchView
     private var recyclerAdapter: SalesCardAdapter? = null // can leak memory so need to null
-    private val viewModel: SalesCardViewModel by viewModels()
+    private val viewModel: SalesCardViewModel by activityViewModels()
     private lateinit var menu: Menu
 
 
@@ -49,6 +50,7 @@ class SalesCartFragment : BaseSalesFragment(),
         initRecyclerView()
         initUIClick()
         subscribeObservers()
+        Log.d(TAG, "SalesCartFragment ViewModel " + viewModel.toString())
     }
 
     private fun initUIClick() {
@@ -160,5 +162,4 @@ class SalesCartFragment : BaseSalesFragment(),
 //        }
 //        dialog.show()
     }
-
 }

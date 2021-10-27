@@ -136,7 +136,7 @@ constructor(
     }
 
     override fun getItemCount(): Int {
-        Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
+        Log.d(TAG, "SalesInventoryAdapter List Size " + differ.currentList.size)
         return differ.currentList.size
     }
 
@@ -197,26 +197,14 @@ constructor(
                 interaction?.onItemSelected(adapterPosition, item)
             }
             Log.d("SalesInventoryAdapter", item.toString())
-            itemView.localBrandNameTV.setText(item.brand_name)
-            itemView.localCompanyNameTV.setText(item.generic)
-            if (item.mrp != null) {
-                itemView.localMRPTV.setText("MRP ৳ "+ item.mrp.toString())
-            }
-            else {
-                itemView.localMRPTV.setText("MRP ৳ ...")
-            }
+            itemView.salesInventoryBrandName.setText(item.brand_name)
+            itemView.salesInventoryCompanyName.setText(item.generic)
+            itemView.salesInventoryMRP.setText("MRP ৳ "+ item.mrp.toString())
+
 
 
             itemView.salesInventoryItemCard.setOnClickListener {
                 interaction?.onItemCard(adapterPosition, item)
-            }
-
-            itemView.localMedicineReturn.setOnClickListener {
-                interaction?.onItemCard(adapterPosition, item)
-            }
-
-            itemView.localMedicineDelete.setOnClickListener {
-                interaction?.onItemDeleteSelected(adapterPosition, item)
             }
 
         }
