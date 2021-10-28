@@ -184,7 +184,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
-            android:visibility="gone"
             />
         <Spinner
             android:background="@drawable/gray_shape_outline1"

@@ -62,7 +62,9 @@ class SalesPayNowFragment : BaseSalesFragment() {
     }
 
     private fun initUIClick() {
-
+        createSalesOrder.setOnClickListener {
+            viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+        }
     }
 
     private fun subscribeObservers(){

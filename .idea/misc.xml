@@ -47,7 +47,7 @@
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_completed.xml" value="0.14266304347826086" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_inventory.xml" value="0.264" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_orders.xml" value="0.264" />
-        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_pay_now.xml" value="0.264" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_pay_now.xml" value="0.22503961965134706" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_report.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_settings.xml" value="0.11548913043478261" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_supplier_list.xml" value="0.264" />
@@ -79,6 +79,7 @@
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_sub_sales_list.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_supplier_list.xml" value="0.264" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_supplier_previous_orders.xml" value="0.264" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_unit_menu.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/layout_drawer_menu.xml" value="0.221875" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/purchase_generate_order_dialog.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/purchase_short_list_dialog.xml" value="0.16" />

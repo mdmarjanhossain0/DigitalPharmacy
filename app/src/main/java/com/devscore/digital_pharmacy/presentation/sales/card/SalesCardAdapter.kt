@@ -4,15 +4,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.*
-import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import kotlinx.android.synthetic.main.item_sales_cart.view.*
+import com.skydoves.powermenu.MenuAnimation
+
+import androidx.core.content.ContextCompat
+import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
+
+import com.skydoves.powermenu.CustomPowerMenu
+import com.skydoves.powermenu.MenuBaseAdapter
+import com.skydoves.powermenu.OnMenuItemClickListener
+import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.view.*
+
 
 class SalesCardAdapter
 constructor(
@@ -191,49 +199,36 @@ constructor(
                 itemView.salesCardItemUnit.setText(item.salesUnit?.name)
             }
 
-            itemView.salesCardItemBrandName.setText(item.orderMedicine.brand_name)
-            val newList = mutableListOf<String>()
+            val newList = mutableListOf<MedicineUnits>()
             for (a in item.medicine?.units!!) {
-                newList.add(a.name)
+                newList.add(a)
             }
-            val kindAdapter = ArrayAdapter(
-                context,
-                android.R.layout.simple_spinner_item,
-                newList
-            )
 
-            kindAdapter.setDropDownViewResource(
-                android.R.layout
-                    .simple_spinner_dropdown_item
-            )
-            itemView.salesCardItemUnitSpinner.setAdapter(kindAdapter)
-
-//            itemView.salesCardItemUnit.setOnClickListener {
-//                itemView.salesCardItemUnit.visibility = View.INVISIBLE
-//                itemView.salesCardItemUnitSpinner.visibility = View.VISIBLE
-//
-//                itemView.salesCardItemUnitSpinner.performClick()
-//            }
-
-
-            itemView.salesCardItemUnitSpinner.setOnItemSelectedListener(object :
-                AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>, view: View?,
-                    position: Int, arg3: Long
-                ) {
-                    itemView.salesCardItemUnit.setText(item.medicine?.units?.get(position)?.name!!)
-                    Log.d("AppDebug", item.medicine?.units?.get(position)?.name!!)
-//                    itemView.salesCardItemUnitSpinner.visibility = View.GONE
-//                    itemView.salesCardItemUnit.visibility = View.VISIBLE
+            val itemSelectListener = object : OnMenuItemClickListener<MedicineUnits?> {
+                override fun onItemClick(position: Int, item: MedicineUnits?) {
+                    itemView.salesCardItemUnit.setText(item?.name)
+                    Log.d("AppDebug", item.toString())
                 }
+            }
 
-                override fun onNothingSelected(arg0: AdapterView<*>?) {
-                    itemView.salesCardItemUnit.visibility = View.VISIBLE
-                    itemView.salesCardItemUnitSpinner.visibility = View.GONE
-                    Log.d("AppDebug", "dklfjsdlfjlfdjlfjf")
-                }
-            })
+            val customPowerMenu: CustomPowerMenu<*, *> =
+                CustomPowerMenu.Builder(itemView.context, UnitMenuAdapter())
+                    .addItemList(newList)
+                    .setOnMenuItemClickListener(itemSelectListener)
+                    .setAnimation(MenuAnimation.SHOWUP_TOP_RIGHT)
+                    .setMenuRadius(10f)
+                    .setMenuShadow(10f)
+                    .build()
+
+
+
+
+            itemView.salesCardItemBrandName.setText(item.orderMedicine.brand_name)
+
+            itemView.salesCardItemUnit.setOnClickListener {
+                customPowerMenu.showAsAnchorCenter(itemView.salesCardItemUnit)
+
+            }
         }
     }
 

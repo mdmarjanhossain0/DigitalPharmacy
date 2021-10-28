@@ -110,7 +110,7 @@ constructor(
 
             val list = state.order.sales_oder_medicines!!.toMutableList()
             val item = SalesOrderMedicine(
-                unit = -1,
+                unit = salesUnit.id!!,
                 quantity = 1f,
                 local_medicine = medicine.id!!,
                 brand_name = medicine.brand_name
@@ -196,18 +196,13 @@ constructor(
 
 
     private fun createNewOrder() {
-        resetPage()
-        clearList()
+//        resetPage()
+//        clearList()
 
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)
-        if (searchJob != null) {
-            if (searchJob.isActive) {
-                searchJob.cancel()
-            }
-        }
         state.value?.let { state ->
-            searchJob = createSalesOrder.execute(
+            createSalesOrder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 state.order.toCreateSalesOrder()
             ).onEach { dataState ->

@@ -28,6 +28,10 @@ class CreateSalesOderInteractor (
             throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
         }
 
+        if (createSalesOder.customer == -1) {
+            createSalesOder.customer = null
+        }
+
         try{
             Log.d(TAG, "Call Api Section")
             val salesOder = service.createSalesOder(

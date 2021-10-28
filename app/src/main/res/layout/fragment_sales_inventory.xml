@@ -19,13 +19,12 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginStart="16dp"
-            android:layout_marginRight="16dp"
-            android:weightSum="10"
+            android:weightSum="11"
             >
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/salesInventorySearchView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -36,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:queryHint="Search..."
-                android:layout_weight="7"
+                android:layout_weight="10"
                 />
 
 
@@ -46,9 +45,9 @@
                 android:layout_height="45dp"
                 android:src="@drawable/ic_cart"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 layout="@layout/dynamic_cart"
-                android:layout_marginRight="5dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 />
 
         </LinearLayout>
