@@ -12,7 +12,6 @@ import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 
 class SalesOrderItemAdapter
 constructor(
-    private val interaction: Interaction? = null
 )
     : RecyclerView.Adapter<SalesOrderItemAdapter.SalesOrderItemDataViewHolder>() {
 
@@ -34,7 +33,7 @@ constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesOrderItemDataViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sub_sales_list,parent,false)
-        return SalesOrderItemDataViewHolder(itemView, interaction)
+        return SalesOrderItemDataViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: SalesOrderItemDataViewHolder, position: Int) {
@@ -43,7 +42,7 @@ constructor(
 
     override fun getItemCount(): Int {
         Log.d(TAG, "SalesOrderItemAdapter List Size " + differ.currentList.size)
-        return differ.currentList.size
+        return 5
     }
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesOrderMedicine>() {
@@ -94,24 +93,9 @@ constructor(
     class SalesOrderItemDataViewHolder
     constructor(
         itemView: View,
-        private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: SalesOrderMedicine) = with(itemView) {
-            itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
-            }
-
-
         }
-    }
-
-    interface Interaction {
-
-        fun onItemSelected(position: Int, item: SalesOrderMedicine)
-
-        fun restoreListPosition()
-
-        fun nextPage()
     }
 }

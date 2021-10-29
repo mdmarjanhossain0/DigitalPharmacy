@@ -116,7 +116,7 @@
 
 
             <TextView
-                android:id="@+id/minimumStockDecrementTV"
+                android:id="@+id/salesCartItemDecrease"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:background="@drawable/circle_shape_gray1"
@@ -128,13 +128,15 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/minimumStockCount"
+                android:id="@+id/salesCartItemQuantityCount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/gray_shape_outline1"
                 android:gravity="fill"
                 android:hint="100"
+                android:text="1"
+                android:layout_gravity="center"
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:maxLength="3"
@@ -147,7 +149,7 @@
 
 
             <TextView
-                android:id="@+id/minimumStockIncrementTV"
+                android:id="@+id/salesCardItemIncrease"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginStart="8dp"
@@ -185,24 +187,18 @@
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             />
-        <Spinner
-            android:background="@drawable/gray_shape_outline1"
-            android:id="@+id/salesCardItemUnitSpinner"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:drawableEnd="@drawable/ic_polygon"
-            android:drawablePadding="5dp"
-            android:text="Packs"
-            android:textSize="12sp"
-            android:padding="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            android:src="@drawable/ic_polygon"
+            app:layout_constraintTop_toTopOf="@id/salesCardItemUnit"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
+            app:layout_constraintLeft_toRightOf="@id/salesCardItemUnit"
             />
 
 
         <TextView
+            android:id="@+id/salesCartSubTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

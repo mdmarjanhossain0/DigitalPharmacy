@@ -11,6 +11,9 @@ sealed class SalesCardEvents {
 
     data class AddToCard(val medicine : LocalMedicine): SalesCardEvents()
 
+
+    data class ChangeUnit(val medicine: LocalMedicine, val unit : Int?, val quantity : Int?) : SalesCardEvents()
+
     data class SearchWithQuery(val query: String) : SalesCardEvents()
 
     object NextPage: SalesCardEvents()

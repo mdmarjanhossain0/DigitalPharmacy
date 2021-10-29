@@ -72,7 +72,7 @@ class SalesCartFragment : BaseSalesFragment(),
         }
 
         salesCardGenerate.setOnClickListener {
-            if (viewModel.state.value?.order?.sales_oder_medicines?.size!! < 1) {
+            if (viewModel.state.value?.salesCartList?.size!! < 1) {
                 notItemAvailableInCart()
                 return@setOnClickListener
             }
@@ -103,8 +103,12 @@ class SalesCartFragment : BaseSalesFragment(),
                 submitList(list = state.salesCartList, state.isLoading, state.isQueryExhausted)
             }
 
-            salesCartItemCount.setText("Items : " + state.order.sales_oder_medicines!!.size.toString())
-            salesCartTotalAmount.setText("Total : ৳" + state.order.total_amount.toString())
+            salesCartItemCount.setText("Items : " + state.salesCartList.size.toString())
+            salesCartTotalAmount.setText("Total : ৳" + state.totalAmount.toString())
+
+            for (item in state.salesCartList) {
+                Log.d(TAG, "Quantity " + item.quantity)
+            }
         })
     }
 
@@ -123,27 +127,9 @@ class SalesCartFragment : BaseSalesFragment(),
         salesCardRvId.apply {
             layoutManager = LinearLayoutManager(this@SalesCartFragment.context)
             val topSpacingDecorator = TopSpacingItemDecoration(0)
-            removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
+            removeItemDecoration(topSpacingDecorator)
             addItemDecoration(topSpacingDecorator)
-
             recyclerAdapter = SalesCardAdapter(this@SalesCartFragment)
-            addOnScrollListener(object: RecyclerView.OnScrollListener(){
-
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    val lastPosition = layoutManager.findLastVisibleItemPosition()
-                    Log.d(TAG, "onScrollStateChanged: exhausted? ${viewModel.state.value?.isQueryExhausted}")
-                    if (
-                        lastPosition == recyclerAdapter?.itemCount?.minus(1)
-                        && viewModel.state.value?.isLoading == false
-                        && viewModel.state.value?.isQueryExhausted == false
-                    ) {
-                        Log.d(TAG, "GlobalFragment: attempting to load next page...")
-                        viewModel.onTriggerEvent(SalesCardEvents.NextPage)
-                    }
-                }
-            })
             adapter = recyclerAdapter
         }
     }
@@ -156,6 +142,10 @@ class SalesCartFragment : BaseSalesFragment(),
 
     override fun onItemSelected(position: Int, item: SalesCart) {
         oderDetails(item)
+    }
+
+    override fun onChangeUnit(position: Int, item: SalesCart, unitId: Int, quantity : Int) {
+        viewModel.onTriggerEvent(SalesCardEvents.ChangeUnit(item.medicine!!, unitId, quantity!!))
     }
 
 
@@ -213,6 +203,32 @@ class SalesCartFragment : BaseSalesFragment(),
             .show {
                 title(R.string.Warning)
                 message(text = "No item available in cart")
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
+
+
+        CoroutineScope(IO).launch {
+            delay(2000)
+            withContext(Main){
+                if (dialog == null) {
+                    return@withContext
+                }
+                dialog.dismiss()
+            }
+        }
+    }
+
+
+    override fun alertDialog(item : SalesCart, message : String) {
+        val dialog = MaterialDialog(requireContext())
+            .show {
+                title(R.string.Warning)
+                message(text = item.medicine?.brand_name + "..." + message)
                 negativeButton {
                     dismiss()
                 }

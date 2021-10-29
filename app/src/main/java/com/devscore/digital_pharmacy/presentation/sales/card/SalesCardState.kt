@@ -13,7 +13,7 @@ data class SalesCardState (
         pk = -2,
         customer = -1,
         total_amount = 0f,
-        total_after_discount = .05f,
+        total_after_discount = .0f,
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
@@ -21,7 +21,8 @@ data class SalesCardState (
         updated_at = "",
         sales_oder_medicines = ArrayList<SalesOrderMedicine>()
     ),
-    var salesCartList : ArrayList<SalesCart> = ArrayList<SalesCart>(),
+    val salesCartList : List<SalesCart> = listOf(),
+    val totalAmount : Float? = 0f,
     val medicineList : List<LocalMedicine> = listOf(),
     val query: String = "",
     val page: Int = 1,

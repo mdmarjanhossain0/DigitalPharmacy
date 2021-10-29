@@ -18,6 +18,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
@@ -31,11 +32,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sales_cart.*
 import kotlinx.android.synthetic.main.fragment_sales_cart.searchViewId
 import kotlinx.android.synthetic.main.fragment_sales_pay_now.*
+import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
-class SalesPayNowFragment : BaseSalesFragment() {
+class SalesPayNowFragment : BaseSalesFragment(){
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null

@@ -40,6 +40,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="1"
                     tools:listitem="@layout/item_sales_list" />
 
                 <ImageView
@@ -108,7 +109,7 @@
 
 
                 <TextView
-                    android:id="@+id/productDetailsCompanyName"
+                    android:id="@+id/salesPaymentTotalAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -130,7 +131,7 @@
                     android:text="%"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productDetailsCompanyName" />
+                    app:layout_constraintTop_toBottomOf="@id/salesPaymentTotalAmount" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/switchId"
@@ -152,12 +153,12 @@
                     android:text="Cash"
                     app:layout_constraintBottom_toBottomOf="@id/tv3"
                     app:layout_constraintEnd_toStartOf="@+id/switchId"
-                    app:layout_constraintStart_toEndOf="@+id/unitNameET"
+                    app:layout_constraintStart_toEndOf="@+id/salesPaymentDiscount"
                     app:layout_constraintTop_toTopOf="@id/tv3" />
 
 
                 <EditText
-                    android:id="@+id/unitNameET"
+                    android:id="@+id/salesPaymentDiscount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -182,7 +183,7 @@
                     android:layout_marginStart="16dp"
                     android:text="Discount :"
                     app:layout_constraintBottom_toBottomOf="@id/tv3"
-                    app:layout_constraintEnd_toStartOf="@+id/unitNameET"
+                    app:layout_constraintEnd_toStartOf="@+id/salesPaymentDiscount"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv3" />
 
@@ -226,7 +227,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/totalAfterDiscountValue" />
 
                 <EditText
-                    android:id="@+id/amountReceivedValue"
+                    android:id="@+id/salesPaymentReceiveAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -248,7 +249,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/amountReceivedTv" />
 
                 <EditText
-                    android:id="@+id/dueValue"
+                    android:id="@+id/salesPaymentDueAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -270,7 +271,7 @@
                     android:src="@drawable/ic_floating"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/dueValue" />
+                    app:layout_constraintTop_toBottomOf="@id/salesPaymentDueAmount" />
 
                 <TextView
                     android:layout_width="wrap_content"

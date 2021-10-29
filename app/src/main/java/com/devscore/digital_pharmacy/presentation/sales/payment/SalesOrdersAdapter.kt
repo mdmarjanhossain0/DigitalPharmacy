@@ -4,13 +4,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
+import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
+import kotlinx.android.synthetic.main.item_sales_list.*
+import kotlinx.android.synthetic.main.item_sales_list.view.*
 import java.util.ArrayList
 
 class SalesOrdersAdapter(val context: Context) :
     RecyclerView.Adapter<SalesOrdersAdapter.SalesOrdersViewHolder>() {
+
+
+    lateinit var recyclerItemAdapter : SalesOrderItemAdapter
 
     class SalesOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -23,7 +30,14 @@ class SalesOrdersAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: SalesOrdersViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-
+            holder.itemView.salesOrderItemRvId.apply {
+                layoutManager = LinearLayoutManager(context)
+                val topSpacingDecorator = TopSpacingItemDecoration(0)
+                removeItemDecoration(topSpacingDecorator)
+                addItemDecoration(topSpacingDecorator)
+                recyclerItemAdapter = SalesOrderItemAdapter()
+                adapter = recyclerItemAdapter
+            }
         }
     }
 
@@ -31,6 +45,6 @@ class SalesOrdersAdapter(val context: Context) :
         return 1
     }
 
-    fun submitList(list: ArrayList<SalesCart>) {
+    fun submitList(list: List<SalesCart>) {
     }
 }

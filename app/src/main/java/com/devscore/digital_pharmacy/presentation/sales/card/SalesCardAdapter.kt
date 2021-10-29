@@ -1,5 +1,7 @@
 package com.devscore.digital_pharmacy.presentation.sales.card
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +14,10 @@ import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import kotlinx.android.synthetic.main.item_sales_cart.view.*
 import com.skydoves.powermenu.MenuAnimation
 
-import androidx.core.content.ContextCompat
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 
 import com.skydoves.powermenu.CustomPowerMenu
-import com.skydoves.powermenu.MenuBaseAdapter
 import com.skydoves.powermenu.OnMenuItemClickListener
 import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.view.*
 
@@ -34,14 +34,8 @@ constructor(
 
     val loadingItem = SalesCart(
         medicine = null,
-        orderMedicine = SalesOrderMedicine (
-            pk = -2,
-            room_id = -2,
-            unit = -1,
-            quantity = 0f,
-            local_medicine = -1
-        ),
         salesUnit = null,
+        quantity = -2,
         amount = null
     )
 
@@ -49,14 +43,8 @@ constructor(
 
     val notFound = SalesCart(
         medicine = null,
-        orderMedicine = SalesOrderMedicine (
-            pk = -3,
-            room_id = -3,
-            unit = -1,
-            quantity = 0f,
-            local_medicine = -1
-        ),
         salesUnit = null,
+        quantity = -3,
         amount = null
     )
 
@@ -103,10 +91,10 @@ constructor(
 
     override fun getItemViewType(position: Int): Int {
         if (differ.currentList.size != 0) {
-            if(differ.currentList.get(position).orderMedicine.pk == -2){
+            if(differ.currentList.get(position).quantity == -2){
                 return LOADING_ITEM
             }
-            if(differ.currentList.get(position).orderMedicine.pk == -3){
+            if(differ.currentList.get(position).quantity == -3){
                 return NOT_FOUND
             }
             return IMAGE_ITEM
@@ -133,7 +121,7 @@ constructor(
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesCart>() {
 
         override fun areItemsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
-            return oldItem.orderMedicine.pk == newItem.orderMedicine.pk
+            return oldItem.medicine?.id == newItem.medicine?.id
         }
 
         override fun areContentsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
@@ -191,50 +179,99 @@ constructor(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: SalesCart) = with(itemView) {
-            itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
-            }
 
-            if (item.salesUnit != null) {
-                itemView.salesCardItemUnit.setText(item.salesUnit?.name)
-            }
+            itemView.salesCardItemBrandName.setText(item.medicine!!.brand_name!!)
+
+
 
             val newList = mutableListOf<MedicineUnits>()
             for (a in item.medicine?.units!!) {
                 newList.add(a)
             }
-
-            val itemSelectListener = object : OnMenuItemClickListener<MedicineUnits?> {
-                override fun onItemClick(position: Int, item: MedicineUnits?) {
-                    itemView.salesCardItemUnit.setText(item?.name)
-                    Log.d("AppDebug", item.toString())
-                }
-            }
-
-            val customPowerMenu: CustomPowerMenu<*, *> =
+            val menu =
                 CustomPowerMenu.Builder(itemView.context, UnitMenuAdapter())
                     .addItemList(newList)
-                    .setOnMenuItemClickListener(itemSelectListener)
                     .setAnimation(MenuAnimation.SHOWUP_TOP_RIGHT)
                     .setMenuRadius(10f)
                     .setMenuShadow(10f)
-                    .build()
+
+            val customPowerMenu = menu.build()
+            customPowerMenu.setOnMenuItemClickListener { position, selectItem ->
+                itemView.salesCardItemUnit.setText(selectItem?.name)
+                interaction?.onChangeUnit(
+                    position = adapterPosition,
+                    item = item,
+                    unitId = selectItem.id!!,
+                    quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
+                Log.d("AppDebug", item.toString())
+                customPowerMenu.dismiss()
+            }
 
 
 
 
-            itemView.salesCardItemBrandName.setText(item.orderMedicine.brand_name)
 
+
+            itemView.setOnClickListener {
+//                interaction?.onItemSelected(adapterPosition, item)
+            }
             itemView.salesCardItemUnit.setOnClickListener {
                 customPowerMenu.showAsAnchorCenter(itemView.salesCardItemUnit)
 
             }
+
+            itemView.salesCardItemIncrease.setOnClickListener {
+                val value = itemView.salesCartItemQuantityCount.text.toString().toInt() + 1
+//                itemView.salesCartItemQuantityCount.setText(value.toString())
+//                val amount = item.medicine!!.mrp!! * value * item.salesUnit!!.quantity
+//                itemView.salesCartItemQuantityCount.setText(value.toString())
+//                itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount.toString())
+
+                interaction?.onChangeUnit(
+                    position = adapterPosition,
+                    item = item,
+                    unitId = item.salesUnit?.id!!,
+                    quantity = value)
+            }
+            itemView.salesCartItemDecrease.setOnClickListener {
+                val value = itemView.salesCartItemQuantityCount.text.toString().toInt() - 1
+                if (value < 1) {
+                    itemView.salesCartItemQuantityCount.setText("1")
+                    interaction?.alertDialog(item, "It cann't decrease")
+                    return@setOnClickListener
+                }
+//                itemView.salesCartItemQuantityCount.setText(value.toString())
+//                val amount = item.medicine!!.mrp!! * value * item.salesUnit!!.quantity
+//                itemView.salesCartItemQuantityCount.setText(value.toString())
+//                itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount.toString())
+                interaction?.onChangeUnit(
+                    position = adapterPosition,
+                    item = item,
+                    unitId = item.salesUnit?.id!!,
+                    quantity = value)
+            }
+
+            itemView.salesCartSubTotal.setText("Sub Total ৳ " + item.amount)
+            if (item.salesUnit != null) {
+                itemView.salesCardItemUnit.setText(item.salesUnit?.name)
+            }
+
+//            if (itemView.salesCartItemQuantityCount.text.toString().toInt() == 1) {
+//                itemView.salesCartItemQuantityCount.setText((item.orderMedicine.quantity.toInt()).toString())
+//            }
+
+
+            itemView.salesCartItemQuantityCount.setText(item.quantity.toString())
         }
     }
 
     interface Interaction {
 
         fun onItemSelected(position: Int, item: SalesCart)
+
+        fun onChangeUnit(position: Int, item: SalesCart, unitId : Int, quantity : Int)
+
+        fun alertDialog(item : SalesCart, message : String)
 
         fun restoreListPosition()
 

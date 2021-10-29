@@ -50,6 +50,11 @@ constructor(
             is SalesCardEvents.AddToCard -> {
                 addToCard(event.medicine)
             }
+
+
+            is SalesCardEvents.ChangeUnit -> {
+                changeUnit(event.medicine, event.unit, event.quantity)
+            }
             is SalesCardEvents.NextPage -> {
                 incrementPageNumber()
                 search()
@@ -68,20 +73,89 @@ constructor(
         }
     }
 
+    private fun changeUnit(medicine: LocalMedicine, unitId: Int?, quantity : Int? = 1) {
+        state.value?.let { state ->
+            var checkExist = 0
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    checkExist = 1
+                    break
+                }
+            }
+            if (checkExist == 0 ) {
+                return@changeUnit
+            }
+            Log.d(TAG, "Medicine exist in cart")
+            Log.d(TAG, "Show Medicine property " + medicine.toString())
+
+            val previousAmount = state.totalAmount
+            Log.d(TAG, "Previous Amount " + previousAmount.toString())
+            var unitEquivalentQuantity : Int = 0
+            var salesUnit : MedicineUnits? = null
+            for (unit in medicine.units) {
+                if (unit.id == unitId) {
+                    unitEquivalentQuantity = unit.quantity
+                    salesUnit = unit
+                    break
+                }
+            }
+            if (unitEquivalentQuantity == 0) {
+                throw Exception("Unit Not Found")
+            }
+            if (salesUnit == null) {
+                throw Exception("Unit cann't usable")
+            }
+
+            val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
+            Log.d(TAG, "New Amount " + newAmount.toString())
+
+            var previousSalesCartItem : SalesCart? = null
+
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    previousSalesCartItem = item
+                }
+            }
+
+            if (previousSalesCartItem == null) {
+                throw Exception("Item Not Found")
+            }
+
+
+            val totalAmount = previousAmount!! + newAmount - previousSalesCartItem.amount!!
+
+            val newCartList = state.salesCartList.toMutableList()
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    newCartList.set(state.salesCartList.indexOf(item), SalesCart(
+                        medicine = medicine,
+                        salesUnit = salesUnit,
+                        quantity = quantity,
+                        amount = newAmount
+                    ))
+                    break
+                }
+            }
+
+            this.state.value = state.copy(
+                salesCartList = newCartList,
+                totalAmount = totalAmount
+            )
+        }
+    }
+
     private fun addToCard(medicine : LocalMedicine, quantity : Int = 1, unitId : Int = 1) {
         state.value?.let { state ->
-            for (item in state.order.sales_oder_medicines!!) {
-                if (item.local_medicine == medicine.id) {
+
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
                     return@addToCard
                 }
             }
             Log.d(TAG, "Successfully Add To Cart")
-
-
-
             Log.d(TAG, "Show Medicine property " + medicine.toString())
 
-            val previousAmount = state.order.total_amount
+            val previousAmount = state.totalAmount?.toInt()
             Log.d(TAG, "Previous Amount " + previousAmount.toString())
             var unitEquivalentQuantity : Int = 0
             var salesUnit : MedicineUnits? = null
@@ -97,48 +171,29 @@ constructor(
                 salesUnit = medicine.units.first()
             }
             if (unitEquivalentQuantity == 0) {
-                unitEquivalentQuantity = 1
+                throw Exception("Unit Not Found")
             }
 
             if (salesUnit == null) {
-                salesUnit = medicine.units.first()
+                throw Exception("Unit Not Found")
             }
             val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
             Log.d(TAG, "New Amount " + newAmount.toString())
 
             val totalAmount = newAmount!! + previousAmount!!
 
-            val list = state.order.sales_oder_medicines!!.toMutableList()
-            val item = SalesOrderMedicine(
-                unit = salesUnit.id!!,
-                quantity = 1f,
-                local_medicine = medicine.id!!,
-                brand_name = medicine.brand_name
-            )
-            list.add(item)
-            this.state.value = state.copy(
-                order = SalesOrder(
-                    pk = -2,
-                    customer = -1,
-                    total_amount = totalAmount,
-                    total_after_discount = .05f,
-                    paid_amount = 0f,
-                    discount = 0f,
-                    is_discount_percent = false,
-                    created_at = "",
-                    updated_at = "",
-                    sales_oder_medicines = list
-                )
-            )
-            Log.d(TAG, state.order.sales_oder_medicines!!.size.toString())
+            val newCartList = state.salesCartList.toMutableList()
+            newCartList.add(SalesCart(
+                medicine = medicine,
+                salesUnit = salesUnit!!,
+                quantity = quantity,
+                amount = newAmount
+            ))
 
-            state.salesCartList.add(
-                SalesCart(
-                    medicine = medicine,
-                    orderMedicine = item,
-                    salesUnit = salesUnit!!,
-                    amount = newAmount
-                    )
+
+            this.state.value = state.copy(
+                salesCartList = newCartList,
+                totalAmount = totalAmount
             )
         }
     }
@@ -196,10 +251,7 @@ constructor(
 
 
     private fun createNewOrder() {
-//        resetPage()
-//        clearList()
-
-
+        processOder()
         Log.d(TAG, "ViewModel page number " + state.value?.page)
         state.value?.let { state ->
             createSalesOrder.execute(
@@ -223,6 +275,43 @@ constructor(
 
             }.launchIn(viewModelScope)
         }
+    }
+
+    private fun processOder() {
+        val list = processOrderMedicine()
+        state.value?.let { state ->
+            this.state.value = state.copy(
+                order = SalesOrder(
+                    pk = -2,
+                    customer = -1,
+                    total_amount = state.totalAmount?.toFloat(),
+                    total_after_discount = .0f,
+                    paid_amount = 0f,
+                    discount = 0f,
+                    is_discount_percent = false,
+                    created_at = "",
+                    updated_at = "",
+                    sales_oder_medicines = list
+                )
+            )
+        }
+    }
+
+    private fun processOrderMedicine() : List<SalesOrderMedicine> {
+        val list = mutableListOf<SalesOrderMedicine>()
+        state.value?.let {state ->
+            for (item in state.salesCartList) {
+                list.add(
+                    SalesOrderMedicine(
+                        unit = item.salesUnit?.id!!,
+                        quantity = item.quantity?.toFloat()!!,
+                        local_medicine = item.medicine?.id!!,
+                        brand_name = item.medicine?.brand_name!!
+                    )
+                )
+            }
+        }
+        return list
     }
 
 
