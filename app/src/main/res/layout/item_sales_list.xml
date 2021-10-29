@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motionView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,7 +9,7 @@
     app:layoutDescription="@xml/item_sales_list_scene">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/colorPrimary"
@@ -33,17 +31,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/decreaseImage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="7dp"
-            android:src="@drawable/ic_left_down"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:id="@+id/increaseImage"
@@ -55,16 +44,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/decreaseImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="7dp"
+        android:src="@drawable/ic_left_down"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/salesOrderItemRvId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:paddingVertical="10dp"
-        tools:listitem="@layout/item_sub_sales_list"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:itemCount="11"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
