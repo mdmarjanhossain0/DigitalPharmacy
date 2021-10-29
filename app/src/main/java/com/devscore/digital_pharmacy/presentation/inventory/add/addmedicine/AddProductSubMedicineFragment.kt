@@ -143,8 +143,8 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
             val strength = strengthET.text.toString()
 //        val salesUnit = salesUnit.text.toString()
 //        val purchasesUnit = symtomORPurchasesUnit.text.toString()
-            val mrp = mrpET.text.toString().toInt()
-            val purchases_price = purchases_price.text.toString().toInt()
+            val mrp = mrpET.text.toString().toFloat()
+            val purchases_price = purchases_price.text.toString().toFloat()
             val minimum_stock = minimumStockCount.text.toString().toInt()
 
             val local_medicine = LocalMedicine(

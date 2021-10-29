@@ -8,14 +8,17 @@ import com.devscore.digital_pharmacy.business.domain.models.Supplier
 data class FailureSupplierEntity (
 
     @PrimaryKey(autoGenerate = true)
-    var room_id : Long,
+    var room_id : Long? = -1,
     var company_name : String?,
     var agent_name : String?,
+    var email : String?,
     var mobile : String?,
     var whatsapp : String?,
     var facebook : String?,
     var imo : String?,
     var address : String?,
+    var total_balance : Int? = 0,
+    var due_balance : Int? = 0,
 )
 
 
@@ -24,10 +27,13 @@ fun FailureSupplierEntity.toSupplier() : Supplier {
         room_id = room_id,
         company_name = company_name,
         agent_name = agent_name,
+        email = email,
         mobile = mobile,
         whatsapp = whatsapp,
         facebook = facebook,
         imo = imo,
-        address = address
+        address = address,
+        total_balance = total_balance,
+        due_balance = due_balance
     )
 }

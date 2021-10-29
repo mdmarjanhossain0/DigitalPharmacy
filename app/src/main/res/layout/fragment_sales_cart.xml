@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".sales.SalesCartFragment">
+    tools:context=".presentation.sales.card.SalesCartFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardId"
@@ -45,7 +45,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/returnRvId"
+        android:id="@+id/salesCardRvId"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/cardBottomId"
@@ -60,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:cardCornerRadius="0dp"
+        android:background="#00000000"
+        android:backgroundTint="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -74,20 +76,20 @@
 
 
             <TextView
-                android:id="@+id/itemTvId"
+                android:id="@+id/salesCartItemCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Items : 2"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/totalTvId"
+                app:layout_constraintBottom_toTopOf="@+id/salesCartTotalAmount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
-                android:id="@+id/totalTvId"
+                android:id="@+id/salesCartTotalAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -96,10 +98,10 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemTvId" />
+                app:layout_constraintTop_toBottomOf="@+id/salesCartItemCount" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/returnBtnId"
+                android:id="@+id/salesCardGenerate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -108,9 +110,9 @@
                 android:textAllCaps="false"
                 app:icon="@drawable/ic_forward"
                 app:iconGravity="end"
-                app:layout_constraintBottom_toBottomOf="@+id/totalTvId"
+                app:layout_constraintBottom_toBottomOf="@+id/salesCartTotalAmount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemTvId" />
+                app:layout_constraintTop_toBottomOf="@+id/salesCartItemCount" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

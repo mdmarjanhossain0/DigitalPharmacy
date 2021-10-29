@@ -77,7 +77,7 @@ fun LocalMedicine.toFailureMedicineUnitEntity() : List<FailureMedicineUnitEntity
         unitList.add(
             FailureMedicineUnitEntity(
                 medicine_id = id!!,
-                id = unit.id,
+                room_id = unit.room_id,
                 name = unit.name,
                 quantity = unit.quantity,
                 type = unit.type
@@ -90,7 +90,7 @@ fun LocalMedicine.toFailureMedicineUnitEntity() : List<FailureMedicineUnitEntity
 
 fun FailureMedicineUnitEntity.toMedicineUnits() : MedicineUnits {
     return MedicineUnits(
-        id = id,
+        room_id = room_id,
         name = name,
         quantity = quantity,
         type = type

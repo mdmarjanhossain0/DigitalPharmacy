@@ -43,6 +43,9 @@ interface LocalMedicineDao {
     @Query("DELETE FROM LocalMedicine WHERE id = :id")
     suspend fun deleteLocalMedicine(id: Int)
 
+    @Query("DELETE FROM FailureMedicine WHERE room_medicine_id = :room_medicine_id")
+    suspend fun deleteFailureLocalMedicine(room_medicine_id : Long)
+
     @Query(" SELECT * FROM LocalMedicine LIMIT (:page * :pageSize)")
     suspend fun getAllLocalMedicineWithUnits(
         page: Int,

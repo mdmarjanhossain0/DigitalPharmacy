@@ -36,6 +36,7 @@ interface SupplierDao {
         SELECT * FROM AppClientVendor 
         WHERE company_name LIKE '%' || :query || '%' 
         OR agent_name LIKE '%' || :query || '%' 
+        OR email LIKE '%' || :query || '%' 
         OR mobile LIKE '%' || :query || '%' 
         OR whatsapp LIKE '%' || :query || '%' 
         OR facebook LIKE '%' || :query || '%' 
@@ -53,16 +54,14 @@ interface SupplierDao {
         SELECT * FROM FailureAppClientVendor 
         WHERE company_name LIKE '%' || :query || '%' 
         OR agent_name LIKE '%' || :query || '%' 
+        OR email LIKE '%' || :query || '%' 
         OR mobile LIKE '%' || :query || '%' 
         OR whatsapp LIKE '%' || :query || '%' 
         OR facebook LIKE '%' || :query || '%' 
         OR imo LIKE '%' || :query || '%' 
         OR address LIKE '%' || :query || '%'
-        LIMIT (:page * :pageSize)
         """)
     suspend fun searchAllFailureSupplier (
-        query: String,
-        page: Int,
-        pageSize: Int = Constants.PAGINATION_PAGE_SIZE
-    ): List<SupplierEntity>
+        query: String
+    ): List<FailureSupplierEntity>
 }

@@ -41,10 +41,10 @@ data class GlobalMedicineEntity (
     val description : String?,
 
     @ColumnInfo(name="baseMrp")
-    val mrp : Int?,
+    val mrp : Float?,
 
     @ColumnInfo(name="basePurchasePrice")
-    val purchases_price : Int?,
+    val purchases_price : Float?,
 
     @ColumnInfo(name="manufacture")
     val manufacture : String?,

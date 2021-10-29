@@ -17,6 +17,15 @@
         android:theme="@style/Theme.DigitalPharmacy"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.sales.SalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.customer.CustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.supplier.SupplierActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.inventory.InventoryActivity"
             android:exported="true" />
         <activity
@@ -50,13 +59,10 @@
             </intent-filter>
         </activity>
 
-
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove">
-        </provider>
-
+            tools:node="remove" />
     </application>
 
 </manifest>

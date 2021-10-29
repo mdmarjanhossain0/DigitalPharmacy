@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_sales_graph"
+    app:startDestination="@id/salesFragment">
+
+    <fragment
+        android:id="@+id/salesFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.SalesFragment"
+        android:label="fragment_sales"
+        tools:layout="@layout/fragment_sales" >
+        <action
+            android:id="@+id/action_salesFragment_to_salesCartFragment"
+            app:destination="@id/salesCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesOrdersFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.orderlist.SalesOrdersFragment"
+        android:label="fragment_sales_orders"
+        tools:layout="@layout/fragment_sales_orders" />
+    <fragment
+        android:id="@+id/salesCompletedFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.odercompleted.SalesCompletedFragment"
+        android:label="fragment_sales_completed"
+        tools:layout="@layout/fragment_sales_completed" />
+    <fragment
+        android:id="@+id/salesCartFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.card.SalesCartFragment"
+        android:label="fragment_sales_cart"
+        tools:layout="@layout/fragment_sales_cart" >
+        <action
+            android:id="@+id/action_salesCartFragment_to_salesPayNowFragment"
+            app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesCartFragment_to_salesInventoryFragment"
+            app:destination="@id/salesInventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesPayNowFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayNowFragment"
+        android:label="fragment_sales_pay_now"
+        tools:layout="@layout/fragment_sales_pay_now" />
+    <fragment
+        android:id="@+id/salesInventoryFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.salesinventory.SalesInventoryFragment"
+        android:label="SalesInventoryFragment" />
+</navigation>

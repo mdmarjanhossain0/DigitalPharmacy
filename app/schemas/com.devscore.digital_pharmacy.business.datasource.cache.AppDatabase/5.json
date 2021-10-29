@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "2ffa7da9db81af6a3bdcb3c7d65b9003",
+    "identityHash": "cd3590bf941605468541831ad2eba70a",
     "entities": [
       {
         "tableName": "auth_token",
@@ -599,12 +599,308 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "AppClientVendor",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER NOT NULL, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `created_at` TEXT, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "fields": [
+          {
+            "fieldPath": "pk",
+            "columnName": "pk",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "company_name",
+            "columnName": "company_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "agent_name",
+            "columnName": "agent_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mobile",
+            "columnName": "mobile",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "whatsapp",
+            "columnName": "whatsapp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "facebook",
+            "columnName": "facebook",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imo",
+            "columnName": "imo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "created_at",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updated_at",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pk"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "FailureAppClientVendor",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `company_name` TEXT, `agent_name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "room_id",
+            "columnName": "room_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "company_name",
+            "columnName": "company_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "agent_name",
+            "columnName": "agent_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mobile",
+            "columnName": "mobile",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "whatsapp",
+            "columnName": "whatsapp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "facebook",
+            "columnName": "facebook",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imo",
+            "columnName": "imo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "room_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "AppClientCustomer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT, `created_at` TEXT, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "fields": [
+          {
+            "fieldPath": "pk",
+            "columnName": "pk",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mobile",
+            "columnName": "mobile",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "whatsapp",
+            "columnName": "whatsapp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "facebook",
+            "columnName": "facebook",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imo",
+            "columnName": "imo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date_of_birth",
+            "columnName": "date_of_birth",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "created_at",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updated_at",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pk"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "FailureAppClientCustomer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `email` TEXT, `mobile` TEXT, `whatsapp` TEXT, `facebook` TEXT, `imo` TEXT, `address` TEXT, `date_of_birth` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "room_id",
+            "columnName": "room_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mobile",
+            "columnName": "mobile",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "whatsapp",
+            "columnName": "whatsapp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "facebook",
+            "columnName": "facebook",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imo",
+            "columnName": "imo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date_of_birth",
+            "columnName": "date_of_birth",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "room_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2ffa7da9db81af6a3bdcb3c7d65b9003')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cd3590bf941605468541831ad2eba70a')"
     ]
   }
 }

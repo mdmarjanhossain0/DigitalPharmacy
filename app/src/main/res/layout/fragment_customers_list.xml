@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.CustomersListFragment">
+    tools:context=".presentation.customer.customerlist.CustomersListFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardId"
@@ -45,7 +45,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/globalRvId"
+        android:id="@+id/customerRvId"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
         tools:listitem="@layout/item_customer_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonId"
+        android:id="@+id/customerFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"

@@ -18,8 +18,8 @@ import androidx.room.PrimaryKey
 data class FailureMedicineUnitEntity (
     var medicine_id : Int,
 
-    @PrimaryKey(autoGenerate = false)
-    var id : Int,
+    @PrimaryKey(autoGenerate = true)
+    var room_id : Long? = -1,
 
     var quantity : Int,
     var name : String,
