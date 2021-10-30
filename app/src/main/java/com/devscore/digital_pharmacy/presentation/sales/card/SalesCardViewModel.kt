@@ -87,34 +87,44 @@ constructor(
 
     private fun discount(discount: Float?) {
         state.value?.let {state ->
+            var discountAmount = 0f
+            if (state.is_discount_percent) {
+                discountAmount = ((state.totalAmount!! * discount!!) / 100)
+            }
+            else {
+                discountAmount = discount!!
+            }
+            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
             this.state.value = state.copy(
-                discount = discount
+                discount = discount,
+                discountAmount = discountAmount,
+                totalAmountAfterDiscount = totalAmountAfterDiscount
             )
         }
     }
 
     private fun isDiscountPercent(discountPercent: Boolean) {
         state.value?.let {state ->
-            var discount : Float = 0f
-            val previousDiscount = state.discount
+            var discountAmount : Float = 0f
             if (discountPercent) {
-                discount = ((state.totalAmount!! * previousDiscount!!) / 100 )
+                discountAmount = ((state.totalAmount!! * state.discount!!) / 100 )
             }
             else {
-                discount = previousDiscount!!
+                discountAmount = state.discount!!
             }
+            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
             this.state.value = state.copy(
-                discount = discount
+                is_discount_percent = discountPercent,
+                discountAmount = discountAmount,
+                totalAmountAfterDiscount = totalAmountAfterDiscount
             )
         }
     }
 
     private fun receiveAmount(amount : Float) {
         state.value?.let {state ->
-            val discount = state.discount
             this.state.value = state.copy(
-                receivedAmount = amount,
-                totalAmountAfterDiscount = amount - discount!!
+                receivedAmount = amount
             )
         }
     }

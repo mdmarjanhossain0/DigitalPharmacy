@@ -86,11 +86,17 @@ class SalesPayNowFragment : BaseSalesFragment(){
             if (text!!.isNotEmpty()) {
                 viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
             }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(0f))
+            }
         }
 
         salesPaymentDiscount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
                 viewModel.onTriggerEvent(SalesCardEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.Discount(0f))
             }
         }
     }
@@ -113,19 +119,13 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 submitList(order = state.order)
             }
 
-            salesPaymentItemCount.setText("Items : " + state.order.sales_oder_medicines!!.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.order.total_amount.toString())
-
-//            salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
-//            val totalAmountAfterDiscount = state.totalAmount!! - salesPaymentDiscount.text.toString().toFloat()
-//            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
-//            val due = totalAmountAfterDiscount - salesPaymentReceiveAmount.text.toString().toFloat()
-//            salesPaymentDueAmount.setText("৳ " + due.toString())
+            salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
+            salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
 
 
             salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
-            val totalAmountAfterDiscount = state.totalAmount!! - state.discount!!
+            val totalAmountAfterDiscount = state.totalAmountAfterDiscount!!
             totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
             val due = totalAmountAfterDiscount - state.receivedAmount!!
             salesPaymentDueAmount.setText("৳ " + due.toString())

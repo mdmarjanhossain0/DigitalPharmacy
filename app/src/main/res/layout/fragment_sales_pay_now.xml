@@ -231,8 +231,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="৳1200.00"
                     android:textSize="12sp"
+                    android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="@+id/amountReceivedTv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/amountReceivedTv" />
@@ -253,7 +253,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="৳ -100"
                     android:textColor="@color/speech_red"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/due"

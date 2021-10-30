@@ -18,7 +18,7 @@ class SalesOrdersAdapter(val context: Context) :
     RecyclerView.Adapter<SalesOrdersAdapter.SalesOrdersViewHolder>() {
 
 
-    lateinit var recyclerItemAdapter : SalesOrderItemAdapter
+    var recyclerItemAdapter : SalesOrderItemAdapter? = null
 
     class SalesOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -48,6 +48,8 @@ class SalesOrdersAdapter(val context: Context) :
     }
 
     fun submitList(order: SalesOrder) {
-        recyclerItemAdapter.submitList(order.sales_oder_medicines)
+        if (recyclerItemAdapter != null) {
+            recyclerItemAdapter?.submitList(order.sales_oder_medicines)
+        }
     }
 }

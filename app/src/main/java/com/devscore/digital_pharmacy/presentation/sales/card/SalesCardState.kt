@@ -26,6 +26,7 @@ data class SalesCardState (
     val is_discount_percent : Boolean = false,
     val receivedAmount : Float? = 0f,
     val discount : Float? = 0f,
+    val discountAmount : Float? = 0f,
     val totalAmountAfterDiscount : Float? = 0f,
     val medicineList : List<LocalMedicine> = listOf(),
     val query: String = "",
