@@ -14,6 +14,12 @@ sealed class SalesCardEvents {
 
     data class ChangeUnit(val medicine: LocalMedicine, val unit : Int?, val quantity : Int?) : SalesCardEvents()
 
+    data class IsDiscountPercent(val isDiscountPercent : Boolean = false) : SalesCardEvents()
+
+    data class ReceiveAmount(val amount : Float? = 0f) : SalesCardEvents()
+
+    data class Discount(val discount : Float? = 0f) : SalesCardEvents()
+
     data class SearchWithQuery(val query: String) : SalesCardEvents()
 
     object NextPage: SalesCardEvents()

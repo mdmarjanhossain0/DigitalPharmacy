@@ -55,6 +55,18 @@ constructor(
             is SalesCardEvents.ChangeUnit -> {
                 changeUnit(event.medicine, event.unit, event.quantity)
             }
+
+            is SalesCardEvents.ReceiveAmount -> {
+                receiveAmount(event.amount!!)
+            }
+
+            is SalesCardEvents.IsDiscountPercent -> {
+                isDiscountPercent(event.isDiscountPercent)
+            }
+
+            is SalesCardEvents.Discount -> {
+                discount(event.discount)
+            }
             is SalesCardEvents.NextPage -> {
                 incrementPageNumber()
                 search()
@@ -70,6 +82,40 @@ constructor(
             is SalesCardEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun discount(discount: Float?) {
+        state.value?.let {state ->
+            this.state.value = state.copy(
+                discount = discount
+            )
+        }
+    }
+
+    private fun isDiscountPercent(discountPercent: Boolean) {
+        state.value?.let {state ->
+            var discount : Float = 0f
+            val previousDiscount = state.discount
+            if (discountPercent) {
+                discount = ((state.totalAmount!! * previousDiscount!!) / 100 )
+            }
+            else {
+                discount = previousDiscount!!
+            }
+            this.state.value = state.copy(
+                discount = discount
+            )
+        }
+    }
+
+    private fun receiveAmount(amount : Float) {
+        state.value?.let {state ->
+            val discount = state.discount
+            this.state.value = state.copy(
+                receivedAmount = amount,
+                totalAmountAfterDiscount = amount - discount!!
+            )
         }
     }
 

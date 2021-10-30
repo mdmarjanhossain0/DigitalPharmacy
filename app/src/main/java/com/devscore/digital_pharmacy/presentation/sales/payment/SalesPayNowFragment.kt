@@ -34,6 +34,10 @@ import kotlinx.android.synthetic.main.fragment_sales_cart.searchViewId
 import kotlinx.android.synthetic.main.fragment_sales_pay_now.*
 import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.coroutines.*
+import android.text.Editable
+
+import android.text.TextWatcher
+import androidx.core.widget.doOnTextChanged
 
 
 @AndroidEntryPoint
@@ -67,6 +71,28 @@ class SalesPayNowFragment : BaseSalesFragment(){
         createSalesOrder.setOnClickListener {
             viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
         }
+
+        switchId.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(true))
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(false))
+            }
+        }
+
+
+        salesPaymentReceiveAmount.doOnTextChanged { text, start, before, count ->
+            if (text!!.isNotEmpty()) {
+                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
+            }
+        }
+
+        salesPaymentDiscount.doOnTextChanged { text, start, before, count ->
+            if (text!!.isNotEmpty()) {
+                viewModel.onTriggerEvent(SalesCardEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
+            }
+        }
     }
 
     private fun subscribeObservers(){
@@ -84,18 +110,26 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 })
 
             recyclerAdapter?.apply {
-                submitList(list = state.salesCartList)
+                submitList(order = state.order)
             }
 
             salesPaymentItemCount.setText("Items : " + state.order.sales_oder_medicines!!.size.toString())
             salesPaymentTotal.setText("Total : ৳" + state.order.total_amount.toString())
-        })
-    }
 
-    private fun executeNewQuery(query: String){
-        resetUI()
-        viewModel.onTriggerEvent(SalesCardEvents.UpdateQuery(query))
-        viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+//            salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
+//            val totalAmountAfterDiscount = state.totalAmount!! - salesPaymentDiscount.text.toString().toFloat()
+//            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
+//            val due = totalAmountAfterDiscount - salesPaymentReceiveAmount.text.toString().toFloat()
+//            salesPaymentDueAmount.setText("৳ " + due.toString())
+
+
+
+            salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
+            val totalAmountAfterDiscount = state.totalAmount!! - state.discount!!
+            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
+            val due = totalAmountAfterDiscount - state.receivedAmount!!
+            salesPaymentDueAmount.setText("৳ " + due.toString())
+        })
     }
 
     private  fun resetUI(){
