@@ -81,7 +81,6 @@ class SalesCartFragment : BaseSalesFragment(),
 
 
         searchViewId.setOnClickListener {
-            (activity as SalesActivity).navigateSalesCardToSalesInventoryFragment()
         }
     }
 

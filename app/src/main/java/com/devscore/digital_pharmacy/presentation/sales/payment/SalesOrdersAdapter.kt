@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.android.synthetic.main.item_sales_list.view.*
@@ -17,7 +18,7 @@ class SalesOrdersAdapter(val context: Context) :
     RecyclerView.Adapter<SalesOrdersAdapter.SalesOrdersViewHolder>() {
 
 
-    lateinit var recyclerItemAdapter : SalesOrderItemAdapter
+    var recyclerItemAdapter : SalesOrderItemAdapter? = null
 
     class SalesOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -34,8 +35,11 @@ class SalesOrdersAdapter(val context: Context) :
                 layoutManager = LinearLayoutManager(context)
                 val topSpacingDecorator = TopSpacingItemDecoration(0)
                 removeItemDecoration(topSpacingDecorator)
+                hasFixedSize()
                 addItemDecoration(topSpacingDecorator)
-                recyclerItemAdapter = SalesOrderItemAdapter()
+                if (recyclerItemAdapter == null) {
+                    recyclerItemAdapter = SalesOrderItemAdapter()
+                }
                 adapter = recyclerItemAdapter
             }
         }
@@ -45,6 +49,10 @@ class SalesOrdersAdapter(val context: Context) :
         return 1
     }
 
-    fun submitList(list: List<SalesCart>) {
+    fun submitList(order: SalesOrder) {
+        if (recyclerItemAdapter == null) {
+            recyclerItemAdapter = SalesOrderItemAdapter()
+        }
+        recyclerItemAdapter?.submitList(order.sales_oder_medicines)
     }
 }

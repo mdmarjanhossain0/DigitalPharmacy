@@ -156,15 +156,15 @@ class SalesActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    fun navigateSalesOrderFragmentToSalesCardFragment() {
-        navController.navigate(R.id.action_salesFragment_to_salesCartFragment)
+    fun navigateSalesOrderToInventoryFragment() {
+        navController.navigate(R.id.action_salesFragment_to_salesInventoryFragment)
     }
 
     fun navigateSalesCardFragmentToSalesPaymentFragment() {
         navController.navigate(R.id.action_salesCartFragment_to_salesPayNowFragment)
     }
 
-    fun navigateSalesCardToSalesInventoryFragment() {
-        navController.navigate(R.id.action_salesCartFragment_to_salesInventoryFragment)
+    fun navigateSalesInventoryToCardFragment() {
+        navController.navigate(R.id.action_salesInventoryFragment_to_salesCartFragment)
     }
 }

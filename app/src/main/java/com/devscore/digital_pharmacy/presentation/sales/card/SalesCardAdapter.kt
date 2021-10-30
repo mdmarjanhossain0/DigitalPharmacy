@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
@@ -222,43 +223,39 @@ constructor(
 
             itemView.salesCardItemIncrease.setOnClickListener {
                 val value = itemView.salesCartItemQuantityCount.text.toString().toInt() + 1
-//                itemView.salesCartItemQuantityCount.setText(value.toString())
-//                val amount = item.medicine!!.mrp!! * value * item.salesUnit!!.quantity
-//                itemView.salesCartItemQuantityCount.setText(value.toString())
-//                itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount.toString())
-
-                interaction?.onChangeUnit(
-                    position = adapterPosition,
-                    item = item,
-                    unitId = item.salesUnit?.id!!,
-                    quantity = value)
+                itemView.salesCartItemQuantityCount.setText(value.toString())
             }
             itemView.salesCartItemDecrease.setOnClickListener {
                 val value = itemView.salesCartItemQuantityCount.text.toString().toInt() - 1
-                if (value < 1) {
+                itemView.salesCartItemQuantityCount.setText(value.toString())
+            }
+
+
+            itemView.salesCartItemQuantityCount.doOnTextChanged { text, start, before, count ->
+                try {
+                    val value = itemView.salesCartItemQuantityCount.text.toString().toInt()
+                    if (value < 1) {
+                        itemView.salesCartItemQuantityCount.setText("1")
+                        interaction?.alertDialog(item, "It cann't decrease")
+                        return@doOnTextChanged
+                    }
+                    interaction?.onChangeUnit(
+                        position = adapterPosition,
+                        item = item,
+                        unitId = item.salesUnit?.id!!,
+                        quantity = value)
+                }
+                catch (e : Exception) {
                     itemView.salesCartItemQuantityCount.setText("1")
                     interaction?.alertDialog(item, "It cann't decrease")
-                    return@setOnClickListener
+                    return@doOnTextChanged
                 }
-//                itemView.salesCartItemQuantityCount.setText(value.toString())
-//                val amount = item.medicine!!.mrp!! * value * item.salesUnit!!.quantity
-//                itemView.salesCartItemQuantityCount.setText(value.toString())
-//                itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount.toString())
-                interaction?.onChangeUnit(
-                    position = adapterPosition,
-                    item = item,
-                    unitId = item.salesUnit?.id!!,
-                    quantity = value)
             }
 
             itemView.salesCartSubTotal.setText("Sub Total ৳ " + item.amount)
             if (item.salesUnit != null) {
                 itemView.salesCardItemUnit.setText(item.salesUnit?.name)
             }
-
-//            if (itemView.salesCartItemQuantityCount.text.toString().toInt() == 1) {
-//                itemView.salesCartItemQuantityCount.setText((item.orderMedicine.quantity.toInt()).toString())
-//            }
 
 
             itemView.salesCartItemQuantityCount.setText(item.quantity.toString())

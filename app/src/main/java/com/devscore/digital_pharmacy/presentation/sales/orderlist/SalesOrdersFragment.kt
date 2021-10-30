@@ -70,7 +70,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
 
 
         newSalesOrder.setOnClickListener {
-            (activity as SalesActivity).navigateSalesOrderFragmentToSalesCardFragment()
+            (activity as SalesActivity).navigateSalesOrderToInventoryFragment()
         }
     }
 

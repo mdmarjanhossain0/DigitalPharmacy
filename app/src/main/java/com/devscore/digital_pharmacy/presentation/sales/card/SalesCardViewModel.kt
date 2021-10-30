@@ -55,6 +55,18 @@ constructor(
             is SalesCardEvents.ChangeUnit -> {
                 changeUnit(event.medicine, event.unit, event.quantity)
             }
+
+            is SalesCardEvents.ReceiveAmount -> {
+                receiveAmount(event.amount!!)
+            }
+
+            is SalesCardEvents.IsDiscountPercent -> {
+                isDiscountPercent(event.isDiscountPercent)
+            }
+
+            is SalesCardEvents.Discount -> {
+                discount(event.discount)
+            }
             is SalesCardEvents.NextPage -> {
                 incrementPageNumber()
                 search()
@@ -70,6 +82,50 @@ constructor(
             is SalesCardEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun discount(discount: Float?) {
+        state.value?.let {state ->
+            var discountAmount = 0f
+            if (state.is_discount_percent) {
+                discountAmount = ((state.totalAmount!! * discount!!) / 100)
+            }
+            else {
+                discountAmount = discount!!
+            }
+            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
+            this.state.value = state.copy(
+                discount = discount,
+                discountAmount = discountAmount,
+                totalAmountAfterDiscount = totalAmountAfterDiscount
+            )
+        }
+    }
+
+    private fun isDiscountPercent(discountPercent: Boolean) {
+        state.value?.let {state ->
+            var discountAmount : Float = 0f
+            if (discountPercent) {
+                discountAmount = ((state.totalAmount!! * state.discount!!) / 100 )
+            }
+            else {
+                discountAmount = state.discount!!
+            }
+            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
+            this.state.value = state.copy(
+                is_discount_percent = discountPercent,
+                discountAmount = discountAmount,
+                totalAmountAfterDiscount = totalAmountAfterDiscount
+            )
+        }
+    }
+
+    private fun receiveAmount(amount : Float) {
+        state.value?.let {state ->
+            this.state.value = state.copy(
+                receivedAmount = amount
+            )
         }
     }
 
@@ -139,7 +195,8 @@ constructor(
 
             this.state.value = state.copy(
                 salesCartList = newCartList,
-                totalAmount = totalAmount
+                totalAmount = totalAmount,
+                totalAmountAfterDiscount = totalAmount,
             )
         }
     }
@@ -193,7 +250,8 @@ constructor(
 
             this.state.value = state.copy(
                 salesCartList = newCartList,
-                totalAmount = totalAmount
+                totalAmount = totalAmount,
+                totalAmountAfterDiscount = totalAmount
             )
         }
     }
@@ -285,10 +343,10 @@ constructor(
                     pk = -2,
                     customer = -1,
                     total_amount = state.totalAmount?.toFloat(),
-                    total_after_discount = .0f,
-                    paid_amount = 0f,
-                    discount = 0f,
-                    is_discount_percent = false,
+                    total_after_discount = state.totalAmountAfterDiscount?.toFloat(),
+                    paid_amount = state.receivedAmount,
+                    discount = state.discountAmount,
+                    is_discount_percent = (state.discount == state.totalAmountAfterDiscount),
                     created_at = "",
                     updated_at = "",
                     sales_oder_medicines = list

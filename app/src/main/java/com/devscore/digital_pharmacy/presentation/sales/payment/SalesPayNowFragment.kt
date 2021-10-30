@@ -34,6 +34,16 @@ import kotlinx.android.synthetic.main.fragment_sales_cart.searchViewId
 import kotlinx.android.synthetic.main.fragment_sales_pay_now.*
 import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.coroutines.*
+import android.text.Editable
+
+import android.text.TextWatcher
+import androidx.core.widget.doOnTextChanged
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+
+
+
 
 
 @AndroidEntryPoint
@@ -67,6 +77,57 @@ class SalesPayNowFragment : BaseSalesFragment(){
         createSalesOrder.setOnClickListener {
             viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
         }
+
+        switchId.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(true))
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(false))
+            }
+        }
+
+
+        salesPaymentReceiveAmount.doOnTextChanged { text, start, before, count ->
+            if (text!!.isNotEmpty()) {
+                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(0f))
+            }
+        }
+
+        salesPaymentDiscount.doOnTextChanged { text, start, before, count ->
+            if (text!!.isNotEmpty()) {
+                viewModel.onTriggerEvent(SalesCardEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.Discount(0f))
+            }
+        }
+
+        img1.setOnClickListener {
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2)
+        }
+
+//        salesPaymentSearchView.setOnSearchClickListener {
+//            Log.d(TAG, "OnSearchClickListener")
+//            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+//        }
+
+        salesPaymentSearchView.setOnClickListener {
+            Log.d(TAG, "OnClickListener")
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+        }
+
+
+//        salesPaymentSearchView.setOnTouchListener(object : OnTouchListener {
+//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+//                Log.d(TAG, "OnTouchListener")
+//                findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+//                return true
+//            }
+//        })
     }
 
     private fun subscribeObservers(){
@@ -84,18 +145,20 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 })
 
             recyclerAdapter?.apply {
-                submitList(list = state.salesCartList)
+                submitList(order = state.order)
             }
 
-            salesPaymentItemCount.setText("Items : " + state.order.sales_oder_medicines!!.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.order.total_amount.toString())
-        })
-    }
+            salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
+            salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
-    private fun executeNewQuery(query: String){
-        resetUI()
-        viewModel.onTriggerEvent(SalesCardEvents.UpdateQuery(query))
-        viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+
+
+            salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
+            val totalAmountAfterDiscount = state.totalAmountAfterDiscount!!
+            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
+            val due = totalAmountAfterDiscount - state.receivedAmount!!
+            salesPaymentDueAmount.setText("৳ " + due.toString())
+        })
     }
 
     private  fun resetUI(){
