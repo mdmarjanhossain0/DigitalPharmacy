@@ -38,6 +38,12 @@ import android.text.Editable
 
 import android.text.TextWatcher
 import androidx.core.widget.doOnTextChanged
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+
+
+
 
 
 @AndroidEntryPoint
@@ -99,6 +105,29 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 viewModel.onTriggerEvent(SalesCardEvents.Discount(0f))
             }
         }
+
+        img1.setOnClickListener {
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2)
+        }
+
+//        salesPaymentSearchView.setOnSearchClickListener {
+//            Log.d(TAG, "OnSearchClickListener")
+//            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+//        }
+
+        salesPaymentSearchView.setOnClickListener {
+            Log.d(TAG, "OnClickListener")
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+        }
+
+
+//        salesPaymentSearchView.setOnTouchListener(object : OnTouchListener {
+//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+//                Log.d(TAG, "OnTouchListener")
+//                findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+//                return true
+//            }
+//        })
     }
 
     private fun subscribeObservers(){

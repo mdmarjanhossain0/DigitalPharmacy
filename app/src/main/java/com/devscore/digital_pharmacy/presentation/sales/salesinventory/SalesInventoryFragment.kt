@@ -24,6 +24,7 @@ import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.inventory.local.LocalAdapter
 import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineEvents
 import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineViewModel
+import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
@@ -77,6 +78,9 @@ class SalesInventoryFragment : BaseInventoryFragment(),
     }
 
     private fun initUIClick() {
+        salesInventoryCard.setOnClickListener {
+            (activity as SalesActivity).navigateSalesInventoryToCardFragment()
+        }
     }
 
     private fun subscribeObservers(){

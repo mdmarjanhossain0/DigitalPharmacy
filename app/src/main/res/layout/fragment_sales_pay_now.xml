@@ -73,8 +73,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img1">
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchViewId"
+                    <TextView
+                        android:id="@+id/salesPaymentSearchView"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginHorizontal="10dp"
@@ -85,6 +85,10 @@
                         android:background="@drawable/search_shape"
                         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                         app:iconifiedByDefault="false"
+                        android:text="     Walk-in customer"
+                        android:gravity="center_vertical"
+                        android:drawableStart="@drawable/ic_search_black_24dp"
+                        android:paddingStart="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
