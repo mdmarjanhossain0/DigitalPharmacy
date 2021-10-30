@@ -37,7 +37,9 @@ class SalesOrdersAdapter(val context: Context) :
                 removeItemDecoration(topSpacingDecorator)
                 hasFixedSize()
                 addItemDecoration(topSpacingDecorator)
-                recyclerItemAdapter = SalesOrderItemAdapter()
+                if (recyclerItemAdapter == null) {
+                    recyclerItemAdapter = SalesOrderItemAdapter()
+                }
                 adapter = recyclerItemAdapter
             }
         }
@@ -48,8 +50,9 @@ class SalesOrdersAdapter(val context: Context) :
     }
 
     fun submitList(order: SalesOrder) {
-        if (recyclerItemAdapter != null) {
-            recyclerItemAdapter?.submitList(order.sales_oder_medicines)
+        if (recyclerItemAdapter == null) {
+            recyclerItemAdapter = SalesOrderItemAdapter()
         }
+        recyclerItemAdapter?.submitList(order.sales_oder_medicines)
     }
 }
