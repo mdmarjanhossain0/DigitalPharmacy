@@ -11,6 +11,7 @@ import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.inventory.ContainerActivity
 import com.devscore.digital_pharmacy.presentation.customer.CustomerActivity
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
+import com.devscore.digital_pharmacy.presentation.purchases.PurchasesActivity
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.supplier.SupplierActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -64,6 +65,12 @@ class DashboardFragment : Fragment() {
 
         salesImgId.setOnClickListener {
             val intent = Intent(context, SalesActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        purchaseImgId.setOnClickListener {
+            val intent = Intent(context, PurchasesActivity::class.java)
             startActivity(intent)
         }
     }

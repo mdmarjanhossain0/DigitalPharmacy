@@ -55,7 +55,7 @@ interface SalesDao {
 
     // Complex Query
 
-
+    @Transaction
     @Query("""
         SELECT * FROM SalesOrder 
         WHERE customer LIKE '%' || :query || '%' 
@@ -69,6 +69,8 @@ interface SalesDao {
     ): List<SalesOderWithMedicine>
 
 
+
+    @Transaction
     @Query("""
         SELECT * FROM FailureSalesOrder 
         WHERE customer LIKE '%' || :query || '%'

@@ -2,24 +2,24 @@ package com.devscore.digital_pharmacy.business.datasource.cache.purchases
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.devscore.digital_pharmacy.business.domain.models.PurchasesOder
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
 
 
-data class FailurePurchasesOderWithMedicine (
+data class FailurePurchasesOrderWithMedicine (
 
     @Embedded
-    var purchases_oder : FailurePurchasesOderEntity,
+    var purchases_oder : FailurePurchasesOrderEntity,
 
     @Relation(
         parentColumn = "room_id",
-        entityColumn = "sales_oder"
+        entityColumn = "purchases_order"
     )
-    var purchases_oder_medicines : List<FailurePurchasesOderMedicineEntity>
+    var purchases_order_medicines : List<FailurePurchasesOrderMedicineEntity>
 )
 
 
-fun FailurePurchasesOderWithMedicine.toPurchasesOder() : PurchasesOder {
-    return PurchasesOder (
+fun FailurePurchasesOrderWithMedicine.toPurchasesOrder() : PurchasesOrder {
+    return PurchasesOrder (
         room_id = purchases_oder.room_id,
         vendor = purchases_oder.vendor,
         company = purchases_oder.company,
@@ -30,8 +30,8 @@ fun FailurePurchasesOderWithMedicine.toPurchasesOder() : PurchasesOder {
         is_discount_percent = purchases_oder.is_discount_percent,
         created_at = purchases_oder.created_at,
         updated_at = purchases_oder.updated_at,
-        purchases_oder_medicine = purchases_oder_medicines.map {
-            it.toPurchasesOderMedicine()
+        purchases_order_medicines = purchases_order_medicines.map {
+            it.toPurchasesOrderMedicine()
         }
     )
 }

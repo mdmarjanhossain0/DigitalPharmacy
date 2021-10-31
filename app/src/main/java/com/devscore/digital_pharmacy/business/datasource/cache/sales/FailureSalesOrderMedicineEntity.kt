@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.cache.sales
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -11,7 +12,7 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
         ForeignKey(
             entity = FailureSalesOrderEntity::class,
             parentColumns = ["room_id"],
-            childColumns = ["sales_oder"],
+            childColumns = ["sales_order"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -19,7 +20,8 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 data class FailureSalesOrderMedicineEntity (
 
 
-    var sales_oder : Int,
+    @ColumnInfo(name = "sales_order", index = true)
+    var sales_order : Long?,
 
 
     @PrimaryKey(autoGenerate = true)

@@ -38,8 +38,8 @@ fun SalesOrder.toSalesOrderMedicinesEntity() : List<SalesOrderMedicineEntity> {
     for (medicine in sales_oder_medicines!!) {
         list.add(
             SalesOrderMedicineEntity(
-                sales_oder = pk!!,
-                pk = pk,
+                sales_order = pk!!,
+                pk = medicine.pk,
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,
@@ -71,7 +71,7 @@ fun SalesOrder.toFailureSalesOderMedicineEntity() : List<FailureSalesOrderMedici
     for (medicine in sales_oder_medicines!!) {
         list.add(
             FailureSalesOrderMedicineEntity(
-                sales_oder = pk!!,
+                sales_order = room_id!!,
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,

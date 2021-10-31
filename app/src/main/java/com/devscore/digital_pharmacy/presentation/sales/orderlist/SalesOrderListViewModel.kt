@@ -44,8 +44,8 @@ constructor(
             is SalesOrderListEvents.SearchWithQuery -> {
             }
             is SalesOrderListEvents.NextPage -> {
-//                incrementPageNumber()
-//                order()
+                incrementPageNumber()
+                order()
             }
 
             is SalesOrderListEvents.UpdateQuery -> {
@@ -125,11 +125,6 @@ constructor(
 
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)
-//        if (searchJob == null) {
-//            if (searchJob.isActive) {
-//                searchJob.cancel()
-//            }
-//        }
         state.value?.let { state ->
             searchJob = searchSalesOder.execute(
                 authToken = sessionManager.state.value?.authToken,

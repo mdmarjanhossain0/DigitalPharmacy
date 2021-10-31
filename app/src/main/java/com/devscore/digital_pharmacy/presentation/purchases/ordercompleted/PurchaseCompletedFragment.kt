@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.purchase
+package com.devscore.digital_pharmacy.presentation.purchases.ordercompleted
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -4,30 +4,30 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "PurchasesOder")
-data class PurchasesOderEntity (
+@Entity(tableName = "FailurePurchasesOrder")
+data class FailurePurchasesOrderEntity (
 
-    @ColumnInfo(name = "pk")
-    @PrimaryKey(autoGenerate = false)
-    var pk : Int?,
+    @ColumnInfo(name = "room_id")
+    @PrimaryKey(autoGenerate = true)
+    var room_id : Long? = -1,
 
-    @ColumnInfo(name = "vendor")
+    @ColumnInfo(name = "customer")
     var vendor : Int?,
 
     @ColumnInfo(name = "company")
     var company : String?,
 
     @ColumnInfo(name = "total_amount")
-    var total_amount : Long?,
+    var total_amount : Float?,
 
     @ColumnInfo(name = "total_after_discount")
-    var total_after_discount : Long?,
+    var total_after_discount : Float?,
 
     @ColumnInfo(name = "paid_amount")
-    var paid_amount : Long?,
+    var paid_amount : Float?,
 
     @ColumnInfo(name = "discount")
-    var discount : Long?,
+    var discount : Float?,
 
     @ColumnInfo(name = "is_discount_percent")
     var is_discount_percent : Boolean,

@@ -1,25 +1,28 @@
 package com.devscore.digital_pharmacy.business.datasource.cache.purchases
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.devscore.digital_pharmacy.business.domain.models.PurchasesOderMedicine
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrderMedicine
 
 @Entity(
-    tableName = "FailurePurchasesOderMedicine",
+    tableName = "FailurePurchasesOrderMedicine",
     foreignKeys = [
         ForeignKey(
-            entity = FailurePurchasesOderEntity::class,
+            entity = FailurePurchasesOrderEntity::class,
             parentColumns = ["room_id"],
-            childColumns = ["purchases_oder"],
+            childColumns = ["purchases_order"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class FailurePurchasesOderMedicineEntity (
+data class FailurePurchasesOrderMedicineEntity (
 
 
-    var purchases_oder : Int,
+
+    @ColumnInfo(name = "purchases_order", index = true)
+    var purchases_order : Long?,
 
 
     @PrimaryKey(autoGenerate = true)
@@ -27,7 +30,7 @@ data class FailurePurchasesOderMedicineEntity (
 
     var unit : Int,
 
-    var quantity : Long,
+    var quantity : Float,
 
     var local_medicine : Int,
 
@@ -35,8 +38,8 @@ data class FailurePurchasesOderMedicineEntity (
 
 )
 
-fun FailurePurchasesOderMedicineEntity.toPurchasesOderMedicine() : PurchasesOderMedicine {
-    return PurchasesOderMedicine (
+fun FailurePurchasesOrderMedicineEntity.toPurchasesOrderMedicine() : PurchasesOrderMedicine {
+    return PurchasesOrderMedicine (
         room_id = room_id,
         unit = unit,
         quantity = quantity,

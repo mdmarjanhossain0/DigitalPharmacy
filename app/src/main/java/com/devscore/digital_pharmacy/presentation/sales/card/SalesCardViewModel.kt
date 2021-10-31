@@ -67,6 +67,10 @@ constructor(
             is SalesCardEvents.Discount -> {
                 discount(event.discount)
             }
+
+            is SalesCardEvents.DeleteMedicine -> {
+                deleteFromCart(event.medicine)
+            }
             is SalesCardEvents.NextPage -> {
                 incrementPageNumber()
                 search()
@@ -82,6 +86,55 @@ constructor(
             is SalesCardEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun deleteFromCart(medicine : LocalMedicine) {
+        state.value?.let { state ->
+            var checkExist = 0
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    checkExist = 1
+                    break
+                }
+            }
+            if (checkExist == 0 ) {
+                return@deleteFromCart
+            }
+            Log.d(TAG, "Medicine exist in cart")
+            Log.d(TAG, "Show Medicine property " + medicine.toString())
+
+            val previousAmount = state.totalAmount
+            Log.d(TAG, "Previous Amount " + previousAmount.toString())
+
+            var previousSalesCartItem : SalesCart? = null
+
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    previousSalesCartItem = item
+                }
+            }
+
+            if (previousSalesCartItem == null) {
+                throw Exception("Item Not Found")
+            }
+
+
+            val totalAmount = previousAmount!! - previousSalesCartItem.amount!!
+
+            val newCartList = state.salesCartList.toMutableList()
+            for (item in state.salesCartList) {
+                if (item.medicine?.id == medicine.id) {
+                    newCartList.remove(item)
+                    break
+                }
+            }
+
+            this.state.value = state.copy(
+                salesCartList = newCartList,
+                totalAmount = totalAmount,
+                totalAmountAfterDiscount = totalAmount,
+            )
         }
     }
 

@@ -12,6 +12,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.customer.FailureC
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.cache.purchases.*
 import com.devscore.digital_pharmacy.business.datasource.cache.sales.*
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.FailureSupplierEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierDao
@@ -32,8 +33,12 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     SalesOrderEntity::class,
     SalesOrderMedicineEntity::class,
     FailureSalesOrderEntity::class,
-    FailureSalesOrderMedicineEntity::class
-], version = 10)
+    FailureSalesOrderMedicineEntity::class,
+    PurchasesOrderEntity::class,
+    PurchasesOrderMedicineEntity::class,
+    FailurePurchasesOrderEntity::class,
+    FailurePurchasesOrderMedicineEntity::class
+], version = 14)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao
@@ -48,8 +53,9 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getCustomerDao() : CustomerDao
 
-
     abstract fun getSalesDao() : SalesDao
+
+    abstract fun getPurchasesDao() : PurchasesDao
 
 
     companion object{

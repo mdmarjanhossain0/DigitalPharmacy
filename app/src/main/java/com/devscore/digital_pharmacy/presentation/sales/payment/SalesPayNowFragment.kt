@@ -47,7 +47,7 @@ import android.view.View.OnTouchListener
 
 
 @AndroidEntryPoint
-class SalesPayNowFragment : BaseSalesFragment(){
+class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction{
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null
@@ -110,24 +110,11 @@ class SalesPayNowFragment : BaseSalesFragment(){
             findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2)
         }
 
-//        salesPaymentSearchView.setOnSearchClickListener {
-//            Log.d(TAG, "OnSearchClickListener")
-//            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
-//        }
-
         salesPaymentSearchView.setOnClickListener {
             Log.d(TAG, "OnClickListener")
-            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_salesCustomerListFragment)
         }
 
-
-//        salesPaymentSearchView.setOnTouchListener(object : OnTouchListener {
-//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                Log.d(TAG, "OnTouchListener")
-//                findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
-//                return true
-//            }
-//        })
     }
 
     private fun subscribeObservers(){
@@ -145,7 +132,7 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 })
 
             recyclerAdapter?.apply {
-                submitList(order = state.order)
+                submitList(order = state.order, cartList = state.salesCartList)
             }
 
             salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
@@ -171,7 +158,7 @@ class SalesPayNowFragment : BaseSalesFragment(){
             val topSpacingDecorator = TopSpacingItemDecoration(0)
             removeItemDecoration(topSpacingDecorator)
             addItemDecoration(topSpacingDecorator)
-            recyclerAdapter = SalesOrdersAdapter(context)
+            recyclerAdapter = SalesOrdersAdapter(this@SalesPayNowFragment)
             adapter = recyclerAdapter
         }
     }
@@ -228,5 +215,9 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 dialog.dismiss()
             }
         }
+    }
+
+    override fun onItemDelete(item: SalesCart) {
+        viewModel.onTriggerEvent(SalesCardEvents.DeleteMedicine(item.medicine!!))
     }
 }

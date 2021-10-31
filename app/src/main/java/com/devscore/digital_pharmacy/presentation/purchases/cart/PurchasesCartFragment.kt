@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.purchase
+package com.devscore.digital_pharmacy.presentation.purchases.cart
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.devscore.digital_pharmacy.R
 
 
-class PurchaseNewOrderFragment : Fragment() {
+class PurchasesCartFragment : Fragment() {
 
 
     override fun onCreateView(

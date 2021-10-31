@@ -7,11 +7,11 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 data class SalesOderWithMedicine (
 
     @Embedded
-    var sales_oder : SalesOrderEntity,
+    var sales_order : SalesOrderEntity,
 
     @Relation(
         parentColumn = "pk",
-        entityColumn = "sales_oder"
+        entityColumn = "sales_order"
     )
     var sales_oder_medicines : List<SalesOrderMedicineEntity>
 )
@@ -19,15 +19,15 @@ data class SalesOderWithMedicine (
 
 fun SalesOderWithMedicine.toSalesOder() : SalesOrder {
     return SalesOrder(
-        pk = sales_oder.pk,
-        customer = sales_oder.customer,
-        total_amount = sales_oder.total_amount,
-        total_after_discount = sales_oder.total_after_discount,
-        paid_amount = sales_oder.paid_amount,
-        discount = sales_oder.discount,
-        is_discount_percent = sales_oder.is_discount_percent,
-        created_at = sales_oder.created_at,
-        updated_at = sales_oder.updated_at,
+        pk = sales_order.pk,
+        customer = sales_order.customer,
+        total_amount = sales_order.total_amount,
+        total_after_discount = sales_order.total_after_discount,
+        paid_amount = sales_order.paid_amount,
+        discount = sales_order.discount,
+        is_discount_percent = sales_order.is_discount_percent,
+        created_at = sales_order.created_at,
+        updated_at = sales_order.updated_at,
         sales_oder_medicines = sales_oder_medicines.map {
             it.toSaleOrderMedicine()
         }

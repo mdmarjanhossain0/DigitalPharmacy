@@ -1,6 +1,7 @@
 package com.devscore.digital_pharmacy.presentation.sales.card
 
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 
 sealed class SalesCardEvents {
@@ -19,6 +20,8 @@ sealed class SalesCardEvents {
     data class ReceiveAmount(val amount : Float? = 0f) : SalesCardEvents()
 
     data class Discount(val discount : Float? = 0f) : SalesCardEvents()
+
+    data class DeleteMedicine(val medicine : LocalMedicine) : SalesCardEvents()
 
     data class SearchWithQuery(val query: String) : SalesCardEvents()
 
