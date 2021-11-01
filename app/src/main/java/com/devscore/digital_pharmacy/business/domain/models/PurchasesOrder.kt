@@ -4,10 +4,6 @@ import com.devscore.digital_pharmacy.business.datasource.cache.purchases.Failure
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.FailurePurchasesOrderMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.PurchasesOrderEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.PurchasesOrderMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.FailureSalesOrderEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.FailureSalesOrderMedicineEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesOrderEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesOrderMedicineEntity
 
 class PurchasesOrder (
 
@@ -99,7 +95,7 @@ fun PurchasesOrder.toCreatePurchasesOrder() : CreatePurchasesOder {
         paid_amount = paid_amount!!,
         discount = discount,
         is_discount_percent =is_discount_percent,
-        purchases_order_medicine = purchases_order_medicines!!.map {
+        purchases_order_medicines = purchases_order_medicines!!.map {
             it.toCreatePurchasesOrderMedicine()
         }
     )

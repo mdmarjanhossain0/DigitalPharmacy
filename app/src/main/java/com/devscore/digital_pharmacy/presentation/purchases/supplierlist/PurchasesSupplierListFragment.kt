@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.sales.customerlist
+package com.devscore.digital_pharmacy.presentation.purchases.supplierlist
 
 import android.os.Bundle
 import android.util.Log
@@ -14,28 +14,28 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.Customer
+import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
-import com.devscore.digital_pharmacy.presentation.customer.BaseCustomerFragment
-import com.devscore.digital_pharmacy.presentation.customer.customerlist.CustomerListAdapter
-import com.devscore.digital_pharmacy.presentation.customer.customerlist.CustomerListEvents
-import com.devscore.digital_pharmacy.presentation.customer.customerlist.CustomerListVIewModel
-import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
+import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
+import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartEvents
+import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartViewModel
+import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
+import com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierEvents
+import com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierListAdapter
+import com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierListViewModel
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_sales_customer_list.*
+import kotlinx.android.synthetic.main.fragment_purchases_suplier_list.*
 
 @AndroidEntryPoint
-class SalesCustomerListFragment : BaseSalesFragment(),
-    SalesCustomerListAdapter.Interaction{
+class PurchasesSupplierListFragment : BaseSupplierFragment(),
+    PurchasesSupplierListAdapter.Interaction {
 
 
-    private var recyclerAdapter: SalesCustomerListAdapter? = null // can leak memory so need to null
-    private val viewModel: CustomerListVIewModel by viewModels()
-    private val shareViewModel : SalesCardViewModel by activityViewModels()
+    private var recyclerAdapter: PurchasesSupplierListAdapter? = null // can leak memory so need to null
+    private val viewModel: SupplierListViewModel by viewModels()
+    private val shareViewModel : PurchasesCartViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -43,7 +43,7 @@ class SalesCustomerListFragment : BaseSalesFragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_sales_customer_list, container, false)
+        return inflater.inflate(R.layout.fragment_purchases_suplier_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,8 +70,8 @@ class SalesCustomerListFragment : BaseSalesFragment(),
         })
 
 
-        customerFloatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_customersListFragment_to_addCustomerFragment)
+        purchasesSupplierFloatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_purchasesSuplierListFragment_to_createSupplierFragment2)
         }
     }
 
@@ -85,20 +85,20 @@ class SalesCustomerListFragment : BaseSalesFragment(),
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(CustomerListEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(SupplierEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
             recyclerAdapter?.apply {
-                submitList(list = state.customerList)
+                submitList(list = state.supplierList)
             }
         })
     }
 
     private fun executeNewQuery(query: String){
         resetUI()
-        viewModel.onTriggerEvent(CustomerListEvents.UpdateQuery(query))
-        viewModel.onTriggerEvent(CustomerListEvents.NewSearchCustomer)
+        viewModel.onTriggerEvent(SupplierEvents.UpdateQuery(query))
+        viewModel.onTriggerEvent(SupplierEvents.NewSearchSupplier)
     }
 
     private  fun resetUI(){
@@ -107,13 +107,13 @@ class SalesCustomerListFragment : BaseSalesFragment(),
     }
 
     private fun initRecyclerView(){
-        customerRvId.apply {
-            layoutManager = LinearLayoutManager(this@SalesCustomerListFragment.context)
+        supplierRvId.apply {
+            layoutManager = LinearLayoutManager(this@PurchasesSupplierListFragment.context)
             val topSpacingDecorator = TopSpacingItemDecoration(0)
             removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
             addItemDecoration(topSpacingDecorator)
 
-            recyclerAdapter = SalesCustomerListAdapter(this@SalesCustomerListFragment)
+            recyclerAdapter = PurchasesSupplierListAdapter(this@PurchasesSupplierListFragment)
             addOnScrollListener(object: RecyclerView.OnScrollListener(){
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -127,7 +127,7 @@ class SalesCustomerListFragment : BaseSalesFragment(),
                         && viewModel.state.value?.isQueryExhausted == false
                     ) {
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
-                        viewModel.onTriggerEvent(CustomerListEvents.NextPage)
+                        viewModel.onTriggerEvent(SupplierEvents.NextPage)
                     }
                 }
             })
@@ -141,11 +141,16 @@ class SalesCustomerListFragment : BaseSalesFragment(),
         recyclerAdapter = null
     }
 
-    override fun onSelectCustomer(position: Int, item: Customer) {
-        shareViewModel.onTriggerEvent(SalesCardEvents.SelectCustomer(item))
-        findNavController().popBackStack()
+    override fun onItemSelected(position: Int, item: Supplier) {
     }
 
+    override fun onItemDeleteSelected(position: Int, item: Supplier) {
+    }
+
+    override fun onSelectSupplier(position: Int, item: Supplier) {
+        shareViewModel.onTriggerEvent(PurchasesCartEvents.SelectSupplier(item))
+        findNavController().popBackStack()
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.supplier.supplierlist
+package com.devscore.digital_pharmacy.presentation.sales.customerlist
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,44 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.Supplier
-import com.devscore.digital_pharmacy.presentation.purchases.orderlist.PurchasesOrderAdapter
+import com.devscore.digital_pharmacy.business.domain.models.Customer
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
-import kotlinx.android.synthetic.main.item_supplier_list.view.*
+import kotlinx.android.synthetic.main.item_customer_list.view.*
 
-class SupplierListAdapter
+class SalesCustomerListAdapter
 constructor(
     private val interaction: Interaction? = null
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val TAG = "SupplierAdapter"
-
-
-
-    val loading = Supplier(
-        pk = -2,
-        company_name = "",
-        agent_name = "",
-        email = "",
-        mobile = "",
-        whatsapp = "",
-        facebook = "",
-        imo = "",
-        address = ""
-    )
-
-    val notFound = Supplier(
-        pk = -3,
-        company_name = "",
-        agent_name = "",
-        email = "",
-        mobile = "",
-        whatsapp = "",
-        facebook = "",
-        imo = "",
-        address = ""
-    )
+    val TAG = "CustomerListAdapter"
 
     companion object {
 
@@ -58,8 +31,8 @@ constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             IMAGE_ITEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_supplier_list,parent,false)
-                return SupplierDataViewHolder(itemView, interaction)
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_customer_list,parent,false)
+                return CustomerDataViewHolder(itemView, interaction)
             }
 
             LOADING_ITEM -> {
@@ -74,27 +47,20 @@ constructor(
             }
         }
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_local ,parent,false)
-        return SupplierDataViewHolder(itemView, interaction)
+        return CustomerDataViewHolder(itemView, interaction)
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (differ.currentList.size != 0) {
-            if(differ.currentList.get(position).pk == -2){
-                return PurchasesOrderAdapter.LOADING_ITEM
-            }
-            if(differ.currentList.get(position).pk == -3){
-                return PurchasesOrderAdapter.NOT_FOUND
-            }
-            return PurchasesOrderAdapter.IMAGE_ITEM
+        if(differ.currentList.size < (position + 1)){
+            return LOADING_ITEM
         }
-        else {
-            return PurchasesOrderAdapter.LOADING_ITEM
-        }
+        Log.d(TAG, "Data Item")
+        return IMAGE_ITEM
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is SupplierDataViewHolder -> {
+            is CustomerDataViewHolder -> {
                 holder.bind(differ.currentList.get(position))
             }
         }
@@ -103,19 +69,19 @@ constructor(
 
     override fun getItemCount(): Int {
         Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
-        return differ.currentList.size
+        return differ.currentList.size + 1
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Supplier>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Customer>() {
 
-        override fun areItemsTheSame(oldItem: Supplier, newItem: Supplier): Boolean {
+        override fun areItemsTheSame(oldItem: Customer, newItem: Customer): Boolean {
             if (oldItem.pk == null || newItem.pk == null) {
                 return oldItem.room_id == oldItem.room_id
             }
             return oldItem.pk == newItem.pk
         }
 
-        override fun areContentsTheSame(oldItem: Supplier, newItem: Supplier): Boolean {
+        override fun areContentsTheSame(oldItem: Customer, newItem: Customer): Boolean {
             return oldItem == newItem
         }
     }
@@ -127,7 +93,7 @@ constructor(
         )
 
     internal inner class LocalRecyclerChangeCallback(
-        private val adapter: SupplierListAdapter
+        private val adapter: SalesCustomerListAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {
@@ -147,7 +113,7 @@ constructor(
         }
     }
 
-    fun submitList(list: List<Supplier>?, ){
+    fun submitList(list: List<Customer>?, ){
         val newList = list?.toMutableList()
         differ.submitList(newList)
     }
@@ -155,35 +121,24 @@ constructor(
     fun changeBottom(bottomState : Int) {
     }
 
-    class SupplierDataViewHolder
+    class CustomerDataViewHolder
     constructor(
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: Supplier) = with(itemView) {
+        fun bind(item: Customer) = with(itemView) {
             itemView.setOnClickListener {
-                interaction?.onItemSelected(adapterPosition, item)
+                interaction?.onSelectCustomer(adapterPosition, item)
             }
 
-            itemView.supplierCompanyName.setText(item.company_name)
-            itemView.supplierName.setText(item.agent_name)
-            itemView.supplierContactNumber.setText(item.mobile)
-            itemView.supplierTotalBalance.setText(item.total_balance.toString())
+            itemView.customerName.setText(item.name)
+            itemView.customerContactNumber.setText(item.mobile)
 
         }
     }
 
     interface Interaction {
-
-        fun onItemSelected(position: Int, item: Supplier)
-
-        fun onItemReturnSelected(position: Int, item: Supplier)
-
-        fun onItemDeleteSelected(position: Int, item: Supplier)
-
-        fun restoreListPosition()
-
-        fun nextPage()
+        fun onSelectCustomer(position: Int, item: Customer)
     }
 }

@@ -55,6 +55,7 @@ class CreateSalesOderInteractor (
                     uiComponentType = UIComponentType.Dialog(),
                     messageType = MessageType.Success()
                 ), data = salesOder))
+            return@flow
 
 
         } catch (e: Exception){

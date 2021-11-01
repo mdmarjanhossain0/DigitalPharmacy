@@ -32,20 +32,20 @@ constructor(
     lateinit var searchJob : Job
 
     init {
-        onTriggerEvent(PurchasesOrderListEvents.CreateNewOrder)
+        onTriggerEvent(PurchasesOrderListEvents.SearchNewOrder)
     }
 
     fun onTriggerEvent(event: PurchasesOrderListEvents) {
         when (event) {
-            is PurchasesOrderListEvents.CreateNewOrder -> {
-                order()
+            is PurchasesOrderListEvents.SearchNewOrder -> {
+                search()
             }
 
             is PurchasesOrderListEvents.SearchWithQuery -> {
             }
             is PurchasesOrderListEvents.NextPage -> {
                 incrementPageNumber()
-                order()
+                search()
             }
 
             is PurchasesOrderListEvents.UpdateQuery -> {
@@ -119,9 +119,9 @@ constructor(
     }
 
 
-    private fun order() {
-        resetPage()
-        clearList()
+    private fun search() {
+//        resetPage()
+//        clearList()
 
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)

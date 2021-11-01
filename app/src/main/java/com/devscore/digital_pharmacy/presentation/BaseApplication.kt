@@ -65,14 +65,14 @@ class BaseApplication : Application(), Configuration.Provider{
             .build()
 
 
-        /*val syncWorkRequest : WorkRequest =
-            PeriodicWorkRequestBuilder<SyncWorker>(15, TimeUnit.MINUTES)
-                .setConstraints(constraints)
-                .build()
+        val syncWorkRequest : WorkRequest =
+             PeriodicWorkRequestBuilder<SyncWorker>(15, TimeUnit.MINUTES)
+                 .setConstraints(constraints)
+                 .build()
 
-        WorkManager
-            .getInstance(this)
-            .enqueue(syncWorkRequest)*/
+         WorkManager
+             .getInstance(this)
+             .enqueue(syncWorkRequest)
 
     }
 }

@@ -4,7 +4,7 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 
 sealed class PurchasesOrderListEvents {
 
-    object CreateNewOrder : PurchasesOrderListEvents()
+    object SearchNewOrder : PurchasesOrderListEvents()
 
     data class SearchWithQuery(val query: String) : PurchasesOrderListEvents()
 

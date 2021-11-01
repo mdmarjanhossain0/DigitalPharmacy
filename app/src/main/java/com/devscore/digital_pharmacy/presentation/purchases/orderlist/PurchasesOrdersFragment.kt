@@ -13,6 +13,7 @@ import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.purchases.BasePurchasesFragment
+import com.devscore.digital_pharmacy.presentation.purchases.PurchasesActivity
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +46,9 @@ class PurchasesOrdersFragment : BasePurchasesFragment(),
     }
 
     private fun initUIClick() {
+        generateNewPurchasesOrder.setOnClickListener {
+            (activity as PurchasesActivity).navigatePurchasesGenerateToPurchasesInventoryFragment()
+        }
     }
 
     private fun subscribeObservers(){

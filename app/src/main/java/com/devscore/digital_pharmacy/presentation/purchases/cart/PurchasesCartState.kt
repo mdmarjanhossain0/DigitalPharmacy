@@ -1,14 +1,15 @@
-package com.devscore.digital_pharmacy.presentation.sales.card
+package com.devscore.digital_pharmacy.presentation.purchases.cart
 
 import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.Queue
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 
-data class SalesCardState (
+data class PurchasesCartState (
     val isLoading : Boolean = false,
-    val order : SalesOrder = SalesOrder(
+    val order : PurchasesOrder = PurchasesOrder(
         pk = -2,
-        customer = -1,
+        vendor = -1,
+        company = "",
         total_amount = 0f,
         total_after_discount = .0f,
         paid_amount = 0f,
@@ -16,16 +17,16 @@ data class SalesCardState (
         is_discount_percent = false,
         created_at = "",
         updated_at = "",
-        sales_oder_medicines = ArrayList<SalesOrderMedicine>()
+        purchases_order_medicines = ArrayList<PurchasesOrderMedicine>()
     ),
-    val salesCartList : List<SalesCart> = listOf(),
+    val purchasesCartList : List<PurchasesCart> = listOf(),
     val totalAmount : Float? = 0f,
     val is_discount_percent : Boolean = false,
     val receivedAmount : Float? = 0f,
     val discount : Float? = 0f,
     val discountAmount : Float? = 0f,
     val totalAmountAfterDiscount : Float? = 0f,
-    val customer : Customer? = null,
+    val vendor : Supplier? = null,
     val medicineList : List<LocalMedicine> = listOf(),
     val query: String = "",
     val page: Int = 1,

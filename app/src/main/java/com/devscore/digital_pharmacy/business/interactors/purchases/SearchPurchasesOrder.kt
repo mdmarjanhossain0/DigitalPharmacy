@@ -88,7 +88,8 @@ class SearchPurchasesOrder(
 
 
 
-        emit(DataState.data(response = null, data = marge(successList, failureList)))
+        val  list = marge(successList, failureList)
+        emit(DataState.data(response = null, data = list))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

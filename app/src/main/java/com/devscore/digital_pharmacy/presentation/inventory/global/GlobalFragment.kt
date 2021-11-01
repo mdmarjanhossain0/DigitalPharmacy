@@ -21,6 +21,7 @@ import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
 import kotlinx.android.synthetic.main.inventory_list_filter_dialog.*
+import kotlinx.android.synthetic.main.item_global.*
 
 class GlobalFragment : BaseInventoryFragment(),
     GlobalAdapter.Interaction {
@@ -51,14 +52,11 @@ class GlobalFragment : BaseInventoryFragment(),
     private fun initUIClick() {
         globalFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                // your text view here
-//                textView.text = newText
                 executeNewQuery(newText)
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-//                textView.text = query
                 executeNewQuery(query)
                 return true
             }
@@ -86,6 +84,29 @@ class GlobalFragment : BaseInventoryFragment(),
 
             recyclerAdapter?.apply {
                 submitList(medicineList = state.globalMedicineList, state.isLoading, state.isQueryExhausted)
+            }
+
+
+            when(state.selectQuery) {
+                0 -> {
+
+                }
+                1 -> {
+                    globalBrandNameTV.background = context?.resources?.getDrawable(R.color.white)
+                    globalBrandNameTV.setTextColor(resources.getColor(R.color.black))
+                }
+                2 -> {
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.black))
+                }
+                3 -> {
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.black))
+                }
+                4 -> {
+
+                }
+
             }
         })
     }

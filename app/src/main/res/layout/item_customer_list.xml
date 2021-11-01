@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/customerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -60,19 +60,19 @@
             android:id="@+id/imageView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+            app:layout_constraintBottom_toBottomOf="@+id/customerContactNumber"
             app:layout_constraintEnd_toEndOf="@+id/view4"
-            app:layout_constraintTop_toTopOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/customerContactNumber"
             app:srcCompat="@drawable/ic_imo" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/customerLoyaltyPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Loyalty Point: 2000"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintStart_toStartOf="@+id/customerName"
+            app:layout_constraintTop_toBottomOf="@+id/customerName" />
 
         <TextView
             android:id="@+id/textView13"
@@ -80,9 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="Balance: 0000"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintBottom_toBottomOf="@+id/customerLoyaltyPoint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView12" />
+            app:layout_constraintTop_toTopOf="@+id/customerLoyaltyPoint" />
 
 
         <View
@@ -92,11 +92,11 @@
             android:layout_marginTop="5dp"
             android:background="@color/gray"
             app:layout_constraintEnd_toEndOf="@+id/textView13"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toStartOf="@+id/customerLoyaltyPoint"
+            app:layout_constraintTop_toBottomOf="@+id/customerLoyaltyPoint" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/customerContactNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

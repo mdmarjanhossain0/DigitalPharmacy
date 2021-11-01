@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.sales.card
+package com.devscore.digital_pharmacy.presentation.purchases.cart
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,10 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
 import com.devscore.digital_pharmacy.business.interactors.inventory.local.SearchLocalMedicine
+import com.devscore.digital_pharmacy.business.interactors.purchases.CreatePurchasesOrderInteractor
 import com.devscore.digital_pharmacy.business.interactors.sales.CreateSalesOderInteractor
+import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
+import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -19,82 +22,83 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class SalesCardViewModel
+class PurchasesCartViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
-    private val createSalesOrder : CreateSalesOderInteractor,
+    private val createPurchasesOrderInteractor: CreatePurchasesOrderInteractor,
     private val searchLocalMedicine: SearchLocalMedicine
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
 
-    val state: MutableLiveData<SalesCardState> = MutableLiveData(SalesCardState())
+    val state: MutableLiveData<PurchasesCartState> = MutableLiveData(PurchasesCartState())
+
+
 
     init {
     }
 
-    fun onTriggerEvent(event: SalesCardEvents) {
+    fun onTriggerEvent(event: PurchasesCartEvents) {
         when (event) {
-            is SalesCardEvents.GenerateNewOrder -> {
+            is PurchasesCartEvents.GenerateNewOrder -> {
                 createNewOrder()
             }
 
-            is SalesCardEvents.NewLocalMedicineSearch -> {
+            is PurchasesCartEvents.NewLocalMedicineSearch -> {
                 search()
             }
 
-            is SalesCardEvents.AddToCard -> {
+            is PurchasesCartEvents.AddToCard -> {
                 addToCard(event.medicine)
             }
 
 
-            is SalesCardEvents.ChangeUnit -> {
+            is PurchasesCartEvents.ChangeUnit -> {
                 changeUnit(event.medicine, event.unit, event.quantity)
             }
 
-            is SalesCardEvents.ReceiveAmount -> {
+            is PurchasesCartEvents.ReceiveAmount -> {
                 receiveAmount(event.amount!!)
             }
 
-            is SalesCardEvents.IsDiscountPercent -> {
+            is PurchasesCartEvents.IsDiscountPercent -> {
                 isDiscountPercent(event.isDiscountPercent)
             }
 
-            is SalesCardEvents.Discount -> {
+            is PurchasesCartEvents.Discount -> {
                 discount(event.discount)
             }
 
-            is SalesCardEvents.DeleteMedicine -> {
+            is PurchasesCartEvents.DeleteMedicine -> {
                 deleteFromCart(event.medicine)
             }
 
-
-            is SalesCardEvents.SelectCustomer -> {
-                selectCustomer(event.customer)
+            is PurchasesCartEvents.SelectSupplier -> {
+                selectSupplier(event.supplier)
             }
-            is SalesCardEvents.NextPage -> {
+            is PurchasesCartEvents.NextPage -> {
                 incrementPageNumber()
                 search()
             }
 
-            is SalesCardEvents.UpdateQuery -> {
+            is PurchasesCartEvents.UpdateQuery -> {
                 onUpdateQuery(event.query)
             }
 
-            is SalesCardEvents.Error -> {
+            is PurchasesCartEvents.Error -> {
                 appendToMessageQueue(event.stateMessage)
             }
-            is SalesCardEvents.OnRemoveHeadFromQueue -> {
+            is PurchasesCartEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
         }
     }
 
-    private fun selectCustomer(customer: Customer) {
+    private fun selectSupplier(supplier: Supplier) {
         state.value?.let { state ->
             this.state.value = state.copy(
-                customer = customer
+                vendor = supplier
             )
         }
     }
@@ -102,7 +106,7 @@ constructor(
     private fun deleteFromCart(medicine : LocalMedicine) {
         state.value?.let { state ->
             var checkExist = 0
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     checkExist = 1
                     break
@@ -117,9 +121,9 @@ constructor(
             val previousAmount = state.totalAmount
             Log.d(TAG, "Previous Amount " + previousAmount.toString())
 
-            var previousSalesCartItem : SalesCart? = null
+            var previousSalesCartItem : PurchasesCart? = null
 
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     previousSalesCartItem = item
                 }
@@ -132,8 +136,8 @@ constructor(
 
             val totalAmount = previousAmount!! - previousSalesCartItem.amount!!
 
-            val newCartList = state.salesCartList.toMutableList()
-            for (item in state.salesCartList) {
+            val newCartList = state.purchasesCartList.toMutableList()
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     newCartList.remove(item)
                     break
@@ -141,7 +145,7 @@ constructor(
             }
 
             this.state.value = state.copy(
-                salesCartList = newCartList,
+                purchasesCartList = newCartList,
                 totalAmount = totalAmount,
                 totalAmountAfterDiscount = totalAmount,
             )
@@ -195,7 +199,7 @@ constructor(
     private fun changeUnit(medicine: LocalMedicine, unitId: Int?, quantity : Int? = 1) {
         state.value?.let { state ->
             var checkExist = 0
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     checkExist = 1
                     break
@@ -228,9 +232,9 @@ constructor(
             val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
             Log.d(TAG, "New Amount " + newAmount.toString())
 
-            var previousSalesCartItem : SalesCart? = null
+            var previousSalesCartItem : PurchasesCart? = null
 
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     previousSalesCartItem = item
                 }
@@ -243,21 +247,22 @@ constructor(
 
             val totalAmount = previousAmount!! + newAmount - previousSalesCartItem.amount!!
 
-            val newCartList = state.salesCartList.toMutableList()
-            for (item in state.salesCartList) {
+            val newCartList = state.purchasesCartList.toMutableList()
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
-                    newCartList.set(state.salesCartList.indexOf(item), SalesCart(
+                    newCartList.set(state.purchasesCartList.indexOf(item), PurchasesCart(
                         medicine = medicine,
                         salesUnit = salesUnit,
                         quantity = quantity,
                         amount = newAmount
-                    ))
+                    )
+                    )
                     break
                 }
             }
 
             this.state.value = state.copy(
-                salesCartList = newCartList,
+                purchasesCartList = newCartList,
                 totalAmount = totalAmount,
                 totalAmountAfterDiscount = totalAmount,
             )
@@ -267,7 +272,7 @@ constructor(
     private fun addToCard(medicine : LocalMedicine, quantity : Int = 1, unitId : Int = 1) {
         state.value?.let { state ->
 
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 if (item.medicine?.id == medicine.id) {
                     return@addToCard
                 }
@@ -302,17 +307,19 @@ constructor(
 
             val totalAmount = newAmount!! + previousAmount!!
 
-            val newCartList = state.salesCartList.toMutableList()
-            newCartList.add(SalesCart(
+            val newCartList = state.purchasesCartList.toMutableList()
+            newCartList.add(
+                PurchasesCart(
                 medicine = medicine,
                 salesUnit = salesUnit!!,
                 quantity = quantity,
                 amount = newAmount
-            ))
+            )
+            )
 
 
             this.state.value = state.copy(
-                salesCartList = newCartList,
+                purchasesCartList = newCartList,
                 totalAmount = totalAmount,
                 totalAmountAfterDiscount = totalAmount
             )
@@ -375,9 +382,9 @@ constructor(
         processOder()
         Log.d(TAG, "ViewModel page number " + state.value?.page)
         state.value?.let { state ->
-            createSalesOrder.execute(
+            createPurchasesOrderInteractor.execute(
                 authToken = sessionManager.state.value?.authToken,
-                state.order.toCreateSalesOrder()
+                state.order.toCreatePurchasesOrder()
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())
                 this.state.value = state.copy(isLoading = dataState.isLoading)
@@ -402,9 +409,10 @@ constructor(
         val list = processOrderMedicine()
         state.value?.let { state ->
             this.state.value = state.copy(
-                order = SalesOrder(
+                order = PurchasesOrder(
                     pk = -2,
-                    customer = state.customer?.pk,
+                    vendor = state.vendor?.pk,
+                    company = state.vendor?.company_name,
                     total_amount = state.totalAmount?.toFloat(),
                     total_after_discount = state.totalAmountAfterDiscount?.toFloat(),
                     paid_amount = state.receivedAmount,
@@ -412,18 +420,18 @@ constructor(
                     is_discount_percent = (state.discount == state.totalAmountAfterDiscount),
                     created_at = "",
                     updated_at = "",
-                    sales_oder_medicines = list
+                    purchases_order_medicines = list
                 )
             )
         }
     }
 
-    private fun processOrderMedicine() : List<SalesOrderMedicine> {
-        val list = mutableListOf<SalesOrderMedicine>()
+    private fun processOrderMedicine() : List<PurchasesOrderMedicine> {
+        val list = mutableListOf<PurchasesOrderMedicine>()
         state.value?.let {state ->
-            for (item in state.salesCartList) {
+            for (item in state.purchasesCartList) {
                 list.add(
-                    SalesOrderMedicine(
+                    PurchasesOrderMedicine(
                         unit = item.salesUnit?.id!!,
                         quantity = item.quantity?.toFloat()!!,
                         local_medicine = item.medicine?.id!!,

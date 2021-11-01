@@ -145,6 +145,13 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
             totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
             val due = totalAmountAfterDiscount - state.receivedAmount!!
             salesPaymentDueAmount.setText("৳ " + due.toString())
+
+            if (viewModel.state.value?.customer != null) {
+                salesPaymentSearchView.setText("        " + viewModel.state.value?.customer?.name!!)
+            }
+            else {
+                salesPaymentSearchView.setText("      " + "Walk-In Customer")
+            }
         })
     }
 

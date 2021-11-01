@@ -39,6 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_receive"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +55,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/generateNewPurchasesOrder"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="28dp"
@@ -68,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="Create Order"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintBottom_toBottomOf="@+id/generateNewPurchasesOrder"
+                app:layout_constraintEnd_toStartOf="@+id/generateNewPurchasesOrder"
+                app:layout_constraintTop_toTopOf="@+id/generateNewPurchasesOrder" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

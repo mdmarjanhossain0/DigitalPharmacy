@@ -42,6 +42,8 @@ class CreateSupplierInteractor (
             ).toSupplier()
 
 
+            Log.d(TAG, "CreateSupplierInteractior " + supplier.toString())
+
             try{
                 cache.insertSupplier(supplier.toSupplierEntity())
             }catch (e: Exception){
@@ -54,9 +56,14 @@ class CreateSupplierInteractor (
                     uiComponentType = UIComponentType.Dialog(),
                     messageType = MessageType.Success()
                 ), data = supplier))
+            return@flow
 
 
-        } catch (e: Exception){
+        }
+
+
+
+        catch (e: Exception){
             e.printStackTrace()
 
             try{
@@ -83,7 +90,7 @@ class CreateSupplierInteractor (
         emit(
             DataState.data(response = Response(
                 message = "Unable to create supplier. Please be careful and don't uninstall or log out",
-                uiComponentType = UIComponentType.None(),
+                uiComponentType = UIComponentType.Dialog(),
                 messageType = MessageType.Error()
             ), data = stateSupplier))
 

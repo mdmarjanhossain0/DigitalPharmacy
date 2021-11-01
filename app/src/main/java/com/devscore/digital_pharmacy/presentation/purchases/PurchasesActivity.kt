@@ -154,4 +154,9 @@ class PurchasesActivity : BaseActivity(), View.OnClickListener {
 
     override fun expandAppBar() {
     }
+
+
+    fun navigatePurchasesGenerateToPurchasesInventoryFragment() {
+        navController.navigate(R.id.action_purchaseFragment_to_purchasesInventoryFragment)
+    }
 }

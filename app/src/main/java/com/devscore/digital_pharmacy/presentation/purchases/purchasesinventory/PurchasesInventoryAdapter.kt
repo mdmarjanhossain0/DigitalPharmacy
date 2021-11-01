@@ -1,61 +1,76 @@
-package com.devscore.digital_pharmacy.presentation.purchases.orderlist
+package com.devscore.digital_pharmacy.presentation.purchases.purchasesinventory
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
+import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
+import kotlinx.android.synthetic.main.item_sales_inventory.view.*
 
-class PurchasesOrderAdapter
+class PurchasesInventoryAdapter
 constructor(
     private val interaction: Interaction? = null
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val TAG = "PurchasesOrderAdapter"
+    val TAG = "PurchasesInvAdapter"
 
-    var isLoading : Boolean = true
-
-    val loadingItem = PurchasesOrder (
-        pk = -2,
-        vendor = -1,
-        company = "",
-        total_amount = 0f,
-        total_after_discount = .05f,
-        paid_amount = 0f,
+    val loadingItem = LocalMedicine (
+        id = -2,
+        brand_name = "",
+        sku = "",
+        dar_number = "",
+        mr_number = "",
+        generic = "",
+        indication = "",
+        symptom = "",
+        strength = "",
+        description = "",
+        mrp = 0f,
+        purchases_price = 0f,
         discount = 0f,
-        is_discount_percent = false,
-        created_at = "",
-        updated_at = "",
-        purchases_order_medicines = null
+        is_percent_discount = false,
+        manufacture = "",
+        kind = "",
+        form = "",
+        remaining_quantity = 0f,
+        damage_quantity = 0f,
+        rack_number = "",
+        units = listOf()
     )
 
-
-
-    val notFound = PurchasesOrder (
-        pk = -3,
-        vendor = -1,
-        company = "",
-        total_amount = 0f,
-        total_after_discount = .05f,
-        paid_amount = 0f,
+    val notFound = LocalMedicine (
+        id = -3,
+        brand_name = "",
+        sku = "",
+        dar_number = "",
+        mr_number = "",
+        generic = "",
+        indication = "",
+        symptom = "",
+        strength = "",
+        description = "",
+        mrp = 0f,
+        purchases_price = 0f,
         discount = 0f,
-        is_discount_percent = false,
-        created_at = "",
-        updated_at = "",
-        purchases_order_medicines = null
+        is_percent_discount = false,
+        manufacture = "",
+        kind = "",
+        form = "",
+        remaining_quantity = 0f,
+        damage_quantity = 0f,
+        rack_number = "",
+        units = listOf()
     )
-
 
     companion object {
 
         const val IMAGE_ITEM = 1
         const val LOADING_ITEM = 2
+
         const val NOT_FOUND = 3
 
         const val LOADING = 1
@@ -66,8 +81,8 @@ constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             IMAGE_ITEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_orders,parent,false)
-                return PurchasesOrderDataViewHolder(itemView, interaction)
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_inventory,parent,false)
+                return SalesInventoryDataViewHolder(itemView, interaction)
             }
 
             LOADING_ITEM -> {
@@ -94,10 +109,10 @@ constructor(
 
     override fun getItemViewType(position: Int): Int {
         if (differ.currentList.size != 0) {
-            if(differ.currentList.get(position).pk == -2){
+            if(differ.currentList.get(position).id == -2){
                 return LOADING_ITEM
             }
-            if(differ.currentList.get(position).pk == -3){
+            if(differ.currentList.get(position).id == -3){
                 return NOT_FOUND
             }
             return IMAGE_ITEM
@@ -109,7 +124,7 @@ constructor(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is PurchasesOrderDataViewHolder -> {
+            is SalesInventoryDataViewHolder -> {
                 holder.bind(differ.currentList.get(position))
             }
         }
@@ -117,30 +132,29 @@ constructor(
     }
 
     override fun getItemCount(): Int {
-        Log.d(TAG, "SalesOrderAdapter List Size " + differ.currentList.size)
+        Log.d(TAG, "PurchasesInventoryAdapter List Size " + differ.currentList.size)
         return differ.currentList.size
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PurchasesOrder>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalMedicine>() {
 
-        override fun areItemsTheSame(oldItem: PurchasesOrder, newItem: PurchasesOrder): Boolean {
-            return oldItem.pk == newItem.pk
+        override fun areItemsTheSame(oldItem: LocalMedicine, newItem: LocalMedicine): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: PurchasesOrder, newItem: PurchasesOrder): Boolean {
+        override fun areContentsTheSame(oldItem: LocalMedicine, newItem: LocalMedicine): Boolean {
             return oldItem == newItem
         }
     }
 
     private val differ =
         AsyncListDiffer(
-            GlobalRecyclerChangeCallback(this),
+            LocalRecyclerChangeCallback(this),
             AsyncDifferConfig.Builder(DIFF_CALLBACK).build()
         )
 
-    internal inner class GlobalRecyclerChangeCallback(
-        private val adapter: PurchasesOrderAdapter
+    internal inner class LocalRecyclerChangeCallback(
+        private val adapter: PurchasesInventoryAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {
@@ -160,8 +174,8 @@ constructor(
         }
     }
 
-    fun submitList(list: List<PurchasesOrder>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
-        val newList = list?.toMutableList()
+    fun submitList(medicineList: List<LocalMedicine>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
+        val newList = medicineList?.toMutableList()
         if (isLoading) {
             newList?.add(loadingItem)
         }
@@ -176,32 +190,40 @@ constructor(
     fun changeBottom(bottomState : Int) {
     }
 
-    class PurchasesOrderDataViewHolder
+    class SalesInventoryDataViewHolder
     constructor(
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: PurchasesOrder) = with(itemView) {
+        fun bind(item: LocalMedicine) = with(itemView) {
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
+            Log.d("SalesInventoryAdapter", item.toString())
+            itemView.salesInventoryBrandName.setText(item.brand_name)
+            itemView.salesInventoryCompanyName.setText(item.generic)
+            itemView.salesInventoryMRP.setText("MRP ৳ "+ item.mrp.toString())
 
-//            itemView.globalBrandNameTV.setText(item.brand_name)
-//            itemView.globalCompanyNameTV.setText(item.generic)
-//            if (item.mrp != null) {
-//                itemView.globalMRPTV.setText("MRP ৳ "+ item.mrp.toString())
-//            }
-//            else {
-//                itemView.globalMRPTV.setText("MRP ৳ ...")
-//            }
 
+
+            itemView.salesInventoryItemCard.setOnClickListener {
+                interaction?.onItemCard(adapterPosition, item)
+            }
 
         }
     }
 
     interface Interaction {
 
-        fun onItemSelected(position: Int, item: PurchasesOrder)
+        fun onItemSelected(position: Int, item: LocalMedicine)
+
+        fun onItemCard(position: Int, item: LocalMedicine)
+
+        fun onItemDeleteSelected(position: Int, item: LocalMedicine)
+
+        fun restoreListPosition()
+
+        fun nextPage()
     }
 }

@@ -9,6 +9,7 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 data class SupplierCreateState (
     val isLoading : Boolean = false,
     val supplier : Supplier = Supplier(
+        pk = -1,
         company_name = "",
         agent_name = "",
         email = "",

@@ -135,7 +135,7 @@ class LocalFragment : BaseInventoryFragment(),
                 })
 
             recyclerAdapter?.apply {
-                submitList(medicineList = state.localMedicineList)
+                submitList(medicineList = state.localMedicineList, state.isLoading, state.isQueryExhausted)
             }
         })
     }

@@ -9,6 +9,7 @@ import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.Customer
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
+import kotlinx.android.synthetic.main.item_customer_list.view.*
 import kotlinx.android.synthetic.main.item_supplier_list.view.*
 
 class CustomerListAdapter
@@ -134,9 +135,8 @@ constructor(
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-//            itemView.supplierCompanyName.setText(item.company_name)
-//            itemView.supplierName.setText(item.agent_name)
-//            itemView.supplierContactNumber.setText(item.mobile)
+            itemView.customerName.setText(item.name)
+            itemView.customerContactNumber.setText(item.mobile)
 
         }
     }

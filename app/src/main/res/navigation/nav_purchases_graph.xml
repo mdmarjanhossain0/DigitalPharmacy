@@ -56,12 +56,16 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesSuplierListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSuplierListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
         android:label="fragment_purchases_suplier_list"
-        tools:layout="@layout/fragment_purchases_suplier_list" />
+        tools:layout="@layout/fragment_purchases_suplier_list" >
+        <action
+            android:id="@+id/action_purchasesSuplierListFragment_to_createSupplierFragment2"
+            app:destination="@id/createSupplierFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/createSupplierFragment2"
-        android:name="com.devscore.digital_pharmacy.presentation.supplier.createsupplier.CreateSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.createsupplier.PurchasesCreateSupplierFragment"
         android:label="fragment_create_supplier"
         tools:layout="@layout/fragment_create_supplier" />
 </navigation>
