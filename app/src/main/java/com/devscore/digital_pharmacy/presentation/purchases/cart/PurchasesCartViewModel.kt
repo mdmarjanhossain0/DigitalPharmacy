@@ -418,6 +418,7 @@ constructor(
                     paid_amount = state.receivedAmount,
                     discount = state.discountAmount,
                     is_discount_percent = (state.discount == state.totalAmountAfterDiscount),
+                    status = 0,
                     created_at = "",
                     updated_at = "",
                     purchases_order_medicines = list

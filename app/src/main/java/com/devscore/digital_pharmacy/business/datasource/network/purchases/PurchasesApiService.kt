@@ -19,7 +19,15 @@ interface PurchasesApiService {
     suspend fun searchPurchasesOder (
         @Header("Authorization") authorization: String,
         @Query("search") query: String,
+        @Query("status") status : Int,
         @Query("page") page: Int
     ) : PurchasesOderListResponse
+
+
+    @PUT("purchases/statuscompleted/{pk}")
+    suspend fun purchasesCompleted (
+        @Header("Authorization") authorization: String,
+        @Path("pk") pk : Int
+    ) : PurchasesOrderDto
 
 }

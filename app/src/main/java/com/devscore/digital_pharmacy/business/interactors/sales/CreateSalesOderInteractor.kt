@@ -20,7 +20,7 @@ class CreateSalesOderInteractor (
 
     fun execute(
         authToken: AuthToken?,
-        createSalesOder: CreateSalesOrder
+        createSalesOder: CreateSalesOrder,
     ): Flow<DataState<SalesOrder>> = flow {
 
         emit(DataState.loading<SalesOrder>())

@@ -17,7 +17,8 @@ data class PurchasesOrderDto (
     @SerializedName("created_at")var created_at : String,
     @SerializedName("updated_at")var updated_at : String?,
     @SerializedName("brand_name") var brand_name : String?,
-    @SerializedName("company") var company : String?
+    @SerializedName("company") var company : String?,
+    @SerializedName("status") var status : Int
 )
 
 
@@ -31,7 +32,8 @@ fun PurchasesOrderDto.toPurchasesOder() : PurchasesOrder {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
-        created_at = created_at!!,
+        status = status,
+        created_at = created_at,
         updated_at = updated_at,
         purchases_order_medicines = purchases_order_medicines.map {
             it.toPurchasesOderMedicine()

@@ -27,6 +27,7 @@ fun PurchasesOrderWithMedicine.toPurchasesOder() : PurchasesOrder {
         paid_amount = purchases_oder.paid_amount,
         discount = purchases_oder.discount,
         is_discount_percent = purchases_oder.is_discount_percent,
+        status = purchases_oder.status,
         created_at = purchases_oder.created_at,
         updated_at = purchases_oder.updated_at,
         purchases_order_medicines = purchases_order_medicines.map {

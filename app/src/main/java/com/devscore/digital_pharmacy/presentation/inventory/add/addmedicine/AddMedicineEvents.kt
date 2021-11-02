@@ -9,6 +9,11 @@ sealed class AddMedicineEvents {
 
     data class CacheState(val local_medicine : LocalMedicine): AddMedicineEvents()
 
+
+    data class UpdateId(val id : Int) : AddMedicineEvents()
+
+    object FetchData : AddMedicineEvents()
+
     data class Error(val stateMessage: StateMessage): AddMedicineEvents()
 
     object OnRemoveHeadFromQueue: AddMedicineEvents()

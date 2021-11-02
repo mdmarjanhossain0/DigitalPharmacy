@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_inventory" >
         <action
             android:id="@+id/action_inventoryFragment_to_inventoryAddProductFragment"
-            app:destination="@id/inventoryAddProductFragment" />
+            app:destination="@id/inventoryAddProductFragment" >
+            <argument
+                android:name="id"
+                app:argType="integer"
+                android:defaultValue="-1" />
+        </action>
         <action
             android:id="@+id/action_inventoryFragment_to_return1Fragment"
             app:destination="@id/return1Fragment" />
@@ -63,11 +68,10 @@
         android:name="com.devscore.digital_pharmacy.presentation.inventory.add.InventoryAddProductFragment"
         android:label="fragment_inventory_add_product"
         tools:layout="@layout/fragment_inventory_add_product" >
-        <action
-            android:id="@+id/action_inventoryAddProductFragment_to_inventoryFragment"
-            app:destination="@id/inventoryFragment"
-            app:popUpTo="@id/inventoryFragment"
-            app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/dispensingFragment"

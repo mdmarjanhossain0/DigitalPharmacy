@@ -14,6 +14,7 @@ data class SalesCardState (
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
+        status = 0,
         created_at = "",
         updated_at = "",
         sales_oder_medicines = ArrayList<SalesOrderMedicine>()

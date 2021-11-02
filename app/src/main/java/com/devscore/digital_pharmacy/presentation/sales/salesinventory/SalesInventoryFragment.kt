@@ -8,13 +8,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
@@ -26,6 +29,7 @@ import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineE
 import com.devscore.digital_pharmacy.presentation.inventory.local.LocalMedicineViewModel
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
+import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
@@ -78,6 +82,13 @@ class SalesInventoryFragment : BaseInventoryFragment(),
     }
 
     private fun initUIClick() {
+
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+            backPressWarning()
+            Log.d(TAG, "Fragment On Back Press Callback call")
+        }
+
         salesInventoryCard.setOnClickListener {
             (activity as SalesActivity).navigateSalesInventoryToCardFragment()
         }
@@ -238,6 +249,26 @@ class SalesInventoryFragment : BaseInventoryFragment(),
 
             }
         )
+    }
+
+
+    fun backPressWarning() {
+        MaterialDialog(requireContext())
+            .show{
+                title(R.string.are_you_sure)
+                message(text = "Cart item will be dismiss")
+                positiveButton(R.string.text_ok){
+                    viewModel.state.value = SalesCardState()
+                    findNavController().popBackStack()
+                    dismiss()
+                }
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
     }
 
 }

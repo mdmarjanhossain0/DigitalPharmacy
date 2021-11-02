@@ -8,6 +8,7 @@ class CreateSalesOrder (
     var paid_amount : Float,
     var discount : Float?,
     var is_discount_percent : Boolean,
+    var status : Int,
     var sales_oder_medicines : List<CreateSalesOrderMedicine>
 )
 
@@ -36,6 +37,7 @@ fun CreateSalesOrder.toSalesOder() : SalesOrder {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         sales_oder_medicines = sales_oder_medicines.map {
             it.toSalesOrderMedicine()
         }

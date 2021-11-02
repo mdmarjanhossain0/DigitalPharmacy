@@ -15,6 +15,7 @@ data class PurchasesCartState (
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
+        status = 0,
         created_at = "",
         updated_at = "",
         purchases_order_medicines = ArrayList<PurchasesOrderMedicine>()

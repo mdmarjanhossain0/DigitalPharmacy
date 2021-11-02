@@ -16,6 +16,7 @@ class PurchasesOrder (
     var paid_amount : Float?,
     var discount : Float?,
     var is_discount_percent : Boolean,
+    var status : Int,
     var purchases_order_medicines : List<PurchasesOrderMedicine>?,
     var created_at : String? = null,
     var updated_at : String? = null
@@ -31,6 +32,7 @@ fun PurchasesOrder.toPurchasesOrderEntity() : PurchasesOrderEntity {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         created_at = created_at!!,
         updated_at = updated_at
     )
@@ -63,6 +65,7 @@ fun PurchasesOrder.toFailurePurchasesOrderEntity() : FailurePurchasesOrderEntity
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         created_at = created_at!!,
         updated_at = updated_at
     )

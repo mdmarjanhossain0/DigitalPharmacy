@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
+import com.devscore.digital_pharmacy.business.interactors.purchases.PurchasesCompleted
 import com.devscore.digital_pharmacy.business.interactors.purchases.SearchPurchasesOrder
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +23,8 @@ class PurchasesOrderListViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
-    private val searchPurchasesOrder: SearchPurchasesOrder
+    private val searchPurchasesOrder: SearchPurchasesOrder,
+    private val purchasesCompleted: PurchasesCompleted
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
@@ -48,6 +51,10 @@ constructor(
                 search()
             }
 
+            is PurchasesOrderListEvents.PurchasesCompleted -> {
+                orderCompleted(event.order)
+            }
+
             is PurchasesOrderListEvents.UpdateQuery -> {
                 onUpdateQuery(event.query)
             }
@@ -58,6 +65,35 @@ constructor(
             is PurchasesOrderListEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun orderCompleted(order : PurchasesOrder) {
+        state.value?.let { state ->
+            purchasesCompleted.execute(
+                authToken = sessionManager.state.value?.authToken,
+                pk = order.pk!!,
+                query = state.query,
+                status = 0,
+                page = state.page,
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { list ->
+                    Log.d(TAG, "ViewModel List Size " + list.size)
+                    this.state.value = state.copy(orderList = list)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if(stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true){
+                        onUpdateQueryExhausted(true)
+                    }else{
+                        appendToMessageQueue(stateMessage)
+                    }
+                }
+
+            }.launchIn(viewModelScope)
         }
     }
 
@@ -134,6 +170,7 @@ constructor(
             searchJob = searchPurchasesOrder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
+                status = 0,
                 page = state.page,
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())

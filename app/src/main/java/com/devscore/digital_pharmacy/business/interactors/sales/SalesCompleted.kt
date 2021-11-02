@@ -6,13 +6,16 @@ import com.devscore.digital_pharmacy.business.datasource.cache.sales.toSalesOder
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
 import com.devscore.digital_pharmacy.business.datasource.network.sales.toSalesOrder
-import com.devscore.digital_pharmacy.business.domain.models.*
+import com.devscore.digital_pharmacy.business.domain.models.AuthToken
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
+import com.devscore.digital_pharmacy.business.domain.models.toSalesOrderEntity
+import com.devscore.digital_pharmacy.business.domain.models.toSalesOrderMedicinesEntity
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 
-class SearchSalesOder(
+class SalesCompleted(
     private val service : SalesApiService,
     private val cache : SalesDao
 ) {
@@ -21,6 +24,7 @@ class SearchSalesOder(
 
     fun execute(
         authToken: AuthToken?,
+        pk : Int,
         query: String,
         status : Int,
         page: Int
@@ -32,31 +36,26 @@ class SearchSalesOder(
 
         try{
             Log.d(TAG, "Call Api Section")
-            val result = service.searchSalesOder(
+            val result = service.salesCompleted(
                 "Token ${authToken.token}",
-                query = query,
-                status = status,
-                page = page
+                pk
             )
 
             Log.d(TAG, result.toString())
 
-            val oderList = result.results.map {
-                Log.d(TAG, "looping toLocalMedicine")
-                it.toSalesOrder()
+            val order = result.toSalesOrder()
+
+
+            try{
+                Log.d(TAG, "Data " + order.toString())
+                cache.insertSalesOder(order.toSalesOrderEntity())
+                for (medicine in order.toSalesOrderMedicinesEntity()) {
+                    cache.insertSaleOderMedicine(medicine)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
             }
 
-            for(oder in oderList){
-                try{
-                    Log.d(TAG, "Caching size" + oderList.size.toString())
-                    cache.insertSalesOder(oder.toSalesOrderEntity())
-                    for (medicine in oder.toSalesOrderMedicinesEntity()) {
-                        cache.insertSaleOderMedicine(medicine)
-                    }
-                }catch (e: Exception){
-                    e.printStackTrace()
-                }
-            }
         }catch (e: Exception){
             e.printStackTrace()
             emit(
@@ -91,11 +90,4 @@ class SearchSalesOder(
     }.catch { e ->
         emit(handleUseCaseException(e))
     }
-}
-
-fun marge(successList: List<SalesOrder>, failureList : List<SalesOrder>) : List<SalesOrder> {
-    val allMedicine  = mutableListOf<SalesOrder>()
-    allMedicine.addAll(successList)
-    allMedicine.addAll(failureList)
-    return allMedicine
 }

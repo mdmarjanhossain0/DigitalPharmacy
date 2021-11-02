@@ -56,16 +56,25 @@ interface PurchasesDao {
 
     // Complex Query
 
+
+//    SELECT * FROM PurchasesOrder
+//    WHERE vendor LIKE '%' || :query || '%'
+//    OR pk LIKE '%' || :query || '%'
+//    AND status = :status
+//    LIMIT (:page * :pageSize)
+
     @Transaction
     @Query("""
         SELECT * FROM PurchasesOrder 
-        WHERE vendor LIKE '%' || :query || '%' 
-        OR pk LIKE '%' || :query || '%'
+        WHERE status = :status
+        AND (vendor LIKE '%' || :query || '%' 
+        OR pk LIKE '%' || :query || '%')
         LIMIT (:page * :pageSize)
         """)
     suspend fun searchPurchasesOrderWithMedicine(
         query: String,
         page: Int,
+        status : Int,
         pageSize: Int = Constants.PAGINATION_PAGE_SIZE
     ): List<PurchasesOrderWithMedicine>
 
@@ -74,8 +83,10 @@ interface PurchasesDao {
     @Query("""
         SELECT * FROM FailurePurchasesOrder 
         WHERE customer LIKE '%' || :query || '%'
+        AND status = :status
         """)
     suspend fun searchFailurePurchasesOrderWithMedicine(
-        query: String
+        query: String,
+        status : Int,
     ): List<FailurePurchasesOrderWithMedicine>
 }

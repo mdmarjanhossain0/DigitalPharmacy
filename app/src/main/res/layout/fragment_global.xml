@@ -84,7 +84,6 @@
                     android:text="Generic Name"
                     android:textSize="12sp"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/colorPrimaryVariant"
                     android:background="@color/colorPrimaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view2"

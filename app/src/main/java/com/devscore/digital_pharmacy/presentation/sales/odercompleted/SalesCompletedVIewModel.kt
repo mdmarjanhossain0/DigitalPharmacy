@@ -1,101 +1,63 @@
-package com.devscore.digital_pharmacy.presentation.inventory.global
+package com.devscore.digital_pharmacy.presentation.sales.odercompleted
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devscore.digital_pharmacy.business.interactors.inventory.global.SearchGlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
+import com.devscore.digital_pharmacy.business.interactors.sales.SearchSalesOder
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class GlobalViewModel
+class SalesCompletedVIewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
-    private val searchGlobalMedicine: SearchGlobalMedicine
+    private val searchSalesOder: SearchSalesOder
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
 
-    val state: MutableLiveData<GlobalState> = MutableLiveData(GlobalState())
+    val state: MutableLiveData<SalesCompletedState> = MutableLiveData(SalesCompletedState())
+
+
+    lateinit var searchJob : Job
 
     init {
-        onTriggerEvent(GlobalEvents.NewMedicineSearch)
+        onTriggerEvent(SalesCompletedEvents.SearchOrders)
     }
 
-    fun onTriggerEvent(event: GlobalEvents) {
+    fun onTriggerEvent(event: SalesCompletedEvents) {
         when (event) {
-            is GlobalEvents.NewMedicineSearch -> {
+            is SalesCompletedEvents.SearchOrders -> {
                 search()
             }
 
-            is GlobalEvents.SearchWithQuery -> {
-                searchWithQuery(event.query)
+            is SalesCompletedEvents.SearchWithQuery -> {
             }
-
-
-            is GlobalEvents.SetSearchSelection -> {
-                selectQuery(event.selection)
-            }
-
-            is GlobalEvents.NextPage -> {
+            is SalesCompletedEvents.NextPage -> {
                 incrementPageNumber()
                 search()
             }
 
-            is GlobalEvents.UpdateQuery -> {
+            is SalesCompletedEvents.UpdateQuery -> {
                 onUpdateQuery(event.query)
             }
 
-            is GlobalEvents.Error -> {
+            is SalesCompletedEvents.Error -> {
                 appendToMessageQueue(event.stateMessage)
             }
-            is GlobalEvents.OnRemoveHeadFromQueue -> {
+            is SalesCompletedEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
-        }
-    }
-
-    private fun selectQuery(selection: Int) {
-        state.value.let { state ->
-            this.state.value = state?.copy(
-                selectQuery = selection
-            )
-        }
-    }
-
-    private fun searchWithQuery(query: String) {
-        state.value?.let { state ->
-            searchGlobalMedicine.execute(
-                authToken = sessionManager.state.value?.authToken,
-                query = query,
-                page = state.page,
-            ).onEach { dataState ->
-                Log.d(TAG, "ViewModel " + dataState.toString())
-                this.state.value = state.copy(isLoading = dataState.isLoading)
-
-                dataState.data?.let { list ->
-                    Log.d(TAG, "ViewModel List Size " + list.size)
-                    this.state.value = state.copy(globalMedicineList = list)
-                }
-
-                dataState.stateMessage?.let { stateMessage ->
-                    if (stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true) {
-                        onUpdateQueryExhausted(true)
-                    } else {
-                        appendToMessageQueue(stateMessage)
-                    }
-                }
-
-            }.launchIn(viewModelScope)
         }
     }
 
@@ -132,7 +94,7 @@ constructor(
 
     private fun clearList() {
         state.value?.let { state ->
-            this.state.value = state.copy(globalMedicineList = listOf())
+            this.state.value = state.copy(orderList = listOf())
         }
     }
 
@@ -143,9 +105,13 @@ constructor(
 
     private fun incrementPageNumber() {
         state.value?.let { state ->
-            val pageNumber : Int = (state.globalMedicineList.size / 5) as Int + 1
+            val pageNumber : Int = (state.orderList.size / 5) as Int + 1
+            Log.d(TAG, "Pre increment page number " + pageNumber)
             this.state.value = state.copy(page = pageNumber)
         }
+//        state.value?.let { state ->
+//            this.state.value = state.copy(page = state.page + 1)
+//        }
     }
 
     private fun onUpdateQuery(query: String) {
@@ -156,10 +122,14 @@ constructor(
     private fun search() {
 //        resetPage()
 //        clearList()
+
+
+        Log.d(TAG, "ViewModel page number " + state.value?.page)
         state.value?.let { state ->
-            searchGlobalMedicine.execute(
+            searchSalesOder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
+                status = 3,
                 page = state.page,
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())
@@ -167,7 +137,7 @@ constructor(
 
                 dataState.data?.let { list ->
                     Log.d(TAG, "ViewModel List Size " + list.size)
-                    this.state.value = state.copy(globalMedicineList = list)
+                    this.state.value = state.copy(orderList = list)
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

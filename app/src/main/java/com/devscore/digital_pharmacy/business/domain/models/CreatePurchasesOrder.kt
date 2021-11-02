@@ -9,6 +9,7 @@ class CreatePurchasesOder (
     var paid_amount : Float,
     var discount : Float?,
     var is_discount_percent : Boolean,
+    var status : Int = 0,
     var purchases_order_medicines : List<CreatePurchasesOderMedicine>
 )
 
@@ -39,6 +40,7 @@ fun CreatePurchasesOder.toPurchasesOrder() : PurchasesOrder {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         purchases_order_medicines = purchases_order_medicines.map {
             it.toPurchasesOrderMedicine()
         }

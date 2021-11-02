@@ -11,14 +11,17 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.util.MedicineProperties.Companion.OTHER
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
+import com.devscore.digital_pharmacy.presentation.inventory.add.InventoryAddProductFragmentArgs
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.add_product_dialog.*
 import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
@@ -51,7 +54,18 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
         setHasOptionsMenu(true)
         initUIClick()
         initUI()
+        getData()
         subscribeObservers()
+    }
+
+    private fun getData() {
+        val id = arguments?.getInt("id", -1)
+        Log.d(TAG, arguments.toString())
+        Log.d(TAG, "id " + id.toString())
+        if (id != -1) {
+            viewModel.onTriggerEvent(AddMedicineEvents.UpdateId(id!!))
+            viewModel.onTriggerEvent(AddMedicineEvents.FetchData)
+        }
     }
 
     private fun initUI() {
@@ -126,7 +140,36 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
                     }
                 })
             Log.d(TAG, state.medicine.toString())
+
+
+
+            if (state.globalMedicine != null) {
+                updateField(state.globalMedicine)
+            }
+
         })
+    }
+
+    private fun updateField(globalMedicine : GlobalMedicine?) {
+        brand_nameET.setText(globalMedicine?.brand_name.toString())
+        if (globalMedicine?.darNumber != null) {
+            dar_mr_NumberET.setText(globalMedicine?.darNumber)
+        }
+
+        if (globalMedicine?.manufacture != null) {
+            manufactureET.setText(globalMedicine.manufacture.toString())
+        }
+
+        if (globalMedicine?.generic != null) {
+            genericET.setText(globalMedicine?.generic.toString())
+        }
+
+        kindET.setText("Human")
+        formET.setText("TABLET")
+
+        if (globalMedicine?.strength != null) {
+            strengthET.setText(globalMedicine?.strength.toString())
+        }
     }
 
 
@@ -182,6 +225,7 @@ class AddProductSubMedicineFragment : BaseInventoryFragment() {
 
 
     override fun onDestroyView() {
+        cacheState()
         super.onDestroyView()
     }
 

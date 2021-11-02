@@ -12,6 +12,7 @@ class SalesOrder (
     var paid_amount : Float?,
     var discount : Float?,
     var is_discount_percent : Boolean,
+    var status : Int,
     var sales_oder_medicines : List<SalesOrderMedicine>?,
     var created_at : String? = null,
     var updated_at : String? = null
@@ -28,6 +29,7 @@ fun SalesOrder.toSalesOrderEntity() : SalesOrderEntity {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         created_at = created_at!!,
         updated_at = updated_at
     )
@@ -59,6 +61,7 @@ fun SalesOrder.toFailureSalesOrderEntity() : FailureSalesOrderEntity {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         created_at = created_at!!,
         updated_at = updated_at
     )
@@ -90,6 +93,7 @@ fun SalesOrder.toCreateSalesOrder() : CreateSalesOrder {
         paid_amount = paid_amount!!,
         discount = discount,
         is_discount_percent =is_discount_percent,
+        status = status,
         sales_oder_medicines = sales_oder_medicines!!.map {
             it.toCreateSalesOrderMedicine()
         }

@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine
 
+import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.util.Queue
@@ -30,5 +31,7 @@ data class AddMedicineState (
         rack_number = null,
         units = listOf<MedicineUnits>()
     ),
+    val globalMedicine : GlobalMedicine? = null,
+    val id : Int = -1,
     val queue: Queue<StateMessage> = Queue(mutableListOf()),
 )

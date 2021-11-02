@@ -97,7 +97,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
     private fun executeNewQuery(query: String){
         resetUI()
         viewModel.onTriggerEvent(SalesOrderListEvents.UpdateQuery(query))
-        viewModel.onTriggerEvent(SalesOrderListEvents.CreateNewOrder)
+        viewModel.onTriggerEvent(SalesOrderListEvents.SearchOrders)
     }
 
     private  fun resetUI(){
@@ -126,7 +126,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
                         && viewModel.state.value?.isQueryExhausted == false
                     ) {
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
-//                        viewModel.onTriggerEvent(SalesOrderListEvents.NextPage)
+                        viewModel.onTriggerEvent(SalesOrderListEvents.NextPage)
                     }
                 }
             })
@@ -141,7 +141,7 @@ class SalesOrdersFragment : BaseSalesFragment(),
     }
 
     override fun onItemSelected(position: Int, item: SalesOrder) {
-        oderDetails(item)
+        viewModel.onTriggerEvent(SalesOrderListEvents.SalesCompleted(item))
     }
 
 

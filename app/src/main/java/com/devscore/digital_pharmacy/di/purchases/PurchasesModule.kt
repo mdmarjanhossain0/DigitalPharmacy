@@ -6,6 +6,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.PurchasesApiService
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
 import com.devscore.digital_pharmacy.business.interactors.purchases.CreatePurchasesOrderInteractor
+import com.devscore.digital_pharmacy.business.interactors.purchases.PurchasesCompleted
 import com.devscore.digital_pharmacy.business.interactors.purchases.SearchPurchasesOrder
 import com.devscore.digital_pharmacy.business.interactors.sales.CreateSalesOderInteractor
 import com.devscore.digital_pharmacy.business.interactors.sales.SearchSalesOder
@@ -59,6 +60,18 @@ object PurchasesModule {
         cache : PurchasesDao
     ) : CreatePurchasesOrderInteractor {
         return CreatePurchasesOrderInteractor(
+            service = service,
+            cache = cache
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun providePurchasesCompleted (
+        service : PurchasesApiService,
+        cache : PurchasesDao
+    ) : PurchasesCompleted {
+        return PurchasesCompleted(
             service = service,
             cache = cache
         )

@@ -66,11 +66,6 @@ class SalesCartFragment : BaseSalesFragment(),
     private fun initUIClick() {
 
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            backPressWarning()
-            Log.d(TAG, "Fragment On Back Press Callback call")
-        }
-
         salesCardGenerate.setOnClickListener {
             if (viewModel.state.value?.salesCartList?.size!! < 1) {
                 notItemAvailableInCart()
@@ -175,26 +170,6 @@ class SalesCartFragment : BaseSalesFragment(),
 //        dialog.show()
     }
 
-
-
-    fun backPressWarning() {
-        MaterialDialog(requireContext())
-            .show{
-                title(R.string.are_you_sure)
-                message(text = "Cart item will be dismiss")
-                positiveButton(R.string.text_ok){
-                    viewModel.state.value = SalesCardState()
-                    findNavController().popBackStack()
-                    dismiss()
-                }
-                negativeButton {
-                    dismiss()
-                }
-                onDismiss {
-                }
-                cancelable(false)
-            }
-    }
 
 
     fun notItemAvailableInCart() {

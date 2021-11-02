@@ -43,6 +43,32 @@ class PurchasesOrdersFragment : BasePurchasesFragment(),
         initRecyclerView()
         initUIClick()
         subscribeObservers()
+
+//        var sum = 0
+//        var i = 1
+//        while (i <= 600) {
+//            if ( (i % 7 == 0) && (i % 9 == 0)) {
+//                sum = sum + i
+//            }
+//            i = i + 1
+//        }
+//
+//        Log.d(TAG, "sflsdkfsdlfjkjfsfdflkjdfk   " + sum)
+
+
+//        sum = 0
+//
+//        i = 1
+//
+//        while (i <= 600) :
+//
+//        if ( (i % 7 == 0) && (i % 9 == 0)) :
+//        sum = sum + i
+//
+//        i = i + 1
+//
+//
+//        Print(sum)
     }
 
     private fun initUIClick() {
@@ -112,7 +138,7 @@ class PurchasesOrdersFragment : BasePurchasesFragment(),
     }
 
     override fun onItemSelected(position: Int, item: PurchasesOrder) {
-        oderDetails(item)
+        viewModel.onTriggerEvent(PurchasesOrderListEvents.PurchasesCompleted(item))
     }
 
 

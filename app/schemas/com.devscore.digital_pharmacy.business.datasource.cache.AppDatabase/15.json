@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 14,
-    "identityHash": "0c573b9145f357a824229dac242a59ba",
+    "version": 15,
+    "identityHash": "a07d39b9dec2263ae5028d9b85983033",
     "entities": [
       {
         "tableName": "auth_token",
@@ -976,7 +976,7 @@
       },
       {
         "tableName": "SalesOrder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT, PRIMARY KEY(`pk`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `status` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT, PRIMARY KEY(`pk`))",
         "fields": [
           {
             "fieldPath": "pk",
@@ -1017,6 +1017,12 @@
           {
             "fieldPath": "is_discount_percent",
             "columnName": "is_discount_percent",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -1115,7 +1121,7 @@
       },
       {
         "tableName": "FailureSalesOrder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`room_id` INTEGER PRIMARY KEY AUTOINCREMENT, `customer` INTEGER, `total_amount` REAL, `total_after_discount` REAL, `paid_amount` REAL, `discount` REAL, `is_discount_percent` INTEGER NOT NULL, `status` INTEGER NOT NULL, `created_at` TEXT NOT NULL, `updated_at` TEXT)",
         "fields": [
           {
             "fieldPath": "room_id",
@@ -1156,6 +1162,12 @@
           {
             "fieldPath": "is_discount_percent",
             "columnName": "is_discount_percent",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -1558,7 +1570,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0c573b9145f357a824229dac242a59ba')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a07d39b9dec2263ae5028d9b85983033')"
     ]
   }
 }

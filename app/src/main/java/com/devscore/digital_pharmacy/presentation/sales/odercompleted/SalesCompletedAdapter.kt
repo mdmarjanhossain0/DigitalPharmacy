@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.sales.orderlist
+package com.devscore.digital_pharmacy.presentation.sales.odercompleted
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
-import kotlinx.android.synthetic.main.item_sales_orders.view.*
+import kotlinx.android.synthetic.main.item_sales_completed.view.*
 
-class SalesOrderAdapter
+class SalesCompletedAdapter
 constructor(
     private val interaction: Interaction? = null
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val TAG = "SalesOrderAdapter"
+    val TAG = "SalesCompletedAdapter"
 
     var isLoading : Boolean = true
 
@@ -66,7 +66,7 @@ constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             IMAGE_ITEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_orders,parent,false)
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_completed,parent,false)
                 return SalesOrderDataViewHolder(itemView, interaction)
             }
 
@@ -140,7 +140,7 @@ constructor(
         )
 
     internal inner class GlobalRecyclerChangeCallback(
-        private val adapter: SalesOrderAdapter
+        private val adapter: SalesCompletedAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {
@@ -183,17 +183,17 @@ constructor(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: SalesOrder) = with(itemView) {
-            itemView.orderProcess.setOnClickListener {
+            itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-            itemView.orderId.setText("Order ID : # " + item.pk.toString())
+            itemView.orderCompletedOrderId.setText("Order ID : # " + item.pk.toString())
             var orderMedicines : String? = ""
             for (medicine in item.sales_oder_medicines!!) {
                 orderMedicines = orderMedicines + medicine.brand_name
             }
-            itemView.orderMedicines.setText(orderMedicines)
-            orderMRP.setText("MRP: ৳ " + item.total_amount!!)
+            itemView.orderCompletedOrderMedicines.setText(orderMedicines)
+            orderCompletedTotal.setText("MRP: ৳ " + item.paid_amount!!)
 
 
         }

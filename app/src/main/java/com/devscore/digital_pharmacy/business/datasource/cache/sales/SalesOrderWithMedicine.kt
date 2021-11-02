@@ -26,6 +26,7 @@ fun SalesOderWithMedicine.toSalesOder() : SalesOrder {
         paid_amount = sales_order.paid_amount,
         discount = sales_order.discount,
         is_discount_percent = sales_order.is_discount_percent,
+        status = sales_order.status,
         created_at = sales_order.created_at,
         updated_at = sales_order.updated_at,
         sales_oder_medicines = sales_oder_medicines.map {

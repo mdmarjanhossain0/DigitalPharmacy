@@ -58,12 +58,14 @@ interface SalesDao {
     @Transaction
     @Query("""
         SELECT * FROM SalesOrder 
-        WHERE customer LIKE '%' || :query || '%' 
-        OR pk LIKE '%' || :query || '%'
+        WHERE status = :status
+        AND (customer LIKE '%' || :query || '%' 
+        OR pk LIKE '%' || :query || '%')
         LIMIT (:page * :pageSize)
         """)
     suspend fun searchSaleOderWithMedicine(
         query: String,
+        status : Int,
         page: Int,
         pageSize: Int = Constants.PAGINATION_PAGE_SIZE
     ): List<SalesOderWithMedicine>
@@ -72,10 +74,12 @@ interface SalesDao {
 
     @Transaction
     @Query("""
-        SELECT * FROM FailureSalesOrder 
-        WHERE customer LIKE '%' || :query || '%'
+        SELECT * FROM FailureSalesOrder
+        WHERE status = :status
+        AND (customer LIKE '%' || :query || '%')
         """)
     suspend fun searchFailureSalesOderWithMedicine(
-        query: String
+        query: String,
+        status : Int
     ): List<FailureSalesOrderWithMedicine>
 }

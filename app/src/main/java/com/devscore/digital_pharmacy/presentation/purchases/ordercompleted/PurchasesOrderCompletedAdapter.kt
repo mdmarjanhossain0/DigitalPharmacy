@@ -1,4 +1,4 @@
-package com.devscore.digital_pharmacy.presentation.sales.orderlist
+package com.devscore.digital_pharmacy.presentation.purchases.ordercompleted
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -7,23 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
-import kotlinx.android.synthetic.main.item_sales_orders.view.*
+import kotlinx.android.synthetic.main.item_sales_completed.view.*
 
-class SalesOrderAdapter
+class PurchasesOrderCompletedAdapter
 constructor(
     private val interaction: Interaction? = null
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val TAG = "SalesOrderAdapter"
+    val TAG = "PurOrderComAdapter"
 
     var isLoading : Boolean = true
 
-    val loadingItem = SalesOrder (
+    val loadingItem = PurchasesOrder (
         pk = -2,
-        customer = -1,
+        vendor = -1,
+        company = "",
         total_amount = 0f,
         total_after_discount = .05f,
         paid_amount = 0f,
@@ -32,23 +33,24 @@ constructor(
         status = 0,
         created_at = "",
         updated_at = "",
-        sales_oder_medicines = null
+        purchases_order_medicines = null
     )
 
 
 
-    val notFound = SalesOrder (
+    val notFound = PurchasesOrder (
         pk = -3,
-        customer = -1,
+        vendor = -1,
+        company = "",
         total_amount = 0f,
-        total_after_discount = 0f,
+        total_after_discount = .05f,
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
         status = 0,
         created_at = "",
         updated_at = "",
-        sales_oder_medicines = null
+        purchases_order_medicines = null
     )
 
 
@@ -66,8 +68,8 @@ constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             IMAGE_ITEM -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_orders,parent,false)
-                return SalesOrderDataViewHolder(itemView, interaction)
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sales_completed,parent,false)
+                return PurchasesOrderDataViewHolder(itemView, interaction)
             }
 
             LOADING_ITEM -> {
@@ -109,7 +111,7 @@ constructor(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-            is SalesOrderDataViewHolder -> {
+            is PurchasesOrderDataViewHolder -> {
                 holder.bind(differ.currentList.get(position))
             }
         }
@@ -121,14 +123,14 @@ constructor(
         return differ.currentList.size
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesOrder>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PurchasesOrder>() {
 
-        override fun areItemsTheSame(oldItem: SalesOrder, newItem: SalesOrder): Boolean {
+        override fun areItemsTheSame(oldItem: PurchasesOrder, newItem: PurchasesOrder): Boolean {
             return oldItem.pk == newItem.pk
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: SalesOrder, newItem: SalesOrder): Boolean {
+        override fun areContentsTheSame(oldItem: PurchasesOrder, newItem: PurchasesOrder): Boolean {
             return oldItem == newItem
         }
     }
@@ -140,7 +142,7 @@ constructor(
         )
 
     internal inner class GlobalRecyclerChangeCallback(
-        private val adapter: SalesOrderAdapter
+        private val adapter: PurchasesOrderCompletedAdapter
     ) : ListUpdateCallback {
 
         override fun onChanged(position: Int, count: Int, payload: Any?) {
@@ -160,7 +162,7 @@ constructor(
         }
     }
 
-    fun submitList(list: List<SalesOrder>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
+    fun submitList(list: List<PurchasesOrder>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
         val newList = list?.toMutableList()
         if (isLoading) {
             newList?.add(loadingItem)
@@ -176,35 +178,30 @@ constructor(
     fun changeBottom(bottomState : Int) {
     }
 
-    class SalesOrderDataViewHolder
+    class PurchasesOrderDataViewHolder
     constructor(
         itemView: View,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: SalesOrder) = with(itemView) {
-            itemView.orderProcess.setOnClickListener {
+        fun bind(item: PurchasesOrder) = with(itemView) {
+            itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-            itemView.orderId.setText("Order ID : # " + item.pk.toString())
+
+            itemView.orderCompletedOrderId.setText("Order ID : # " + item.pk.toString())
             var orderMedicines : String? = ""
-            for (medicine in item.sales_oder_medicines!!) {
+            for (medicine in item.purchases_order_medicines!!) {
                 orderMedicines = orderMedicines + medicine.brand_name
             }
-            itemView.orderMedicines.setText(orderMedicines)
-            orderMRP.setText("MRP: ৳ " + item.total_amount!!)
-
-
+            itemView.orderCompletedOrderMedicines.setText(orderMedicines)
+            orderCompletedTotal.setText("MRP: ৳ " + item.paid_amount!!)
         }
     }
 
     interface Interaction {
 
-        fun onItemSelected(position: Int, item: SalesOrder)
-
-        fun restoreListPosition()
-
-        fun nextPage()
+        fun onItemSelected(position: Int, item: PurchasesOrder)
     }
 }

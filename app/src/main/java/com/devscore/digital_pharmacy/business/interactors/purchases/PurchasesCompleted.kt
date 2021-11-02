@@ -4,20 +4,19 @@ import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.PurchasesDao
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.toPurchasesOder
 import com.devscore.digital_pharmacy.business.datasource.cache.purchases.toPurchasesOrder
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
-import com.devscore.digital_pharmacy.business.datasource.cache.sales.toSalesOder
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.PurchasesApiService
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.toPurchasesOder
-import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
-import com.devscore.digital_pharmacy.business.datasource.network.sales.toSalesOrder
-import com.devscore.digital_pharmacy.business.domain.models.*
+import com.devscore.digital_pharmacy.business.domain.models.AuthToken
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrder
+import com.devscore.digital_pharmacy.business.domain.models.toPurchasesOrderEntity
+import com.devscore.digital_pharmacy.business.domain.models.toPurchasesOrderMedicines
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 
-class SearchPurchasesOrder(
+class PurchasesCompleted (
     private val service : PurchasesApiService,
     private val cache : PurchasesDao
 ) {
@@ -26,6 +25,7 @@ class SearchPurchasesOrder(
 
     fun execute(
         authToken: AuthToken?,
+        pk : Int,
         query: String,
         status : Int,
         page: Int
@@ -37,31 +37,26 @@ class SearchPurchasesOrder(
 
         try{
             Log.d(TAG, "Call Api Section")
-            val result = service.searchPurchasesOder(
+            val result = service.purchasesCompleted(
                 "Token ${authToken.token}",
-                query = query,
-                status = status,
-                page = page
+                pk
             )
 
             Log.d(TAG, result.toString())
 
-            val oderList = result.results.map {
-                Log.d(TAG, "looping toLocalMedicine")
-                it.toPurchasesOder()
+            val order = result.toPurchasesOder()
+
+            try{
+                Log.d(TAG, "Data " + order.toString())
+                cache.insertPurchasesOrder(order.toPurchasesOrderEntity())
+                for (medicine in order.toPurchasesOrderMedicines()) {
+                    Log.d(TAG, "Order Medicine " + medicine.toString())
+                    cache.insertPurchasesOrderMedicine(medicine)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
             }
 
-            for(oder in oderList){
-                try{
-                    Log.d(TAG, "Caching size" + oderList.size.toString())
-                    cache.insertPurchasesOrder(oder.toPurchasesOrderEntity())
-                    for (medicine in oder.toPurchasesOrderMedicines()) {
-                        cache.insertPurchasesOrderMedicine(medicine)
-                    }
-                }catch (e: Exception){
-                    e.printStackTrace()
-                }
-            }
         }catch (e: Exception){
             e.printStackTrace()
             emit(
@@ -102,11 +97,4 @@ class SearchPurchasesOrder(
     }.catch { e ->
         emit(handleUseCaseException(e))
     }
-}
-
-fun marge(successList: List<PurchasesOrder>, failureList : List<PurchasesOrder>) : List<PurchasesOrder> {
-    val allMedicine  = mutableListOf<PurchasesOrder>()
-    allMedicine.addAll(successList)
-    allMedicine.addAll(failureList)
-    return allMedicine
 }

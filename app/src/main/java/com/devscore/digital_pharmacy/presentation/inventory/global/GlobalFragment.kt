@@ -65,6 +65,23 @@ class GlobalFragment : BaseInventoryFragment(),
         globalFragmentFloatingActionButton.setOnClickListener {
             showFilterDialog()
         }
+
+        globalFragmentBrandNameAction.setOnClickListener {
+            viewModel.onTriggerEvent(GlobalEvents.SetSearchSelection(1))
+        }
+
+        globalFragmentGenericAction.setOnClickListener {
+            viewModel.onTriggerEvent(GlobalEvents.SetSearchSelection(2))
+        }
+
+        globalFragmentIndicationAction.setOnClickListener {
+            viewModel.onTriggerEvent(GlobalEvents.SetSearchSelection(3))
+        }
+
+
+        globalFragmentCompanyNameAction.setOnClickListener {
+            viewModel.onTriggerEvent(GlobalEvents.SetSearchSelection(4))
+        }
     }
 
     private fun subscribeObservers(){
@@ -89,22 +106,62 @@ class GlobalFragment : BaseInventoryFragment(),
 
             when(state.selectQuery) {
                 0 -> {
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
 
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
                 }
                 1 -> {
-                    globalBrandNameTV.background = context?.resources?.getDrawable(R.color.white)
-                    globalBrandNameTV.setTextColor(resources.getColor(R.color.black))
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.black))
+
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
                 }
                 2 -> {
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
+
                     globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.white)
                     globalFragmentGenericAction.setTextColor(resources.getColor(R.color.black))
+
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
                 }
                 3 -> {
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
+
                     globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.white)
                     globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.black))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
                 }
                 4 -> {
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
 
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.black))
                 }
 
             }
@@ -154,7 +211,7 @@ class GlobalFragment : BaseInventoryFragment(),
     }
 
     override fun onItemSelected(position: Int, item: GlobalMedicine) {
-        (activity as InventoryActivity).navigateGlobalFragmentToAddMedicineContainerFragment()
+        (activity as InventoryActivity).navigateGlobalFragmentToAddMedicineContainerFragment(item.id)
     }
 
     override fun restoreListPosition() {
