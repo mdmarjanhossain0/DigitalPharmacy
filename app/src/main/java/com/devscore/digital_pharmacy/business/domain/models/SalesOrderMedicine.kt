@@ -7,7 +7,9 @@ data class SalesOrderMedicine (
     var unit : Int,
     var quantity : Float,
     var local_medicine : Int,
-    var brand_name : String? = null
+    var brand_name : String? = null,
+    var unit_name : String? = null,
+    var amount : Float? = 0f
 
 )
 

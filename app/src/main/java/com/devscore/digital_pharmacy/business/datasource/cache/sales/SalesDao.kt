@@ -82,4 +82,13 @@ interface SalesDao {
         query: String,
         status : Int
     ): List<FailureSalesOrderWithMedicine>
+
+
+    @Transaction
+    @Query("""
+        SELECT * FROM SalesOrder WHERE pk = :pk
+        """)
+    suspend fun getSalesOrder(
+        pk : Int
+    ): SalesOderWithMedicine
 }

@@ -89,4 +89,22 @@ interface PurchasesDao {
         query: String,
         status : Int,
     ): List<FailurePurchasesOrderWithMedicine>
+
+
+
+    @Transaction
+    @Query("""
+        SELECT * FROM PurchasesOrder WHERE pk = :pk
+        """)
+    suspend fun getPurchasesOrder (
+        pk : Int
+    ): PurchasesOrderWithMedicine
+
+    @Transaction
+    @Query("""
+        SELECT * FROM PurchasesOrder WHERE pk = :pk
+        """)
+    suspend fun getFailurePurchasesOrder (
+        pk : Int
+    ): PurchasesOrderWithMedicine
 }

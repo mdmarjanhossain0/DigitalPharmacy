@@ -428,7 +428,9 @@ constructor(
                         unit = item.salesUnit?.id!!,
                         quantity = item.quantity?.toFloat()!!,
                         local_medicine = item.medicine?.id!!,
-                        brand_name = item.medicine?.brand_name!!
+                        brand_name = item.medicine?.brand_name!!,
+                        unit_name = item.salesUnit?.name!!,
+                        amount = item.amount
                     )
                 )
             }

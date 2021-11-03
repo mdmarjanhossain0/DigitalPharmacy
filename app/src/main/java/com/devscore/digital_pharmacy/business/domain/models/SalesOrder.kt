@@ -45,7 +45,9 @@ fun SalesOrder.toSalesOrderMedicinesEntity() : List<SalesOrderMedicineEntity> {
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,
-                brand_name = medicine.brand_name
+                brand_name = medicine.brand_name,
+                unit_name = medicine.unit_name,
+                amount = medicine.amount
             )
         )
     }
@@ -78,7 +80,9 @@ fun SalesOrder.toFailureSalesOderMedicineEntity() : List<FailureSalesOrderMedici
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,
-                brand_name = medicine.brand_name
+                brand_name = medicine.brand_name,
+                unit_name = medicine.unit_name,
+                amount = medicine.amount
             )
         )
     }

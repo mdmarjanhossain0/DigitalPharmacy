@@ -10,7 +10,8 @@ data class PurchasesOderItemDto (
     @SerializedName("local_medicine") var local_medicine : Int,
     @SerializedName("brand_name") var brand_name : String?,
     @SerializedName("pk") var pk : Int?,
-
+    @SerializedName("unit_name") var unit_name : String?,
+    @SerializedName("ammount") var amount : Float?
     )
 
 
@@ -20,6 +21,8 @@ fun PurchasesOderItemDto.toPurchasesOderMedicine() : PurchasesOrderMedicine {
         unit = unit,
         quantity = quantity,
         local_medicine = local_medicine,
-        brand_name = brand_name
+        brand_name = brand_name,
+        unit_name = unit_name,
+        amount = amount
     )
 }

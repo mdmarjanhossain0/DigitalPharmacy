@@ -48,7 +48,9 @@ fun PurchasesOrder.toPurchasesOrderMedicines() : List<PurchasesOrderMedicineEnti
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,
-                brand_name = medicine.brand_name
+                brand_name = medicine.brand_name,
+                unit_name = medicine.unit_name,
+                amount = medicine.amount
             )
         )
     }
@@ -82,7 +84,9 @@ fun PurchasesOrder.toFailurePurchasesOrderMedicineEntity() : List<FailurePurchas
                 unit = medicine.unit,
                 quantity = medicine.quantity,
                 local_medicine = medicine.local_medicine,
-                brand_name = medicine.brand_name
+                brand_name = medicine.brand_name,
+                unit_name = medicine.unit_name,
+                amount = medicine.amount
             )
         )
     }

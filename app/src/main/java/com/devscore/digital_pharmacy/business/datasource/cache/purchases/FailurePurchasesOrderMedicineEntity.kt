@@ -34,7 +34,11 @@ data class FailurePurchasesOrderMedicineEntity (
 
     var local_medicine : Int,
 
-    var brand_name : String?
+    var brand_name : String?,
+
+    var unit_name : String?,
+
+    var amount : Float?
 
 )
 
@@ -44,6 +48,8 @@ fun FailurePurchasesOrderMedicineEntity.toPurchasesOrderMedicine() : PurchasesOr
         unit = unit,
         quantity = quantity,
         local_medicine = local_medicine,
-        brand_name = brand_name
+        brand_name = brand_name,
+        unit_name = unit_name,
+        amount = amount
     )
 }

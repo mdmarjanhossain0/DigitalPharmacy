@@ -24,7 +24,7 @@ fun CreateSalesOrderMedicine.toSalesOrderMedicine() : SalesOrderMedicine {
     return SalesOrderMedicine(
         unit = unit,
         quantity = quantity,
-        local_medicine = local_medicine
+        local_medicine = local_medicine,
     )
 }
 
