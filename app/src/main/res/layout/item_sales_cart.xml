@@ -188,9 +188,10 @@
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             />
         <ImageView
+            android:id="@+id/unitSwith"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_polygon"
+            android:src="@drawable/ic_circle_right"
             app:layout_constraintTop_toTopOf="@id/salesCardItemUnit"
             app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
             app:layout_constraintLeft_toRightOf="@id/salesCardItemUnit"

@@ -37,13 +37,9 @@ constructor(
                 search()
             }
 
-            is GlobalEvents.SearchWithQuery -> {
-                searchWithQuery(event.query)
-            }
-
 
             is GlobalEvents.SetSearchSelection -> {
-                selectQuery(event.selection)
+                selectQuery(event.action)
             }
 
             is GlobalEvents.NextPage -> {
@@ -64,38 +60,11 @@ constructor(
         }
     }
 
-    private fun selectQuery(selection: Int) {
+    private fun selectQuery(action: String) {
         state.value.let { state ->
             this.state.value = state?.copy(
-                selectQuery = selection
+                action = action
             )
-        }
-    }
-
-    private fun searchWithQuery(query: String) {
-        state.value?.let { state ->
-            searchGlobalMedicine.execute(
-                authToken = sessionManager.state.value?.authToken,
-                query = query,
-                page = state.page,
-            ).onEach { dataState ->
-                Log.d(TAG, "ViewModel " + dataState.toString())
-                this.state.value = state.copy(isLoading = dataState.isLoading)
-
-                dataState.data?.let { list ->
-                    Log.d(TAG, "ViewModel List Size " + list.size)
-                    this.state.value = state.copy(globalMedicineList = list)
-                }
-
-                dataState.stateMessage?.let { stateMessage ->
-                    if (stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true) {
-                        onUpdateQueryExhausted(true)
-                    } else {
-                        appendToMessageQueue(stateMessage)
-                    }
-                }
-
-            }.launchIn(viewModelScope)
         }
     }
 
@@ -156,11 +125,13 @@ constructor(
     private fun search() {
 //        resetPage()
 //        clearList()
+        Log.d(TAG, "ViewModel Search Query " + state.value?.query)
         state.value?.let { state ->
             searchGlobalMedicine.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
                 page = state.page,
+                action = state.action
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())
                 this.state.value = state.copy(isLoading = dataState.isLoading)

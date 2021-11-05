@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
@@ -132,8 +133,8 @@ class PurchasesCartFragment : BasePurchasesFragment(),
         oderDetails(item)
     }
 
-    override fun onChangeUnit(position: Int, item: PurchasesCart, unitId: Int, quantity : Int) {
-        viewModel.onTriggerEvent(PurchasesCartEvents.ChangeUnit(item.medicine!!, unitId, quantity!!))
+    override fun onChangeUnit(position: Int, item: PurchasesCart, unit: MedicineUnits, quantity : Int) {
+        viewModel.onTriggerEvent(PurchasesCartEvents.ChangeUnit(item, unit, quantity!!))
     }
 
 

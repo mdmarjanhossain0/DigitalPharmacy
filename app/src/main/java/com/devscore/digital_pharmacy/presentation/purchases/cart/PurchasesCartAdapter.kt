@@ -1,5 +1,7 @@
 package com.devscore.digital_pharmacy.presentation.purchases.cart
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import com.skydoves.powermenu.CustomPowerMenu
 import com.skydoves.powermenu.MenuAnimation
 import kotlinx.android.synthetic.main.item_sales_cart.view.*
+import java.lang.Exception
 
 class PurchasesCartAdapter
 constructor(
@@ -28,7 +31,7 @@ constructor(
 
     val loadingItem = PurchasesCart(
         medicine = null,
-        salesUnit = null,
+        purchasesUnit = null,
         quantity = -2,
         amount = null
     )
@@ -37,7 +40,7 @@ constructor(
 
     val notFound = PurchasesCart(
         medicine = null,
-        salesUnit = null,
+        purchasesUnit = null,
         quantity = -3,
         amount = null
     )
@@ -176,6 +179,36 @@ constructor(
 
             itemView.salesCardItemBrandName.setText(item.medicine!!.brand_name!!)
 
+            itemView.unitSwith.setOnClickListener {
+                try {
+                    for (i in 0..(item.medicine?.units?.size!! - 1)) {
+                        if (item.medicine?.units?.get(i)?.id == item.purchasesUnit?.id) {
+                            interaction?.onChangeUnit(
+                                position = adapterPosition,
+                                item = item,
+                                unit = item.medicine?.units?.get(i+1)!!,
+                                quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
+                            val amount = item.medicine?.purchases_price!! * item.medicine?.units?.get(i+1)?.quantity!! * itemView.salesCartItemQuantityCount.text.toString().toInt()
+                            itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
+                            itemView.salesCardItemUnit.setText(item.medicine?.units?.get(i+1)!!.name)
+                            Log.d("AppDebug", "SalesCartAdapter " + item.toString())
+
+                            break
+                        }
+                    }
+                }
+                catch (e : Exception) {
+                    e.printStackTrace()
+                    interaction?.onChangeUnit(
+                        position = adapterPosition,
+                        item = item,
+                        unit = item.medicine?.units?.get(0)!!,
+                        quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
+                    val amount = item.medicine?.purchases_price!! * item.medicine?.units?.get(0)?.quantity!! * itemView.salesCartItemQuantityCount.text.toString().toInt()
+                    itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
+                    itemView.salesCardItemUnit.setText(item.medicine?.units?.get(0)!!.name)
+                }
+            }
 
 
             val newList = mutableListOf<MedicineUnits>()
@@ -195,9 +228,11 @@ constructor(
                 interaction?.onChangeUnit(
                     position = adapterPosition,
                     item = item,
-                    unitId = selectItem.id!!,
+                    unit = selectItem!!,
                     quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
-                Log.d("AppDebug", item.toString())
+                val amount = item.medicine?.purchases_price!! * selectItem.quantity * itemView.salesCartItemQuantityCount.text.toString().toInt()
+                itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
+                Log.d("AppDebug", "PurchasesCart Adapter " + item.toString())
                 customPowerMenu.dismiss()
             }
 
@@ -223,31 +258,33 @@ constructor(
                 itemView.salesCartItemQuantityCount.setText(value.toString())
             }
 
+            itemView.salesCartItemQuantityCount.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            itemView.salesCartItemQuantityCount.doOnTextChanged { text, start, before, count ->
-                try {
-                    val value = itemView.salesCartItemQuantityCount.text.toString().toInt()
-                    if (value < 1) {
-                        itemView.salesCartItemQuantityCount.setText("1")
-                        interaction?.alertDialog(item, "It cann't decrease")
-                        return@doOnTextChanged
-                    }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
                     interaction?.onChangeUnit(
                         position = adapterPosition,
                         item = item,
-                        unitId = item.salesUnit?.id!!,
-                        quantity = value)
+                        unit = item.purchasesUnit!!,
+                        quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
+                    val amount = item.medicine?.purchases_price!! * item.purchasesUnit?.quantity!! * itemView.salesCartItemQuantityCount.text.toString().toInt()
+                    itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
                 }
-                catch (e : Exception) {
-                    itemView.salesCartItemQuantityCount.setText("1")
-                    interaction?.alertDialog(item, "It cann't decrease")
-                    return@doOnTextChanged
-                }
-            }
+
+            })
 
             itemView.salesCartSubTotal.setText("Sub Total ৳ " + item.amount)
-            if (item.salesUnit != null) {
-                itemView.salesCardItemUnit.setText(item.salesUnit?.name)
+            if (item.purchasesUnit != null) {
+                itemView.salesCardItemUnit.setText(item.purchasesUnit?.name)
             }
 
 
@@ -259,7 +296,7 @@ constructor(
 
         fun onItemSelected(position: Int, item: PurchasesCart)
 
-        fun onChangeUnit(position: Int, item: PurchasesCart, unitId : Int, quantity : Int)
+        fun onChangeUnit(position: Int, item: PurchasesCart, unit : MedicineUnits, quantity : Int)
 
         fun alertDialog(item : PurchasesCart, message : String)
 

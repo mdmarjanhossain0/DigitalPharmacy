@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesCart
-import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import kotlinx.android.synthetic.main.item_sub_sales_list.view.*
 
 class PurchasesOrderItemAdapter
@@ -100,8 +99,8 @@ constructor(
 
         fun bind(item: PurchasesCart) = with(itemView) {
             salesPaymentOrderItemBrandName.setText(item.medicine?.brand_name)
-            salesPaymentOrderItemUnitPrize.setText("৳" + (item.salesUnit?.quantity!! * item.medicine?.mrp!!))
-            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.salesUnit?.name.toString())
+            salesPaymentOrderItemUnitPrize.setText("৳" + (item.purchasesUnit?.quantity!! * item.medicine?.mrp!!))
+            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.purchasesUnit?.name.toString())
             salesPaymentOrderItemTotalAmount.setText("৳" + item.amount.toString())
 
 

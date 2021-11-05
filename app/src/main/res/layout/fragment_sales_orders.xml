@@ -6,15 +6,28 @@
     android:layout_height="match_parent"
     >
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/salesOrdersRvId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_sales_orders" />
+
+    <ImageView
+        android:id="@+id/newSalesOrder"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/ic_sales"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -23,7 +36,9 @@
         app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -56,7 +71,7 @@
 
 
             <ImageView
-                android:id="@+id/newSalesOrder"
+                android:id="@+id/newSalesOrders"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="28dp"
@@ -70,9 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="New Sales"
-                app:layout_constraintBottom_toBottomOf="@+id/newSalesOrder"
-                app:layout_constraintEnd_toStartOf="@+id/newSalesOrder"
-                app:layout_constraintTop_toTopOf="@+id/newSalesOrder" />
+                app:layout_constraintBottom_toBottomOf="@+id/newSalesOrders"
+                app:layout_constraintEnd_toStartOf="@+id/newSalesOrders"
+                app:layout_constraintTop_toTopOf="@+id/newSalesOrders" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

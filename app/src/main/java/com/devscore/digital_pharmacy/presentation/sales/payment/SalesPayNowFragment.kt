@@ -75,7 +75,13 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
 
     private fun initUIClick() {
         createSalesOrder.setOnClickListener {
-            viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+            val due = viewModel.state.value?.totalAmountAfterDiscount!! - viewModel.state.value?.receivedAmount!!
+            if (due > 0 && viewModel.state.value?.customer == null) {
+                dueWarning()
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+            }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -177,28 +183,6 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
     }
 
 
-
-
-    fun backPressWarning() {
-        MaterialDialog(requireContext())
-            .show{
-                title(R.string.are_you_sure)
-                message(text = "Cart item will be dismiss")
-                positiveButton(R.string.text_ok){
-                    viewModel.state.value = SalesCardState()
-                    findNavController().popBackStack()
-                    dismiss()
-                }
-                negativeButton {
-                    dismiss()
-                }
-                onDismiss {
-                }
-                cancelable(false)
-            }
-    }
-
-
     fun notItemAvailableInCart() {
         val dialog = MaterialDialog(requireContext())
             .show {
@@ -226,5 +210,21 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
 
     override fun onItemDelete(item: SalesCart) {
         viewModel.onTriggerEvent(SalesCardEvents.DeleteMedicine(item.medicine!!))
+    }
+
+
+
+    fun dueWarning() {
+        MaterialDialog(requireContext())
+            .show{
+                title(R.string.Warning)
+                message(text = "Customer must be select for due payment")
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
     }
 }

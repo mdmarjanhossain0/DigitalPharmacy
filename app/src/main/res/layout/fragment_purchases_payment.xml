@@ -278,6 +278,7 @@
                     app:layout_constraintTop_toBottomOf="@id/purchasesPaymentDueAmount" />
 
                 <TextView
+                    android:id="@+id/externalTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"

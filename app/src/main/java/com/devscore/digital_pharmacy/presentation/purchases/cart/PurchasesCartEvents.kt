@@ -1,8 +1,8 @@
 package com.devscore.digital_pharmacy.presentation.purchases.cart
 
-import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
-import com.devscore.digital_pharmacy.business.domain.models.Supplier
+import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
+import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
 
 sealed class PurchasesCartEvents {
 
@@ -12,8 +12,8 @@ sealed class PurchasesCartEvents {
 
     data class AddToCard(val medicine : LocalMedicine): PurchasesCartEvents()
 
-
-    data class ChangeUnit(val medicine: LocalMedicine, val unit : Int?, val quantity : Int?) : PurchasesCartEvents()
+    data class ChangeUnit(val cart : PurchasesCart, val unit : MedicineUnits?, val quantity : Int?) : PurchasesCartEvents()
+//    data class ChangeUnit(val medicine: LocalMedicine, val unit : Int?, val quantity : Int?) : PurchasesCartEvents()
 
     data class IsDiscountPercent(val isDiscountPercent : Boolean = false) : PurchasesCartEvents()
 

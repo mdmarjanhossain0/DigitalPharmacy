@@ -54,7 +54,13 @@ class PurchasesPaymentFragment : BasePurchasesFragment(), PurchasesOrderItemAdap
 
     private fun initUIClick() {
         createSalesOrder.setOnClickListener {
-            viewModel.onTriggerEvent(PurchasesCartEvents.GenerateNewOrder)
+            val due = viewModel.state.value?.totalAmountAfterDiscount!! - viewModel.state.value?.receivedAmount!!
+            if (due > 0 && viewModel.state.value?.vendor == null) {
+                dueWarning()
+            }
+            else {
+                viewModel.onTriggerEvent(PurchasesCartEvents.GenerateNewOrder)
+            }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -93,6 +99,11 @@ class PurchasesPaymentFragment : BasePurchasesFragment(), PurchasesOrderItemAdap
             Log.d(TAG, "OnClickListener")
             findNavController().navigate(R.id.action_purchasesPaymentFragment_to_purchasesSuplierListFragment)
         }
+
+
+
+        img2.visibility = View.INVISIBLE
+        externalTV.visibility = View.INVISIBLE
 
     }
 
@@ -206,5 +217,20 @@ class PurchasesPaymentFragment : BasePurchasesFragment(), PurchasesOrderItemAdap
 
     override fun onItemDelete(item: PurchasesCart) {
         viewModel.onTriggerEvent(PurchasesCartEvents.DeleteMedicine(item.medicine!!))
+    }
+
+
+    fun dueWarning() {
+        MaterialDialog(requireContext())
+            .show{
+                title(R.string.Warning)
+                message(text = "Customer must be select for due payment")
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
     }
 }

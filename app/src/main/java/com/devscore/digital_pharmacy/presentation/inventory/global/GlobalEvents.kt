@@ -16,7 +16,7 @@ sealed class GlobalEvents {
 
     data class GenericWithManufacturerFilter(val generic : String, val manufacturer: String): GlobalEvents()
 
-    data class SetSearchSelection(val selection : Int) : GlobalEvents()
+    data class SetSearchSelection(val action : String) : GlobalEvents()
 
     data class UpdateQuery(val query: String): GlobalEvents()
 

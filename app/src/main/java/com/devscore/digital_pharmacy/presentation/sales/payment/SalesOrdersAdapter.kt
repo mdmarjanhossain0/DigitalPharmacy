@@ -25,6 +25,7 @@ class SalesOrdersAdapter
 
 
     var recyclerItemAdapter : SalesOrderItemAdapter? = null
+    var itemNumber = 0
 
     class SalesOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -39,6 +40,7 @@ class SalesOrdersAdapter
 //        holder.itemView.setOnClickListener {
 //        }
         Log.d("AppDebug", "onBind")
+        holder.itemView.numberOfItem.setText("Item list " + itemNumber.toString() )
         holder.itemView.salesOrderItemRvId.apply {
             layoutManager = LinearLayoutManager(context)
             val topSpacingDecorator = TopSpacingItemDecoration(0)
@@ -61,6 +63,7 @@ class SalesOrdersAdapter
             recyclerItemAdapter = SalesOrderItemAdapter(interaction)
         }
         recyclerItemAdapter?.submitList(cartList)
+        itemNumber = cartList.size
         notifyDataSetChanged()
     }
 }
