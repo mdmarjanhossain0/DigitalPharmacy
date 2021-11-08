@@ -53,6 +53,12 @@
         <action
             android:id="@+id/action_purchasesPaymentFragment_to_createSupplierFragment2"
             app:destination="@id/createSupplierFragment2" />
+        <action
+            android:id="@+id/action_purchasesPaymentFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_purchases_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/purchasesSuplierListFragment"

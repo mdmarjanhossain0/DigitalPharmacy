@@ -6,6 +6,9 @@ import com.devscore.digital_pharmacy.business.datasource.network.inventory.netwo
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.GlobalMedicineResponse
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.LocalMedicineResponse
 import com.devscore.digital_pharmacy.business.domain.models.AddMedicine
+import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface InventoryApiService {
@@ -77,6 +80,15 @@ interface InventoryApiService {
     suspend fun addMedicine(
         @Header("Authorization") authorization: String,
         @Body medicine : AddMedicine
+    ) : AddMedicineResponse
+
+    @Multipart
+    @POST("inventory/addmedicines")
+    suspend fun addMedicines (
+        @Header("Authorization") authorization: String,
+        @Part("brand_name") brand_name : RequestBody,
+//        @Part image: MultipartBody.Part?,
+        @Part("units") units : String
     ) : AddMedicineResponse
 }
 

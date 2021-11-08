@@ -33,4 +33,5 @@ data class PurchasesCartState (
     val page: Int = 1,
     val isQueryExhausted: Boolean = false, // no more results available, prevent next page
     val queue: Queue<StateMessage> = Queue(mutableListOf()),
+    val uploaded : Boolean = false
 )

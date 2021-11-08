@@ -41,9 +41,7 @@ import androidx.core.widget.doOnTextChanged
 import android.view.MotionEvent
 
 import android.view.View.OnTouchListener
-
-
-
+import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartState
 
 
 @AndroidEntryPoint
@@ -74,6 +72,13 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
     }
 
     private fun initUIClick() {
+
+//        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+//            backPressWarning()
+//            Log.d(TAG, "Fragment On Back Press Callback call")
+//        }
+
+
         createSalesOrder.setOnClickListener {
             val due = viewModel.state.value?.totalAmountAfterDiscount!! - viewModel.state.value?.receivedAmount!!
             if (due > 0 && viewModel.state.value?.customer == null) {
@@ -157,6 +162,11 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
             }
             else {
                 salesPaymentSearchView.setText("      " + "Walk-In Customer")
+            }
+
+            if (state.uploaded) {
+                viewModel.state.value = SalesCardState()
+                findNavController().navigate(R.id.action_salesPayNowFragment_to_salesFragment)
             }
         })
     }

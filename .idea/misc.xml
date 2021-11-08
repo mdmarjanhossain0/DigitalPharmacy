@@ -183,9 +183,11 @@
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25" />
         <entry key="..\:/DigitalPharmacy/DigitalPharmacy/app/src/main/res/menu/nev_menu.xml" value="0.25" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/drawable/ic_polygon.xml" value="0.2421875" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/activity_cash_register.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/activity_purchases.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/activity_sales.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_add_customer.xml" value="0.11594202898550725" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_cash_vendor.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_create_supplier.xml" value="0.10746720484359233" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_customers_list.xml" value="0.18659420289855072" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_dashboard.xml" value="0.10746720484359233" />
@@ -212,6 +214,8 @@
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_orders.xml" value="0.536" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_sales_pay_now.xml" value="0.4" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_supplier_list.xml" value="0.2" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_vendor_payment.xml" value="0.264" />
+        <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/fragment_vendor_receive.xml" value="0.264" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/inventory_list_filter_dialog.xml" value="0.17753623188405798" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_customer_list.xml" value="0.4" />
         <entry key="..\:/Marjan/DigitalPharmacy/app/src/main/res/layout/item_global.xml" value="0.264" />

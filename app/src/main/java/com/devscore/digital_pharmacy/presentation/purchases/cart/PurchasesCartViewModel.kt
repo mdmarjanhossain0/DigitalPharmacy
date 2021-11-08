@@ -361,7 +361,10 @@ constructor(
                 this.state.value = state.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { order ->
-                    this.state.value = state.copy(order = order)
+                    this.state.value = state.copy(
+                        order = order,
+                        uploaded = true
+                    )
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

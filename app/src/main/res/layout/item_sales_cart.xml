@@ -187,6 +187,25 @@
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             />
+
+        <Spinner
+            android:background="@drawable/gray_shape_outline1"
+            android:id="@+id/salesCardItemUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:drawablePadding="5dp"
+            android:text="Packs"
+            android:textSize="12sp"
+            android:padding="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            />
+
+
         <ImageView
             android:id="@+id/unitSwith"
             android:layout_width="wrap_content"
@@ -195,6 +214,7 @@
             app:layout_constraintTop_toTopOf="@id/salesCardItemUnit"
             app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
             app:layout_constraintLeft_toRightOf="@id/salesCardItemUnit"
+            android:visibility="invisible"
             />
 
 

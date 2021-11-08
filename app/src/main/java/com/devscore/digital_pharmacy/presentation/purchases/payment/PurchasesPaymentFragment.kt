@@ -143,6 +143,13 @@ class PurchasesPaymentFragment : BasePurchasesFragment(), PurchasesOrderItemAdap
             else {
                 purchasesPaymentSearchView.setText("      " + "Walk-In Supplier")
             }
+
+
+
+            if (state.uploaded) {
+                viewModel.state.value = PurchasesCartState()
+                findNavController().navigate(R.id.action_purchasesPaymentFragment_to_purchaseFragment)
+            }
         })
     }
 

@@ -46,6 +46,12 @@
         <action
             android:id="@+id/action_salesPayNowFragment_to_salesCustomerListFragment"
             app:destination="@id/salesCustomerListFragment" />
+        <action
+            android:id="@+id/action_salesPayNowFragment_to_salesFragment"
+            app:destination="@id/salesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_sales_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/salesInventoryFragment"

@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
@@ -35,6 +36,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers.io
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import java.util.concurrent.TimeUnit
 
 
@@ -73,6 +76,39 @@ class LocalFragment : BaseInventoryFragment(),
     }
 
     private fun initUIClick() {
+
+       /* val list = mutableListOf<MedicineUnits>()
+        list.add(
+            MedicineUnits(
+                name = "p",
+                quantity = 5,
+                type = "SALES"
+            )
+        )
+        list.add(
+            MedicineUnits(
+                name = "ppp",
+                quantity = 5,
+                type = "SALES"
+            )
+        )
+
+        val brand_name = RequestBody.create(
+            MediaType.parse("text/plain"),
+            "test"
+        )
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = inventoryApiService.addMedicines(
+                "Token 0c58549b616cba8e1f39a4ed1c86b019b52ea764",
+                brand_name = brand_name,
+                units = "dfdf"
+                )
+            Log.d(TAG, result.toString())
+        }*/
+
+
 /*        CoroutineScope(IO).launch {
             val result = inventoryApiService.addMedicine(
                 "Token 0c58549b616cba8e1f39a4ed1c86b019b52ea764",

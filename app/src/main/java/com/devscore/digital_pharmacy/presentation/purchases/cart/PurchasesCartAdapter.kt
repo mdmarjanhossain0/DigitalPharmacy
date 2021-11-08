@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
@@ -16,6 +18,8 @@ import com.devscore.digital_pharmacy.presentation.sales.card.UnitMenuAdapter
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import com.skydoves.powermenu.CustomPowerMenu
 import com.skydoves.powermenu.MenuAnimation
+import com.skydoves.powermenu.OnMenuItemClickListener
+import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import kotlinx.android.synthetic.main.item_sales_cart.view.*
 import java.lang.Exception
 
@@ -179,7 +183,7 @@ constructor(
 
             itemView.salesCardItemBrandName.setText(item.medicine!!.brand_name!!)
 
-            itemView.unitSwith.setOnClickListener {
+            /*itemView.unitSwith.setOnClickListener {
                 try {
                     for (i in 0..(item.medicine?.units?.size!! - 1)) {
                         if (item.medicine?.units?.get(i)?.id == item.purchasesUnit?.id) {
@@ -208,14 +212,14 @@ constructor(
                     itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
                     itemView.salesCardItemUnit.setText(item.medicine?.units?.get(0)!!.name)
                 }
-            }
+            }*/
 
 
             val newList = mutableListOf<MedicineUnits>()
             for (a in item.medicine?.units!!) {
                 newList.add(a)
             }
-            val menu =
+            /*val menu =
                 CustomPowerMenu.Builder(itemView.context, UnitMenuAdapter())
                     .addItemList(newList)
                     .setAnimation(MenuAnimation.SHOWUP_TOP_RIGHT)
@@ -236,16 +240,60 @@ constructor(
                 customPowerMenu.dismiss()
             }
 
-
-
-
-
-
-            itemView.setOnClickListener {
-//                interaction?.onItemSelected(adapterPosition, item)
-            }
             itemView.salesCardItemUnit.setOnClickListener {
                 customPowerMenu.showAsAnchorCenter(itemView.salesCardItemUnit)
+
+            }*/
+
+
+
+            itemView.salesCardItemUnit.setOnClickListener {
+                itemView.salesCardItemUnitSpinner.visibility = View.VISIBLE
+                itemView.salesCardItemUnit.visibility = View.INVISIBLE
+
+                val kindAdapter = SpinnerAdapter(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    newList.toTypedArray()
+                )
+
+                kindAdapter.setDropDownViewResource(
+                    android.R.layout
+                        .simple_spinner_dropdown_item
+                )
+
+                itemView.salesCardItemUnitSpinner.setAdapter(kindAdapter)
+                itemView.salesCardItemUnitSpinner.setAdapter(kindAdapter)
+                itemView.salesCardItemUnitSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        if (newList.get(position).id == item.purchasesUnit?.id) {
+                            Log.d("AppDebug", "spinner return")
+                            return
+                        }
+
+                        interaction?.onChangeUnit(
+                            position = adapterPosition,
+                            item = item,
+                            unit = newList.get(position),
+                            quantity = itemView.salesCartItemQuantityCount.text.toString().toInt())
+
+                        val amount = item.medicine?.purchases_price!! * newList.get(position)?.quantity!! * itemView.salesCartItemQuantityCount.text.toString().toInt()
+                        itemView.salesCartSubTotal.setText("Sub Total ৳ " + amount)
+                        itemView.salesCardItemUnit.setText(newList.get(position)!!.name)
+                        Log.d("AppDebug", "SalesCartAdapter " + item.toString())
+                        itemView.salesCardItemUnitSpinner.visibility = View.INVISIBLE
+                        itemView.salesCardItemUnit.visibility = View.VISIBLE
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        itemView.salesCardItemUnitSpinner.visibility = View.INVISIBLE
+                        itemView.salesCardItemUnit.visibility = View.VISIBLE
+                    }
+
+                })
+
+                itemView.salesCardItemUnitSpinner.performClick()
 
             }
 
@@ -290,8 +338,8 @@ constructor(
 
             itemView.salesCartItemQuantityCount.setText(item.quantity.toString())
         }
-    }
 
+    }
     interface Interaction {
 
         fun onItemSelected(position: Int, item: PurchasesCart)

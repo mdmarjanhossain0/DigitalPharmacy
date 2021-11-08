@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DigitalPharmacy"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.cashregister.CashRegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.purchases.PurchasesActivity"
             android:exported="false" />
         <activity
