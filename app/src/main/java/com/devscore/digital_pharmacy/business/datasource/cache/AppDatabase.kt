@@ -6,6 +6,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDa
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.cashregister.*
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.FailureCustomerEntity
@@ -37,8 +38,12 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     PurchasesOrderEntity::class,
     PurchasesOrderMedicineEntity::class,
     FailurePurchasesOrderEntity::class,
-    FailurePurchasesOrderMedicineEntity::class
-], version = 17)
+    FailurePurchasesOrderMedicineEntity::class,
+    ReceiveEntity::class,
+    FailureReceiveEntity::class,
+    PaymentEntity::class,
+    FailurePaymentEntity::class
+], version = 18)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao
@@ -56,6 +61,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getSalesDao() : SalesDao
 
     abstract fun getPurchasesDao() : PurchasesDao
+
+
+    abstract fun getReceiveDao() : ReceiveDao
+
+    abstract fun getPaymentDao() : PaymentDao
 
 
     companion object{

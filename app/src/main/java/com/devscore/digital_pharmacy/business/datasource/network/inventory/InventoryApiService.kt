@@ -87,8 +87,8 @@ interface InventoryApiService {
     suspend fun addMedicines (
         @Header("Authorization") authorization: String,
         @Part("brand_name") brand_name : RequestBody,
-//        @Part image: MultipartBody.Part?,
-        @Part("units") units : String
+        @Part image: MultipartBody.Part?,
+        @Part("units") units : RequestBody
     ) : AddMedicineResponse
 }
 

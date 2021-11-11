@@ -1,13 +1,20 @@
 package com.devscore.digital_pharmacy.presentation.inventory.local
 
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -23,6 +30,9 @@ import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragmen
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
+import com.google.gson.Gson
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.*
 import kotlinx.android.synthetic.main.add_product_dialog.*
@@ -39,6 +49,8 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.util.concurrent.TimeUnit
+import okhttp3.MultipartBody
+import java.io.File
 
 
 @AndroidEntryPoint
@@ -54,7 +66,23 @@ class LocalFragment : BaseInventoryFragment(),
     private var recyclerAdapter: LocalAdapter? = null // can leak memory so need to null
     private val viewModel: LocalMedicineViewModel by viewModels()
     private val disposables = CompositeDisposable()
-    private val timeSinceLastRequest: Long = 0
+
+
+    private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri>() {
+        override fun createIntent(context: Context, input: Any?): Intent {
+            return CropImage
+                .activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .getIntent(context)
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return CropImage.getActivityResult(intent)?.uri
+        }
+    }
+
+    private lateinit var cropActivityResultLauncher: ActivityResultLauncher<Any?>
+
 
 
     override fun onCreateView(
@@ -70,43 +98,75 @@ class LocalFragment : BaseInventoryFragment(),
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
         initRecyclerView()
+//        openImage()
         initUIClick()
         bouncingSearch()
         subscribeObservers()
     }
 
-    private fun initUIClick() {
-
-       /* val list = mutableListOf<MedicineUnits>()
-        list.add(
-            MedicineUnits(
-                name = "p",
-                quantity = 5,
-                type = "SALES"
-            )
-        )
-        list.add(
-            MedicineUnits(
-                name = "ppp",
-                quantity = 5,
-                type = "SALES"
-            )
-        )
-
-        val brand_name = RequestBody.create(
-            MediaType.parse("text/plain"),
-            "test"
-        )
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = inventoryApiService.addMedicines(
-                "Token 0c58549b616cba8e1f39a4ed1c86b019b52ea764",
-                brand_name = brand_name,
-                units = "dfdf"
+    private fun openImage() {
+        cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) { uri ->
+            val list = mutableListOf<MedicineUnits>()
+            list.add(
+                MedicineUnits(
+                    name = "p",
+                    quantity = 5,
+                    type = "SALES"
                 )
-            Log.d(TAG, result.toString())
-        }*/
+            )
+            list.add(
+                MedicineUnits(
+                    name = "ppp",
+                    quantity = 5,
+                    type = "SALES"
+                )
+            )
+
+            val brand_name = RequestBody.create(
+                MediaType.parse("text/plain"),
+                "Napaaaa"
+            )
+
+            val json = Gson()
+            val gson = json.toJson(list)
+            val units = RequestBody.create(
+                MediaType.parse("application/json"),
+                gson
+            )
+
+
+
+            var multipartBody: MultipartBody.Part? = null
+            val imageFile = File(uri.path)
+            if(imageFile.exists()){
+                val requestBody =
+                    RequestBody.create(
+                        MediaType.parse("image/jpeg"),
+                        imageFile
+                    )
+                multipartBody = MultipartBody.Part.createFormData(
+                    "image",
+                    imageFile.name,
+                    requestBody
+                )
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    val result = inventoryApiService.addMedicines(
+                        "Token c0b7ea3fd8309d9a8768f42b931e2047b376ef1f",
+                        brand_name = brand_name,
+                        image = multipartBody,
+                        units = units
+                    )
+                    Log.d(TAG, result.toString())
+                }
+            }
+            Log.d(TAG, uri.toString())
+        }
+
+        cropActivityResultLauncher.launch(null)
+    }
+
+    private fun initUIClick() {
 
 
 /*        CoroutineScope(IO).launch {
@@ -137,18 +197,6 @@ class LocalFragment : BaseInventoryFragment(),
             )
             Log.d(TAG, result.toString())
         }*/
-
-//        localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                executeNewQuery(newText)
-//                return true
-//            }
-//
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                executeNewQuery(query)
-//                return true
-//            }
-//        })
 
 
         localFragmentFloatingActionButton.setOnClickListener {
@@ -307,5 +355,4 @@ class LocalFragment : BaseInventoryFragment(),
             }
         )
     }
-
 }
