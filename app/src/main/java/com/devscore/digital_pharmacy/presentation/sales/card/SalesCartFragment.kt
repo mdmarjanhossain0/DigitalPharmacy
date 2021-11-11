@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
@@ -66,11 +67,6 @@ class SalesCartFragment : BaseSalesFragment(),
     private fun initUIClick() {
 
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            backPressWarning()
-            Log.d(TAG, "Fragment On Back Press Callback call")
-        }
-
         salesCardGenerate.setOnClickListener {
             if (viewModel.state.value?.salesCartList?.size!! < 1) {
                 notItemAvailableInCart()
@@ -111,12 +107,6 @@ class SalesCartFragment : BaseSalesFragment(),
         })
     }
 
-    private fun executeNewQuery(query: String){
-        resetUI()
-        viewModel.onTriggerEvent(SalesCardEvents.UpdateQuery(query))
-        viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
-    }
-
     private  fun resetUI(){
 //        uiCommunicationListener.hideSoftKeyboard()
 //        focusableView.requestFocus()
@@ -143,18 +133,18 @@ class SalesCartFragment : BaseSalesFragment(),
         oderDetails(item)
     }
 
-    override fun onChangeUnit(position: Int, item: SalesCart, unitId: Int, quantity : Int) {
-        viewModel.onTriggerEvent(SalesCardEvents.ChangeUnit(item.medicine!!, unitId, quantity!!))
+    override fun onChangeUnit(position: Int, item: SalesCart, unit: MedicineUnits, quantity : Int) {
+        Log.d(TAG, "SalesFragment onChangeUnit Call " + Thread.currentThread().name)
+        viewModel.onTriggerEvent(SalesCardEvents.ChangeUnit(item, unit, quantity))
+        Log.d(TAG, "SalesFragment onChangeUnit Call Finish " + Thread.currentThread().name)
+//        viewModel.onTriggerEvent(SalesCardEvents.ChangeUnit(item.medicine!!, unitId, quantity!!))
     }
 
-
-    override fun restoreListPosition() {
+    override fun onUpdateQuantity(position: Int, item: SalesCart, quantity: Int) {
+        Log.d(TAG, "SalesFragment onQuantity Call " + Thread.currentThread().name)
+        viewModel.onTriggerEvent(SalesCardEvents.UpdateQuantity(item, quantity))
+        Log.d(TAG, "SalesFragment onQuantity Call Finish " + Thread.currentThread().name)
     }
-
-    override fun nextPage() {
-//        viewModel.onTriggerEvent(LocalMedicineEvents.NewLocalMedicineSearch)
-    }
-
 
 
     fun oderDetails(item: SalesCart) {
@@ -175,26 +165,6 @@ class SalesCartFragment : BaseSalesFragment(),
 //        dialog.show()
     }
 
-
-
-    fun backPressWarning() {
-        MaterialDialog(requireContext())
-            .show{
-                title(R.string.are_you_sure)
-                message(text = "Cart item will be dismiss")
-                positiveButton(R.string.text_ok){
-                    viewModel.state.value = SalesCardState()
-                    findNavController().popBackStack()
-                    dismiss()
-                }
-                negativeButton {
-                    dismiss()
-                }
-                onDismiss {
-                }
-                cancelable(false)
-            }
-    }
 
 
     fun notItemAvailableInCart() {

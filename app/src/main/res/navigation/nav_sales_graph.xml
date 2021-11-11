@@ -44,8 +44,14 @@
             android:id="@+id/action_salesPayNowFragment_to_addCustomerFragment2"
             app:destination="@id/addCustomerFragment2" />
         <action
-            android:id="@+id/action_salesPayNowFragment_to_customersListFragment2"
-            app:destination="@id/customersListFragment2" />
+            android:id="@+id/action_salesPayNowFragment_to_salesCustomerListFragment"
+            app:destination="@id/salesCustomerListFragment" />
+        <action
+            android:id="@+id/action_salesPayNowFragment_to_salesFragment"
+            app:destination="@id/salesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_sales_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/salesInventoryFragment"
@@ -61,8 +67,11 @@
         android:label="fragment_add_customer"
         tools:layout="@layout/fragment_add_customer" />
     <fragment
-        android:id="@+id/customersListFragment2"
-        android:name="com.devscore.digital_pharmacy.presentation.customer.customerlist.CustomersListFragment"
-        android:label="fragment_customers_list"
-        tools:layout="@layout/fragment_customers_list" />
+        android:id="@+id/salesCustomerListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.customerlist.SalesCustomerListFragment"
+        android:label="SalesCustomerListFragment" >
+        <action
+            android:id="@+id/action_salesCustomerListFragment_to_addCustomerFragment2"
+            app:destination="@id/addCustomerFragment2" />
+    </fragment>
 </navigation>

@@ -41,13 +41,11 @@ import androidx.core.widget.doOnTextChanged
 import android.view.MotionEvent
 
 import android.view.View.OnTouchListener
-
-
-
+import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartState
 
 
 @AndroidEntryPoint
-class SalesPayNowFragment : BaseSalesFragment(){
+class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction{
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null
@@ -74,8 +72,21 @@ class SalesPayNowFragment : BaseSalesFragment(){
     }
 
     private fun initUIClick() {
+
+//        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+//            backPressWarning()
+//            Log.d(TAG, "Fragment On Back Press Callback call")
+//        }
+
+
         createSalesOrder.setOnClickListener {
-            viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+            val due = viewModel.state.value?.totalAmountAfterDiscount!! - viewModel.state.value?.receivedAmount!!
+            if (due > 0 && viewModel.state.value?.customer == null) {
+                dueWarning()
+            }
+            else {
+                viewModel.onTriggerEvent(SalesCardEvents.GenerateNewOrder)
+            }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -110,24 +121,11 @@ class SalesPayNowFragment : BaseSalesFragment(){
             findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2)
         }
 
-//        salesPaymentSearchView.setOnSearchClickListener {
-//            Log.d(TAG, "OnSearchClickListener")
-//            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
-//        }
-
         salesPaymentSearchView.setOnClickListener {
             Log.d(TAG, "OnClickListener")
-            findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_salesCustomerListFragment)
         }
 
-
-//        salesPaymentSearchView.setOnTouchListener(object : OnTouchListener {
-//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                Log.d(TAG, "OnTouchListener")
-//                findNavController().navigate(R.id.action_salesPayNowFragment_to_customersListFragment2)
-//                return true
-//            }
-//        })
     }
 
     private fun subscribeObservers(){
@@ -145,7 +143,7 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 })
 
             recyclerAdapter?.apply {
-                submitList(order = state.order)
+                submitList(order = state.order, cartList = state.salesCartList)
             }
 
             salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
@@ -158,6 +156,18 @@ class SalesPayNowFragment : BaseSalesFragment(){
             totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
             val due = totalAmountAfterDiscount - state.receivedAmount!!
             salesPaymentDueAmount.setText("৳ " + due.toString())
+
+            if (viewModel.state.value?.customer != null) {
+                salesPaymentSearchView.setText("        " + viewModel.state.value?.customer?.name!!)
+            }
+            else {
+                salesPaymentSearchView.setText("      " + "Walk-In Customer")
+            }
+
+            if (state.uploaded) {
+                viewModel.state.value = SalesCardState()
+                findNavController().navigate(R.id.action_salesPayNowFragment_to_salesFragment)
+            }
         })
     }
 
@@ -171,7 +181,7 @@ class SalesPayNowFragment : BaseSalesFragment(){
             val topSpacingDecorator = TopSpacingItemDecoration(0)
             removeItemDecoration(topSpacingDecorator)
             addItemDecoration(topSpacingDecorator)
-            recyclerAdapter = SalesOrdersAdapter(context)
+            recyclerAdapter = SalesOrdersAdapter(this@SalesPayNowFragment)
             adapter = recyclerAdapter
         }
     }
@@ -180,28 +190,6 @@ class SalesPayNowFragment : BaseSalesFragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null
-    }
-
-
-
-
-    fun backPressWarning() {
-        MaterialDialog(requireContext())
-            .show{
-                title(R.string.are_you_sure)
-                message(text = "Cart item will be dismiss")
-                positiveButton(R.string.text_ok){
-                    viewModel.state.value = SalesCardState()
-                    findNavController().popBackStack()
-                    dismiss()
-                }
-                negativeButton {
-                    dismiss()
-                }
-                onDismiss {
-                }
-                cancelable(false)
-            }
     }
 
 
@@ -228,5 +216,25 @@ class SalesPayNowFragment : BaseSalesFragment(){
                 dialog.dismiss()
             }
         }
+    }
+
+    override fun onItemDelete(item: SalesCart) {
+        viewModel.onTriggerEvent(SalesCardEvents.DeleteMedicine(item.medicine!!))
+    }
+
+
+
+    fun dueWarning() {
+        MaterialDialog(requireContext())
+            .show{
+                title(R.string.Warning)
+                message(text = "Customer must be select for due payment")
+                negativeButton {
+                    dismiss()
+                }
+                onDismiss {
+                }
+                cancelable(false)
+            }
     }
 }

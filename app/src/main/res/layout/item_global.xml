@@ -44,6 +44,7 @@
             android:src="@drawable/ic_history"
             app:layout_constraintBottom_toBottomOf="@+id/globalBrandNameTV"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"
             app:layout_constraintTop_toTopOf="@+id/globalBrandNameTV" />
 
         <ImageView
@@ -91,7 +92,9 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/globalMRPTV"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/globalMRPTV" />
+            app:layout_constraintTop_toTopOf="@+id/globalMRPTV"
+            android:visibility="invisible"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

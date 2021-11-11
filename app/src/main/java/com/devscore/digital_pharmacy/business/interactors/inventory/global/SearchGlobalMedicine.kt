@@ -2,10 +2,12 @@ package com.devscore.digital_pharmacy.business.interactors.inventory.global
 
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.searchCacheGlobalMedicine
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.toGlobalMedicine
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.toGlobalMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.searchGlobalMedicine
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.toGlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
@@ -28,7 +30,8 @@ class SearchGlobalMedicine(
     fun execute(
         authToken: AuthToken?,
         query: String,
-        page: Int
+        page: Int,
+        action : String
     ): Flow<DataState<List<GlobalMedicine>>> = flow {
         emit(DataState.loading<List<GlobalMedicine>>())
         if(authToken == null){
@@ -37,14 +40,16 @@ class SearchGlobalMedicine(
 
         try{ // catch network exception
             Log.d(TAG, "Call Api Section")
-            val medicines = service.searchAllListGlobalMedicine(
+            val medicines = service.searchGlobalMedicine(
                 "Token ${authToken.token}",
                 query = query,
-                page = page
+                page = page,
+                action = action
             ).results.map {
                 Log.d(TAG, "looping toGLobalMedicine")
                 it.toGlobalMedicine()
             }
+            Log.d(TAG, "Network data " + medicines.size +" " + "Query " + query +medicines.toString())
 
             Log.d(TAG, "Success Api Call")
 
@@ -71,9 +76,14 @@ class SearchGlobalMedicine(
         }
 
         // emit from cache
-        val cachedBlogs = cache.getAllGlobalMedicine(
-            page = page
+        val cachedBlogs = cache.searchCacheGlobalMedicine(
+            query = query,
+            page = page,
+            action = action
         ).map { it.toGlobalMedicine() }
+
+
+        Log.d(TAG, "Cache Data " + cachedBlogs.size + " " + "Query " + query + cachedBlogs.toString())
 
         emit(DataState.data(response = null, data = cachedBlogs))
     }.catch { e ->

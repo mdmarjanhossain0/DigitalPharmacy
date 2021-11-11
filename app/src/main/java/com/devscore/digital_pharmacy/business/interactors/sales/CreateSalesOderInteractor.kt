@@ -20,7 +20,7 @@ class CreateSalesOderInteractor (
 
     fun execute(
         authToken: AuthToken?,
-        createSalesOder: CreateSalesOrder
+        createSalesOder: CreateSalesOrder,
     ): Flow<DataState<SalesOrder>> = flow {
 
         emit(DataState.loading<SalesOrder>())
@@ -55,6 +55,7 @@ class CreateSalesOderInteractor (
                     uiComponentType = UIComponentType.Dialog(),
                     messageType = MessageType.Success()
                 ), data = salesOder))
+            return@flow
 
 
         } catch (e: Exception){

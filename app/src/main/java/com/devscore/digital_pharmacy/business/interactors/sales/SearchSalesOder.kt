@@ -22,6 +22,7 @@ class SearchSalesOder(
     fun execute(
         authToken: AuthToken?,
         query: String,
+        status : Int,
         page: Int
     ): Flow<DataState<List<SalesOrder>>> = flow {
         emit(DataState.loading<List<SalesOrder>>())
@@ -34,6 +35,7 @@ class SearchSalesOder(
             val result = service.searchSalesOder(
                 "Token ${authToken.token}",
                 query = query,
+                status = status,
                 page = page
             )
 
@@ -70,11 +72,13 @@ class SearchSalesOder(
 
         val successList = cache.searchSaleOderWithMedicine(
             query = query,
+            status = status,
             page = page
         ).map { it.toSalesOder() }
 
         val failureList = cache.searchFailureSalesOderWithMedicine(
             query = query,
+            status = status
         ).map {
             it.toSalesOder()
         }

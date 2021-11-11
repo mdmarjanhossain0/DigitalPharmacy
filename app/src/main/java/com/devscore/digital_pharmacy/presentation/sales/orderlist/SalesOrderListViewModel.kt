@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
+import com.devscore.digital_pharmacy.business.interactors.sales.SalesCompleted
 import com.devscore.digital_pharmacy.business.interactors.sales.SearchSalesOder
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,31 +23,34 @@ class SalesOrderListViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
-    private val searchSalesOder: SearchSalesOder
+    private val searchSalesOder: SearchSalesOder,
+    private val salesCompleted: SalesCompleted
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
 
     val state: MutableLiveData<SalesOrderListState> = MutableLiveData(SalesOrderListState())
 
-
-    lateinit var searchJob : Job
-
     init {
-        onTriggerEvent(SalesOrderListEvents.CreateNewOrder)
+        onTriggerEvent(SalesOrderListEvents.SearchOrders)
     }
 
     fun onTriggerEvent(event: SalesOrderListEvents) {
         when (event) {
-            is SalesOrderListEvents.CreateNewOrder -> {
-                order()
+            is SalesOrderListEvents.SearchOrders -> {
+                search()
             }
 
             is SalesOrderListEvents.SearchWithQuery -> {
             }
             is SalesOrderListEvents.NextPage -> {
-//                incrementPageNumber()
-//                order()
+                incrementPageNumber()
+                search()
+            }
+
+
+            is SalesOrderListEvents.SalesCompleted -> {
+                orderCompleted(event.order)
             }
 
             is SalesOrderListEvents.UpdateQuery -> {
@@ -58,6 +63,35 @@ constructor(
             is SalesOrderListEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun orderCompleted(order: SalesOrder) {
+        state.value?.let { state ->
+            salesCompleted.execute(
+                authToken = sessionManager.state.value?.authToken,
+                pk = order.pk!!,
+                query = state.query,
+                status = 0,
+                page = state.page,
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { list ->
+                    Log.d(TAG, "ViewModel List Size " + list.size)
+                    this.state.value = state.copy(orderList = list)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if(stateMessage.response.message?.contains(ErrorHandling.INVALID_PAGE) == true){
+                        onUpdateQueryExhausted(true)
+                    }else{
+                        appendToMessageQueue(stateMessage)
+                    }
+                }
+
+            }.launchIn(viewModelScope)
         }
     }
 
@@ -119,21 +153,17 @@ constructor(
     }
 
 
-    private fun order() {
-        resetPage()
-        clearList()
+    private fun search() {
+//        resetPage()
+//        clearList()
 
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)
-//        if (searchJob == null) {
-//            if (searchJob.isActive) {
-//                searchJob.cancel()
-//            }
-//        }
         state.value?.let { state ->
-            searchJob = searchSalesOder.execute(
+            searchSalesOder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
+                status = 0,
                 page = state.page,
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())

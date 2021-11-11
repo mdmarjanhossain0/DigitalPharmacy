@@ -1,9 +1,11 @@
 package com.devscore.digital_pharmacy.di.inventory
 
 import android.content.Context
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.global.GlobalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.interactors.inventory.AddMedicineInteractor
+import com.devscore.digital_pharmacy.business.interactors.inventory.FetchGlobalMedicineData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +31,18 @@ object InventoryAddMedicineModule {
             service = service,
             cache = localMedicineDao,
             applicationContext
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideFetchGlobalMedicineData (
+        service: InventoryApiService,
+        cache : GlobalMedicineDao
+    ) : FetchGlobalMedicineData {
+        return FetchGlobalMedicineData(
+            service = service,
+            cache = cache,
         )
     }
 }

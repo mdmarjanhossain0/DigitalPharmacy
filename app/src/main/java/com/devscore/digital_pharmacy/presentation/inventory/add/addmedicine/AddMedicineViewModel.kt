@@ -11,6 +11,7 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
 import com.devscore.digital_pharmacy.business.interactors.inventory.AddMedicineInteractor
+import com.devscore.digital_pharmacy.business.interactors.inventory.FetchGlobalMedicineData
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -22,7 +23,8 @@ class AddMedicineViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
-    private val addMedicineInteractor: AddMedicineInteractor
+    private val addMedicineInteractor: AddMedicineInteractor,
+    private val fetchGlobalMedicineData: FetchGlobalMedicineData
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
@@ -42,12 +44,50 @@ constructor(
                 cacheState(event.local_medicine)
             }
 
+            is AddMedicineEvents.UpdateId -> {
+                updateId(event.id)
+            }
+
+            is AddMedicineEvents.FetchData -> {
+                fetchData()
+            }
+
             is AddMedicineEvents.Error -> {
                 appendToMessageQueue(event.stateMessage)
             }
             is AddMedicineEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
+        }
+    }
+
+    private fun fetchData() {
+        state.value?.let { state ->
+            fetchGlobalMedicineData.execute(
+                state.id
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { medicine ->
+                    this.state.value = state.copy(
+                        globalMedicine = medicine
+                    )
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    appendToMessageQueue(stateMessage)
+                }
+
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private fun updateId(id: Int) {
+        state.value?.let { state ->
+            this.state.value = state.copy(
+                id = id
+            )
         }
     }
 

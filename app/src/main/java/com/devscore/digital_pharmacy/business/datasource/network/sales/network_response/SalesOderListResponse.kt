@@ -16,7 +16,7 @@ data class SalesOderListResponse (
 
 fun SalesOderListResponse.toList() : List<SalesOrder> {
     val list : MutableList<SalesOrder> = mutableListOf()
-    for (dto in results!!) {
+    for (dto in results) {
         list.add(
             dto.toSalesOrder()
         )

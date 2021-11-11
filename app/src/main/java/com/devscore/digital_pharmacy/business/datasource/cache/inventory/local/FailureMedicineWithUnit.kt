@@ -76,7 +76,7 @@ fun LocalMedicine.toFailureMedicineUnitEntity() : List<FailureMedicineUnitEntity
     for (unit in units!!) {
         unitList.add(
             FailureMedicineUnitEntity(
-                medicine_id = id!!,
+                medicine_id = room_medicine_id!!,
                 room_id = unit.room_id,
                 name = unit.name,
                 quantity = unit.quantity,

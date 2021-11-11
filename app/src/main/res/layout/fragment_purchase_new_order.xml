@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".purchase.PurchaseNewOrderFragment">
+    tools:context=".presentation.purchases.cart.PurchasesCartFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardId"
@@ -72,20 +72,20 @@
 
 
             <TextView
-                android:id="@+id/itemTvId"
+                android:id="@+id/purchasesCartItemCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Items : 2"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/totalTvId"
+                app:layout_constraintBottom_toTopOf="@+id/purchasesCartTotalAmount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
-                android:id="@+id/totalTvId"
+                android:id="@+id/purchasesCartTotalAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -94,19 +94,19 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemTvId" />
+                app:layout_constraintTop_toBottomOf="@+id/purchasesCartItemCount" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/returnBtnId"
+                android:id="@+id/purchasesCartGenerate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/colorPrimaryVariant"
                 android:text="Generate Order"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/totalTvId"
+                app:layout_constraintBottom_toBottomOf="@+id/purchasesCartTotalAmount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemTvId" />
+                app:layout_constraintTop_toBottomOf="@+id/purchasesCartItemCount" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

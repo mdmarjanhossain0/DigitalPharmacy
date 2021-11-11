@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.presentation.inventory.global.GlobalAdapter
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.item_global.view.*
 import kotlinx.android.synthetic.main.item_local.view.*
@@ -19,10 +21,60 @@ constructor(
 
     val TAG = "LocalAdapter"
 
+
+    val loadingItem = LocalMedicine(
+    id = -2,
+    brand_name = null,
+    sku = null,
+    dar_number = null,
+    mr_number = null,
+    generic = null,
+    indication = null,
+    symptom = null,
+    strength = null,
+    description = null,
+    mrp = null,
+    purchases_price = null,
+    discount = null,
+    is_percent_discount = false,
+    manufacture = null,
+    kind = null,
+    form = null,
+    remaining_quantity = null,
+    damage_quantity = null,
+    rack_number = null,
+    units = listOf()
+    )
+
+    val notFound = LocalMedicine(
+    id = -3,
+    brand_name = null,
+    sku = null,
+    dar_number = null,
+    mr_number = null,
+    generic = null,
+    indication = null,
+    symptom = null,
+    strength = null,
+    description = null,
+    mrp = null,
+    purchases_price = null,
+    discount = null,
+    is_percent_discount = false,
+    manufacture = null,
+    kind = null,
+    form = null,
+    remaining_quantity = null,
+    damage_quantity = null,
+    rack_number = null,
+    units = listOf()
+    )
+
     companion object {
 
         const val IMAGE_ITEM = 1
         const val LOADING_ITEM = 2
+        const val NOT_FOUND = 3
 
         const val LOADING = 1
         const val RETRY =2
@@ -46,18 +98,32 @@ constructor(
                     )
                 )
             }
+
+            else -> {
+                return GenericViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.item_result_not_found,
+                        parent,
+                        false
+                    )
+                )
+            }
         }
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_local ,parent,false)
-        return LocalDataViewHolder(itemView, interaction)
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.size < (position + 1)){
-            interaction?.nextPage()
-            return LOADING_ITEM
+        if (differ.currentList.size != 0) {
+            if(differ.currentList.get(position).id == -2){
+                return LocalAdapter.LOADING_ITEM
+            }
+            if(differ.currentList.get(position).id == -3){
+                return LocalAdapter.NOT_FOUND
+            }
+            return LocalAdapter.IMAGE_ITEM
         }
-        Log.d(TAG, "Data Item")
-        return IMAGE_ITEM
+        else {
+            return LocalAdapter.LOADING_ITEM
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -71,7 +137,7 @@ constructor(
 
     override fun getItemCount(): Int {
         Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
-        return differ.currentList.size + 1
+        return differ.currentList.size
     }
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LocalMedicine>() {
@@ -112,8 +178,16 @@ constructor(
         }
     }
 
-    fun submitList(medicineList: List<LocalMedicine>?, ){
+    fun submitList(medicineList: List<LocalMedicine>?, isLoading : Boolean = true, queryExhausted : Boolean = false){
         val newList = medicineList?.toMutableList()
+        if (isLoading) {
+            newList?.add(loadingItem)
+        }
+        else {
+            if (queryExhausted) {
+                newList?.add(notFound)
+            }
+        }
         differ.submitList(newList)
     }
 

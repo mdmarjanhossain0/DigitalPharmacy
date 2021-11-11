@@ -17,6 +17,8 @@ import androidx.room.PrimaryKey
     ]
 )
 data class LocalMedicineUnitsEntity (
+
+    @ColumnInfo(name = "medicine_id", index = true)
     var medicine_id : Int,
 
     @PrimaryKey(autoGenerate = false)

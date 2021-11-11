@@ -67,7 +67,7 @@ class SearchGlobalMedicineWithQuery(
         }
 
         // emit from cache
-        val cachedBlogs = cache.searchGlobalMedicinwWithQuery(
+        val cachedBlogs = cache.searchGlobalMedicineWithQuery(
             query = query,
             page = page
         ).map { it.toGlobalMedicine() }

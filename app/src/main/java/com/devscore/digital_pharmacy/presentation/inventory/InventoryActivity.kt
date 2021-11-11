@@ -2,9 +2,11 @@ package com.devscore.digital_pharmacy.presentation.inventory
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -153,8 +155,13 @@ class InventoryActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    fun navigateGlobalFragmentToAddMedicineContainerFragment(){
-        navController.navigate(R.id.action_inventoryFragment_to_inventoryAddProductFragment)
+    fun navigateGlobalFragmentToAddMedicineContainerFragment(id : Int? = -1){
+        Log.d(TAG, "Inventory Activity Id " + id.toString())
+//            val data = bundleOf("id" to id)
+//            navController.navigate(R.id.action_inventoryFragment_to_inventoryAddProductFragment, data)
+        val direction = InventoryFragmentDirections.actionInventoryFragmentToInventoryAddProductFragment()
+        direction.id = id!!
+        navController.navigate(direction)
     }
 
     fun navigateLocalFragmentToReturnFragment(){

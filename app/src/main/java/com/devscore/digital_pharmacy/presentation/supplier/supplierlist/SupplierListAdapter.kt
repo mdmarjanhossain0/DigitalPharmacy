@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
+import com.devscore.digital_pharmacy.presentation.purchases.orderlist.PurchasesOrderAdapter
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
 import kotlinx.android.synthetic.main.item_supplier_list.view.*
 
@@ -17,6 +18,32 @@ constructor(
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val TAG = "SupplierAdapter"
+
+
+
+    val loading = Supplier(
+        pk = -2,
+        company_name = "",
+        agent_name = "",
+        email = "",
+        mobile = "",
+        whatsapp = "",
+        facebook = "",
+        imo = "",
+        address = ""
+    )
+
+    val notFound = Supplier(
+        pk = -3,
+        company_name = "",
+        agent_name = "",
+        email = "",
+        mobile = "",
+        whatsapp = "",
+        facebook = "",
+        imo = "",
+        address = ""
+    )
 
     companion object {
 
@@ -51,12 +78,18 @@ constructor(
     }
 
     override fun getItemViewType(position: Int): Int {
-        if(differ.currentList.size < (position + 1)){
-            interaction?.nextPage()
-            return LOADING_ITEM
+        if (differ.currentList.size != 0) {
+            if(differ.currentList.get(position).pk == -2){
+                return PurchasesOrderAdapter.LOADING_ITEM
+            }
+            if(differ.currentList.get(position).pk == -3){
+                return PurchasesOrderAdapter.NOT_FOUND
+            }
+            return PurchasesOrderAdapter.IMAGE_ITEM
         }
-        Log.d(TAG, "Data Item")
-        return IMAGE_ITEM
+        else {
+            return PurchasesOrderAdapter.LOADING_ITEM
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -70,7 +103,7 @@ constructor(
 
     override fun getItemCount(): Int {
         Log.d(TAG, "GlobalAdapter List Size " + differ.currentList.size)
-        return differ.currentList.size + 1
+        return differ.currentList.size
     }
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Supplier>() {
@@ -136,6 +169,7 @@ constructor(
             itemView.supplierCompanyName.setText(item.company_name)
             itemView.supplierName.setText(item.agent_name)
             itemView.supplierContactNumber.setText(item.mobile)
+            itemView.supplierTotalBalance.setText(item.total_balance.toString())
 
         }
     }

@@ -17,7 +17,8 @@ data class SalesOrderDto (
     @SerializedName("sales_oder_medicines") var sales_oder_medicines : List<SalesOrderItemDto>,
     @SerializedName("created_at")var created_at : String,
     @SerializedName("updated_at")var updated_at : String?,
-    @SerializedName("brand_name") var brand_name : String?
+    @SerializedName("brand_name") var brand_name : String?,
+    @SerializedName("status") var status : Int
         )
 
 
@@ -31,7 +32,8 @@ fun SalesOrderDto.toSalesOrder() : SalesOrder {
         paid_amount = paid_amount,
         discount = discount,
         is_discount_percent =is_discount_percent,
-        created_at = created_at!!,
+        status = status,
+        created_at = created_at,
         updated_at = updated_at,
         sales_oder_medicines = sales_oder_medicines.map {
             it.toSalesOrderMedicine()

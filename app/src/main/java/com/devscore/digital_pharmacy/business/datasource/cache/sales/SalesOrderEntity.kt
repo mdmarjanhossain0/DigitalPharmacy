@@ -30,6 +30,8 @@ data class SalesOrderEntity (
     @ColumnInfo(name = "is_discount_percent")
     var is_discount_percent : Boolean,
 
+    var status : Int,
+
     @ColumnInfo(name = "created_at")
     var created_at : String,
 

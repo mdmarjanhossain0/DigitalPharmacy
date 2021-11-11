@@ -46,6 +46,9 @@ interface LocalMedicineDao {
     @Query("DELETE FROM FailureMedicine WHERE room_medicine_id = :room_medicine_id")
     suspend fun deleteFailureLocalMedicine(room_medicine_id : Long)
 
+
+
+    @Transaction
     @Query(" SELECT * FROM LocalMedicine LIMIT (:page * :pageSize)")
     suspend fun getAllLocalMedicineWithUnits(
         page: Int,
@@ -66,11 +69,13 @@ interface LocalMedicineDao {
 
 
 
+    @Transaction
     @Query(" SELECT * FROM LocalMedicine WHERE id = :id")
    fun getRequestedData(
         id : Long = -1
     ): LiveData<List<LocalMedicineEntity>>
 
+    @Transaction
     @Query(" SELECT * FROM FailureMedicine")
     fun getSyncData(): List<FailureMedicineWithUnit>
 
@@ -84,6 +89,7 @@ interface LocalMedicineDao {
     // Complex Query
 
 
+    @Transaction
     @Query("""
         SELECT * FROM LocalMedicine 
         WHERE brand_name LIKE '%' || :query || '%' 
@@ -98,6 +104,8 @@ interface LocalMedicineDao {
     ): List<LocalMedicineWithUnits>
 
 
+
+    @Transaction
     @Query("""
         SELECT * FROM FailureMedicine 
         WHERE brand_name LIKE '%' || :query || '%' 

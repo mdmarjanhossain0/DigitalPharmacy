@@ -7,6 +7,7 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 data class GlobalState(
     val isLoading : Boolean = false,
     val globalMedicineList : List<GlobalMedicine> = listOf(),
+    val action : String = "",
     val query: String = "",
     val page: Int = 1,
     val isQueryExhausted: Boolean = false, // no more results available, prevent next page

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".purchase.PurchaseGeneratedFragment">
+    tools:context=".presentation.purchases.orderlist.PurchasesOrdersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/purchaseGeneratedRvId"
@@ -16,6 +16,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_sales_orders" />
 
+
+    <ImageView
+        android:id="@+id/generateNewPurchasesOrder"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/ic_floating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -23,7 +34,9 @@
         app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,6 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_receive"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,13 +62,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Receive Cash"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/generateNewPurchasesOrders"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="28dp"
@@ -68,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="Create Order"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintBottom_toBottomOf="@+id/generateNewPurchasesOrders"
+                app:layout_constraintEnd_toStartOf="@+id/generateNewPurchasesOrders"
+                app:layout_constraintTop_toTopOf="@+id/generateNewPurchasesOrders" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

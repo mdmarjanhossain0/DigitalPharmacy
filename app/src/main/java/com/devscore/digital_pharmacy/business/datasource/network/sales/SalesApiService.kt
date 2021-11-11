@@ -19,7 +19,16 @@ interface SalesApiService {
     suspend fun searchSalesOder (
         @Header("Authorization") authorization: String,
         @Query("search") query: String,
+        @Query("status") status : Int,
         @Query("page") page: Int
     ) : SalesOderListResponse
+
+
+    @PUT("sales/statuscompleted/{pk}")
+    suspend fun salesCompleted (
+        @Header("Authorization") authorization: String,
+        @Path("pk") pk : Int
+    ) : SalesOrderDto
+
 
 }

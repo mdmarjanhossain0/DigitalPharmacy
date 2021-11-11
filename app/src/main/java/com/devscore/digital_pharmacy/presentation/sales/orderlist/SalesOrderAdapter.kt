@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.presentation.util.GenericViewHolder
+import kotlinx.android.synthetic.main.item_sales_orders.view.*
 
 class SalesOrderAdapter
 constructor(
@@ -28,6 +29,7 @@ constructor(
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
+        status = 0,
         created_at = "",
         updated_at = "",
         sales_oder_medicines = null
@@ -43,6 +45,7 @@ constructor(
         paid_amount = 0f,
         discount = 0f,
         is_discount_percent = false,
+        status = 0,
         created_at = "",
         updated_at = "",
         sales_oder_medicines = null
@@ -180,18 +183,17 @@ constructor(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: SalesOrder) = with(itemView) {
-            itemView.setOnClickListener {
+            itemView.orderProcess.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
-//            itemView.globalBrandNameTV.setText(item.brand_name)
-//            itemView.globalCompanyNameTV.setText(item.generic)
-//            if (item.mrp != null) {
-//                itemView.globalMRPTV.setText("MRP ৳ "+ item.mrp.toString())
-//            }
-//            else {
-//                itemView.globalMRPTV.setText("MRP ৳ ...")
-//            }
+            itemView.orderId.setText("Order ID : # " + item.pk.toString())
+            var orderMedicines : String? = ""
+            for (medicine in item.sales_oder_medicines!!) {
+                orderMedicines = orderMedicines + medicine.brand_name
+            }
+            itemView.orderMedicines.setText(orderMedicines)
+            orderMRP.setText("MRP: ৳ " + item.total_amount!!)
 
 
         }

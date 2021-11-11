@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/salesPaymentOrderItemBrandName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -19,54 +20,54 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView21"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemUnitPrize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/salesPaymentOrderItemUnitPrize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="৳ 5.00"
         android:textColor="@color/colorPrimaryVariant"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView20"
-        app:layout_constraintEnd_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemBrandName"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemUnitCount"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemBrandName" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/salesPaymentOrderItemUnitCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="4 pcs"
         android:textColor="@color/colorPrimaryVariant"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintEnd_toStartOf="@+id/textView23"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemUnitPrize"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemTotalAmount"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemUnitPrize" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/salesPaymentOrderItemTotalAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="৳ 20.00"
         android:textColor="@color/colorPrimaryVariant"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemUnitCount"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemDelete"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemUnitCount"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/salesPaymentOrderItemDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemTotalAmount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView23"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemTotalAmount"
         app:srcCompat="@drawable/ic_remove" />
 </androidx.constraintlayout.widget.ConstraintLayout>

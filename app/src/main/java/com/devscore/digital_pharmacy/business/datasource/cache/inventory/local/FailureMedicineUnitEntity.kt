@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.cache.inventory.local
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -16,7 +17,10 @@ import androidx.room.PrimaryKey
     ]
 )
 data class FailureMedicineUnitEntity (
-    var medicine_id : Int,
+
+
+    @ColumnInfo(name = "medicine_id", index = true)
+    var medicine_id : Long?,
 
     @PrimaryKey(autoGenerate = true)
     var room_id : Long? = -1,
