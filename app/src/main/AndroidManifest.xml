@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.devscore.digital_pharmacy" >
+    package="com.devscore.digital_pharmacy">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,7 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalPharmacy"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".account.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".account.EditUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".account.UsersActivity"
+            android:exported="false" />
         <activity
             android:name=".account.AddUserActivity"
             android:exported="false"
@@ -67,7 +76,7 @@
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

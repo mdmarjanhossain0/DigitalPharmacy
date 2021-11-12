@@ -69,5 +69,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="otp_text">An OTP code was sent to your Email ID. <br/> Please use the code to confirm your setting.</string>
+    <string name="pass">No Password set yet <br/> for Report</string>
+    <string name="forget_pass">Please give Password<br/>For Report</string>
 
 </resources>
