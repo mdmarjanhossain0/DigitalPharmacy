@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.devscore.digital_pharmacy">
+    package="com.devscore.digital_pharmacy" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".presentation.BaseApplication"
@@ -17,7 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalPharmacy"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".account.AddUserActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_user"
+            android:theme="@style/Theme.DigitalPharmacy.NoActionBar" />
+        <activity
+            android:name=".CashRecordActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.cashregister.CashRegisterActivity"
             android:exported="false" />
@@ -59,7 +67,7 @@
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,16 +78,11 @@
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove" />
-
-
-
-<!--        <activity android:name="com.canhub.cropper.CropImageActivity"-->
-<!--            android:theme="@style/Base.Theme.AppCompat"/>-->
-
-
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+            tools:node="remove" /> <!-- <activity android:name="com.canhub.cropper.CropImageActivity" -->
+        <!-- android:theme="@style/Base.Theme.AppCompat"/> -->
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
