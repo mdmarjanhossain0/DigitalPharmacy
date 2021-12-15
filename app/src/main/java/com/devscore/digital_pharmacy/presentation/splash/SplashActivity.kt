@@ -1,19 +1,20 @@
-package com.devscore.digital_pharmacy
+package com.devscore.digital_pharmacy.presentation.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
+import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
-import com.devscore.digital_pharmacy.register.WelcomeActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         // This is used to hide the status bar and make
         // the splash screen as a full screen activity.
         window.setFlags(
