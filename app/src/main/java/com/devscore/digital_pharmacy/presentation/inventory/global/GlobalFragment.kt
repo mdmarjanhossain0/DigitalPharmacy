@@ -103,7 +103,7 @@ class GlobalFragment : BaseInventoryFragment(),
     private fun subscribeObservers(){
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
-//            uiCommunicationListener.displayProgressBar(state.isLoading)
+           // uiCommunicationListener.displayProgressBar(state.isLoading)
             Log.d(TAG, "GlobalFragment Loading State" + state.isLoading)
 
             processQueue(
