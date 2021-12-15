@@ -193,11 +193,13 @@
         <entry key="..\:/DigitalPharmacy/app/src/main/res/drawable/gray_shape_outline.xml" value="0.2703125" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/drawable/ic_floating.xml" value="0.2703125" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_add_user.xml" value="0.2" />
+        <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_auth.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_cash_record.xml" value="0.2" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_cash_register.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_container.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_edit_user.xml" value="0.24010416666666667" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_inventory.xml" value="0.25416666666666665" />
+        <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_purchases.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
@@ -213,9 +215,12 @@
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_add_product.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sales_history.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_inventory_sub_sales_history.xml" value="0.25416666666666665" />
+        <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_launcher.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_local.xml" value="0.25416666666666665" />
+        <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_purchase_generated.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_purchase_new_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_sales.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_sales_cart.xml" value="0.25416666666666665" />
         <entry key="..\:/DigitalPharmacy/app/src/main/res/layout/fragment_sales_report.xml" value="0.25416666666666665" />
